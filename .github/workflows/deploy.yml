@@ -28,9 +28,23 @@ jobs:
       - name: Stage dist for wrangler
         run: cp -rL result dist && chmod -R u+w dist
 
-      # Deploy only the real thing on main; PRs just prove the build.
-      - name: Deploy to Cloudflare Workers
+      # Deploy only on main, and only if the token secret is configured —
+      # so the build stays green before the secret is added.
+      - name: Check for deploy secret
+        id: gate
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -n "$CF_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::CLOUDFLARE_API_TOKEN not set — built dist/ but skipped deploy."
+          fi
+
+      - name: Deploy to Cloudflare Workers
+        if: steps.gate.outputs.ready == 'true'
         run: nix develop --command wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
