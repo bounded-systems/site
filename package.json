@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
-    "check": "node brand/tokens/build-tokens.mjs --check",
+    "check": "node brand/tokens/build-tokens.mjs --check && node scripts/gen-seams.mjs --check",
+    "seams": "node scripts/gen-seams.mjs",
     "dev": "python3 -m http.server 8080",
     "prebuild": "npm run check",
     "deploy": "wrangler deploy"
