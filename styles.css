@@ -167,7 +167,11 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .code .k { color: var(--site-forest-mute); }
 .code .s { color: #E8C98A; }
 .code .fn { color: #9FE3C4; }
+.code .ok { color: #9FE3C4; }
+.code .no { color: #E6B45C; }
 .code .spacer { height: 8px; }
+/* hero transaction block: one allow, one deny — sits between lead and CTA */
+.code--hero { margin: 0 0 36px; max-width: 560px; font-size: 13px; line-height: 1.85; }
 
 /* ---------- honesty (dark) ---------- */
 .honesty { margin-top: 96px; background: var(--site-dark); }
