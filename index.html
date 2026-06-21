@@ -60,10 +60,19 @@
       <div class="hero__inner">
         <div class="hero__lock">
           <span class="mark mark--sq" style="width:46px;height:46px;background:transparent;"><img src="brand/mark/mark-white.svg" width="40" height="40" alt=""></span>
-          <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems&nbsp;&nbsp;&middot;&nbsp;&nbsp;A&nbsp;solo&nbsp;project</span>
+          <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
         </div>
         <h1>Agents can write the code now. The unsolved part is keeping it&nbsp;honest.</h1>
-        <p class="hero__lead">A bet on how agent-built software stays trustworthy: give every idea a <strong>bounded abstraction with a real contract</strong>, make every privileged effect <strong>attributable to a signed owner</strong>, and treat drift between those contracts as a <strong>build failure</strong> — not a code review.</p>
+        <p class="hero__lead">One sanctioned door per kind of system power. An agent touches the filesystem, a process, or your tools only through it — the door checks a signed owner and policy, acts or refuses, and records either way.</p>
+        <div class="code code--hero">
+          <div><span class="k">agent&nbsp;&rarr;</span> fs.<span class="fn">write</span>(<span class="s">"/repo/out.txt"</span>, bytes)</div>
+          <div class="c">&nbsp;&nbsp;fs door &middot; owner: keeper &middot; policy: allow</div>
+          <div>&nbsp;&nbsp;<span class="ok">&#10003; written</span><span class="c"> &middot; signed keeper &middot; audited</span></div>
+          <div class="spacer"></div>
+          <div><span class="k">agent&nbsp;&rarr;</span> fs.<span class="fn">write</span>(<span class="s">"/etc/shadow"</span>, bytes)</div>
+          <div class="c">&nbsp;&nbsp;fs door &middot; <span class="no">policy: deny</span> &mdash; outside keeper's grant</div>
+          <div>&nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; recorded</span></div>
+        </div>
         <div class="hero__cta">
           <a class="btn-primary" href="#bet">Read the one idea&nbsp;&rarr;</a>
           <a class="btn-link" href="https://github.com/bounded-systems/prx">prx on GitHub&nbsp;&#8599;</a>
