@@ -63,18 +63,29 @@ git add brand && git commit -m "Bump brand to <sha>"
 
 Hosted on **Cloudflare Workers** as a static-assets site (GitHub Pages is
 disabled at the org level). `wrangler.jsonc` serves the built `dist/` folder.
-Connected once via Cloudflare → Workers & Pages → import `bounded-systems/site`:
 
-- **Build command:** `npm run build`
-- **Deploy command:** `npx wrangler deploy`
-- **Custom domain:** `bounded.tools` (added to the Worker; DNS already in Cloudflare)
+The build is a **Nix derivation** — `nodejs` and the `brand` source are pinned by
+`flake.lock`, so the deployed bytes are reproducible on any machine:
 
-The public `@bounded-systems/brand` submodule is fetched at build. Cloudflare
-rebuilds + redeploys on every push to `main`. Deploy locally with `npm run deploy`.
+```bash
+nix build .#site        # → ./result (the complete dist/), hermetic
+nix develop             # shell with the pinned nodejs + wrangler
+```
 
-CI (`.github/workflows/ci.yml`) runs `npm run build` on each push/PR as a quality
-gate — it validates the assembled `dist/` and fails on brand token drift, but does
-not deploy.
+**CI deploys from GitHub Actions, not Cloudflare's builder**
+(`.github/workflows/deploy.yml`): on every push/PR it runs `nix build .#site`
+(which runs the brand token-drift check first); on push to `main` it then
+`wrangler deploy`s the result. Requires repo secret **`CLOUDFLARE_API_TOKEN`**
+(an "Edit Cloudflare Workers" token); the account id lives in `wrangler.jsonc`.
+
+> Cloudflare's own Workers Builds is **not** used — leave it disconnected so it
+> doesn't double-deploy. Add the custom domain `bounded.tools` once to the Worker
+> (Settings → Domains & Routes); DNS is already in Cloudflare.
+
+Non-Nix paths still work for local dev (`npm run dev`, `npm run build`,
+`npm run deploy`); the git submodule provides `brand/` for those. When bumping the
+brand, update both the submodule **and** `nix flake update brand` so the two pins
+stay aligned.
 
 ## Before publishing
 
