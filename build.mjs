@@ -27,7 +27,7 @@ for (const f of ["index.html", "styles.css"]) {
 
 // Only the brand assets the site actually references
 await mkdir(join(dist, "brand"), { recursive: true });
-for (const p of ["tokens/tokens.css", "css/fonts.css", "css/base.css", "mark", "favicon-32.png", "lockup"]) {
+for (const p of ["tokens/tokens.css", "css", "mark", "favicon-32.png", "lockup"]) {
   await cp(join(brand, p), join(dist, "brand", p), { recursive: true });
 }
 
