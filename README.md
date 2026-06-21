@@ -49,6 +49,31 @@ npm run check    # fail if brand tokens.css drifted from tokens.json
 `prebuild` runs `check` automatically, so a drifted token set fails the build —
 the same drift-as-CI-failure rule the project argues for.
 
+## The capability-seam grid is generated
+
+The "capability seams" grid on the homepage is **not hand-written HTML**. It is
+generated from [`data/seams.json`][seed] (the single source of truth, seeded
+from the original copy) into the region marked
+`<!-- seams:start … --> … <!-- seams:end -->` in `index.html`:
+
+```bash
+node scripts/gen-seams.mjs            # regenerate the grid in index.html
+node scripts/gen-seams.mjs --check    # CI gate: fail if the grid is stale/hand-edited
+node scripts/gen-seams.mjs --reconcile  # cross-check the seam SET against prx (needs network)
+node scripts/gen-seams.mjs --emit-seed  # emit seed/ payload to promote taglines upstream into prx
+```
+
+`.github/workflows/sync-seams.yml` runs `--check` on every PR (drift gate) and,
+daily, reconciles the set against `prx` (`packages/*` whose `package.json`
+`keywords` include `seam`) — opening a PR if a seam was added or removed. This
+is the same drift-as-CI-failure rule, and the same
+[`bounded-systems`-flavored `synoptic-github`][synoptic] generate-and-commit
+pattern, applied to the page's own content.
+
+> The long-term source of truth for the taglines is each prx package's
+> `package.json`; `--emit-seed` produces the payload to move them upstream,
+> after which the generator can read them from prx and the local seed retires.
+
 ## Updating the brand
 
 The site moves when you bump the submodule pointer — never by editing brand
@@ -94,3 +119,5 @@ stay aligned.
 - [ ] Confirm the colophon copy / links read the way you want
 
 [brand]: https://github.com/bounded-systems/brand
+[seed]: data/seams.json
+[synoptic]: https://github.com/bdelanghe/synoptic-github

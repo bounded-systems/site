@@ -1,0 +1,68 @@
+name: sync-seams
+
+# The capability-seam grid on the homepage is generated from data/seams.json
+# (scripts/gen-seams.mjs). This workflow keeps it honest two ways:
+#   • on PRs — fail if the committed grid is stale or hand-edited (offline gate)
+#   • daily / on demand — reconcile the seam SET against prx and, if anything
+#     changed, open a PR. Mirrors the bdelanghe/synoptic-github pattern.
+
+on:
+  pull_request:
+    paths:
+      - "index.html"
+      - "data/seams.json"
+      - "scripts/gen-seams.mjs"
+  schedule:
+    - cron: "17 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Offline, deterministic: the committed grid must equal render(data/seams.json).
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - run: node scripts/gen-seams.mjs --check
+
+  # Networked: reconcile against prx, regenerate, open a PR on any change.
+  sync:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      # Surface seams added to / dropped from prx. Non-fatal: a rate-limit or a
+      # not-yet-curated new seam should inform, not break the daily run.
+      - name: Reconcile seam set against prx
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/gen-seams.mjs --reconcile
+
+      - name: Regenerate grid from seed
+        run: node scripts/gen-seams.mjs
+
+      - name: Open PR if the grid changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No change — seam grid already in sync."
+            exit 0
+          fi
+          branch="seam-sync/$(date -u +%Y%m%d%H%M%S)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git commit -am "chore(seams): sync capability-seam grid from prx"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore(seams): sync capability-seam grid from prx" \
+            --body "Automated by .github/workflows/sync-seams.yml. The generated seam grid drifted from data/seams.json — review and merge."
