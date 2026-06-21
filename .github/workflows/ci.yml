@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 # Validates the static build (incl. the brand token-drift check via prebuild).
-# Deployment is handled by Cloudflare Pages, which builds from this repo on push.
+# Deployment is handled by Cloudflare Workers Builds, which builds from this repo on push.
 jobs:
   build:
     runs-on: ubuntu-latest

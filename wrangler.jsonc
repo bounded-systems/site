@@ -1,0 +1,10 @@
+{
+  // Static-assets Worker for bounded.tools — serves the built dist/ folder.
+  // Build: `npm run build` (assembles dist/ from the page + brand submodule).
+  // Deploy: `npx wrangler deploy`.
+  "name": "bounded-tools-site",
+  "compatibility_date": "2026-06-21",
+  "assets": {
+    "directory": "./dist"
+  }
+}

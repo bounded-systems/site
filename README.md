@@ -61,17 +61,20 @@ git add brand && git commit -m "Bump brand to <sha>"
 
 ## Deploy
 
-Hosted on **Cloudflare Pages** (GitHub Pages is disabled at the org level).
-Connect this repo in the Cloudflare dashboard once:
+Hosted on **Cloudflare Workers** as a static-assets site (GitHub Pages is
+disabled at the org level). `wrangler.jsonc` serves the built `dist/` folder.
+Connected once via Cloudflare → Workers & Pages → import `bounded-systems/site`:
 
 - **Build command:** `npm run build`
-- **Output directory:** `dist`
-- **Submodules:** enabled (the public `@bounded-systems/brand` is pulled at build)
-- **Custom domain:** `bounded.tools` (added in the Pages project; DNS already in Cloudflare)
+- **Deploy command:** `npx wrangler deploy`
+- **Custom domain:** `bounded.tools` (added to the Worker; DNS already in Cloudflare)
 
-Cloudflare rebuilds on every push to `main`. CI (`.github/workflows/ci.yml`) runs
-`npm run build` on each push/PR as a quality gate — it validates the assembled
-`dist/` and fails on brand token drift, but does not deploy.
+The public `@bounded-systems/brand` submodule is fetched at build. Cloudflare
+rebuilds + redeploys on every push to `main`. Deploy locally with `npm run deploy`.
+
+CI (`.github/workflows/ci.yml`) runs `npm run build` on each push/PR as a quality
+gate — it validates the assembled `dist/` and fails on brand token drift, but does
+not deploy.
 
 ## Before publishing
 
