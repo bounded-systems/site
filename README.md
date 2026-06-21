@@ -61,12 +61,17 @@ git add brand && git commit -m "Bump brand to <sha>"
 
 ## Deploy
 
-CI deploys to **GitHub Pages** on every push to `main`
-(`.github/workflows/deploy.yml`): checkout with submodules → `npm run build` →
-publish `dist/`. The custom domain is set by the `CNAME` file (`bounded.tools`).
+Hosted on **Cloudflare Pages** (GitHub Pages is disabled at the org level).
+Connect this repo in the Cloudflare dashboard once:
 
-`dist/` is also a plain static folder, so **Cloudflare Pages** / Netlify work too —
-point them at build command `npm run build`, output dir `dist/`.
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
+- **Submodules:** enabled (the public `@bounded-systems/brand` is pulled at build)
+- **Custom domain:** `bounded.tools` (added in the Pages project; DNS already in Cloudflare)
+
+Cloudflare rebuilds on every push to `main`. CI (`.github/workflows/ci.yml`) runs
+`npm run build` on each push/PR as a quality gate — it validates the assembled
+`dist/` and fails on brand token drift, but does not deploy.
 
 ## Before publishing
 

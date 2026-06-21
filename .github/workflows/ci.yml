@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# Validates the static build (incl. the brand token-drift check via prebuild).
+# Deployment is handled by Cloudflare Pages, which builds from this repo on push.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: recursive   # public @bounded-systems/brand
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - run: npm run build        # prebuild runs the token-drift check first
+      - name: Verify dist assembled
+        run: test -f dist/index.html && test -f dist/brand/tokens/tokens.css && test -f dist/brand/lockup/lockup-forest-1200.png
