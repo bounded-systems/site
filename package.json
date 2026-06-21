@@ -1,0 +1,13 @@
+{
+  "name": "bounded-tools-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The bounded.tools website. Static HTML built on the @bounded-systems/brand design system.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node brand/tokens/build-tokens.mjs --check",
+    "dev": "python3 -m http.server 8080",
+    "prebuild": "npm run check"
+  }
+}
