@@ -78,8 +78,32 @@ em { font-style: normal; color: var(--bs-color-forest); }
   display: flex; align-items: center; justify-content: center;
 }
 .hero__bg img { width: 420px; height: 420px; }
+.hero__grid {
+  position: relative; display: grid; grid-template-columns: 1fr 320px;
+  gap: 48px; align-items: center;
+}
 .hero__inner { position: relative; max-width: 720px; }
 .hero__lock { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+
+/* hero figure — the room · door · guest panel, the first thing you see */
+.hero__panel {
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  background: var(--site-deep);
+  border: 1px solid rgba(127, 184, 162, 0.28);
+  border-radius: 18px; padding: 34px 28px;
+}
+.hero__panel .mark { width: 150px; height: 150px; }
+.hero__panel .mark img { width: 108px; height: 108px; }
+.hero__cap {
+  font-family: var(--bs-font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #9FCBB8;
+}
+.hero__roles { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.hero__role {
+  font-family: var(--bs-font-mono); font-size: 11.5px; color: var(--site-cream);
+  text-align: center; border: 1px solid rgba(127, 184, 162, 0.32);
+  border-radius: 999px; padding: 6px 12px;
+}
 .hero h1 {
   font-size: 52px; line-height: 1.04; font-weight: 600;
   letter-spacing: -0.03em; color: #fff; margin: 0 0 24px;
@@ -146,6 +170,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
   display: grid; grid-template-columns: 280px 1fr; gap: 36px;
   align-items: center; padding: 40px; margin-bottom: 28px;
 }
+.model-card--defns { display: block; padding: 16px 40px; }
 .model-figure { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .model-figure .mark { width: 180px; height: 180px; }
 .model-figure .mark img { width: 130px; height: 130px; }
@@ -206,6 +231,13 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .grade--on-dark.grade--partial { color: #E6B45C; background: rgba(200,144,47,0.12); }
 .grade--on-dark.grade--aspirational { color: #A9B8AF; background: rgba(126,140,131,0.14); }
 
+/* ---------- get started ---------- */
+.start-card { padding: 30px 32px; margin-bottom: 20px; }
+.start-card__head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+.start-card__name { font-family: var(--bs-font-mono); font-size: 16px; font-weight: 600; color: var(--bs-color-forest); }
+.start-card__lead { font-size: 16px; line-height: 1.55; color: var(--site-ink-2); margin: 0 0 20px; }
+.start-card__more { display: inline-block; margin-top: 18px; font-family: var(--bs-font-mono); font-size: 12.5px; color: var(--bs-color-forest); text-decoration: none; }
+
 /* ---------- proof ---------- */
 .proof-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
 .proof-card { text-decoration: none; padding: 34px; display: flex; flex-direction: column; gap: 14px; }
@@ -255,7 +287,10 @@ em { font-style: normal; color: var(--bs-color-forest); }
   .section__grid { grid-template-columns: 1fr; gap: 18px; }
   .section__num { position: static; }
   .model-card { grid-template-columns: 1fr; }
+  .model-card--defns { padding: 8px 26px; }
   .legend, .proof-cards, .seam-grid { grid-template-columns: 1fr; }
+  .hero__grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero__panel { order: -1; }
   .hero { padding: 48px 32px; }
   .hero h1 { font-size: 38px; }
   .honesty h2 { font-size: 30px; }

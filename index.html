@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bounded Systems — bounded authority for AI agents</title>
-  <meta name="description" content="Bounded authority for AI agents — drawn at the door, not the process or container. Every claim graded against the running code.">
+  <title>Bounded Systems — run AI coding agents with scoped authority</title>
+  <meta name="description" content="Your AI coding agent can already write code, run commands, and push to git — using your full access. Bounded Systems puts one sanctioned door in front of each kind of system power, so the agent only does what you grant it, and every privileged action is signed and recorded.">
   <link rel="canonical" href="https://bounded.tools/">
   <link rel="icon" type="image/png" href="brand/favicon-32.png">
   <meta name="theme-color" content="#0C5A42">
@@ -13,16 +13,16 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Bounded Systems">
   <meta property="og:url" content="https://bounded.tools/">
-  <meta property="og:title" content="Bounded Systems — bounded authority for AI agents">
-  <meta property="og:description" content="Bounded authority for AI agents — drawn at the door, not the process or container. Every claim graded against the running code.">
+  <meta property="og:title" content="Bounded Systems — run AI coding agents with scoped authority">
+  <meta property="og:description" content="Your AI coding agent can write code, run commands, and push to git using your full access. Bounded Systems gives it one door per kind of system power instead, and signs and records every privileged action.">
   <meta property="og:image" content="https://bounded.tools/brand/lockup/lockup-forest-1200.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Bounded Systems — bounded authority for AI agents">
+  <meta property="og:image:alt" content="Bounded Systems — scoped authority for AI coding agents">
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bounded Systems — bounded authority for AI agents">
-  <meta name="twitter:description" content="Bounded authority for AI agents — drawn at the door. Every claim graded against the running code.">
+  <meta name="twitter:title" content="Bounded Systems — run AI coding agents with scoped authority">
+  <meta name="twitter:description" content="Give an AI agent one door per kind of system power, not your full access. Every privileged action is signed and recorded.">
   <meta name="twitter:image" content="https://bounded.tools/brand/lockup/lockup-forest-1200.png">
 
   <!-- Brand: fonts, tokens, base — all from the brand submodule -->
@@ -44,10 +44,10 @@
         <span class="lock__name">bounded.tools</span>
       </a>
       <div class="nav__links">
-        <a href="#bet">The bet</a>
-        <a href="#model">The model</a>
-        <a href="#honesty">Honesty</a>
-        <a href="#proof">Proof</a>
+        <a href="#how">How it works</a>
+        <a href="#start">Get started</a>
+        <a href="#proof">The code</a>
+        <a href="#honesty">Kept honest</a>
         <a href="blog/">Writing</a>
         <a class="nav__gh" href="https://github.com/bounded-systems">GitHub&nbsp;&#8599;</a>
       </div>
@@ -58,86 +58,167 @@
   <div class="wrap">
     <header class="hero">
       <div class="hero__bg"><img src="brand/mark/mark-white.svg" alt=""></div>
-      <div class="hero__inner">
-        <div class="hero__lock">
-          <span class="mark mark--sq" style="width:46px;height:46px;background:transparent;"><img src="brand/mark/mark-white.svg" width="40" height="40" alt=""></span>
-          <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
+      <div class="hero__grid">
+        <div class="hero__inner">
+          <div class="hero__lock">
+            <span class="mark mark--sq" style="width:40px;height:40px;background:transparent;"><img src="brand/mark/mark-white.svg" width="34" height="34" alt=""></span>
+            <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
+          </div>
+          <h1>Give your AI agent one door, not all your keys.</h1>
+          <p class="hero__lead">Your coding agent already writes code, runs commands, and pushes to git — and today it does all of that with <strong>your</strong> access. Bounded Systems puts one sanctioned door in front of each kind of system power. The agent knocks; a broker behind the door checks your policy, acts or refuses, and records what happened.</p>
+          <div class="code code--hero">
+            <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })</div>
+            <div>&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span></div>
+            <div class="spacer"></div>
+            <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"scout"</span> })</div>
+            <div>&nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; scout holds no git-write &middot; recorded</span></div>
+          </div>
+          <div class="hero__cta">
+            <a class="btn-primary" href="#start">Get started&nbsp;&rarr;</a>
+            <a class="btn-link" href="#how">See how it works</a>
+          </div>
         </div>
-        <h1>Agents can write the code now. The unsolved part is keeping it&nbsp;honest.</h1>
-        <p class="hero__lead">One sanctioned door per kind of system power. An agent reaches git, the filesystem, a subprocess, or your tools only through it — the door checks the caller's policy, acts or refuses, and records either way. Today the highest-risk effect — git-writes — is signed and attributable to its owner.</p>
-        <div class="code code--hero">
-          <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })</div>
-          <div class="c">&nbsp;&nbsp;git door &middot; policy: allow &middot; owner: keeper</div>
-          <div>&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; signed keeper &middot; audited</span></div>
-          <div class="spacer"></div>
-          <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"scout"</span> })</div>
-          <div class="c">&nbsp;&nbsp;git door &middot; <span class="no">policy: deny</span> &mdash; role <span class="s">scout</span> holds no git-write</div>
-          <div>&nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; recorded</span></div>
-        </div>
-        <div class="hero__cta">
-          <a class="btn-primary" href="#bet">Read the one idea&nbsp;&rarr;</a>
-          <a class="btn-link" href="https://github.com/bounded-systems/prx">prx on GitHub&nbsp;&#8599;</a>
-        </div>
-        <div class="hero__note">
-          <span class="dot-sm"></span>
-          Built in the open. Every claim on this page is graded against the running code — including this one.
-        </div>
+
+        <aside class="hero__panel" aria-label="The model: a guest reaches a room only through a door.">
+          <span class="mark mark--rounded"><img src="brand/mark/mark-white.svg" alt="A guest passes through one door into a room."></span>
+          <span class="hero__cap">room&nbsp;&middot;&nbsp;door&nbsp;&middot;&nbsp;guest</span>
+          <div class="hero__roles">
+            <span class="hero__role">guest = your agent</span>
+            <span class="hero__role">door = one capability</span>
+            <span class="hero__role">room = the doors it holds</span>
+          </div>
+        </aside>
       </div>
     </header>
   </div>
 
-  <!-- THE BET -->
-  <section class="wrap section" id="bet">
+  <!-- HOW IT WORKS -->
+  <section class="wrap section" id="how">
     <div class="section__grid">
-      <div class="section__num">01&nbsp;/&nbsp;The&nbsp;bet</div>
+      <div class="section__num">01&nbsp;/&nbsp;How&nbsp;it&nbsp;works</div>
       <div>
-        <p class="statement">Agentic development works by <em>bifurcation</em>: a good idea earns its own bounded abstraction with a defined contract — and that boundary is exactly what lets you scope an agent to it.</p>
-        <p class="copy">That part is increasingly easy. The hard, unsolved part is <strong>keeping many bounded, agent-authored abstractions honest against each other as they evolve</strong> — enforcing contracts <em>between</em> ideas, not just within one.</p>
-        <p class="copy copy--last">Most tooling secures a single action. Bounded Systems is about the seams: every privileged effect attributable to a signed owner, one source of truth projected to many surfaces, and drift caught as a build failure so the contracts can't quietly rot.</p>
-        <div class="grade-inline">
-          <span class="grade-inline__label">This claim, graded:</span>
-          <span class="grade grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
-          <span class="grade-inline__note">Inter-contract enforcement is the open problem — stated as a bet, not a solved result.</span>
+        <h2>One door per kind of power</h2>
+        <p class="lead-2">Each kind of system power — the filesystem, subprocesses, git, your tools — sits behind a single door. The agent holds a socket to the door, never the keys behind it. A broker daemon checks your policy on every knock, then acts or refuses and writes it down.</p>
+
+        <div class="card model-card model-card--defns">
+          <div class="defn"><span class="defn__term">room</span><span class="defn__body">The bundle of doors one agent holds for one job. Ask for a door it wasn't given and it fails closed — a typo never widens authority.</span></div>
+          <div class="defn"><span class="defn__term">door</span><span class="defn__body">One unit of authority: a socket to a broker that holds the real keys. The agent can knock; it cannot reach past the door.</span></div>
+          <div class="defn"><span class="defn__term">attenuation</span><span class="defn__body">You narrow a door by adding caveats. Authority only ever gets tighter as it is handed inward, never looser.</span></div>
+          <div class="defn"><span class="defn__term">guest</span><span class="defn__body">The agent the room hosts — for example claude-box, a Claude Code runtime. The engine itself names no particular agent.</span></div>
+        </div>
+
+        <div class="code">
+          <div class="c"># a room expands to exactly the doors this job holds — nothing else exists</div>
+          <div><span class="k">const</span> doors = <span class="fn">expandRoom</span>(rooms, catalog, <span class="s">"dev"</span>, env);</div>
+          <div class="spacer"></div>
+          <div class="c"># narrowing only ever tightens — caveats are append-only</div>
+          <div><span class="k">const</span> narrowed = <span class="fn">attenuate</span>(doors[<span class="s">0</span>], [<span class="s">"host=github.com"</span>]);</div>
+        </div>
+
+        <p class="copy copy--last" style="margin-top:28px;">Today prx wires these doors in-process, as library imports. The work in progress moves them onto guest-room, where each door is a real socket into a separate broker — the same model, now enforced across a process boundary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET STARTED -->
+  <section class="wrap section" id="start">
+    <div class="section__grid">
+      <div class="section__num">02&nbsp;/&nbsp;Get&nbsp;started</div>
+      <div>
+        <h2>Try it</h2>
+        <p class="lead-2">Bounded Systems is built in the open and source-available. Pick the runtime that fits how you already work, then read the repo for the full setup.</p>
+
+        <div class="start-card card">
+          <div class="start-card__head">
+            <span class="start-card__name">claude-box</span>
+            <span class="tag tag--green">Start here if you use Claude&nbsp;Code</span>
+          </div>
+          <p class="start-card__lead">Run Claude Code inside a room, so its authority is only the doors you hand it.</p>
+          <div class="code">
+            <div class="c"># macOS — one command sets it up</div>
+            <div><span class="fn">nix</span> run .#setup</div>
+            <div class="spacer"></div>
+            <div class="c"># then, in another terminal, open Claude Code into the dev room</div>
+            <div>DOORS_TCP=<span class="s">1</span> <span class="fn">claude-box</span> --room dev --repo .</div>
+          </div>
+          <a class="start-card__more" href="https://github.com/bounded-systems/claude-box">Full setup on GitHub&nbsp;&#8599;</a>
+        </div>
+
+        <div class="start-card card">
+          <div class="start-card__head">
+            <span class="start-card__name">prx</span>
+            <span class="tag tag--mute">The work-unit CLI</span>
+          </div>
+          <p class="start-card__lead">Drive each unit of work through one signed, content-addressed pipeline to a merged PR.</p>
+          <div class="code">
+            <div class="c"># Homebrew</div>
+            <div><span class="fn">brew</span> tap bounded-systems/prx https://github.com/bounded-systems/prx</div>
+            <div><span class="fn">brew</span> install prx</div>
+            <div class="spacer"></div>
+            <div class="c"># or run it straight from the flake</div>
+            <div><span class="fn">nix</span> run github:bounded-systems/prx -- --version</div>
+          </div>
+          <a class="start-card__more" href="https://github.com/bounded-systems/prx">Read prx&nbsp;&#8599;</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- THE MODEL -->
-  <section class="wrap section" id="model">
+  <!-- PROOF -->
+  <section class="wrap section" id="proof">
     <div class="section__grid">
-      <div class="section__num">02&nbsp;/&nbsp;The&nbsp;model</div>
+      <div class="section__num">03&nbsp;/&nbsp;The&nbsp;code</div>
       <div>
-        <h2>The model, made physical</h2>
-        <p class="lead-2">One mechanism, not twenty. A <strong>capability seam</strong>: for each kind of system power there is exactly one sanctioned way through — a <strong>door</strong> you hold a socket to, never the keys behind it. The guest-room runtime makes it physical.</p>
+        <h2>The proof is the code</h2>
+        <p class="lead-2">Three repositories carry the model from idea to running software.</p>
 
-        <div class="card model-card">
-          <div class="model-figure">
-            <span class="mark mark--rounded"><img src="brand/mark/mark-white.svg" alt="The Bounded Systems mark"></span>
-            <span class="model-figure__cap">room&nbsp;&middot;&nbsp;door&nbsp;&middot;&nbsp;guest</span>
-          </div>
-          <div>
-            <div class="defn"><span class="defn__term">room</span><span class="defn__body">a named bundle of doors for one kind of stay. Ask for a room it doesn't know and it fails closed — a typo never widens authority.</span></div>
-            <div class="defn"><span class="defn__term">door</span><span class="defn__body">one unit of authority — a unix socket to a broker daemon that holds the real keys. The guest can knock; it cannot do.</span></div>
-            <div class="defn"><span class="defn__term">attenuation</span><span class="defn__body">narrowing a door by appending caveats. Append-only: authority can only ever get tighter as it is handed inward.</span></div>
-            <div class="defn"><span class="defn__term">confinement</span><span class="defn__body">a held capability lives only while a provider leases it, and never past that provider's ceiling.</span></div>
-            <div class="defn"><span class="defn__term">guest</span><span class="defn__body">the agent the room hosts — for example claude-box, the Claude Code runtime. The engine names no guest.</span></div>
-          </div>
+        <div class="proof-cards">
+          <a class="card proof-card" href="https://github.com/bounded-systems/prx">
+            <div class="proof-card__head">
+              <span class="proof-card__name">prx</span>
+              <span class="tag tag--green">Flagship</span>
+            </div>
+            <div class="proof-card__title">The agent-run work-unit CLI</div>
+            <div class="proof-card__body">Capability-scoped agents drive each work unit to a merged PR. Git-writes are signed and verified against their owner today; the other doors are wired in-process.</div>
+            <div class="proof-card__more">Read prx&nbsp;&#8599;</div>
+          </a>
+          <a class="card proof-card" href="https://github.com/bounded-systems/guest-room">
+            <div class="proof-card__head">
+              <span class="proof-card__name">guest-room</span>
+              <span class="tag tag--mute">The model</span>
+            </div>
+            <div class="proof-card__title">The door runtime prx is moving onto</div>
+            <div class="proof-card__body">A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement. Its specs run against the engine, so the docs can't drift from the code.</div>
+            <div class="proof-card__more">Read guest-room&nbsp;&#8599;</div>
+          </a>
+          <a class="card proof-card" href="https://github.com/bounded-systems/claude-box">
+            <div class="proof-card__head">
+              <span class="proof-card__name">claude-box</span>
+              <span class="tag tag--mute">The guest</span>
+            </div>
+            <div class="proof-card__title">Claude Code, plugged into a room</div>
+            <div class="proof-card__body">The first guest: a Claude Code runtime whose authority is the doors it holds — keeper, scout, concierge, net — and nothing more. Everything else is denied and recorded.</div>
+            <div class="proof-card__more">Read claude-box&nbsp;&#8599;</div>
+          </a>
         </div>
 
-        <div class="code">
-          <div class="c"># a room expands to the doors this stay holds — nothing else exists</div>
-          <div><span class="k">const</span> doors = <span class="fn">expandRoom</span>(rooms, catalog, <span class="s">"dev"</span>, env);</div>
-          <div class="spacer"></div>
-          <div class="c">// narrowing only ever tightens — caveats are append-only</div>
-          <div><span class="k">const</span> narrowed = <span class="fn">attenuate</span>(doors[<span class="s">0</span>], [<span class="s">"host=github.com"</span>]);</div>
-          <div class="spacer"></div>
-          <div class="c">// the rulebook is honest about what's denied, not only granted</div>
-          <div><span class="fn">deniedDoorSection</span>(<span class="fn">deniedDoors</span>(catalog, held))<span class="c">&nbsp;&rarr; "do not attempt"</span></div>
+        <div class="card seams">
+          <div class="seams__head">
+            <span class="seams__title">The capability seams</span>
+            <span class="seams__pkg">@bounded-systems/*</span>
+          </div>
+          <p class="seams__lead">One narrow seam per kind of system power — the single sanctioned way through in prx today, a door on guest-room tomorrow.</p>
+          <!-- seams:start · generated from data/seams.json by scripts/gen-seams.mjs — do not edit by hand -->
+      <div class="seam-grid">
+        <div class="seam"><div class="seam__name">fs</div><div class="seam__desc">the one filesystem door</div></div>
+        <div class="seam"><div class="seam__name">proc</div><div class="seam__desc">the one subprocess spawn</div></div>
+        <div class="seam"><div class="seam__name">env</div><div class="seam__desc">the one reader of process.env</div></div>
+        <div class="seam"><div class="seam__name">gh</div><div class="seam__desc">GitHub CLI, policy-gated</div></div>
+        <div class="seam"><div class="seam__name">git</div><div class="seam__desc">git CLI, lock-recovering</div></div>
+        <div class="seam"><div class="seam__name">cas</div><div class="seam__desc">bytes addressed by digest</div></div>
+      </div>
+      <!-- seams:end -->
         </div>
-
-        <p class="copy" style="margin-top:28px;">Today prx wires these seams in-process, as library imports. The move is onto guest-room's out-of-process doors — same model, enforced across a socket — with claude-box as the first guest.</p>
-        <p class="copy copy--last">Concretely: a room is a rootless Podman container, declared as a systemd quadlet and built reproducibly by nix; a door is a single unix socket bind-mounted in, a broker daemon holding the authority on the other side. Walls that come standard — drop-all-caps, read-only, no-new-privileges — and a short list of doors.</p>
       </div>
     </div>
   </section>
@@ -145,9 +226,9 @@
   <!-- HONESTY -->
   <section class="honesty" id="honesty">
     <div class="honesty__inner">
-      <div class="bs-text-label eyebrow--light">03&nbsp;/&nbsp;Kept&nbsp;honest</div>
-      <h2>Every claim is graded against the running code. Including the claims on this page.</h2>
-      <p class="honesty__lead">An instrument built to catch my <em>own</em> over-statements and file the gap. Docs generate from source and fail CI on drift; guest-room's specs execute against its engine. I keep myself as honest as I keep the agents.</p>
+      <div class="bs-text-label eyebrow--light">04&nbsp;/&nbsp;Kept&nbsp;honest</div>
+      <h2>Every claim here is graded against the running code.</h2>
+      <p class="honesty__lead">This is a working project, not a finished one. Rather than gloss over the gaps, each claim carries a grade so you can see what's proven, what's partial, and what's still a bet.</p>
 
       <div class="legend">
         <div class="legend__card">
@@ -156,11 +237,11 @@
         </div>
         <div class="legend__card">
           <span class="legend__head legend__head--partial"><span class="grade__dot" style="background:var(--grade-partial);"></span>Partial</span>
-          <p>True in the common path, with a named gap. The gap is written down, not glossed over.</p>
+          <p>True on the common path, with a named gap. The gap is written down, not glossed over.</p>
         </div>
         <div class="legend__card">
           <span class="legend__head legend__head--aspirational"><span class="grade__dot" style="background:var(--grade-aspirational);"></span>Aspirational</span>
-          <p>The bet, not yet the result. Stated as direction so it can't masquerade as done.</p>
+          <p>The bet, not yet the result. Stated as a direction so it can't pass for done.</p>
         </div>
       </div>
 
@@ -171,79 +252,25 @@
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--enforced"><span class="grade__dot"></span>Enforced</span>
-          <span class="claim__text">guest-room's behaviour specs execute against the engine.</span>
+          <span class="claim__text">guest-room's behaviour specs run against the engine.</span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--partial"><span class="grade__dot"></span>Partial</span>
-          <span class="claim__text">A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate. <span class="claim__gap">— the sign→verify loop is tested but opt-in today; gh, external reads, and egress are policy-gated, not yet signed.</span></span>
+          <span class="claim__text">A git-write carries signed, content-addressed provenance, checked at the merge gate. <span class="claim__gap">— the sign-then-verify loop is tested but opt-in today; reads and egress are policy-gated, not yet signed.</span></span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--partial"><span class="grade__dot"></span>Partial</span>
-          <span class="claim__text">The agent never holds the credential — a broker daemon does. <span class="claim__gap">— claude-box runs credential-free; keeperd / netd hold the secret and hand back only the result. Isolation today is the container plus in-process discipline, not yet a hardened sandbox.</span></span>
+          <span class="claim__text">The agent never holds the credential — a broker daemon does. <span class="claim__gap">— claude-box runs credential-free; isolation today is the container plus in-process discipline, not yet a hardened sandbox.</span></span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
-          <span class="claim__text">The guest-room door runtime replaces prx's in-process seams. <span class="claim__gap">— guest-room v0 ships the model (rooms, doors, attenuation, confinement); the cutover, and signing across every door, is the work.</span></span>
+          <span class="claim__text">The guest-room door runtime replaces prx's in-process seams. <span class="claim__gap">— guest-room v0 ships the model; the cutover, and signing across every door, is the work.</span></span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
-          <span class="claim__text">Contracts stay honest <em>between</em> components as they evolve. <span class="claim__gap">— the unsolved problem this whole project is aimed at.</span></span>
+          <span class="claim__text">Agent-authored components stay honest <em>against each other</em> as they evolve. <span class="claim__gap">— the open problem this whole project is aimed at.</span></span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- PROOF -->
-  <section class="wrap section" id="proof">
-    <div class="bs-text-label eyebrow" style="margin-bottom:22px;">04&nbsp;/&nbsp;The&nbsp;proof</div>
-    <h2 style="font-size:34px;line-height:1.1;font-weight:600;letter-spacing:-0.02em;margin:0 0 36px;">The proof is the code</h2>
-
-    <div class="proof-cards">
-      <a class="card proof-card" href="https://github.com/bounded-systems/prx">
-        <div class="proof-card__head">
-          <span class="proof-card__name">prx</span>
-          <span class="tag tag--green">Flagship</span>
-        </div>
-        <div class="proof-card__title">The agent-run work-unit CLI</div>
-        <div class="proof-card__body">Capability-scoped agents driving each work unit through one signed, content-addressed pipeline to a merged PR. Git-writes are signed and verified against the keeper; the other seams are wired in-process as imports today.</div>
-        <div class="proof-card__more">Read prx&nbsp;&#8599;</div>
-      </a>
-      <a class="card proof-card" href="https://github.com/bounded-systems/guest-room">
-        <div class="proof-card__head">
-          <span class="proof-card__name">guest-room</span>
-          <span class="tag tag--mute">The model</span>
-        </div>
-        <div class="proof-card__title">The door runtime prx is moving onto</div>
-        <div class="proof-card__body">A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement. Its Gherkin specs execute against the engine, so the docs cannot drift from the code.</div>
-        <div class="proof-card__more">Read guest-room&nbsp;&#8599;</div>
-      </a>
-      <a class="card proof-card" href="https://github.com/bounded-systems/claude-box">
-        <div class="proof-card__head">
-          <span class="proof-card__name">claude-box</span>
-          <span class="tag tag--mute">The guest</span>
-        </div>
-        <div class="proof-card__title">Claude Code, plugged into a room</div>
-        <div class="proof-card__body">The first guest: a Claude Code runtime whose authority is the door references it holds — keeper, scout, concierge, net — and nothing beyond them. Everything else is denied and recorded.</div>
-        <div class="proof-card__more">Read claude-box&nbsp;&#8599;</div>
-      </a>
-    </div>
-
-    <div class="card seams">
-      <div class="seams__head">
-        <span class="seams__title">The capability seams</span>
-        <span class="seams__pkg">@bounded-systems/*</span>
-      </div>
-      <p class="seams__lead">One narrow seam per kind of ambient system power — the single sanctioned access point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and policy stays enforceable.</p>
-      <!-- seams:start · generated from data/seams.json by scripts/gen-seams.mjs — do not edit by hand -->
-      <div class="seam-grid">
-        <div class="seam"><div class="seam__name">fs</div><div class="seam__desc">the one filesystem door</div></div>
-        <div class="seam"><div class="seam__name">proc</div><div class="seam__desc">the one subprocess spawn</div></div>
-        <div class="seam"><div class="seam__name">env</div><div class="seam__desc">the one reader of process.env</div></div>
-        <div class="seam"><div class="seam__name">gh</div><div class="seam__desc">GitHub CLI, policy-gated</div></div>
-        <div class="seam"><div class="seam__name">git</div><div class="seam__desc">git CLI, lock-recovering</div></div>
-        <div class="seam"><div class="seam__name">cas</div><div class="seam__desc">bytes addressed by digest</div></div>
-      </div>
-      <!-- seams:end -->
     </div>
   </section>
 
@@ -252,8 +279,8 @@
     <section class="colophon">
       <div class="bs-text-label eyebrow--light" style="margin-bottom:24px;">Colophon</div>
       <h2>A solo project, worked out in public against running code.</h2>
-      <p>I build agent infrastructure and capability-security systems. Bounded Systems is where I'm working out — honestly, in the open — how agent-authored software stays trustworthy as it grows.</p>
-      <p class="last">If that's a problem your team is chewing on too, I'd like to talk.</p>
+      <p>I build agent infrastructure and capability-security systems. Bounded Systems is where I work out, in the open, how agent-authored software stays trustworthy as it grows.</p>
+      <p class="last">If your team is chewing on the same problem, I'd like to talk.</p>
       <div class="colophon__cta">
         <a class="btn-primary" href="mailto:hello@bounded.tools">Get in touch</a>
         <a class="btn-link" href="https://github.com/bounded-systems">github.com/bounded-systems&nbsp;&#8599;</a>
