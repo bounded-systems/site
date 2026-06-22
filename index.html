@@ -136,7 +136,7 @@
           <div><span class="fn">deniedDoorSection</span>(<span class="fn">deniedDoors</span>(catalog, held))<span class="c">&nbsp;&rarr; "do not attempt"</span></div>
         </div>
 
-        <p class="copy" style="margin-top:28px;">Today prx wires these seams in-process, as library imports. The move is onto guest-room's out-of-process doors — same model, enforced across a socket — with claude-box as the first guest.</p>
+        <p class="copy" style="margin-top:28px;">Today prx wires these seams in-process, as library imports. The move is onto guest-room's out-of-process doors — same model, enforced across a socket — with claude-box as the first guest. Both prx and claude-box are being broken up onto that shared runtime: two tools today, converging into one door-based system.</p>
         <p class="copy copy--last">Concretely: a room is a rootless Podman container, declared as a systemd quadlet and built reproducibly by nix; a door is a single unix socket bind-mounted in, a broker daemon holding the authority on the other side. Walls that come standard — drop-all-caps, read-only, no-new-privileges — and a short list of doors.</p>
       </div>
     </div>
@@ -183,7 +183,7 @@
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
-          <span class="claim__text">The guest-room door runtime replaces prx's in-process seams. <span class="claim__gap">— guest-room v0 ships the model (rooms, doors, attenuation, confinement); the cutover, and signing across every door, is the work.</span></span>
+          <span class="claim__text">prx and claude-box converge onto one guest-room door runtime. <span class="claim__gap">— guest-room v0 ships the model (rooms, doors, attenuation, confinement); prx still runs a parallel in-process door stack. Converging the two — and signing across every door — is the work in progress.</span></span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
