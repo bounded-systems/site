@@ -37,6 +37,7 @@
               # Same drift gate the project argues for, then assemble dist/.
               node brand/tokens/build-tokens.mjs --check
               node build.mjs
+              node scripts/gen-blog.mjs
               runHook postBuild
             '';
             installPhase = ''
