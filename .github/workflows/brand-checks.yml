@@ -26,5 +26,7 @@ jobs:
         run: node brand/tools/meta.mjs --check dist
       - name: Content tokens (schema + Gherkin + lint)
         run: node brand/tools/content.mjs --check .
-      - name: Design-system coverage (report)
-        run: node brand/tools/coverage.mjs .
+      - name: No hardcoded colours (all colours are tokens)
+        run: node brand/tools/coverage.mjs --colors --check dist
+      - name: Accessibility (WCAG AA contrast + headings)
+        run: node brand/tools/a11y.mjs --check dist
