@@ -1,12 +1,35 @@
 {
   "_comment": "Single source of truth for the capability-seam grid on the homepage. Seeded from the original hand-written copy. The grid HTML between the <!-- seams:start --> / <!-- seams:end --> markers in index.html is GENERATED from this file — do not hand-edit it. Edit a tagline here and run `node scripts/gen-seams.mjs`. The canonical long-term home for these taglines is each prx package's package.json; `node scripts/gen-seams.mjs --emit-seed` produces the payload to promote them upstream, and `--reconcile` checks this set against prx.",
-  "source": { "repo": "bounded-systems/prx", "packagesDir": "packages", "seamKeyword": "seam", "scope": "@bounded-systems" },
+  "source": {
+    "repo": "bounded-systems/prx",
+    "packagesDir": "packages",
+    "seamKeyword": "seam",
+    "scope": "@bounded-systems"
+  },
   "seams": [
-    { "name": "fs",   "tagline": "the one filesystem door" },
-    { "name": "proc", "tagline": "the one subprocess spawn" },
-    { "name": "env",  "tagline": "the one reader of process.env" },
-    { "name": "gh",   "tagline": "GitHub CLI, policy-gated" },
-    { "name": "git",  "tagline": "git CLI, lock-recovering" },
-    { "name": "cas",  "tagline": "bytes addressed by digest" }
+    {
+      "name": "fs",
+      "tagline": "the one filesystem door"
+    },
+    {
+      "name": "proc",
+      "tagline": "the one subprocess spawn"
+    },
+    {
+      "name": "env",
+      "tagline": "the one reader of process.env"
+    },
+    {
+      "name": "gh",
+      "tagline": "GitHub CLI, policy-gated"
+    },
+    {
+      "name": "git",
+      "tagline": "git CLI, lock-recovering"
+    },
+    {
+      "name": "cas",
+      "tagline": "bytes addressed by digest"
+    }
   ]
 }
