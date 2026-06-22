@@ -48,6 +48,39 @@ naming rivals on a landing page dates quickly and reads defensively. A README or
 a blog post is the right place to name them explicitly if desired (e.g. a "how
 this differs" section), since it's versioned and easy to update.
 
+## Distribution: submit to `awesome-harness-engineering`
+
+[`ai-boost/awesome-harness-engineering`][awesome] is a curated, problem-first
+list (its `AGENTS.md` organizes by *the problem being solved, not by vendor*, and
+excludes marketing content — entries must be opinionated and justify inclusion).
+Its top-level **"Security, Sandbox & Permissions"** section already lists tools
+alongside standards, but everything in it is **policy / identity** authorization
+(OAuth, SPIFFE, PEP/PDP decision points, intent-taxonomy allow/deny, classifiers).
+There is **no object-capability implementation** in the section — which is exactly
+prx's distinct mechanism, and the opinionated hook for inclusion.
+
+Lead with a **single** entry (prx) — one well-justified entry respects the list's
+anti-spam ethos better than submitting three repos. Add guest-room only if the
+runtime primitive is worth representing too. Notes below are written to our own
+grading (no over-claiming), which also satisfies the list's anti-marketing rule.
+
+**Recommended entry — "Security, Sandbox & Permissions":**
+
+```markdown
+- [prx](https://github.com/bounded-systems/prx) — Object-capability authority for coding agents: the agent holds an unforgeable reference to a *door*, never the credential behind it, and a broker performs the privileged act. Git-writes carry per-actor, content-addressed provenance verified fail-closed at the merge gate, so every effect is attributable — a capability model rather than the allow/deny lists and PEP/PDP policy layers most of this section covers.
+```
+
+**Optional second entry — same section:**
+
+```markdown
+- [guest-room](https://github.com/bounded-systems/guest-room) — The capability runtime prx is moving onto: rooms expand to exactly the doors a job holds, attenuation narrows them append-only (authority only ever tightens as it's handed inward), and confinement binds a held capability to its provider's lease. Behaviour specs execute against the engine, so the docs can't drift from the code.
+```
+
+**How to submit:** fork `ai-boost/awesome-harness-engineering`, add the line(s)
+under "Security, Sandbox & Permissions", verify the URL resolves, open a PR.
+(Can't be done from the site session — its GitHub access is scoped to
+`bounded-systems/site` only; this is a manual outbound contribution.)
+
 ## Acceptance / verify
 
 A reader comparing harness options can tell, in one line, that Bounded Systems
@@ -62,3 +95,4 @@ efficiency-focused tools, and that the tools compose rather than compete.
 [chopratejas/headroom]: https://github.com/chopratejas/headroom
 [DietrichGebert/ponytail]: https://github.com/DietrichGebert/ponytail
 [awesome-harness-engineering]: https://github.com/ai-boost/awesome-harness-engineering
+[awesome]: https://github.com/ai-boost/awesome-harness-engineering
