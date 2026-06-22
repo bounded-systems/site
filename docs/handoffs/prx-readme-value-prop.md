@@ -52,3 +52,37 @@ consistent with the site hero so the two don't drift.
 - Site hero + "Get started" copy: `index.html` (this site branch).
 - prx README install steps the site now links verbatim: `brew tap … && brew
   install prx`, `nix run github:bounded-systems/prx -- --version`.
+
+## Ready to apply (paste-ready)
+
+Replace the current README opening (heading + tagline + first paragraph) with
+this. It keeps the existing tagline — demoted to a blockquote below the plain
+lead — and leaves the Quickstart untouched.
+
+````markdown
+# prx
+
+**prx runs AI coding agents with scoped authority.** Each agent reaches git, the
+shell, your environment, and your tools only through capability *doors* you grant
+— never your full access — and every privileged action is signed and recorded.
+
+Today an AI agent that writes your code also runs with your permissions: it can
+push to git, spawn subprocesses, and read your secrets. prx narrows that to one
+sanctioned door per kind of power, so you get attribution and an audit trail for
+agent-driven changes — and a refusal, not a surprise, when an agent reaches for
+power it was never given.
+
+> The agent-run work-unit CLI: capability-scoped agents driving each work unit
+> through one signed, content-addressed pipeline to a merged PR — git-writes
+> signed and verified against their owner. A Bun + TypeScript monorepo, plus the
+> `@bounded-systems/*` libraries it builds on.
+
+## Quickstart
+
+```sh
+brew tap bounded-systems/prx https://github.com/bounded-systems/prx
+brew install prx
+# or:
+nix run github:bounded-systems/prx -- --version
+```
+````
