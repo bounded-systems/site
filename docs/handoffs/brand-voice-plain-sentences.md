@@ -41,10 +41,35 @@ self-referential "including this one" gimmick. The H2 is now a plain sentence:
 **Guideline:** keep the grading device (it's good and honest); retire the
 self-referential framing wherever it appears in READMEs and marketing copy.
 
+## 3. The tagline + description are now CI-enforced brand tokens
+
+The original feedback singled out the tagline *"Bounded authority for AI agents
+— drawn at the door, not the process or container"* as verbless. Since then the
+site added `content.mjs` copy-token gates: the homepage must contain the brand's
+exact `tagline` and `description` tokens, sourced from this repo. **So the fix
+now lives here** — the site can't reword them without failing CI, and shouldn't,
+because the brand owns them. The site keeps them in `<title>` / meta / JSON-LD to
+stay green; the on-page H1 was rewritten to a plain sentence around them.
+
+### Proposed token rewrites (for discussion — pick or adjust)
+
+Current → plainer, verb-driven alternatives:
+
+- **tagline** — `Bounded authority for AI agents`
+  - → `Scope what your AI agent can do.`
+  - → `Give AI agents one door, not all your keys.`
+- **description** — `Capability security for AI agents — authority drawn at the door, not the process or container. Every claim graded against the running code.`
+  - → `Bounded Systems scopes what an AI agent can do: one sanctioned door per kind of system power, every privileged action signed and recorded, and every claim graded against the running code.`
+
+Keep whichever wording, but make each a sentence with a verb. Changing the token
+here propagates to every surface that reads it (site meta, llms.txt, READMEs) on
+the next sync — that's the intended single-source mechanism.
+
 ## Acceptance / verify
 
 A first-time reader can read any top-level paragraph aloud and have it parse as a
-normal sentence, and nobody has to ask what "including this one" means.
+normal sentence, and nobody has to ask what "including this one" means. The
+`tagline` and `description` tokens each read as a sentence with a verb.
 
 ## Context
 
