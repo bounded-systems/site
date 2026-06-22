@@ -223,9 +223,9 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .claim__text { font-size: 15.5px; color: #D6E0D9; }
 .claim__text em { color: var(--bs-color-white); }
 .claim__gap { color: #8B998F; }
-.grade--on-dark.grade--enforced { color: #7FE0B0; background: rgba(63,185,132,0.12); }
-.grade--on-dark.grade--partial { color: #E6B45C; background: rgba(200,144,47,0.12); }
-.grade--on-dark.grade--aspirational { color: #A9B8AF; background: rgba(126,140,131,0.14); }
+.grade--on-dark.grade--enforced { color: var(--bs-grade-enforced-on-dark); background: var(--bs-grade-enforced-on-dark-bg); }
+.grade--on-dark.grade--partial { color: var(--bs-grade-partial-on-dark); background: var(--bs-grade-partial-on-dark-bg); }
+.grade--on-dark.grade--aspirational { color: var(--bs-grade-aspirational-on-dark); background: var(--bs-grade-aspirational-on-dark-bg); }
 
 /* a one-line positioning note — where this sits among other agent harnesses */
 .fit-note {
