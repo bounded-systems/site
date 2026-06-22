@@ -1,0 +1,59 @@
+name: sync-registry
+
+# The @bounded-systems knowledge-graph section on the homepage is generated from
+# data/registry.json (scripts/gen-registry.mjs). Kept honest two ways:
+#   • on PRs — fail if the committed section is stale or hand-edited (offline gate)
+#   • daily / on demand — refresh labels from each package's bounded.* and, if
+#     anything changed, open a PR. Mirrors sync-seams.yml.
+
+on:
+  pull_request:
+    paths:
+      - "index.html"
+      - "data/registry.json"
+      - "scripts/gen-registry.mjs"
+  schedule:
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Offline, deterministic: the committed section must equal render(data/registry.json).
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - run: node scripts/gen-registry.mjs --check
+
+  # Networked: refresh labels from each package's bounded.* (per-repo), regenerate,
+  # open a PR on any change. No-op until/unless a package's bounded.* changes.
+  sync:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Refresh labels from each package's bounded.* and regenerate
+        run: node scripts/gen-registry.mjs --from-bounded
+      - name: Open PR if the section changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No change — registry section already in sync."
+            exit 0
+          fi
+          branch="registry-sync/$(date -u +%Y%m%d%H%M%S)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git commit -am "chore(registry): sync knowledge-graph section from package bounded.*"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore(registry): sync knowledge-graph section from package bounded.*" \
+            --body "Automated by .github/workflows/sync-registry.yml. A package's bounded.* changed — review and merge."

@@ -269,6 +269,39 @@
     </div>
   </section>
 
+  <!-- KNOWLEDGE GRAPH -->
+  <section class="wrap section" id="graph">
+    <div class="bs-text-label eyebrow" style="margin-bottom:24px;">The libraries, as a graph</div>
+    <h2>Every capability is a typed node; the edges are how they compose.</h2>
+    <p class="seams__lead">Each <code>@bounded-systems/*</code> package declares what it is — a <strong>verb</strong> (a capability that acts) or a <strong>noun</strong> (data that flows) — plus its role and domain, in its own <code>package.json</code>. The graph below is generated from that metadata and fails CI on drift; the full node-edge diagram lives <a href="https://github.com/bounded-systems">on the org profile</a>.</p>
+    <!-- registry:start · generated from data/registry.json by scripts/gen-registry.mjs — do not edit by hand -->
+      <div class="seam-grid">
+        <div class="seam"><div class="seam__name">disposition <span class="facet facet--verb">verb</span> <span class="kind">guest</span></div><div class="seam__desc">Pure classifier mapping work-unit surface state to a disposition (ok/prune/repair/review)</div></div>
+        <div class="seam"><div class="seam__name">env <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">The one sanctioned reader of process.env, routing ambient config through capability imports</div></div>
+        <div class="seam"><div class="seam__name">fs <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Filesystem capability seam; the one allowed filesystem-access point with an injectable FileSystem</div></div>
+        <div class="seam"><div class="seam__name">host <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">The one sanctioned reader of host/OS ambient state (home dir, temp dir, hostname), routing ambient authority through capability imports</div></div>
+        <div class="seam"><div class="seam__name">proc <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">The one allowed subprocess spawn point, routing external-tool invocations through a capability</div></div>
+        <div class="seam"><div class="seam__name">policy <span class="facet facet--verb">verb</span> <span class="kind">room</span></div><div class="seam__desc">Tool-policy engine enforcing subcommand allowlists by tool, state, and role</div></div>
+        <div class="seam"><div class="seam__name">verbspec <span class="facet facet--verb">verb</span> <span class="kind">guest</span></div><div class="seam__desc">Spec-driven CLI core: author a verb once as a typed VerbSpec, project it to CLI, MCP, OpenAPI, and Anthropic tool surfaces</div></div>
+        <div class="seam"><div class="seam__name">auth <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Service-credential resolver (GitHub, Notion) through a single sanctioned access point</div></div>
+        <div class="seam"><div class="seam__name">gh <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">GitHub CLI wrapper with policy enforcement, rate-limit gating, and budget audit logging</div></div>
+        <div class="seam"><div class="seam__name">git <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Git CLI wrapper with policy enforcement and stale-lock recovery</div></div>
+        <div class="seam"><div class="seam__name">bd <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Typed interface to the beads CLI with policy enforcement and short-ID guards</div></div>
+        <div class="seam"><div class="seam__name">github-budget <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Rate-limit-aware gh wrapper with bucket classification, pre-call gating, and audit trail</div></div>
+        <div class="seam"><div class="seam__name">scout <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Content-addressed surface reads (file/grep/files) with anchored-chain provenance</div></div>
+        <div class="seam"><div class="seam__name">slack <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Policy-gated, provenance-tracked Slack read surface: bounded read ops behind a swappable transport port, with keymaker-minted scoped credentials</div></div>
+        <div class="seam"><div class="seam__name">repo-root <span class="facet facet--verb">verb</span> <span class="kind">door</span></div><div class="seam__desc">Repo-root resolution capability: lazy git-based runtime root plus the eager .git-marker walk for build/codegen, the one sanctioned root-resolution point</div></div>
+        <div class="seam"><div class="seam__name">surface-sync <span class="facet facet--verb">verb</span> <span class="kind">room</span></div><div class="seam__desc">Type ontology for work-unit change-detection across GH/branch/worktree/tmux/beads</div></div>
+        <div class="seam"><div class="seam__name">cas <span class="facet facet--noun">noun</span> <span class="kind">room</span></div><div class="seam__desc">Content-addressable storage substrate: bytes addressed by their SHA-256 digest, with a storage-agnostic blob-store port</div></div>
+        <div class="seam"><div class="seam__name">machine-schema <span class="facet facet--noun">noun</span> <span class="kind">room</span></div><div class="seam__desc">Brands, handoff envelope, and state/phase/invariant primitives for work-unit machines</div></div>
+        <div class="seam"><div class="seam__name">audit-context <span class="facet facet--noun">noun</span> <span class="kind">room</span></div><div class="seam__desc">Ambient runtime context for gh-call audit attribution (verb, actor, truth reason)</div></div>
+        <div class="seam"><div class="seam__name">anchored-chain <span class="facet facet--noun">noun</span> <span class="kind">room</span></div><div class="seam__desc">Derivation chain with contract validation, signing, lineage tracking, and invalidation</div></div>
+        <div class="seam"><div class="seam__name">anchored-chain-sqlite <span class="facet facet--noun">noun</span> <span class="kind">room</span></div><div class="seam__desc">SQLite/Drizzle-backed implementation of the anchored-chain stores</div></div>
+        <div class="seam"><div class="seam__name">prx-config <span class="facet facet--noun">noun</span> <span class="kind">guest</span></div><div class="seam__desc">TUI configuration schema parser/emitter for L1 Claude and L2 Warp tools</div></div>
+      </div>
+      <!-- registry:end -->
+  </section>
+
   <!-- COLOPHON -->
   <div class="wrap">
     <section class="colophon">
