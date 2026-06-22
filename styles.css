@@ -231,6 +231,15 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .grade--on-dark.grade--partial { color: #E6B45C; background: rgba(200,144,47,0.12); }
 .grade--on-dark.grade--aspirational { color: #A9B8AF; background: rgba(126,140,131,0.14); }
 
+/* a one-line positioning note — where this sits among other agent harnesses */
+.fit-note {
+  margin: 4px 0 0; padding: 16px 20px;
+  border-left: 2px solid var(--bs-color-forest);
+  background: var(--bs-color-card);
+  font-size: 16px; line-height: 1.55; color: var(--site-ink-2);
+}
+.fit-note strong { color: var(--bs-color-ink); }
+
 /* ---------- get started ---------- */
 .start-card { padding: 30px 32px; margin-bottom: 20px; }
 .start-card__head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
