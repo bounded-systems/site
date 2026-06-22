@@ -4,10 +4,10 @@
   --site-forest-mute: #7FB8A2;
   --site-cream: #CFE4DA;
   --site-ink-2: #3C4A42;
-  --site-dark: #16221C;
+  --site-dark: var(--bs-color-ink);
   --site-dark-card: #1E2B24;
   --site-dark-line: #2C3A31;
-  --site-deep: #073D2C;
+  --site-deep: var(--bs-color-forest-deep);
 
   --grade-enforced: #3FB984;
   --grade-partial: #C8902F;
@@ -25,7 +25,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
 
 .btn-primary {
   display: inline-block; text-decoration: none;
-  background: #fff; color: var(--bs-color-forest);
+  background: var(--bs-color-white); color: var(--bs-color-forest);
   font-size: 15px; font-weight: 600;
   padding: 13px 22px; border-radius: 11px;
 }
