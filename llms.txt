@@ -1,0 +1,12 @@
+# Bounded Systems
+> Bounded authority for AI agents
+
+Capability security for AI agents — authority drawn at the door, not the process or container. Every claim graded against the running code.
+
+## The bet
+Draw the boundary at the door — a scope-bounded set of capabilities an agent acts through, not the process, not the container.
+
+## Links
+- [GitHub](https://github.com/bounded-systems)
+- [Writing](https://bounded.tools/blog/)
+- [Get in touch](mailto:hello@bounded.tools)
