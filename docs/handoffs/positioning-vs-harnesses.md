@@ -59,21 +59,22 @@ alongside standards, but everything in it is **policy / identity** authorization
 There is **no object-capability implementation** in the section — which is exactly
 prx's distinct mechanism, and the opinionated hook for inclusion.
 
-Lead with a **single** entry (prx) — one well-justified entry respects the list's
-anti-spam ethos better than submitting three repos. Add guest-room only if the
-runtime primitive is worth representing too. Notes below are written to our own
-grading (no over-claiming), which also satisfies the list's anti-marketing rule.
+Lead with a **single** entry (guest-room, the flagship) — one well-justified
+entry respects the list's anti-spam ethos better than submitting three repos, and
+the capability *runtime* is the cleanest fit for this section. Add prx only if the
+at-scale implementation is worth representing too. Notes below are written to our
+own grading (no over-claiming), which also satisfies the list's anti-marketing rule.
 
 **Recommended entry — "Security, Sandbox & Permissions":**
 
 ```markdown
-- [prx](https://github.com/bounded-systems/prx) — Object-capability authority for coding agents: the agent holds an unforgeable reference to a *door*, never the credential behind it, and a broker performs the privileged act. Git-writes carry per-actor, content-addressed provenance verified fail-closed at the merge gate, so every effect is attributable — a capability model rather than the allow/deny lists and PEP/PDP policy layers most of this section covers.
+- [guest-room](https://github.com/bounded-systems/guest-room) — Object-capability runtime for AI agents: the agent holds an unforgeable reference to a *door*, never the credential behind it, and a broker performs the privileged act. Rooms expand to exactly the doors a job holds, attenuation narrows them append-only (authority only ever tightens as it's handed inward), and confinement binds a capability to its provider's lease. A capability model rather than the allow/deny lists and PEP/PDP policy layers most of this section covers; behaviour specs execute against the engine, so the docs can't drift from the code.
 ```
 
 **Optional second entry — same section:**
 
 ```markdown
-- [guest-room](https://github.com/bounded-systems/guest-room) — The capability runtime prx is moving onto: rooms expand to exactly the doors a job holds, attenuation narrows them append-only (authority only ever tightens as it's handed inward), and confinement binds a held capability to its provider's lease. Behaviour specs execute against the engine, so the docs can't drift from the code.
+- [prx](https://github.com/bounded-systems/prx) — guest-room's model run at scale: capability-scoped agents drive each work unit to a merged PR, with git-writes carrying per-actor, content-addressed provenance verified fail-closed at the merge gate, so every effect is attributable.
 ```
 
 **How to submit:** fork `ai-boost/awesome-harness-engineering`, add the line(s)

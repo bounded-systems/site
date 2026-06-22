@@ -240,13 +240,6 @@ em { font-style: normal; color: var(--bs-color-forest); }
 }
 .fit-note strong { color: var(--bs-color-ink); }
 
-/* ---------- get started ---------- */
-.start-card { padding: 30px 32px; margin-bottom: 20px; }
-.start-card__head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
-.start-card__name { font-family: var(--bs-font-mono); font-size: 16px; font-weight: 600; color: var(--bs-color-forest); }
-.start-card__lead { font-size: 16px; line-height: 1.55; color: var(--site-ink-2); margin: 0 0 20px; }
-.start-card__more { display: inline-block; margin-top: 18px; font-family: var(--bs-font-mono); font-size: 12.5px; color: var(--bs-color-forest); text-decoration: none; }
-
 /* ---------- proof ---------- */
 .proof-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
 .proof-card { text-decoration: none; padding: 34px; display: flex; flex-direction: column; gap: 14px; }

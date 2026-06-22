@@ -62,30 +62,40 @@
   <main class="wrap">
     <header class="hero">
       <div class="hero__bg"><img src="brand/mark/mark-white.svg" alt=""></div>
-      <div class="hero__inner">
-        <div class="hero__lock">
-          <span class="mark mark--sq" style="width:46px;height:46px;background:transparent;"><img src="brand/mark/mark-white.svg" width="40" height="40" alt=""></span>
-          <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
+      <div class="hero__grid">
+        <div class="hero__inner">
+          <div class="hero__lock">
+            <span class="mark mark--sq" style="width:40px;height:40px;background:transparent;"><img src="brand/mark/mark-white.svg" width="34" height="34" alt=""></span>
+            <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
+          </div>
+          <h1>Give your AI agent one door, not all your keys.</h1>
+          <p class="hero__lead">Your coding agent already writes code, runs commands, and pushes to git — and today it does all of that with <strong>your</strong> access. Bounded Systems puts one sanctioned door in front of each kind of system power. The agent knocks; a broker behind the door checks your policy, acts or refuses, and records what happened.</p>
+          <div class="code code--hero">
+            <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })</div>
+            <div>&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span></div>
+            <div class="spacer"></div>
+            <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"scout"</span> })</div>
+            <div>&nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; scout holds no git-write &middot; recorded</span></div>
+          </div>
+          <div class="hero__cta">
+            <a class="btn-primary" href="#bet">Read the one idea&nbsp;&rarr;</a>
+            <a class="btn-link" href="https://github.com/bounded-systems/guest-room">guest-room on GitHub&nbsp;&#8599;</a>
+          </div>
+          <div class="hero__note">
+            <span class="dot-sm"></span>
+            Built in the open. Every claim on this page is graded against the running code.
+          </div>
         </div>
-        <h1>Agents can write the code now. The unsolved part is keeping it&nbsp;honest.</h1>
-        <p class="hero__lead">One sanctioned door per kind of system power. An agent reaches git, the filesystem, a subprocess, or your tools only through it — the door checks the caller's policy, acts or refuses, and records either way. Today the highest-risk effect — git-writes — is signed and attributable to its owner.</p>
-        <div class="code code--hero">
-          <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })</div>
-          <div class="c">&nbsp;&nbsp;git door &middot; policy: allow &middot; owner: keeper</div>
-          <div>&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; signed keeper &middot; audited</span></div>
-          <div class="spacer"></div>
-          <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"scout"</span> })</div>
-          <div class="c">&nbsp;&nbsp;git door &middot; <span class="no">policy: deny</span> &mdash; role <span class="s">scout</span> holds no git-write</div>
-          <div>&nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; recorded</span></div>
-        </div>
-        <div class="hero__cta">
-          <a class="btn-primary" href="#bet">Read the one idea&nbsp;&rarr;</a>
-          <a class="btn-link" href="https://github.com/bounded-systems/guest-room">guest-room on GitHub&nbsp;&#8599;</a>
-        </div>
-        <div class="hero__note">
-          <span class="dot-sm"></span>
-          Built in the open. Every claim on this page is graded against the running code — including this one.
-        </div>
+
+        <aside class="hero__panel" aria-label="The model: a guest reaches a room only through a door.">
+          <span class="mark mark--rounded"><img src="brand/mark/mark-white.svg" alt="A guest passes through one door into a room."></span>
+          <span class="hero__cap">room&nbsp;&middot;&nbsp;door&nbsp;&middot;&nbsp;guest</span>
+          <div class="hero__roles">
+            <span class="hero__role">guest = your agent</span>
+            <span class="hero__role">door = one capability</span>
+            <span class="hero__role">room = the doors it holds</span>
+          </div>
+        </aside>
       </div>
     </header>
   </div>
@@ -115,18 +125,12 @@
         <h2>The model, made physical</h2>
         <p class="lead-2">One mechanism, not twenty. A <strong>capability seam</strong>: for each kind of system power there is exactly one sanctioned way through — a <strong>door</strong> you hold a socket to, never the keys behind it. The guest-room runtime makes it physical.</p>
 
-        <div class="card model-card">
-          <div class="model-figure">
-            <span class="mark mark--rounded"><img src="brand/mark/mark-white.svg" alt="The Bounded Systems mark"></span>
-            <span class="model-figure__cap">room&nbsp;&middot;&nbsp;door&nbsp;&middot;&nbsp;guest</span>
-          </div>
-          <div>
-            <div class="defn"><span class="defn__term">room</span><span class="defn__body">a named bundle of doors for one kind of stay. Ask for a room it doesn't know and it fails closed — a typo never widens authority.</span></div>
-            <div class="defn"><span class="defn__term">door</span><span class="defn__body">one unit of authority — a unix socket to a broker daemon that holds the real keys. The guest can knock; it cannot do.</span></div>
-            <div class="defn"><span class="defn__term">attenuation</span><span class="defn__body">narrowing a door by appending caveats. Append-only: authority can only ever get tighter as it is handed inward.</span></div>
-            <div class="defn"><span class="defn__term">confinement</span><span class="defn__body">a held capability lives only while a provider leases it, and never past that provider's ceiling.</span></div>
-            <div class="defn"><span class="defn__term">guest</span><span class="defn__body">the agent the room hosts — for example claude-box, the Claude Code runtime. The engine names no guest.</span></div>
-          </div>
+        <div class="card model-card model-card--defns">
+          <div class="defn"><span class="defn__term">room</span><span class="defn__body">a named bundle of doors for one kind of stay. Ask for a room it doesn't know and it fails closed — a typo never widens authority.</span></div>
+          <div class="defn"><span class="defn__term">door</span><span class="defn__body">one unit of authority — a unix socket to a broker daemon that holds the real keys. The guest can knock; it cannot do.</span></div>
+          <div class="defn"><span class="defn__term">attenuation</span><span class="defn__body">narrowing a door by appending caveats. Append-only: authority can only ever get tighter as it is handed inward.</span></div>
+          <div class="defn"><span class="defn__term">confinement</span><span class="defn__body">a held capability lives only while a provider leases it, and never past that provider's ceiling.</span></div>
+          <div class="defn"><span class="defn__term">guest</span><span class="defn__body">the agent the room hosts — for example claude-box, the Claude Code runtime. The engine names no guest.</span></div>
         </div>
 
         <div class="code">
@@ -142,6 +146,8 @@
 
         <p class="copy" style="margin-top:28px;">Today prx wires these seams in-process, as library imports. The move is onto guest-room's out-of-process doors — same model, enforced across a socket — with claude-box as the first guest. Both prx and claude-box are being broken up onto that shared runtime: two tools today, converging into one door-based system. Their shared contracts and SDKs are being lifted out into standalone, versioned interfaces — guest-room (the room/door contract), ocap-provenance (the signed predicate), and the wire schemas — so each piece composes against a published boundary, never another's internals.</p>
         <p class="copy copy--last">Concretely: a room is a rootless Podman container, declared as a systemd quadlet and built reproducibly by nix; a door is a single unix socket bind-mounted in, a broker daemon holding the authority on the other side. Walls that come standard — drop-all-caps, read-only, no-new-privileges — and a short list of doors.</p>
+
+        <p class="fit-note">Other agent harnesses make the work cheaper or the output leaner. This one makes it accountable — the authority layer, designed to run alongside the rest.</p>
       </div>
     </div>
   </section>
@@ -150,7 +156,7 @@
   <section class="honesty" id="honesty">
     <div class="honesty__inner">
       <div class="bs-text-label eyebrow--light">03&nbsp;/&nbsp;Kept&nbsp;honest</div>
-      <h2>Every claim is graded against the running code. Including the claims on this page.</h2>
+      <h2>Every claim here is graded against the running code.</h2>
       <p class="honesty__lead">An instrument built to catch my <em>own</em> over-statements and file the gap. Docs generate from source and fail CI on drift; guest-room's specs execute against its engine. I keep myself as honest as I keep the agents.</p>
 
       <div class="legend">
