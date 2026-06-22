@@ -7,9 +7,9 @@
 //
 //   node scripts/gen-seams.mjs              rewrite the marked region in index.html
 //   node scripts/gen-seams.mjs --check      exit 1 if the region is stale (no writes, offline)
+//   node scripts/gen-seams.mjs --from-prx   refresh the seed taglines from prx, then render (network)
 //   node scripts/gen-seams.mjs --emit-seed  write seed/prx-seam-taglines.json (upstream payload)
 //   node scripts/gen-seams.mjs --reconcile  cross-check the seam SET against prx (needs network)
-//   node scripts/gen-seams.mjs --reconcile --write   reconcile and rewrite index.html
 //
 // Source of truth: today the taglines live in data/seams.json, seeded from the
 // original hand-written copy. The canonical home is each prx package's
@@ -32,6 +32,10 @@ const esc = (s) =>
 
 async function loadData() {
   return JSON.parse(await readFile(DATA, "utf8"));
+}
+
+async function writeData(data) {
+  await writeFile(DATA, JSON.stringify(data, null, 2) + "\n");
 }
 
 function renderGrid(seams) {
@@ -123,6 +127,39 @@ async function reconcile(data) {
   return { prx, added, dropped };
 }
 
+// --- pull taglines from prx (the cutover) -----------------------------------
+// Once a prx package.json carries `bounded.tagline`, that becomes the source of
+// truth; this refreshes the local seed (data/seams.json) from it, falling back
+// to the existing seed copy for any package that hasn't been seeded yet. The
+// grid still renders from the committed seed, so the offline --check gate stays
+// deterministic — this is the networked refresh half of the mechanism.
+async function refreshFromPrx(data) {
+  const { repo, packagesDir, scope } = data.source;
+  if (typeof fetch !== "function") {
+    console.error("✗ global fetch unavailable — Node 18+ required for --from-prx");
+    process.exit(2);
+  }
+  let sourced = 0;
+  let changed = 0;
+  for (const s of data.seams) {
+    const pkg = await rawJson(repo, `${packagesDir}/${s.name}/package.json`).catch(() => null);
+    const upstream = pkg && pkg.bounded && pkg.bounded.tagline;
+    if (typeof upstream === "string" && upstream.length) {
+      sourced++;
+      if (upstream !== s.tagline) {
+        console.log(`  ↑ ${scope}/${s.name}: "${s.tagline}" → "${upstream}"`);
+        s.tagline = upstream;
+        changed++;
+      }
+    } else {
+      console.warn(`  · ${scope}/${s.name}: no bounded.tagline upstream yet — keeping seed copy`);
+    }
+  }
+  await writeData(data);
+  console.log(`✓ refreshed from ${repo}: ${sourced}/${data.seams.length} sourced upstream, ${changed} changed`);
+  return data;
+}
+
 // --- upstream seed ----------------------------------------------------------
 async function emitSeed(data) {
   const payload = {
@@ -140,6 +177,10 @@ async function emitSeed(data) {
 
 // --- main -------------------------------------------------------------------
 const data = await loadData();
+
+// Networked: pull taglines from prx into the seed before rendering.
+if (args.has("--from-prx")) await refreshFromPrx(data);
+
 const html = await readFile(HTML, "utf8");
 const next = splice(html, renderGrid(data.seams));
 
@@ -153,8 +194,8 @@ if (args.has("--check")) {
   process.exit(0);
 }
 
-// Render (idempotent) unless this is a pure report.
-if (!args.has("--reconcile")) {
+// Render (idempotent) unless this is a pure report (--reconcile without a write).
+if (!args.has("--reconcile") || args.has("--from-prx")) {
   if (next !== html) {
     await writeFile(HTML, next);
     console.log("✓ regenerated seam grid in index.html");

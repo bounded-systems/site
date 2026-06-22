@@ -46,8 +46,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/gen-seams.mjs --reconcile
 
-      - name: Regenerate grid from seed
-        run: node scripts/gen-seams.mjs
+      # Pull taglines from prx (bounded.tagline) into the seed, then regenerate.
+      # Falls back to the existing seed for any package not yet seeded upstream,
+      # so this is a no-op until prx carries the field — the automatic cutover.
+      - name: Refresh taglines from prx and regenerate grid
+        run: node scripts/gen-seams.mjs --from-prx
 
       - name: Open PR if the grid changed
         env:

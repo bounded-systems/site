@@ -59,20 +59,33 @@ from the original copy) into the region marked
 ```bash
 node scripts/gen-seams.mjs            # regenerate the grid in index.html
 node scripts/gen-seams.mjs --check    # CI gate: fail if the grid is stale/hand-edited
+node scripts/gen-seams.mjs --from-prx # refresh taglines from prx, then regenerate (network)
 node scripts/gen-seams.mjs --reconcile  # cross-check the seam SET against prx (needs network)
 node scripts/gen-seams.mjs --emit-seed  # emit seed/ payload to promote taglines upstream into prx
 ```
 
 `.github/workflows/sync-seams.yml` runs `--check` on every PR (drift gate) and,
-daily, reconciles the set against `prx` (`packages/*` whose `package.json`
-`keywords` include `seam`) — opening a PR if a seam was added or removed. This
-is the same drift-as-CI-failure rule, and the same
+daily, runs `--from-prx` (refresh taglines) + `--reconcile` (set check against
+`prx` — `packages/*` whose `package.json` `keywords` include `seam`), opening a
+PR if anything changed. This is the same drift-as-CI-failure rule, and the same
 [`bounded-systems`-flavored `synoptic-github`][synoptic] generate-and-commit
 pattern, applied to the page's own content.
 
-> The long-term source of truth for the taglines is each prx package's
-> `package.json`; `--emit-seed` produces the payload to move them upstream,
-> after which the generator can read them from prx and the local seed retires.
+### The upstream cutover
+
+`data/seams.json` is the source of truth **today**, seeded from the original
+copy. The long-term home is each prx package's `package.json`. The cutover needs
+no code change here — it's data-driven:
+
+1. Add `"bounded": { "tagline": "…" }` to each seam package's `package.json` in
+   `prx` (use `--emit-seed` for the exact payload).
+2. The next `--from-prx` run (daily, or on demand) reads `bounded.tagline`,
+   writes it into the local seed, and regenerates — automatically, per package,
+   falling back to the current copy for any not yet seeded.
+
+So `prx` becomes the single source of truth incrementally, and the local seed
+degrades to a cache. The offline `--check` gate stays valid throughout because
+the grid always renders from the committed seed.
 
 ## Updating the brand
 
