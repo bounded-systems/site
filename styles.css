@@ -221,6 +221,12 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .tag--green { color: var(--bs-color-forest); background: #E4F0EA; }
 .tag--mute { color: var(--bs-color-ink-mono); background: #F1EEE5; }
 
+.start-here { padding: 28px 34px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 14px; }
+.start-here__head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.start-here__where { font-family: var(--bs-font-mono); font-size: 12.5px; color: var(--bs-color-ink-mono); }
+.start-here__lead { font-size: 14.5px; line-height: 1.55; color: var(--bs-color-ink-soft); margin: 0; max-width: 560px; }
+.code--cmd { margin: 0; max-width: 560px; font-size: 13px; line-height: 1.8; }
+
 .seams { padding: 34px; }
 .seams__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 8px; }
 .seams__title { font-size: 18px; font-weight: 600; }
