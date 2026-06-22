@@ -9,10 +9,6 @@
   --site-dark-line: #2C3A31;
   --site-deep: var(--bs-color-forest-deep);
 
-  --grade-enforced: #3FB984;
-  --grade-partial: #C8902F;
-  --grade-aspirational: #7E8C83;
-
   --maxw: 1080px;
 }
 
@@ -125,12 +121,12 @@ em { font-style: normal; color: var(--bs-color-forest); }
   text-transform: uppercase; border-radius: 999px; padding: 5px 11px;
 }
 .grade__dot { width: 6px; height: 6px; border-radius: 50%; }
-.grade--enforced { color: var(--bs-color-forest); background: #E4F0EA; }
-.grade--enforced .grade__dot { background: var(--bs-color-forest); }
-.grade--partial { color: #8A5A12; background: #F3E6CE; }
-.grade--partial .grade__dot { background: var(--grade-partial); }
-.grade--aspirational { color: var(--bs-color-ink-soft); background: #EBE7DC; }
-.grade--aspirational .grade__dot { background: #9AA59D; }
+.grade--enforced { color: var(--bs-grade-enforced-fg); background: var(--bs-grade-enforced-bg); }
+.grade--enforced .grade__dot { background: var(--bs-grade-enforced); }
+.grade--partial { color: var(--bs-grade-partial-fg); background: var(--bs-grade-partial-bg); }
+.grade--partial .grade__dot { background: var(--bs-grade-partial); }
+.grade--aspirational { color: var(--bs-grade-aspirational-fg); background: var(--bs-grade-aspirational-bg); }
+.grade--aspirational .grade__dot { background: var(--bs-grade-aspirational); }
 
 .grade-inline {
   display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
