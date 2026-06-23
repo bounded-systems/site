@@ -69,6 +69,8 @@ em { font-style: normal; color: var(--bs-color-forest); }
   color: var(--bs-color-forest); border: 1px solid var(--site-green-line);
   border-radius: 8px; padding: 6px 12px;
 }
+/* mobile menu control — hidden on desktop, a burger disclosure on phones */
+.nav__toggle, .nav__burger { display: none; }
 
 /* ---------- the mark as a tile ---------- */
 .mark {
@@ -320,7 +322,25 @@ em { font-style: normal; color: var(--bs-color-forest); }
   .hero h1 { font-size: 38px; }
   .honesty h2 { font-size: 30px; }
   .colophon { padding: 44px 32px; }
-  .nav__links a:not(.nav__gh) { display: none; }
+  /* nav collapses to a burger-toggled dropdown */
+  .nav__inner { position: relative; }
+  .nav__burger {
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 42px; height: 38px; cursor: pointer;
+    border: 1px solid var(--bs-color-line); border-radius: 10px;
+  }
+  .nav__burger span { width: 18px; height: 2px; background: var(--bs-color-ink); border-radius: 2px; }
+  .nav__links {
+    position: absolute; top: calc(100% + 12px); right: 0;
+    flex-direction: column; align-items: stretch; gap: 2px;
+    min-width: 210px; padding: 10px; display: none;
+    background: var(--bs-color-white);
+    border: 1px solid var(--bs-color-line); border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(12, 90, 66, 0.14);
+  }
+  .nav__links a { padding: 10px 12px; border-radius: 9px; }
+  .nav__gh { text-align: center; }
+  .nav__toggle:checked ~ .nav__links { display: flex; }
 }
 
 /* Small phones — where the page was read first. Keep the hero legible. */
