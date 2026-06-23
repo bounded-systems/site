@@ -1,0 +1,35 @@
+{
+  "$description": "bounded.tools content tokens — EXTENDS the canonical Bounded Systems core (brand submodule, brand/content/strings.json). The content tool merges core + this file. Restates the schema-required core tokens (name/tagline/description) verbatim — the schema + brand-voice scenarios enforce they stay identical to core — then adds the surface-specific copy for https://bounded.tools.",
+  "name": {
+    "$value": "Bounded Systems",
+    "$description": "Org name — exact casing. Mirrors core (must match)."
+  },
+  "tagline": {
+    "$value": "Bounded authority for AI agents",
+    "$description": "Primary tagline. Mirrors core (must match)."
+  },
+  "description": {
+    "$value": "Capability security for AI agents — authority drawn at the door, not the process or container. Every claim graded against the running code.",
+    "$description": "One-line / meta description. Mirrors core (must match)."
+  },
+  "hero-pitch": {
+    "$value": "Your coding agent wanders. Keep it inside the job you gave it.",
+    "$description": "Hero sub-headline — the problem in one line (surface-specific)."
+  },
+  "section-model": {
+    "$value": "The model, made physical",
+    "$description": "Section heading — the capability-model diagram."
+  },
+  "section-proof": {
+    "$value": "The proof is the code",
+    "$description": "Section heading — claims graded against running code."
+  },
+  "byline": {
+    "$value": "Built by Robert DeLanghe — in public, against running code.",
+    "$description": "Author byline / colophon."
+  },
+  "contact-cta": {
+    "$value": "Get in touch",
+    "$description": "Contact call-to-action label."
+  }
+}
