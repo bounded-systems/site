@@ -20,6 +20,12 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
+      - name: Copy hygiene (string-audit)
+        # Vendored string-audit (submodule) + its two npm deps gate the copy on
+        # error-level findings (chatbot/placeholder artifacts + Lane-C overclaims).
+        run: |
+          npm ci
+          node scripts/check-copy.mjs
       - name: Build dist/
         run: node build.mjs
       - name: Meta + agent-readiness
