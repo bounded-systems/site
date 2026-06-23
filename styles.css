@@ -210,7 +210,6 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .code .fn { color: var(--site-code-ok); }
 .code .ok { color: var(--site-code-ok); }
 .code .no { color: var(--site-on-dark-warn); }
-.code .spacer { height: 8px; }
 /* hero transaction block: one allow, one deny — sits between lead and CTA */
 .code--hero { margin: 0 0 36px; max-width: 560px; font-size: 13px; line-height: 1.85; }
 
