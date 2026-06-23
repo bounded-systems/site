@@ -1,60 +1,66 @@
 #!/usr/bin/env node
-// Guard the public copy against the AI-isms the M0 cold read flagged by name.
-// Scans index.html + blog/*.md and fails if any banned cadence reappears.
+// Copy-hygiene gate, backed by string-audit (vendored as a git submodule at
+// vendor/string-audit, pinned to a release tag). Replaces the bespoke pattern
+// list with the shared, data-driven checks: ai-tells.json + the prose
+// heuristics in prose.mjs (aiIsms / overclaims / proofread / readability).
 //
-//   node scripts/check-copy.mjs          # prose gate — exit 1 on any match
-//   node scripts/check-copy.mjs --code   # also flag clever/anthropomorphic
-//                                         # in-code comments (opt-in, looser)
+//   node scripts/check-copy.mjs            # fail on error-level findings
+//   node scripts/check-copy.mjs --verbose  # also list warn/suggestion findings
 //
-// Keep the prose patterns tight: they must never catch the honest "not yet
-// signed" claim-gaps (Lane C honesty) — only the flagged cadences. The --code
-// tells are advisory and kept off the default gate on purpose: comment voice is
-// fuzzier to lint, so it's a flag you run, not a wall the build dies on.
+// Gate threshold = error only:
+//   • ai-tells "error" rules — chatbot/placeholder artifacts (e.g. "as an AI
+//     language model", unfilled [placeholder], lorem ipsum).
+//   • overclaims — absolute coverage/security claims (Lane-C honesty): the
+//     "every privileged effect" shape, "100%", "guaranteed", etc.
+// warn/suggestion (em-dash cadence, readability, proofread tells) are advisory:
+// they include voice-forward signals we keep on purpose, so they never fail CI.
+//
+// prose.mjs reads its own dictionary.txt + ai-tells.json from the submodule and
+// resolves its two npm deps (an-array-of-english-words, write-good) from the
+// repo-root node_modules — so a plain `npm ci` here is all it needs.
 import { readFile, readdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { aiIsms, overclaims, proofread, readability } from "../vendor/string-audit/prose.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
-const CODE = process.argv.includes("--code");
+const VERBOSE = process.argv.includes("--verbose");
 
-const BANNED = [
-  { re: /\beasy part\b/i,                 why: '"the easy part…" cadence' },
-  { re: /\bhard part\b/i,                 why: '"…the hard part" cadence' },
-  { re: /\bhard,?\s+unsolved part\b/i,    why: '"the hard, unsolved part" cadence' },
-  { re: /\bincluding this one\b/i,        why: "self-referential grade" },
-  { re: /isn['’]t\b[^.!?\n]{0,60}—[^.!?\n]{0,60}\bit['’]s\b/i, why: `"it isn't X — it's Y" cadence` },
-];
+// Reduce each surface to its visible prose so the checks see sentences, not markup.
+const stripHtml = (s) => s
+  .replace(/<script[\s\S]*?<\/script>/gi, " ")
+  .replace(/<style[\s\S]*?<\/style>/gi, " ")
+  .replace(/<[^>]+>/g, " ")
+  .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&middot;/g, " · ")
+  .replace(/&rarr;|&#\d+;/g, " ")
+  .replace(/[ \t]+/g, " ");
+const stripMd = (s) => s.replace(/```[\s\S]*?```/g, " ").replace(/[#>*`_[\]()]/g, " ");
 
-// Opt-in (--code): clever or anthropomorphic phrasings that drew a literal
-// "what?" in the cold read. Comment voice should describe what the line does.
-const CODE_TELLS = [
-  { re: /nothing else exists/i,  why: "dramatic comment — say what the line does" },
-  { re: /\bthe rulebook\b/i,     why: "anthropomorphic comment" },
-  { re: /\bis honest about\b/i,  why: "anthropomorphic comment" },
-];
-
-const patterns = CODE ? [...BANNED, ...CODE_TELLS] : BANNED;
-
-const targets = ["index.html"];
+const surfaces = [["index.html", stripHtml]];
 for (const f of (await readdir(join(root, "blog"))).filter((f) => f.endsWith(".md"))) {
-  targets.push(join("blog", f));
+  surfaces.push([join("blog", f), stripMd]);
 }
 
-let hits = 0;
-for (const rel of targets) {
-  const lines = (await readFile(join(root, rel), "utf8")).split("\n");
-  lines.forEach((line, i) => {
-    for (const { re, why } of patterns) {
-      if (re.test(line)) {
-        console.error(`✗ ${rel}:${i + 1} — ${why}\n    ${line.trim().slice(0, 120)}`);
-        hits++;
-      }
+const tally = { error: 0, warn: 0, suggestion: 0 };
+const errors = [];
+for (const [rel, strip] of surfaces) {
+  const text = strip(await readFile(join(root, rel), "utf8"));
+  const blocks = text.split(/\n\s*\n|\.\s+(?=[A-Z])/).map((b) => b.trim()).filter((b) => b.length > 20);
+  for (const b of blocks) {
+    for (const { level, msg } of [...aiIsms(b), ...overclaims(b), ...proofread(b), ...readability(b)]) {
+      tally[level] = (tally[level] || 0) + 1;
+      if (level === "error") errors.push(`✗ ${rel} — ${msg}\n    …${b.slice(0, 96)}…`);
+      else if (VERBOSE) console.error(`  ${level}: ${rel} — ${msg}`);
     }
-  });
+  }
 }
 
-if (hits) {
-  console.error(`\ncopy:check — ${hits} flagged phrase(s). Rewrite in plain voice (see the M0 cold read).`);
+for (const e of errors) console.error(e);
+console.log(
+  `copy:check (string-audit @ vendor/string-audit) — ` +
+  `${tally.error} error · ${tally.warn} warn · ${tally.suggestion} suggestion (gate: error)`,
+);
+if (tally.error) {
+  console.error("\nError-level findings block the build. Scope the absolute, or link a source (Lane C).");
   process.exit(1);
 }
-console.log(`copy:check — ${targets.length} surface(s) clean${CODE ? " (incl. in-code comments)" : ""}.`);

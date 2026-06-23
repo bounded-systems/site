@@ -10,12 +10,14 @@
     "seams": "node scripts/gen-seams.mjs",
     "blog": "node scripts/gen-blog.mjs",
     "copy": "node scripts/check-copy.mjs",
-    "copy:code": "node scripts/check-copy.mjs --code",
+    "copy:verbose": "node scripts/check-copy.mjs --verbose",
     "dev": "python3 -m http.server 8080",
     "prebuild": "npm run check",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "wrangler": "^4"
+    "an-array-of-english-words": "^2.0.0",
+    "wrangler": "^4",
+    "write-good": "^1.0.8"
   }
 }

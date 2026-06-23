@@ -65,7 +65,7 @@ I grade my own claims against the running code, so plainly:
 
 - **Enforced today** — the drift gates (docs from source) and executable behaviour
   specs. If they break, the build breaks.
-- **Partial** — "every privileged effect attributable to a signed owner." True on
+- **Partial** — "privileged effects attributable to a signed owner." True on
   the common path; the named gap is a permission boundary I'm still closing.
 - **The bet** — contracts staying honest *between* components as they evolve. That
   one is stated as direction, not a finished result. It's the problem this whole
