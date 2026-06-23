@@ -72,13 +72,11 @@
           </div>
           <h1>Your coding agent wanders. Keep it inside the job you gave it.</h1>
           <p class="hero__lead">Hand an AI coding agent a real task and it will reach past it — touching files you didn't mean to expose, running a command you didn't intend, doing something you never asked for. Today it does that with <strong>your</strong> access. Bounded Systems scopes that down: each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point that checks your policy, acts or refuses, and records what happened. It's a capability model, the same idea behind reference monitors and seccomp, put in front of an agent's authority.</p>
-          <div class="code code--hero">
-            <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })</div>
-            <div>&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span></div>
-            <div class="spacer"></div>
-            <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"scout"</span> })</div>
-            <div>&nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; scout holds no git-write &middot; recorded</span></div>
-          </div>
+          <pre class="code code--hero"><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })
+&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span>
+
+<span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"scout"</span> })
+&nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; scout holds no git-write &middot; recorded</span></pre>
           <div class="hero__cta">
             <a class="btn-primary" href="#bet">Read the one idea&nbsp;&rarr;</a>
             <a class="btn-link" href="https://github.com/bounded-systems/guest-room">guest-room on GitHub&nbsp;&#8599;</a>
@@ -133,16 +131,14 @@
           <div class="defn"><span class="defn__term">guest</span><span class="defn__body">the agent the room hosts — for example claude-box, the Claude Code runtime. The engine names no guest.</span></div>
         </div>
 
-        <div class="code">
-          <div class="c"># a room expands to exactly the doors this stay holds</div>
-          <div><span class="k">const</span> doors = <span class="fn">expandRoom</span>(rooms, catalog, <span class="s">"dev"</span>, env);</div>
-          <div class="spacer"></div>
-          <div class="c">// attenuate appends caveats; authority only narrows, never widens</div>
-          <div><span class="k">const</span> narrowed = <span class="fn">attenuate</span>(doors[<span class="s">0</span>], [<span class="s">"host=github.com"</span>]);</div>
-          <div class="spacer"></div>
-          <div class="c">// list the doors this room denies, so the agent won't attempt them</div>
-          <div><span class="fn">deniedDoorSection</span>(<span class="fn">deniedDoors</span>(catalog, held))<span class="c">&nbsp;&rarr; "do not attempt"</span></div>
-        </div>
+        <pre class="code"><span class="c"># a room expands to exactly the doors this stay holds</span>
+<span class="k">const</span> doors = <span class="fn">expandRoom</span>(rooms, catalog, <span class="s">"dev"</span>, env);
+
+<span class="c">// attenuate appends caveats; authority only narrows, never widens</span>
+<span class="k">const</span> narrowed = <span class="fn">attenuate</span>(doors[<span class="s">0</span>], [<span class="s">"host=github.com"</span>]);
+
+<span class="c">// list the doors this room denies, so the agent won't attempt them</span>
+<span class="fn">deniedDoorSection</span>(<span class="fn">deniedDoors</span>(catalog, held))<span class="c">&nbsp;&rarr; "do not attempt"</span></pre>
 
         <p class="copy" style="margin-top:28px;">Today prx wires these seams in-process, as library imports. The move is onto guest-room's out-of-process doors — same model, enforced across a socket — with claude-box as the first guest. Both prx and claude-box are being broken up onto that shared runtime: two tools today, converging into one door-based system. Their shared contracts and SDKs are being lifted out into standalone, versioned interfaces — guest-room (the room/door contract), ocap-provenance (the signed predicate), and the wire schemas — so each piece composes against a published boundary, never another's internals.</p>
         <p class="copy copy--last">Concretely: a room is a rootless Podman container, declared as a systemd quadlet and built reproducibly by nix; a door is a single unix socket bind-mounted in, a broker daemon holding the authority on the other side. Walls that come standard — drop-all-caps, read-only, no-new-privileges — and a short list of doors.</p>
@@ -247,12 +243,10 @@
         <span class="start-here__where">guest-room — the model you can run</span>
       </div>
       <p class="start-here__lead">Your first move: clone the runtime, then watch its behaviour specs execute against the engine — the same specs that grade the claims above.</p>
-      <div class="code code--cmd">
-        <div class="c"># clone the door runtime</div>
-        <div><span class="fn">git</span> clone https://github.com/bounded-systems/guest-room</div>
-        <div class="c"># …then run the specs that grade the claims above</div>
-        <div><span class="fn">cd</span> guest-room &amp;&amp; <span class="fn">npm</span> test</div>
-      </div>
+      <pre class="code code--cmd"><span class="c"># clone the door runtime</span>
+<span class="fn">git</span> clone https://github.com/bounded-systems/guest-room
+<span class="c"># …then run the specs that grade the claims above</span>
+<span class="fn">cd</span> guest-room &amp;&amp; <span class="fn">npm</span> test</pre>
       <p class="start-here__alt" style="font-size:13px;margin:14px 0 0;color:var(--site-on-dark-mute,inherit);opacity:.8;">Rather not clone? <a href="https://github.com/bounded-systems/guest-room/releases/latest" style="color:inherit;">Download the latest release&nbsp;&#8599;</a> &middot; <a href="https://github.com/bounded-systems/guest-room" style="color:inherit;">browse on GitHub&nbsp;&#8599;</a></p>
     </div>
 
@@ -264,13 +258,11 @@
       <p class="seams__lead">Git-writes carry a signed in-toto / SLSA derivation — a per-actor ed25519 signature over content-addressed inputs and outputs, recorded in a derivation ledger. Open one:</p>
       <details class="prov-details">
         <summary style="cursor:pointer;font-family:var(--bs-font-mono);font-size:13px;margin-bottom:10px;">▸ a signed derivation (real output)</summary>
-        <div class="code">
-          <div class="c">// DSSE envelope &middot; payloadType application/vnd.in-toto+json</div>
-          <div>{ <span class="s">"derivationId"</span>: <span class="s">"sha256:0269b9…"</span>,</div>
-          <div>&nbsp;&nbsp;<span class="s">"inputs"</span>:&nbsp; { <span class="s">"copy"</span>:&nbsp; <span class="s">"sha256:08eaa3…"</span> },</div>
-          <div>&nbsp;&nbsp;<span class="s">"outputs"</span>: { <span class="s">"audit"</span>: <span class="s">"sha256:0031d9…"</span> },</div>
-          <div>&nbsp;&nbsp;<span class="s">"signatures"</span>: [{ <span class="s">"keyid"</span>: <span class="s">"05ea15…"</span>, <span class="s">"sig"</span>: <span class="s">"EGClgX…"</span> }] }</div>
-        </div>
+        <pre class="code"><span class="c">// DSSE envelope &middot; payloadType application/vnd.in-toto+json</span>
+{ <span class="s">"derivationId"</span>: <span class="s">"sha256:0269b9…"</span>,
+&nbsp;&nbsp;<span class="s">"inputs"</span>:&nbsp; { <span class="s">"copy"</span>:&nbsp; <span class="s">"sha256:08eaa3…"</span> },
+&nbsp;&nbsp;<span class="s">"outputs"</span>: { <span class="s">"audit"</span>: <span class="s">"sha256:0031d9…"</span> },
+&nbsp;&nbsp;<span class="s">"signatures"</span>: [{ <span class="s">"keyid"</span>: <span class="s">"05ea15…"</span>, <span class="s">"sig"</span>: <span class="s">"EGClgX…"</span> }] }</pre>
       </details>
       <p class="seams__lead" style="margin-top:14px;font-size:13px;opacity:.8;">Backed by <a href="https://github.com/bounded-systems/cas">cas</a> (content addressing) and <a href="https://github.com/bounded-systems/anchored-chain">anchored-chain</a> (signed derivations); <a href="https://github.com/bounded-systems/string-audit">string-audit</a> emits one per audit.</p>
     </div>
