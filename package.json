@@ -5,7 +5,7 @@
   "description": "The bounded.tools website. Static HTML built on the @bounded-systems/brand design system.",
   "type": "module",
   "scripts": {
-    "build": "node build.mjs && node scripts/gen-blog.mjs",
+    "build": "node build.mjs && node scripts/gen-blog.mjs && node scripts/gen-stamp.mjs",
     "check": "node brand/tokens/build-tokens.mjs --check && node scripts/gen-seams.mjs --check && node scripts/gen-blog.mjs --check && node scripts/check-copy.mjs",
     "seams": "node scripts/gen-seams.mjs",
     "blog": "node scripts/gen-blog.mjs",
