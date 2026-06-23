@@ -47,7 +47,9 @@
         <span class="mark mark--rounded" style="width:28px;height:28px;"><img src="brand/mark/mark-white.svg" width="20" height="20" alt="Bounded Systems"></span>
         <span class="lock__name">bounded.tools</span>
       </a>
-      <div class="nav__links">
+      <input type="checkbox" id="nav-toggle" class="nav__toggle" hidden>
+      <label class="nav__burger" for="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></label>
+      <div class="nav__links" id="nav-menu">
         <a href="#bet">The bet</a>
         <a href="#model">The model</a>
         <a href="#honesty">Honesty</a>
@@ -68,8 +70,8 @@
             <span class="mark mark--sq" style="width:40px;height:40px;background:transparent;"><img src="brand/mark/mark-white.svg" width="34" height="34" alt=""></span>
             <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
           </div>
-          <h1>Give your AI agent one door, not all your keys.</h1>
-          <p class="hero__lead">Your coding agent already writes code, runs commands, and pushes to git — and today it does all of that with <strong>your</strong> access. Bounded Systems puts one sanctioned door in front of each kind of system power. The agent knocks; a broker behind the door checks your policy, acts or refuses, and records what happened.</p>
+          <h1>Your coding agent wanders. Keep it inside the job you gave it.</h1>
+          <p class="hero__lead">Hand an AI coding agent a real task and it will reach past it — touching files you didn't mean to expose, running a command you didn't intend, doing something you never asked for. Today it does all of that with <strong>your</strong> access. Bounded Systems scopes that down: each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point that checks your policy, acts or refuses, and records what happened. It's a capability model, the same idea behind reference monitors and seccomp, put in front of an agent's authority.</p>
           <div class="code code--hero">
             <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })</div>
             <div>&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span></div>
