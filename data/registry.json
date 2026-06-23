@@ -207,6 +207,42 @@
       "role": "transform",
       "domain": "surfaces",
       "tagline": "Type ontology for work-unit change-detection across GH/branch/worktree/tmux/beads"
+    },
+    {
+      "name": "schema-gen",
+      "pkg": "@bounded-systems/schema-gen",
+      "kind": "guest",
+      "facet": "verb",
+      "role": "generator",
+      "domain": "schema/types",
+      "tagline": "Project zod schemas to explicit, fast-types-clean TypeScript (zod → JSON Schema → .d.ts)"
+    },
+    {
+      "name": "door-kit",
+      "pkg": "@bounded-systems/door-kit",
+      "kind": "door",
+      "facet": "verb",
+      "role": "client",
+      "domain": "door/protocol",
+      "tagline": "In-box door-client SDK for claude-box's capability doors, over the guest-room protocol"
+    },
+    {
+      "name": "guest-room",
+      "pkg": "@bounded-systems/guest-room",
+      "kind": "room",
+      "facet": "verb",
+      "role": "runtime",
+      "domain": "capability/model",
+      "tagline": "Guest-agnostic room+door capability runtime — the core library claude-box is built on"
+    },
+    {
+      "name": "ocap-provenance",
+      "pkg": "@bounded-systems/ocap-provenance",
+      "kind": "room",
+      "facet": "noun",
+      "role": "contract",
+      "domain": "provenance",
+      "tagline": "Capability-use provenance: a schema + SLSA mapping binding each privileged effect to a signed owner + auditable chain"
     }
   ],
   "edges": [
