@@ -2,6 +2,3 @@
 	path = brand
 	url = https://github.com/bounded-systems/brand.git
 	branch = main
-[submodule "vendor/string-audit"]
-	path = vendor/string-audit
-	url = https://github.com/bounded-systems/string-audit

@@ -2,6 +2,8 @@ name: brand-checks
 
 # Gate this surface against the shared design + content system (the brand submodule):
 #   meta + agent-readiness, content tokens (schema + Gherkin + lint), coverage report.
+# Copy hygiene now runs upstream via the string-audit reusable gate (the `copy` job),
+# so the prose rules live in one place and propagate when the pin is bumped.
 on:
   push:
     branches: [main]
@@ -20,12 +22,11 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
-      - name: Copy hygiene (string-audit)
-        # Vendored string-audit (submodule) + its two npm deps gate the copy on
-        # error-level findings (chatbot/placeholder artifacts + Lane-C overclaims).
-        run: |
-          npm ci
-          node scripts/check-copy.mjs
+      - name: Install
+        run: npm ci
+      - name: Content catalog is current (extracted prose surfaces)
+        # The copy job gates data/audit/catalog.json; fail early if it drifted from source.
+        run: node scripts/emit-catalog.mjs --check
       - name: Build dist/
         run: node build.mjs
       - name: Meta + agent-readiness
@@ -36,3 +37,16 @@ jobs:
         run: node brand/tools/coverage.mjs --colors --check dist
       - name: Accessibility (WCAG AA contrast + headings)
         run: node brand/tools/a11y.mjs --check dist
+
+  # Copy hygiene (prose error + ungrounded claims) via the upstream string-audit
+  # reusable gate. Pinned to an immutable commit SHA (v0.6.1) for reproducibility;
+  # bump the pin to pick up upstream rule changes. build-cmd regenerates the
+  # content-addressed catalog so the gate always sees the current prose.
+  copy:
+    uses: bounded-systems/string-audit/.github/workflows/audit.yml@2d9153d219eed4ef3d9cf979f1bd04f510a04f00 # v0.6.1
+    with:
+      ref: 2d9153d219eed4ef3d9cf979f1bd04f510a04f00 # v0.6.1
+      build-cmd: node scripts/emit-catalog.mjs
+      catalog: data/audit/catalog.json
+      grounding: data/audit/grounding.json
+      strict: true
