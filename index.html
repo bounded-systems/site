@@ -128,8 +128,6 @@
         <div class="card model-card model-card--defns">
           <div class="defn"><span class="defn__term">room</span><span class="defn__body">a named bundle of doors for one kind of stay. Ask for a room it doesn't know and it fails closed — a typo never widens authority.</span></div>
           <div class="defn"><span class="defn__term">door</span><span class="defn__body">one unit of authority — a unix socket to a broker daemon that holds the real keys. The guest can knock; it cannot do.</span></div>
-          <div class="defn"><span class="defn__term">attenuation</span><span class="defn__body">narrowing a door by appending caveats. Append-only: authority can only ever get tighter as it is handed inward.</span></div>
-          <div class="defn"><span class="defn__term">confinement</span><span class="defn__body">a held capability lives only while a provider leases it, and never past that provider's ceiling.</span></div>
           <div class="defn"><span class="defn__term">guest</span><span class="defn__body">the agent the room hosts — for example claude-box, the Claude Code runtime. The engine names no guest.</span></div>
         </div>
 
@@ -158,6 +156,9 @@
       <div class="bs-text-label eyebrow--light">03&nbsp;/&nbsp;Kept&nbsp;honest</div>
       <h2>Every claim here is graded against the running code.</h2>
       <p class="honesty__lead">An instrument built to catch my <em>own</em> over-statements and file the gap. Docs generate from source and fail CI on drift; guest-room's specs execute against its engine. I keep myself as honest as I keep the agents.</p>
+      <p class="honesty__stamp" style="font-family:var(--bs-font-mono);font-size:12px;margin:14px 0 0;opacity:.65;letter-spacing:.02em;">
+        <!-- stamp:start -->graded against the latest commit<!-- stamp:end -->
+      </p>
 
       <div class="legend">
         <div class="legend__card">
@@ -247,7 +248,29 @@
       <div class="code code--cmd">
         <div class="c"># clone the door runtime</div>
         <div><span class="fn">git</span> clone https://github.com/bounded-systems/guest-room</div>
+        <div class="c"># …then run the specs that grade the claims above</div>
+        <div><span class="fn">cd</span> guest-room &amp;&amp; <span class="fn">npm</span> test</div>
       </div>
+      <p class="start-here__alt" style="font-size:13px;margin:14px 0 0;color:var(--site-on-dark-mute,inherit);opacity:.8;">Rather not clone? <a href="https://github.com/bounded-systems/guest-room/releases/latest" style="color:inherit;">Download the latest release&nbsp;&#8599;</a> &middot; <a href="https://github.com/bounded-systems/guest-room" style="color:inherit;">browse on GitHub&nbsp;&#8599;</a></p>
+    </div>
+
+    <div class="card provenance" id="provenance">
+      <div class="seams__head">
+        <span class="seams__title">Provenance you can open</span>
+        <span class="seams__pkg">in-toto &middot; SLSA &middot; DSSE</span>
+      </div>
+      <p class="seams__lead">Every git-write carries a signed in-toto / SLSA derivation — a per-actor ed25519 signature over content-addressed inputs and outputs, recorded in a derivation ledger. Open one:</p>
+      <details class="prov-details">
+        <summary style="cursor:pointer;font-family:var(--bs-font-mono);font-size:13px;margin-bottom:10px;">▸ a signed derivation (real output)</summary>
+        <div class="code">
+          <div class="c">// DSSE envelope &middot; payloadType application/vnd.in-toto+json</div>
+          <div>{ <span class="s">"derivationId"</span>: <span class="s">"sha256:0269b9…"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="s">"inputs"</span>:&nbsp; { <span class="s">"copy"</span>:&nbsp; <span class="s">"sha256:08eaa3…"</span> },</div>
+          <div>&nbsp;&nbsp;<span class="s">"outputs"</span>: { <span class="s">"audit"</span>: <span class="s">"sha256:0031d9…"</span> },</div>
+          <div>&nbsp;&nbsp;<span class="s">"signatures"</span>: [{ <span class="s">"keyid"</span>: <span class="s">"05ea15…"</span>, <span class="s">"sig"</span>: <span class="s">"EGClgX…"</span> }] }</div>
+        </div>
+      </details>
+      <p class="seams__lead" style="margin-top:14px;font-size:13px;opacity:.8;">Backed by <a href="https://github.com/bounded-systems/cas">cas</a> (content addressing) and <a href="https://github.com/bounded-systems/anchored-chain">anchored-chain</a> (signed derivations); <a href="https://github.com/bounded-systems/string-audit">string-audit</a> emits one per audit.</p>
     </div>
 
     <div class="card seams">
@@ -310,11 +333,13 @@
   <div class="wrap">
     <section class="colophon">
       <div class="bs-text-label eyebrow--light" style="margin-bottom:24px;">Colophon</div>
-      <h2>A solo project, worked out in public against running code.</h2>
-      <p>I build agent infrastructure and capability-security systems. Bounded Systems is where I'm working out — honestly, in the open — how agent-authored software stays trustworthy as it grows.</p>
-      <p class="last">If that's a problem your team is chewing on too, I'd like to talk.</p>
+      <h2>Built by Robert DeLanghe — in public, against running code.</h2>
+      <p>I'm Bobby. I build agent infrastructure and capability-security systems.</p>
+      <p><strong>Bounded Systems</strong> is where I work out, in the open, how agent-authored software stays trustworthy as it grows. A solo project — every claim on this page graded against the code that backs it.</p>
+      <p class="last">If your team is chewing on the same problem, I'd like to talk.</p>
       <div class="colophon__cta">
         <a class="btn-primary" href="mailto:hello@bounded.tools">Get in touch</a>
+        <a class="btn-link" href="https://robertdelanghe.dev">robertdelanghe.dev&nbsp;&#8599;</a>
         <a class="btn-link" href="https://github.com/bounded-systems">github.com/bounded-systems&nbsp;&#8599;</a>
       </div>
     </section>
