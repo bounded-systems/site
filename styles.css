@@ -138,7 +138,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
 
 /* ---------- numbered sections ---------- */
 .section { padding-top: 96px; }
-.section__grid { display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: start; }
+.section__grid { display: grid; grid-template-columns: 150px 1fr; gap: 36px; align-items: start; }
 .section__num {
   font-family: var(--bs-font-mono); font-size: 11px; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--bs-color-ink-mono);
@@ -305,19 +305,38 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .footer__meta { font-family: var(--bs-font-mono); font-size: 11.5px; color: var(--bs-color-ink-mono); }
 
 /* ---------- responsive ---------- */
-@media (max-width: 860px) {
+/* Collapse the two-column layouts to one readable column before the desktop
+   grid gets cramped (the ~860–1080px zone read as "weird"). */
+@media (max-width: 920px) {
   .section__grid { grid-template-columns: 1fr; gap: 18px; }
   .section__num { position: static; }
   .model-card { grid-template-columns: 1fr; }
   .model-card--defns { padding: 8px 26px; }
   .legend, .proof-cards, .seam-grid { grid-template-columns: 1fr; }
   .hero__grid { grid-template-columns: 1fr; gap: 32px; }
-  .hero__panel { order: -1; }
+  /* Lead with the words on a phone — the metaphor figure follows, never leads. */
+  .hero__panel { order: 1; }
   .hero { padding: 48px 32px; }
   .hero h1 { font-size: 38px; }
   .honesty h2 { font-size: 30px; }
   .colophon { padding: 44px 32px; }
   .nav__links a:not(.nav__gh) { display: none; }
+}
+
+/* Small phones — where the page was read first. Keep the hero legible. */
+@media (max-width: 520px) {
+  .wrap { padding: 0 18px; }
+  .hero { padding: 40px 22px; border-radius: 18px; }
+  .hero h1 { font-size: 30px; line-height: 1.1; }
+  .hero__lead { font-size: 16px; }
+  .code--hero { font-size: 11.5px; line-height: 1.7; }
+  .hero__panel { padding: 26px 20px; }
+  .hero__panel .mark { width: 120px; height: 120px; }
+  .hero__panel .mark img { width: 86px; height: 86px; }
+  .honesty__inner { padding: 64px 18px; }
+  .honesty h2 { font-size: 26px; }
+  .colophon { padding: 36px 24px; }
+  .colophon h2 { font-size: 28px; }
 }
 
 /* --- blog / prose --------------------------------------------------------- */
