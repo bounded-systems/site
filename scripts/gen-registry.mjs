@@ -54,14 +54,25 @@ function renderMermaid({ nodes, edges }) {
 
 function renderCards(nodes) {
   // grouped: verbs (capabilities) then nouns (data), each a labeled card.
+  // The homepage shows a representative SUBSET (nodes flagged `featured`) so
+  // the landing page stays short — the full node-edge graph lives on the org
+  // profile, linked from the trailing "+N more" cell. If nothing is flagged,
+  // fall back to the whole set (keeps the generator valid for any seed).
   const card = (n) =>
     `        <div class="seam"><div class="seam__name">${esc(n.name)} <span class="facet facet--${esc(n.facet)}">${esc(n.facet)}</span> <span class="kind">${esc(n.kind)}</span></div><div class="seam__desc">${esc(n.tagline)}</div></div>`;
-  const verbs = nodes.filter((n) => n.facet === "verb");
-  const nouns = nodes.filter((n) => n.facet === "noun");
+  const shown = nodes.some((n) => n.featured) ? nodes.filter((n) => n.featured) : nodes;
+  const verbs = shown.filter((n) => n.facet === "verb");
+  const nouns = shown.filter((n) => n.facet === "noun");
+  const more = nodes.length - shown.length;
+  const moreCard =
+    more > 0
+      ? `        <a class="seam seam--more" href="https://github.com/bounded-systems"><div class="seam__name">+${more} more <span aria-hidden="true">&#8599;</span></div><div class="seam__desc">The full @bounded-systems node-edge graph lives on the org profile.</div></a>`
+      : null;
   return [
     '      <div class="seam-grid">',
     ...verbs.map(card),
     ...nouns.map(card),
+    ...(moreCard ? [moreCard] : []),
     "      </div>",
   ].join("\n");
 }

@@ -287,6 +287,9 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .seam { background: var(--bs-color-white); padding: 18px 20px; }
 .seam__name { font-family: var(--bs-font-mono); font-size: 13px; font-weight: 600; color: var(--bs-color-forest); margin-bottom: 4px; }
 .seam__desc { font-size: 13px; color: var(--bs-color-ink-soft); }
+/* the "+N more → org profile" cell that closes the trimmed knowledge graph */
+.seam--more { display: block; text-decoration: none; background: var(--site-green-fill); }
+.seam--more:hover { background: var(--site-green-line); }
 
 /* ---------- colophon + footer ---------- */
 .colophon { background: var(--bs-color-forest); border-radius: 22px; padding: 64px; margin-top: 96px; }
@@ -317,7 +320,32 @@ em { font-style: normal; color: var(--bs-color-forest); }
   .hero h1 { font-size: 38px; }
   .honesty h2 { font-size: 30px; }
   .colophon { padding: 44px 32px; }
-  .nav__links a:not(.nav__gh) { display: none; }
+  /* Keep the in-page nav reachable on mobile: brand on top, the section
+     links drop to a full-width, horizontally scrollable row below it —
+     instead of vanishing entirely. */
+  .nav__inner { flex-wrap: wrap; row-gap: 10px; }
+  .nav__links {
+    width: 100%; gap: 18px; font-size: 13px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding-bottom: 1px;
+  }
+  .nav__links::-webkit-scrollbar { display: none; }
+  .nav__links a { white-space: nowrap; flex: none; }
+}
+
+/* small phones — pull oversized type and padding in so the page reads at
+   360px without giant headings or excess scroll. */
+@media (max-width: 560px) {
+  .wrap { padding: 0 22px; }
+  .section { padding-top: 64px; }
+  .hero { padding: 40px 22px; }
+  .hero h1 { font-size: 32px; }
+  .hero__lead { font-size: 16.5px; }
+  .statement { font-size: 22px; line-height: 1.36; }
+  .honesty__inner { padding: 60px 22px; }
+  .honesty h2 { font-size: 26px; }
+  .colophon { padding: 36px 24px; }
+  .colophon h2 { font-size: 28px; }
 }
 
 /* --- blog / prose --------------------------------------------------------- */

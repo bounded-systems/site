@@ -12,6 +12,7 @@
   "nodes": [
     {
       "name": "cas",
+      "featured": true,
       "pkg": "@bounded-systems/cas",
       "kind": "room",
       "facet": "noun",
@@ -84,6 +85,7 @@
     },
     {
       "name": "fs",
+      "featured": true,
       "pkg": "@bounded-systems/fs",
       "kind": "door",
       "facet": "verb",
@@ -102,6 +104,7 @@
     },
     {
       "name": "proc",
+      "featured": true,
       "pkg": "@bounded-systems/proc",
       "kind": "door",
       "facet": "verb",
@@ -111,6 +114,7 @@
     },
     {
       "name": "policy",
+      "featured": true,
       "pkg": "@bounded-systems/policy",
       "kind": "room",
       "facet": "verb",
@@ -120,6 +124,7 @@
     },
     {
       "name": "verbspec",
+      "featured": true,
       "pkg": "@bounded-systems/verbspec",
       "kind": "guest",
       "facet": "verb",
@@ -219,6 +224,7 @@
     },
     {
       "name": "door-kit",
+      "featured": true,
       "pkg": "@bounded-systems/door-kit",
       "kind": "door",
       "facet": "verb",
@@ -228,6 +234,7 @@
     },
     {
       "name": "guest-room",
+      "featured": true,
       "pkg": "@bounded-systems/guest-room",
       "kind": "room",
       "facet": "verb",
@@ -237,6 +244,7 @@
     },
     {
       "name": "ocap-provenance",
+      "featured": true,
       "pkg": "@bounded-systems/ocap-provenance",
       "kind": "room",
       "facet": "noun",
