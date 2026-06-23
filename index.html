@@ -108,8 +108,8 @@
       <div class="section__num">01&nbsp;/&nbsp;The&nbsp;bet</div>
       <div>
         <p class="statement">Agentic development works by <em>bifurcation</em>: a good idea earns its own bounded abstraction with a defined contract — and that boundary is exactly what lets you scope an agent to it.</p>
-        <p class="copy">That part is increasingly easy. The hard, unsolved part is <strong>keeping many bounded, agent-authored abstractions honest against each other as they evolve</strong> — enforcing contracts <em>between</em> ideas, not just within one.</p>
-        <p class="copy copy--last">Most tooling secures a single action. Bounded Systems is about the seams: every privileged effect attributable to a signed owner, one source of truth projected to many surfaces, and drift caught as a build failure so the contracts can't quietly rot.</p>
+        <p class="copy">An agent can author one of those abstractions cheaply now. What it can't do yet — what nobody has really solved — is <strong>keep many of them honest against each other as they evolve</strong>, enforcing the contracts <em>between</em> ideas, not only within one.</p>
+        <p class="copy copy--last">Most tooling secures a single action; the unsolved work lives in the seams between them. Bounded Systems works there: every privileged effect is attributable to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure, so the contracts can't quietly rot.</p>
         <div class="grade-inline">
           <span class="grade-inline__label">This claim, graded:</span>
           <span class="grade grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
@@ -125,7 +125,7 @@
       <div class="section__num">02&nbsp;/&nbsp;The&nbsp;model</div>
       <div>
         <h2>The model, made physical</h2>
-        <p class="lead-2">One mechanism, not twenty. A <strong>capability seam</strong>: for each kind of system power there is exactly one sanctioned way through — a <strong>door</strong> you hold a socket to, never the keys behind it. The guest-room runtime makes it physical.</p>
+        <p class="lead-2">Bounded Systems leans on a single mechanism. For each kind of system power there is exactly one sanctioned way through — a <strong>capability seam</strong>: a <strong>door</strong> you hold a socket to, never the keys behind it. The guest-room runtime makes that concrete.</p>
 
         <div class="card model-card model-card--defns">
           <div class="defn"><span class="defn__term">room</span><span class="defn__body">a named bundle of doors for one kind of stay. Ask for a room it doesn't know and it fails closed — a typo never widens authority.</span></div>

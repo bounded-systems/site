@@ -1,4 +1,4 @@
-# The hard part of agent-built software isn't the code
+# In agent-built software, the open problem is the seams between the pieces
 
 An agent can write the filesystem layer now. The process spawner, the tool
 adapters, the CLI — all of it. What it can't do yet, what nobody has really
@@ -14,9 +14,9 @@ edges — a name, a surface, a promise about what it does and doesn't do. That
 boundary is exactly what makes an agent useful on it. You can scope an agent to a
 contract; you can't scope one to a vibe.
 
-This part is getting easy. Hand an agent a crisp contract and it fills in the
+Authoring is getting cheap. Hand an agent a crisp contract and it fills in the
 implementation, the tests, the docs. The cost of *authoring* a bounded
-abstraction is falling toward zero — so the cost moves somewhere else.
+abstraction is falling toward zero, so the cost moves somewhere else.
 
 ## The unsolved part is between the abstractions, not inside them
 
@@ -26,15 +26,14 @@ door assumes one ownership model; the process door drifts to another; the CLI
 says one thing and its MCP adapter says a slightly older thing. Each piece is
 internally fine. The system is wrong.
 
-The hard, unsolved problem is **keeping many bounded, agent-authored abstractions
+The unsolved problem is **keeping many bounded, agent-authored abstractions
 honest against each other as they evolve** — enforcing contracts *between* ideas,
 not just within one. Most tooling secures a single action. The interesting
 failure mode is the seam.
 
 ## The bet: three mechanisms for the seams
 
-prx is my answer — not a product, an argument made in running code. Three
-mechanisms:
+prx is my answer: an argument I make in running code. Three mechanisms:
 
 **One sanctioned door per kind of power.** For each ambient capability there is
 exactly one way through — a door you hold a socket to, never the keys behind it:
@@ -72,9 +71,9 @@ I grade my own claims against the running code, so plainly:
   one is stated as direction, not a finished result. It's the problem this whole
   project is aimed at.
 
-When agents write most of the software, the scarce resource isn't authoring — it's
-trust *between* the pieces. The seam is where that's won or lost. That's the bet,
-and I'm working it in the open, graded against the code.
+When agents write most of the software, the scarce resource is trust *between*
+the pieces, not authoring. The seam is where that trust is won or lost. That's the
+bet, and I'm working it in the open, graded against the code.
 
 *The capability-seam idea converges with established object-capability and
 information-flow research; that mapping is a later post. This one is the bet.*

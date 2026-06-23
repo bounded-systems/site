@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs && node scripts/gen-blog.mjs",
-    "check": "node brand/tokens/build-tokens.mjs --check && node scripts/gen-seams.mjs --check && node scripts/gen-blog.mjs --check",
+    "check": "node brand/tokens/build-tokens.mjs --check && node scripts/gen-seams.mjs --check && node scripts/gen-blog.mjs --check && node scripts/check-copy.mjs",
     "seams": "node scripts/gen-seams.mjs",
     "blog": "node scripts/gen-blog.mjs",
+    "copy": "node scripts/check-copy.mjs",
     "dev": "python3 -m http.server 8080",
     "prebuild": "npm run check",
     "deploy": "wrangler deploy"
