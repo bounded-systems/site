@@ -46,20 +46,20 @@ build step, no FFI to author a verb.
 
 The surfaces aren't generated-then-edited; they're **computed from the spec on
 demand**. There's nothing to keep in sync because there's only one thing. That's
-the whole trick — drift isn't fixed, it's made unrepresentable.
+the whole trick: with a single definition, drift has nothing to occur between.
 
 The package is a clean leaf: its only production dependency is the `zod` peer
 dep, and an extractability test enforces that it stays pure — outward-only
 imports, no ambient authority (no shelling out, no `process.env`). You can drop
 it into anything.
 
-## What it is and isn't
+## What it covers
 
 verbspec is the **projection layer** — author once, project everywhere,
-drift-free. It is *not* the capability/security story (that's the door work);
-it's the "one source of truth projected to many surfaces" mechanism, pulled out
-as a standalone, usable thing. It's **MIT**, on npm, `zod` the only peer
-dependency. It works today.
+drift-free. It handles one job: the "one source of truth projected to many
+surfaces" mechanism, pulled out as a standalone, usable thing. The
+capability/security story is separate; that's the door work. verbspec is
+**MIT**, on npm, with `zod` the only peer dependency. It works today.
 
 If you maintain a CLI *and* an MCP server *and* an OpenAPI spec for the same
 operations, this collapses four hand-maintained artifacts into one — and the one

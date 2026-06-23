@@ -47,7 +47,9 @@
         <span class="mark mark--rounded" style="width:28px;height:28px;"><img src="brand/mark/mark-white.svg" width="20" height="20" alt="Bounded Systems"></span>
         <span class="lock__name">bounded.tools</span>
       </a>
-      <div class="nav__links">
+      <input type="checkbox" id="nav-toggle" class="nav__toggle" hidden>
+      <label class="nav__burger" for="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></label>
+      <div class="nav__links" id="nav-menu">
         <a href="#bet">The bet</a>
         <a href="#model">The model</a>
         <a href="#honesty">Honesty</a>
@@ -68,8 +70,8 @@
             <span class="mark mark--sq" style="width:40px;height:40px;background:transparent;"><img src="brand/mark/mark-white.svg" width="34" height="34" alt=""></span>
             <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
           </div>
-          <h1>Give your AI agent one door, not all your keys.</h1>
-          <p class="hero__lead">Your coding agent already writes code, runs commands, and pushes to git — and today it does all of that with <strong>your</strong> access. Bounded Systems puts one sanctioned door in front of each kind of system power. The agent knocks; a broker behind the door checks your policy, acts or refuses, and records what happened.</p>
+          <h1>Your coding agent wanders. Keep it inside the job you gave it.</h1>
+          <p class="hero__lead">Hand an AI coding agent a real task and it will reach past it — touching files you didn't mean to expose, running a command you didn't intend, doing something you never asked for. Today it does all of that with <strong>your</strong> access. Bounded Systems scopes that down: each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point that checks your policy, acts or refuses, and records what happened. It's a capability model, the same idea behind reference monitors and seccomp, put in front of an agent's authority.</p>
           <div class="code code--hero">
             <div><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })</div>
             <div>&nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span></div>
@@ -106,8 +108,8 @@
       <div class="section__num">01&nbsp;/&nbsp;The&nbsp;bet</div>
       <div>
         <p class="statement">Agentic development works by <em>bifurcation</em>: a good idea earns its own bounded abstraction with a defined contract — and that boundary is exactly what lets you scope an agent to it.</p>
-        <p class="copy">That part is increasingly easy. The hard, unsolved part is <strong>keeping many bounded, agent-authored abstractions honest against each other as they evolve</strong> — enforcing contracts <em>between</em> ideas, not just within one.</p>
-        <p class="copy copy--last">Most tooling secures a single action. Bounded Systems is about the seams: every privileged effect attributable to a signed owner, one source of truth projected to many surfaces, and drift caught as a build failure so the contracts can't quietly rot.</p>
+        <p class="copy">An agent can author one of those abstractions cheaply now. What it can't do yet — what nobody has really solved — is <strong>keep many of them honest against each other as they evolve</strong>, enforcing the contracts <em>between</em> ideas, not only within one.</p>
+        <p class="copy copy--last">Most tooling secures a single action; the unsolved work lives in the seams between them. Bounded Systems works there: every privileged effect is attributable to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure, so the contracts can't quietly rot.</p>
         <div class="grade-inline">
           <span class="grade-inline__label">This claim, graded:</span>
           <span class="grade grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
@@ -123,7 +125,7 @@
       <div class="section__num">02&nbsp;/&nbsp;The&nbsp;model</div>
       <div>
         <h2>The model, made physical</h2>
-        <p class="lead-2">One mechanism, not twenty. A <strong>capability seam</strong>: for each kind of system power there is exactly one sanctioned way through — a <strong>door</strong> you hold a socket to, never the keys behind it. The guest-room runtime makes it physical.</p>
+        <p class="lead-2">Bounded Systems leans on a single mechanism. For each kind of system power there is exactly one sanctioned way through — a <strong>capability seam</strong>: a <strong>door</strong> you hold a socket to, never the keys behind it. The guest-room runtime makes that concrete.</p>
 
         <div class="card model-card model-card--defns">
           <div class="defn"><span class="defn__term">room</span><span class="defn__body">a named bundle of doors for one kind of stay. Ask for a room it doesn't know and it fails closed — a typo never widens authority.</span></div>
@@ -132,13 +134,13 @@
         </div>
 
         <div class="code">
-          <div class="c"># a room expands to the doors this stay holds — nothing else exists</div>
+          <div class="c"># a room expands to exactly the doors this stay holds</div>
           <div><span class="k">const</span> doors = <span class="fn">expandRoom</span>(rooms, catalog, <span class="s">"dev"</span>, env);</div>
           <div class="spacer"></div>
-          <div class="c">// narrowing only ever tightens — caveats are append-only</div>
+          <div class="c">// attenuate appends caveats; authority only narrows, never widens</div>
           <div><span class="k">const</span> narrowed = <span class="fn">attenuate</span>(doors[<span class="s">0</span>], [<span class="s">"host=github.com"</span>]);</div>
           <div class="spacer"></div>
-          <div class="c">// the rulebook is honest about what's denied, not only granted</div>
+          <div class="c">// list the doors this room denies, so the agent won't attempt them</div>
           <div><span class="fn">deniedDoorSection</span>(<span class="fn">deniedDoors</span>(catalog, held))<span class="c">&nbsp;&rarr; "do not attempt"</span></div>
         </div>
 
