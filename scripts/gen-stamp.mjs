@@ -18,7 +18,8 @@ const sha =
   execSync("git rev-parse HEAD", { cwd: root }).toString().trim();
 const short = sha.slice(0, 7);
 const date = new Date().toISOString().slice(0, 10);
-const url = `https://github.com/bounded-systems/bounded.tools/commit/${sha}`;
+const repo = process.env.GITHUB_REPOSITORY || "bounded-systems/site";
+const url = `https://github.com/${repo}/commit/${sha}`;
 const stamp = `graded against <a href="${url}" style="color:inherit;">commit ${short}</a> &middot; ${date}`;
 
 const html = readFileSync(file, "utf8").replace(
