@@ -38,6 +38,27 @@ jobs:
       - name: Accessibility (WCAG AA contrast + headings)
         run: node brand/tools/a11y.mjs --check dist
 
+  # The brand is pinned twice: in flake.lock (the hermetic Nix build that deploy.yml
+  # ships) and as the git submodule (npm run dev + the checks above). They must point
+  # at the same commit — when they drift, the deployed CSS can silently lag the styles
+  # that reference it. That is exactly how the grade badges shipped with empty
+  # var(--bs-grade-*) values: the submodule was bumped but flake.lock was never relocked.
+  brand-pins-agree:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: flake.lock brand rev == submodule rev
+        run: |
+          lock_rev="$(jq -r '.nodes.brand.locked.rev' flake.lock)"
+          sub_rev="$(git ls-tree HEAD brand | awk '{print $3}')"
+          echo "flake.lock brand: $lock_rev"
+          echo "submodule  brand: $sub_rev"
+          if [ "$lock_rev" != "$sub_rev" ]; then
+            echo "::error::brand pins diverged. Run 'nix flake update brand' and 'git submodule update --remote brand' so both point at the same commit."
+            exit 1
+          fi
+          echo "✓ brand pins agree ($lock_rev)"
+
   # Copy hygiene (prose error + ungrounded claims) via the upstream string-audit
   # reusable gate. Pinned to an immutable commit SHA (v0.6.1) for reproducibility;
   # bump the pin to pick up upstream rule changes. build-cmd regenerates the

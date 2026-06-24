@@ -3,11 +3,11 @@
     "brand": {
       "flake": false,
       "locked": {
-        "lastModified": 1782077665,
-        "narHash": "sha256-GVX4Ul8n09VTI00e3ZYYwGojuDC3faXTf6Aj1BQUSlQ=",
+        "lastModified": 1782241886,
+        "narHash": "sha256-gbUaboNVaz8ubCnKTYKh4fq9lnUG2ZPseT/enWSJgCM=",
         "owner": "bounded-systems",
         "repo": "brand",
-        "rev": "2f4d4af6c8e666cc14681f34fa7b930cea8937f7",
+        "rev": "951baf1de650dac8ba22f123b4c9480b2a138361",
         "type": "github"
       },
       "original": {
