@@ -48,3 +48,27 @@ jobs:
         run: nix develop --command wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      # Prove the edge actually serves the bytes we just built. Workers Static
+      # Assets revalidate on a content-hash ETag, so a successful deploy should
+      # self-invalidate (no purge needed). This asserts that rather than trusting
+      # it — failing loudly if the edge serves something stale.
+      - name: Verify edge serves the deployed asset
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          if [ ! -f dist/styles.css ]; then
+            echo "::error::dist/styles.css not found — build layout changed?"; exit 1
+          fi
+          expected=$(sha256sum dist/styles.css | cut -d' ' -f1)
+          echo "expected sha256=$expected"
+          for i in 1 2 3 4 5; do
+            live=$(curl -fsS https://bounded.tools/styles.css | sha256sum | cut -d' ' -f1) || live="(fetch failed)"
+            if [ "$live" = "$expected" ]; then
+              echo "edge serves freshly-deployed styles.css ✓"
+              exit 0
+            fi
+            echo "edge not fresh yet (attempt $i/5): live=$live"
+            sleep 10
+          done
+          echo "::error::Edge still serving stale styles.css ~50s after deploy (expected $expected)"
+          exit 1
