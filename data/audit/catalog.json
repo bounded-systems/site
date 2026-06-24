@@ -1,6 +1,6 @@
 {
-  "blog/bifurcation-and-inter-contract-enforcement.md#00757812f220": {
-    "$value": "When agents write most of the software, the scarce resource is trust  between \nthe pieces, not authoring",
+  "blog/bifurcation-and-inter-contract-enforcement.md#0733db0fe2f5": {
+    "$value": "The cost of authoring a bounded\nabstraction is falling toward zero, so the cost moves somewhere else",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -24,11 +24,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#277eaaf18c6d": {
-    "$value": "The unsolved problem is   keeping many bounded, agent-authored abstractions\nhonest against each other as they evolve   — enforcing contracts  between  ideas,\nnot just within one",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
   "blog/bifurcation-and-inter-contract-enforcement.md#294b41bfdec2": {
     "$value": "A contract no tool enforces is\nnot a standard; it's a wish, and an agent regresses it the first time it's\nconvenient",
     "$type": "body",
@@ -36,6 +31,11 @@
   },
   "blog/bifurcation-and-inter-contract-enforcement.md#2983d1e86fb8": {
     "$value": "The door checks an owner and a policy,\nacts or refuses, and records either way:",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
+  "blog/bifurcation-and-inter-contract-enforcement.md#2e8ef1eb741a": {
+    "$value": "It's the problem this whole\n project is aimed at",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -49,18 +49,23 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
+  "blog/bifurcation-and-inter-contract-enforcement.md#3554268d2b64": {
+    "$value": "When agents write most of the software, the scarce resource is trust between\nthe pieces, not authoring",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
   "blog/bifurcation-and-inter-contract-enforcement.md#3a468d03bc9d": {
     "$value": "That\nboundary is exactly what makes an agent useful on it",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#3fbc973ff15e": {
-    "$value": "Agentic development works by   bifurcation  : a good idea earns its own bounded\nabstraction with a defined contract. \"Filesystem access\" becomes a thing with\nedges — a name, a surface, a promise about what it does and doesn't do",
+  "blog/bifurcation-and-inter-contract-enforcement.md#4322afc6da76": {
+    "$value": "- Enforced today — the drift gates (docs from source) and executable behaviour\n specs",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#4ce846d5b620": {
-    "$value": "It's the problem this whole\n  project is aimed at",
+  "blog/bifurcation-and-inter-contract-enforcement.md#43930023c26d": {
+    "$value": "If they break, the build breaks.\n- Partial — \"privileged effects attributable to a signed owner.\" True on\n the common path; the named gap is a permission boundary I'm still closing.\n- The bet — contracts staying honest between components as they evolve",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -69,13 +74,13 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#59fcd970839a": {
-    "$value": "The interesting\nfailure mode is the seam",
+  "blog/bifurcation-and-inter-contract-enforcement.md#51771eab45dd": {
+    "$value": "They don't. prx derives them from one spec, so the\nsurfaces can't disagree: there's only one thing to disagree with",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#5a1fdf4c2ec8": {
-    "$value": "-   Enforced today   — the drift gates  docs from source  and executable behaviour\n  specs",
+  "blog/bifurcation-and-inter-contract-enforcement.md#59fcd970839a": {
+    "$value": "The interesting\nfailure mode is the seam",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -99,11 +104,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#622493f4198c": {
-    "$value": "That\n  one is stated as direction, not a finished result",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
   "blog/bifurcation-and-inter-contract-enforcement.md#732c091af220": {
     "$value": "That gap is the whole problem, and it's where I work",
     "$type": "body",
@@ -119,18 +119,18 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#7f4694d4df56": {
-    "$value": "If they break, the build breaks.\n-   Partial   — \"privileged effects attributable to a signed owner.\" True on\n  the common path; the named gap is a permission boundary I'm still closing.\n-   The bet   — contracts staying honest  between  components as they evolve",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
   "blog/bifurcation-and-inter-contract-enforcement.md#821d494d15cf": {
     "$value": "Drift is a build failure, not a code review",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#89e544f49f30": {
-    "$value": "When authoring is cheap, you get  more  of it: more seams, more contracts, more\nplaces two agent-authored pieces can quietly come to disagree",
+  "blog/bifurcation-and-inter-contract-enforcement.md#8267622ae847": {
+    "$value": "The unsolved problem is keeping many bounded, agent-authored abstractions\nhonest against each other as they evolve — enforcing contracts between ideas,\nnot just within one",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
+  "blog/bifurcation-and-inter-contract-enforcement.md#82e0f1144366": {
+    "$value": "Agentic development works by bifurcation: a good idea earns its own bounded\nabstraction with a defined contract. \"Filesystem access\" becomes a thing with\nedges — a name, a surface, a promise about what it does and doesn't do",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -139,8 +139,8 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#8ba641fe8e32": {
-    "$value": "They don't. prx derives them from one spec, so the\nsurfaces  can't  disagree: there's only one thing to disagree with",
+  "blog/bifurcation-and-inter-contract-enforcement.md#8c3aabcfd565": {
+    "$value": "That\n one is stated as direction, not a finished result",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -164,6 +164,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
+  "blog/bifurcation-and-inter-contract-enforcement.md#a9d300918036": {
+    "$value": "Trust is mechanical — gates on every change,\nnot reviewer vigilance that can't scale to agent throughput",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
   "blog/bifurcation-and-inter-contract-enforcement.md#bc8c50fc9b14": {
     "$value": "The bet: three mechanisms for the seams",
     "$type": "body",
@@ -176,6 +181,11 @@
   },
   "blog/bifurcation-and-inter-contract-enforcement.md#d1be7bad7368": {
     "$value": "The unsolved part is between the abstractions, not inside them",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
+  "blog/bifurcation-and-inter-contract-enforcement.md#dd6d6f49d343": {
+    "$value": "For each ambient capability there is\nexactly one way through — a door you hold a socket to, never the keys behind it:\nfs, proc, env, gh, git, cas",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -194,28 +204,33 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#eac50e7fc569": {
-    "$value": "Trust is  mechanical  — gates on every change,\nnot reviewer vigilance that can't scale to agent throughput",
+  "blog/bifurcation-and-inter-contract-enforcement.md#f94b87ce6456": {
+    "$value": "When authoring is cheap, you get more of it: more seams, more contracts, more\nplaces two agent-authored pieces can quietly come to disagree",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#f00e68055309": {
-    "$value": "For each ambient capability there is\nexactly one way through — a door you hold a socket to, never the keys behind it:\n fs ,  proc ,  env ,  gh ,  git ,  cas",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
-  "blog/bifurcation-and-inter-contract-enforcement.md#f053caf4806d": {
-    "$value": "The cost of  authoring  a bounded\nabstraction is falling toward zero, so the cost moves somewhere else",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
-  "blog/verbspec-author-once-project-everywhere.md#13bc84d5520f": {
-    "$value": "This is one mechanism from a larger bet — keeping agent-authored contracts\nhonest as they multiply  see  the door is the unit of bounded\nauthority  bifurcation-and-inter-contract-enforcement.html  . verbspec is the\npiece with the most pull on its own.",
+  "blog/verbspec-author-once-project-everywhere.md#075aefcc7dd5": {
+    "$value": "Ship one capability to both humans and agents today and you write it four times:\na CLI with flag parsing and --help, an MCP tool definition, an OpenAPI\noperation, an Anthropic tool-use schema",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#2815ad0dcdcf": {
-    "$value": "verbspec is the   projection layer   — author once, project everywhere,\ndrift-free",
+  "blog/verbspec-author-once-project-everywhere.md#0a2291c1ef5f": {
+    "$value": "The surfaces aren't generated-then-edited; they're computed from the spec on\ndemand",
+    "$type": "body",
+    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
+  },
+  "blog/verbspec-author-once-project-everywhere.md#312f30d5d6e1": {
+    "$value": "If you maintain a CLI and an MCP server and an OpenAPI spec for the same\noperations, this collapses four hand-maintained artifacts into one — and the one\ncan't lie to the other three.",
+    "$type": "body",
+    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
+  },
+  "blog/verbspec-author-once-project-everywhere.md#31975b0e9ae3": {
+    "$value": "verbspec is the projection layer — author once, project everywhere,\ndrift-free",
+    "$type": "body",
+    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
+  },
+  "blog/verbspec-author-once-project-everywhere.md#4935ee9e71c8": {
+    "$value": "A verb's input and output are Zod schemas — the single\nsource of truth, giving you runtime validation and static types from one\ndefinition. z.toJSONSchema turns it into the interchange IR, and every surface\nis a pure function of that IR:",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -224,18 +239,8 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#534115f60de5": {
-    "$value": "…and the CLI   greet Ada --loud  , the MCP tool, the model schema, and\n POST /greet  are all just that spec seen from different sides",
-    "$type": "body",
-    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
-  },
   "blog/verbspec-author-once-project-everywhere.md#5a6b5fded509": {
     "$value": "The help text says one thing, the\ntool schema says a slightly older thing, the OpenAPI spec a third",
-    "$type": "body",
-    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
-  },
-  "blog/verbspec-author-once-project-everywhere.md#5e22a7d04b86": {
-    "$value": "The surfaces aren't generated-then-edited; they're   computed from the spec on\ndemand",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -249,8 +254,13 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#7ef8b4bffd09": {
-    "$value": "The\ncapability/security story is separate; that's the door work. verbspec is\n  MIT  , on npm, with  zod  the only peer dependency",
+  "blog/verbspec-author-once-project-everywhere.md#87d8a780c64f": {
+    "$value": "This is one mechanism from a larger bet — keeping agent-authored contracts\nhonest as they multiply (see the door is the unit of bounded\nauthority). verbspec is the\npiece with the most pull on its own.",
+    "$type": "body",
+    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
+  },
+  "blog/verbspec-author-once-project-everywhere.md#8817435803a9": {
+    "$value": "The\ncapability/security story is separate; that's the door work. verbspec is\nMIT, on npm, with zod the only peer dependency",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -259,18 +269,13 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
+  "blog/verbspec-author-once-project-everywhere.md#9dd15334258d": {
+    "$value": "The package is a clean leaf: its only production dependency is the zod peer\ndep, and an extractability test enforces that it stays pure — outward-only\nimports, no ambient authority (no shelling out, no process.env)",
+    "$type": "body",
+    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
+  },
   "blog/verbspec-author-once-project-everywhere.md#a0b097a17375": {
     "$value": "It handles one job: the \"one source of truth projected to many\nsurfaces\" mechanism, pulled out as a standalone, usable thing",
-    "$type": "body",
-    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
-  },
-  "blog/verbspec-author-once-project-everywhere.md#a6fb0cddeab3": {
-    "$value": "The package is a clean leaf: its only production dependency is the  zod  peer\ndep, and an extractability test enforces that it stays pure — outward-only\nimports, no ambient authority  no shelling out, no  process.env",
-    "$type": "body",
-    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
-  },
-  "blog/verbspec-author-once-project-everywhere.md#aae53aa266c5": {
-    "$value": "Ship one capability to both humans and agents today and you write it four times:\na CLI with flag parsing and  --help , an MCP tool definition, an OpenAPI\noperation, an Anthropic tool-use schema",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -284,18 +289,13 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#bdb42413d036": {
-    "$value": "A verb's input and output are   Zod schemas   — the single\nsource of truth, giving you runtime validation  and  static types from one\ndefinition.  z.toJSONSchema  turns it into the interchange IR, and every surface\nis a pure function of that IR:",
+  "blog/verbspec-author-once-project-everywhere.md#dc3908a797d0": {
+    "$value": "…and the CLI (greet Ada --loud), the MCP tool, the model schema, and\nPOST /greet are all just that spec seen from different sides",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#be9e14adb3af": {
-    "$value": "If you maintain a CLI  and  an MCP server  and  an OpenAPI spec for the same\noperations, this collapses four hand-maintained artifacts into one — and the one\ncan't lie to the other three.",
-    "$type": "body",
-    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
-  },
-  "blog/verbspec-author-once-project-everywhere.md#c0db6631c0fa": {
-    "$value": "The fix is boring and total: there should be   one   definition, and every\nsurface should be a pure projection of it",
+  "blog/verbspec-author-once-project-everywhere.md#e9c7fd2094c8": {
+    "$value": "The fix is boring and total: there should be one definition, and every\nsurface should be a pure projection of it",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -314,6 +314,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#08fdcd2d81ba": {
+    "$value": "Six months ago the project was dev-contracts — I wanted to give an agent a\ncontract it couldn't drift away from",
+    "$type": "body",
+    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
+  },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#18afe1efca0a": {
     "$value": "It writes code, runs\ncommands, and opens pull requests",
     "$type": "body",
@@ -321,11 +326,6 @@
   },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#1caa64874626": {
     "$value": "A solo project, worked out in the open and graded against\nthe running code — but the first user it has to convince is me",
-    "$type": "body",
-    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
-  },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#1e454575fd59": {
-    "$value": "prx   drives the work",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
@@ -349,13 +349,13 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#3d09357046d3": {
-    "$value": "When something comes out wrong, I can see which step it came\nfrom.",
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#3076a2f131e5": {
+    "$value": "It became prx when the interesting part\nturned out to be driving whole units of work, not holding a single contract",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#405f37f9cb19": {
-    "$value": "Six months ago the project was   dev-contracts   — I wanted to give an agent a\ncontract it couldn't drift away from",
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#3d09357046d3": {
+    "$value": "When something comes out wrong, I can see which step it came\nfrom.",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
@@ -369,11 +369,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#4fa9390091b2": {
-    "$value": "It became   prx   when the interesting part\nturned out to be driving whole units of work, not holding a single contract",
-    "$type": "body",
-    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
-  },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#506d4ab91032": {
     "$value": "That sentence is the whole project, and until now it was nowhere on\nthe page",
     "$type": "body",
@@ -384,8 +379,18 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#5bd2332dc514": {
+    "$value": "And\nprx grew guest-room when I needed the agent's authority to be the thing\nunder contract: one sanctioned way to reach each kind of power, instead of\ntrusting the agent to stay in its lane",
+    "$type": "body",
+    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
+  },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#6bbfae579527": {
     "$value": "Each one is the last one seen more clearly",
+    "$type": "body",
+    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
+  },
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#77c974435144": {
+    "$value": "guest-room is the part I built most recently, and the one I reach for now",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
@@ -396,11 +401,6 @@
   },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#874370548272": {
     "$value": "That's what keeps the agent from wandering — it can't get into\nwhat it was never handed",
-    "$type": "body",
-    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
-  },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#8a5e1d9baf59": {
-    "$value": "The short version, the one that actually lands when I say it out loud:\n guest-room is what I did so the agent didn't get distracted or do things I\ndidn't want",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
@@ -424,8 +424,8 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#d455afa6bdd1": {
-    "$value": "And\nprx grew   guest-room   when I needed the agent's  authority  to be the thing\nunder contract: one sanctioned way to reach each kind of power, instead of\ntrusting the agent to stay in its lane",
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#d71ddbac4da6": {
+    "$value": "The short version, the one that actually lands when I say it out loud:\nguest-room is what I did so the agent didn't get distracted or do things I\ndidn't want",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
@@ -436,11 +436,6 @@
   },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#e369dc2e6d1d": {
     "$value": "It's all derivations of one need, renamed each\ntime I understood it a little better",
-    "$type": "body",
-    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
-  },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#eb4ab5dae39b": {
-    "$value": "guest-room   is the part I built most recently, and the one I reach for now",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
@@ -494,21 +489,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#12dbf98937a8": {
-    "$value": "# a room expands to exactly the doors this stay holds \n const doors = expandRoom (rooms, catalog, \"dev\" , env);",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#1ab8b39cb4a1": {
-    "$value": "// attenuate appends caveats; authority only narrows, never widens \n const narrowed = attenuate (doors[ 0 ], [ \"host=github.com\" ]);",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#1e7e43044d5c": {
-    "$value": "One narrow seam per kind of ambient system power — the single sanctioned access point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and policy stays enforceable.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#21a5159937a6": {
     "$value": "The model, made physical \n Bounded Systems leans on a single mechanism",
     "$type": "body",
@@ -519,23 +499,13 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#2a45e1422f26": {
-    "$value": "agent execGit ({ subcommand: \"push\" , role: \"scout\" })\n refused · scout holds no git-write · recorded",
+  "index.html#278d4d97e4fb": {
+    "$value": "What it can't do yet — what nobody has solved — is keep many of them honest against each other as they evolve, enforcing the contracts between ideas, not just within one",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
   "index.html#2a72c6c142a9": {
     "$value": "Ask for a room it doesn't know and it fails closed — a typo never widens authority. \n door one unit of authority — a unix socket to a broker daemon that holds the real keys",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#2ae945b9efa6": {
-    "$value": "The engine names no guest.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#2cc5b2388698": {
-    "$value": "Agentic development works by bifurcation : a good idea earns its own bounded abstraction with a defined contract — and that boundary is exactly what lets you scope an agent to it",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -549,8 +519,23 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#32efcc50dee6": {
+    "$value": "The graph below is generated from that metadata and fails CI on drift; the full node-edge diagram lives on the org profile",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#362214abfe70": {
+    "$value": "Agentic development works by bifurcation: a good idea earns its own bounded abstraction with a defined contract — and that boundary is exactly what lets you scope an agent to it",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#36a191f9be89": {
     "$value": "Concretely: a room is a rootless Podman container, declared as a systemd quadlet and built reproducibly by nix; a door is a single unix socket bind-mounted in, a broker daemon holding the authority on the other side",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#36b83d008833": {
+    "$value": "Your first move: clone the runtime, then watch its behaviour specs execute against the engine — the same specs that grade the claims above",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -561,11 +546,6 @@
   },
   "index.html#38109e342c6e": {
     "$value": "Aspirational \n Contracts stay honest between components as they evolve. — the unsolved problem this whole project is aimed at.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#3dcaf96f2e0d": {
-    "$value": "Your first move: clone the runtime, then watch its behaviour specs execute against the engine — the same specs that grade the claims above. \n # clone the door runtime \n git clone https://github.com/bounded-systems/guest-room\n # …then run the specs that grade the claims above \n cd guest-room && npm test \n Rather not clone? Download the latest release · browse on GitHub",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -604,6 +584,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#561829f4d3e6": {
+    "$value": "The engine names no guest",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#561b22626f45": {
     "$value": "Enforced \n Docs generate from source and fail CI on drift",
     "$type": "body",
@@ -611,11 +596,6 @@
   },
   "index.html#5d735f4ca93c": {
     "$value": "Git-writes are signed and verified against the keeper; the other seams are wired in-process as imports today",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#5e2da6989cbf": {
-    "$value": "// list the doors this room denies, so the agent won't attempt them \n deniedDoorSection ( deniedDoors (catalog, held)) \"do not attempt\"",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -631,11 +611,6 @@
   },
   "index.html#6d2ec85e9cff": {
     "$value": "Converging the two — and signing across every door — is the work in progress",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#6dc74313fd48": {
-    "$value": "A capability model — the idea behind reference monitors and seccomp — in front of an agent's authority. \n agent execGit ({ subcommand: \"push\" , role: \"keeper\" })\n pushed · keeper holds git-write · signed · audited",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -674,11 +649,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#7b216107f3f8": {
-    "$value": "disposition verb guest Pure classifier mapping work-unit surface state to a disposition (ok/prune/repair/review) \n env verb door The one sanctioned reader of process.env, routing ambient config through capability imports \n fs verb door Filesystem capability seam; the one allowed filesystem-access point with an injectable FileSystem \n host verb door The one sanctioned reader of host/OS ambient state (home dir, temp dir, hostname), routing ambient authority through capability imports \n proc verb door The one allowed subprocess spawn point, routing external-tool invocations through a capability \n policy verb room Tool-policy engine enforcing subcommand allowlists by tool, state, and role \n verbspec verb guest Spec-driven CLI core: author a verb once as a typed VerbSpec, project it to CLI, MCP, OpenAPI, and Anthropic tool surfaces \n auth verb door Service-credential resolver (GitHub, Notion) through a single sanctioned access point \n gh verb door GitHub CLI wrapper with policy enforcement, rate-limit gating, and budget audit logging \n git verb door Git CLI wrapper with policy enforcement and stale-lock recovery \n bd verb door Typed interface to the beads CLI with policy enforcement and short-ID guards \n github-budget verb door Rate-limit-aware gh wrapper with bucket classification, pre-call gating, and audit trail \n scout verb door Content-addressed surface reads (file/grep/files) with anchored-chain provenance \n slack verb door Policy-gated, provenance-tracked Slack read surface: bounded read ops behind a swappable transport port, with keymaker-minted scoped credentials \n repo-root verb door Repo-root resolution capability: lazy git-based runtime root plus the eager .git-marker walk for build/codegen, the one sanctioned root-resolution point \n surface-sync verb room Type ontology for work-unit change-detection across GH/branch/worktree/tmux/beads \n schema-gen verb guest Project zod schemas to explicit, fast-types-clean TypeScript (zod → JSON Schema → .d.ts) \n door-kit verb door In-box door-client SDK for claude-box's capability doors, over the guest-room protocol \n guest-room verb room Guest-agnostic room+door capability runtime — the core library claude-box is built on \n cas noun room Content-addressable storage substrate: bytes addressed by their SHA-256 digest, with a storage-agnostic blob-store port \n machine-schema noun room Brands, handoff envelope, and state/phase/invariant primitives for work-unit machines \n audit-context noun room Ambient runtime context for gh-call audit attribution (verb, actor, truth reason) \n anchored-chain noun room Derivation chain with contract validation, signing, lineage tracking, and invalidation \n anchored-chain-sqlite noun room SQLite/Drizzle-backed implementation of the anchored-chain stores \n prx-config noun guest TUI configuration schema parser/emitter for L1 Claude and L2 Warp tools \n ocap-provenance noun room Capability-use provenance: a schema + SLSA mapping binding each privileged effect to a signed owner + auditable chain",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#7c3e7123a6ff": {
     "$value": "Colophon \n Built by Robert DeLanghe — in public, against running code",
     "$type": "body",
@@ -709,6 +679,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#929e50129c31": {
+    "$value": "For each kind of system power there is exactly one sanctioned way through — a capability seam: a door you hold a socket to, never the keys behind it",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#94fa33afaf95": {
     "$value": "Hand an AI coding agent a real task and it reaches past it — touching files you didn't mean to expose, running a command you didn't intend",
     "$type": "body",
@@ -734,11 +709,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#a35050f97829": {
-    "$value": "▸ a signed derivation (real output) \n // DSSE envelope · payloadType application/vnd.in-toto+json \n{ \"derivationId\" : \"sha256:0269b9…\" ,\n \"inputs\" : { \"copy\" : \"sha256:08eaa3…\" },\n \"outputs\" : { \"audit\" : \"sha256:0031d9…\" },\n \"signatures\" : [{ \"keyid\" : \"05ea15…\" , \"sig\" : \"EGClgX…\" }] }",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#a60d5cb9532f": {
     "$value": "Everything else is denied and recorded",
     "$type": "body",
@@ -751,11 +721,6 @@
   },
   "index.html#a93ee238983c": {
     "$value": "Docs generate from source and fail CI on drift; guest-room's specs execute against its engine",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a9651b485e63": {
-    "$value": "The graph below is generated from that metadata and fails CI on drift; the full node-edge diagram lives on the org profile .",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -784,8 +749,8 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#b094d128b41e": {
-    "$value": "What it can't do yet — what nobody has solved — is keep many of them honest against each other as they evolve , enforcing the contracts between ideas, not just within one",
+  "index.html#b36357ca3849": {
+    "$value": "One narrow seam per kind of ambient system power — the single sanctioned access point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and policy stays enforceable",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -829,6 +794,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#c8c1a0f8ac3b": {
+    "$value": "▸ a signed derivation (real output)",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#c9ebce2f8961": {
     "$value": "Walls that come standard — drop-all-caps, read-only, no-new-privileges — and a short list of doors",
     "$type": "body",
@@ -839,8 +809,8 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#d47be934e98f": {
-    "$value": "fs the one filesystem door \n proc the one subprocess spawn \n env the one reader of process.env \n gh GitHub CLI, policy-gated \n git git CLI, lock-recovering \n cas bytes addressed by digest",
+  "index.html#d7b061c6761b": {
+    "$value": "A capability model — the idea behind reference monitors and seccomp — in front of an agent's authority",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -849,13 +819,13 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#dd4d69e6c198": {
-    "$value": "For each kind of system power there is exactly one sanctioned way through — a capability seam : a door you hold a socket to, never the keys behind it",
+  "index.html#e2399ec3f4bc": {
+    "$value": "04 / The proof \n The proof is the code",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#e2399ec3f4bc": {
-    "$value": "04 / The proof \n The proof is the code",
+  "index.html#e406bf87a150": {
+    "$value": "Rather not clone? Download the latest release · browse on GitHub",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

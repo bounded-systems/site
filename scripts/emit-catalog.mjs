@@ -34,15 +34,35 @@ const CATALOG_PATH = join(OUT_DIR, "catalog.json");
 const GROUNDING_PATH = join(OUT_DIR, "grounding.json");
 
 // Reduce each surface to its visible prose so the gate sees sentences, not markup.
-// (Kept identical to the retired scripts/check-copy.mjs so gating is unchanged.)
-const stripHtml = (s) => s
+//
+// Prose only — not code, not generated grids. Inline markup (`<code>`, `**bold**`)
+// renders with NO surrounding space, so we must not leave a space in its place:
+// `<code>fs</code>,` must read as "fs," not "fs ,", or the gate reports a phantom
+// "space before punctuation" on perfectly correct source. Likewise `<pre>` code and
+// the build-generated seam/registry grids aren't prose and shouldn't be audited as it.
+const normalize = (s) => s
+  .replace(/[ \t]+/g, " ")
+  .replace(/ +([,.;:!?)\]])/g, "$1") // inline markup never wedges space before punctuation
+  .replace(/([([]) +/g, "$1");
+const stripHtml = (s) => normalize(s
   .replace(/<script[\s\S]*?<\/script>/gi, " ")
   .replace(/<style[\s\S]*?<\/style>/gi, " ")
+  .replace(/<pre[\s\S]*?<\/pre>/gi, " ") // code blocks aren't prose
+  .replace(/<!--\s*seams:start[\s\S]*?seams:end\s*-->/gi, " ") // generated grid
+  .replace(/<!--\s*registry:start[\s\S]*?registry:end\s*-->/gi, " ") // generated grid
   .replace(/<[^>]+>/g, " ")
   .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&middot;/g, " · ")
-  .replace(/&rarr;|&#\d+;/g, " ")
-  .replace(/[ \t]+/g, " ");
-const stripMd = (s) => s.replace(/```[\s\S]*?```/g, " ").replace(/[#>*`_[\]()]/g, " ");
+  .replace(/&rarr;|&#\d+;/g, " "));
+// Unwrap inline markdown to its text (no space injected); drop fenced code, headings,
+// and blockquote markers. Keeps real punctuation so genuine typos still surface.
+const stripMd = (s) => normalize(s
+  .replace(/```[\s\S]*?```/g, " ")
+  .replace(/`([^`]+)`/g, "$1")
+  .replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1")
+  .replace(/__([^_]+)__/g, "$1").replace(/\b_([^_]+)_\b/g, "$1")
+  .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+  .replace(/^[ \t]*#{1,6}[ \t]+/gm, "")
+  .replace(/^[ \t]*>[ \t]?/gm, ""));
 
 // Surfaces: the home page + every blog post (sorted for stable iteration).
 const surfaces = [["index.html", stripHtml]];
