@@ -1,6 +1,6 @@
 # In agent-built software, the open problem is the seams between the pieces
 
-An agent can write the filesystem layer now. The process spawner, the tool
+An agent can write the filesystem layer now. The process spawner and tool
 adapters, the CLI — all of it. What it can't do yet, what nobody has really
 solved, is keep all of those honest with each other while it keeps editing them.
 
@@ -20,11 +20,11 @@ abstraction is falling toward zero, so the cost moves somewhere else.
 
 ## The unsolved part is between the abstractions, not inside them
 
-When authoring is cheap, you get *more* of it: more seams, more contracts, more
-places two agent-authored pieces can quietly come to disagree. The filesystem
-door assumes one ownership model; the process door drifts to another; the CLI
-says one thing and its MCP adapter says a slightly older thing. Each piece is
-internally fine. The system is wrong.
+When authoring is cheap, you get *more* of it: more seams, more contracts, and
+that many more places two agent-authored pieces can quietly come to disagree.
+The filesystem door assumes one ownership model; the process door has already
+drifted to another. Meanwhile the CLI says one thing and its MCP adapter says a
+slightly older thing. Each piece is internally fine. The system is wrong.
 
 The unsolved problem is **keeping many bounded, agent-authored abstractions
 honest against each other as they evolve** — enforcing contracts *between* ideas,

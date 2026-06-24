@@ -2,10 +2,10 @@
 
 Ship one capability to both humans and agents today and you write it four times:
 a CLI with flag parsing and `--help`, an MCP tool definition, an OpenAPI
-operation, an Anthropic tool-use schema. Four artifacts, four hand-maintained
-copies of the same shape — and they drift. The help text says one thing, the
-tool schema says a slightly older thing, the OpenAPI spec a third. Each rots on
-its own schedule, and nothing tells you when.
+operation, and a tool-use schema for Anthropic's models. Four artifacts, four
+hand-maintained copies of the same shape — and they drift. The help text says
+one thing, its tool schema says a slightly older thing, the OpenAPI spec a
+third. Each rots on its own schedule, and nothing tells you when.
 
 The fix is boring and total: there should be **one** definition, and every
 surface should be a pure projection of it.
@@ -39,8 +39,8 @@ const greet = defineVerb({
 ```
 
 …and the CLI (`greet Ada --loud`), the MCP tool, the model schema, and
-`POST /greet` are all just that spec seen from different sides. No codegen, no
-build step, no FFI to author a verb.
+`POST /greet` are all just that spec seen from different sides. No codegen and no
+build step — and no FFI to author a verb.
 
 ## Why it can't drift
 
