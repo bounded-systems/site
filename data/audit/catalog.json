@@ -464,11 +464,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
-  "index.html#02762d0f81da": {
-    "$value": "Hand an AI coding agent a real task and it will reach past it — touching files you didn't mean to expose, running a command you didn't intend, doing something you never asked for",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#030500883caa": {
     "$value": "graded against the latest commit",
     "$type": "body",
@@ -559,11 +554,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#36ee7cbd68c2": {
-    "$value": "Both prx and claude-box are being broken up onto that shared runtime: two tools today, converging into one door-based system",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#37e161f1a1f2": {
     "$value": "If it breaks, the build breaks",
     "$type": "body",
@@ -591,11 +581,6 @@
   },
   "index.html#47922b28a4e2": {
     "$value": "Your coding agent wanders",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#4862f880e3c8": {
-    "$value": "Their shared contracts and SDKs are being lifted out into standalone, versioned interfaces — guest-room (the room/door contract), ocap-provenance (the signed predicate), and the wire schemas — so each piece composes against a published boundary, never another's internals",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -649,6 +634,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#6dc74313fd48": {
+    "$value": "A capability model — the idea behind reference monitors and seccomp — in front of an agent's authority. \n agent execGit ({ subcommand: \"push\" , role: \"keeper\" })\n pushed · keeper holds git-write · signed · audited",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#6eb4d2adedd5": {
     "$value": "room a named bundle of doors for one kind of stay",
     "$type": "body",
@@ -694,8 +684,8 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#7fd9ff0239b8": {
-    "$value": "It's a capability model, the same idea behind reference monitors and seccomp, put in front of an agent's authority. \n agent execGit ({ subcommand: \"push\" , role: \"keeper\" })\n pushed · keeper holds git-write · signed · audited",
+  "index.html#811e4cd9bae5": {
+    "$value": "Both are being broken onto that shared runtime: two tools today, converging into one door-based system",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -719,13 +709,13 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#97b57db8ebb7": {
-    "$value": "A solo project — every claim on this page graded against the code that backs it",
+  "index.html#94fa33afaf95": {
+    "$value": "Hand an AI coding agent a real task and it reaches past it — touching files you didn't mean to expose, running a command you didn't intend",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#9a0ad381f8d7": {
-    "$value": "What it can't do yet — what nobody has really solved — is keep many of them honest against each other as they evolve , enforcing the contracts between ideas, not only within one",
+  "index.html#97b57db8ebb7": {
+    "$value": "A solo project — every claim on this page graded against the code that backs it",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -794,6 +784,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#b094d128b41e": {
+    "$value": "What it can't do yet — what nobody has solved — is keep many of them honest against each other as they evolve , enforcing the contracts between ideas, not just within one",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#b54400a836d4": {
     "$value": "Keep it inside the job you gave it",
     "$type": "body",
@@ -821,6 +816,11 @@
   },
   "index.html#c0ce8351cce3": {
     "$value": "The guest can knock; it cannot do. \n guest the agent the room hosts — for example claude-box, the Claude Code runtime",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#c5b96f90dd2e": {
+    "$value": "Their shared contracts and SDKs are lifted into standalone, versioned interfaces — guest-room (the room/door contract), ocap-provenance (the signed predicate), and the wire schemas — so each piece composes against a published boundary, never another's internals",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
