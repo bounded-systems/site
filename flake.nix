@@ -51,7 +51,14 @@
       devShells = forAll (system:
         let pkgs = pkgsFor system; in
         {
+          # Everyday shell: node only, so `nix develop` works on every platform.
+          # (nixpkgs' wrangler currently fails to build on aarch64-darwin; it's
+          # only needed at deploy time, which runs on Linux CI — see `deploy`.)
           default = pkgs.mkShell {
+            packages = [ pkgs.nodejs_22 ];
+          };
+          # Deploy shell: adds wrangler. Used by .github/workflows/deploy.yml.
+          deploy = pkgs.mkShell {
             packages = [ pkgs.nodejs_22 pkgs.wrangler ];
           };
         });
