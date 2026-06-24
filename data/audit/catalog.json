@@ -4,6 +4,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
+  "blog/bifurcation-and-inter-contract-enforcement.md#08877b6e87d5": {
+    "$value": "Each piece is internally fine",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
   "blog/bifurcation-and-inter-contract-enforcement.md#115682eb2e4d": {
     "$value": "The industry hand-maintains\nthe same command four times — CLI, MCP tool, OpenAPI route, tool schema — and\nhopes they stay in sync",
     "$type": "body",
@@ -16,11 +21,6 @@
   },
   "blog/bifurcation-and-inter-contract-enforcement.md#20d9252e17c1": {
     "$value": "Hand an agent a crisp contract and it fills in the\nimplementation, the tests, the docs",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
-  "blog/bifurcation-and-inter-contract-enforcement.md#248dc8aa5db6": {
-    "$value": "The filesystem\ndoor assumes one ownership model; the process door drifts to another; the CLI\nsays one thing and its MCP adapter says a slightly older thing",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -59,6 +59,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
+  "blog/bifurcation-and-inter-contract-enforcement.md#4309372d00a2": {
+    "$value": "The filesystem door assumes one ownership model; the process door has already\ndrifted to another",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
   "blog/bifurcation-and-inter-contract-enforcement.md#4322afc6da76": {
     "$value": "- Enforced today — the drift gates (docs from source) and executable behaviour\n specs",
     "$type": "body",
@@ -66,6 +71,11 @@
   },
   "blog/bifurcation-and-inter-contract-enforcement.md#43930023c26d": {
     "$value": "If they break, the build breaks.\n- Partial — \"privileged effects attributable to a signed owner.\" True on\n the common path; the named gap is a permission boundary I'm still closing.\n- The bet — contracts staying honest between components as they evolve",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
+  "blog/bifurcation-and-inter-contract-enforcement.md#471e5445571f": {
+    "$value": "The process spawner and tool\nadapters, the CLI — all of it",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -86,16 +96,6 @@
   },
   "blog/bifurcation-and-inter-contract-enforcement.md#5a3ee74023f1": {
     "$value": "Same door, one allow, one deny, both recorded",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
-  "blog/bifurcation-and-inter-contract-enforcement.md#5ba604afcf57": {
-    "$value": "The process spawner, the tool\nadapters, the CLI — all of it",
-    "$type": "body",
-    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
-  "blog/bifurcation-and-inter-contract-enforcement.md#5bec4b3d801b": {
-    "$value": "Each piece is\ninternally fine",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
@@ -174,6 +174,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
+  "blog/bifurcation-and-inter-contract-enforcement.md#c43448c09466": {
+    "$value": "Meanwhile the CLI says one thing and its MCP adapter says a\nslightly older thing",
+    "$type": "body",
+    "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
+  },
   "blog/bifurcation-and-inter-contract-enforcement.md#cf5bb2ea5a0c": {
     "$value": "The seam is the only path, so the\nseam is where authority is decided",
     "$type": "body",
@@ -204,15 +209,10 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
-  "blog/bifurcation-and-inter-contract-enforcement.md#f94b87ce6456": {
-    "$value": "When authoring is cheap, you get more of it: more seams, more contracts, more\nplaces two agent-authored pieces can quietly come to disagree",
+  "blog/bifurcation-and-inter-contract-enforcement.md#f600886bc731": {
+    "$value": "When authoring is cheap, you get more of it: more seams, more contracts, and\nthat many more places two agent-authored pieces can quietly come to disagree",
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
-  },
-  "blog/verbspec-author-once-project-everywhere.md#075aefcc7dd5": {
-    "$value": "Ship one capability to both humans and agents today and you write it four times:\na CLI with flag parsing and --help, an MCP tool definition, an OpenAPI\noperation, an Anthropic tool-use schema",
-    "$type": "body",
-    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
   "blog/verbspec-author-once-project-everywhere.md#0a2291c1ef5f": {
     "$value": "The surfaces aren't generated-then-edited; they're computed from the spec on\ndemand",
@@ -239,8 +239,8 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#5a6b5fded509": {
-    "$value": "The help text says one thing, the\ntool schema says a slightly older thing, the OpenAPI spec a third",
+  "blog/verbspec-author-once-project-everywhere.md#640ef2338b10": {
+    "$value": "Four artifacts, four\nhand-maintained copies of the same shape — and they drift",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -264,8 +264,8 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#99fa9f45a752": {
-    "$value": "Four artifacts, four hand-maintained\ncopies of the same shape — and they drift",
+  "blog/verbspec-author-once-project-everywhere.md#982d034a907d": {
+    "$value": "The help text says\none thing, its tool schema says a slightly older thing, the OpenAPI spec a\nthird",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -279,18 +279,23 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#b1a28e2df203": {
-    "$value": "Each rots on\nits own schedule, and nothing tells you when",
-    "$type": "body",
-    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
-  },
   "blog/verbspec-author-once-project-everywhere.md#b7c0a5d66a86": {
     "$value": "There's nothing to keep in sync because there's only one thing",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
+  "blog/verbspec-author-once-project-everywhere.md#cc66da9e6f52": {
+    "$value": "No codegen and no\nbuild step — and no FFI to author a verb",
+    "$type": "body",
+    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
+  },
   "blog/verbspec-author-once-project-everywhere.md#dc3908a797d0": {
     "$value": "…and the CLI (greet Ada --loud), the MCP tool, the model schema, and\nPOST /greet are all just that spec seen from different sides",
+    "$type": "body",
+    "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
+  },
+  "blog/verbspec-author-once-project-everywhere.md#e0c46e628219": {
+    "$value": "Ship one capability to both humans and agents today and you write it four times:\na CLI with flag parsing and --help, an MCP tool definition, an OpenAPI\noperation, and a tool-use schema for Anthropic's models",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -309,8 +314,8 @@
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
-  "blog/verbspec-author-once-project-everywhere.md#fc955bb11e62": {
-    "$value": "No codegen, no\nbuild step, no FFI to author a verb",
+  "blog/verbspec-author-once-project-everywhere.md#fe0127167159": {
+    "$value": "Each rots on its own schedule, and nothing tells you when",
     "$type": "body",
     "$description": "extracted prose — blog/verbspec-author-once-project-everywhere.md"
   },
@@ -334,6 +339,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#23ea4dbb9d83": {
+    "$value": "It became prx when what actually\nmattered turned out to be driving whole units of work, not holding a single\ncontract",
+    "$type": "body",
+    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
+  },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#27d38b20fa7b": {
     "$value": "It\nscopes what the agent can reach: the job gets exactly the capabilities it needs\nand nothing else",
     "$type": "body",
@@ -346,11 +356,6 @@
   },
   "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#2e24130100d6": {
     "$value": "This post is the plain version of\nwhat these tools are and how I got here — usage first, because that's the part\nyou can't see from the repos",
-    "$type": "body",
-    "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
-  },
-  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md#3076a2f131e5": {
-    "$value": "It became prx when the interesting part\nturned out to be driving whole units of work, not holding a single contract",
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
