@@ -38,6 +38,7 @@
               node brand/tokens/build-tokens.mjs --check
               node build.mjs
               node scripts/gen-blog.mjs
+              node scripts/gen-sitemap.mjs
               runHook postBuild
             '';
             installPhase = ''
