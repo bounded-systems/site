@@ -36,8 +36,9 @@ None of this showed up as a plan. It's all derivations of one need, renamed each
 time I understood it a little better.
 
 Six months ago the project was **dev-contracts** — I wanted to give an agent a
-contract it couldn't drift away from. It became **prx** when the interesting part
-turned out to be driving whole units of work, not holding a single contract. And
+contract it couldn't drift away from. It became **prx** when what actually
+mattered turned out to be driving whole units of work, not holding a single
+contract. And
 prx grew **guest-room** when I needed the agent's *authority* to be the thing
 under contract: one sanctioned way to reach each kind of power, instead of
 trusting the agent to stay in its lane.
