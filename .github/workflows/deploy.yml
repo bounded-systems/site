@@ -151,3 +151,15 @@ jobs:
           done
           echo "::error::prod is not serving the freshly-signed provenance (manifest or provenance.json)"
           exit 1
+
+      # Independent, cryptographic confirmation that prod serves verified bytes: run
+      # the standalone verifier (sigstore-js, in-process bundle verification — no
+      # cosign, no Rekor query API) against the live edge. Fail-closed: if the
+      # deployed site doesn't verify against an allowed identity + the signed
+      # manifest, the deploy fails. Runs after the freshness wait above, so the edge
+      # has already propagated.
+      - name: Cryptographically verify prod (standalone verifier)
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          npm ci --prefix integrity/verify
+          node integrity/verify/verify.mjs https://bounded.tools
