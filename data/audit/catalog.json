@@ -929,6 +929,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#6eee01472e57": {
+    "$value": "Built by deploy.yml · this build's Rekor entry & digests · why this is provenance and not legitimacy",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#72e0b0860f76": {
     "$value": "The gap is written down, not glossed over",
     "$type": "body",
@@ -1176,11 +1181,6 @@
   },
   "index.html#f769333f3db6": {
     "$value": "This one makes it accountable — the authority layer, designed to run alongside the rest.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#fb09282c20f9": {
-    "$value": "Built by deploy.yml · this build's Rekor entry & digests in the public log · why this is provenance and not legitimacy",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

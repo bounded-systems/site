@@ -21,7 +21,7 @@ const dist = join(dirname(dirname(fileURLToPath(import.meta.url))), "dist");
 
 // Sidecars: provenance about the site, not part of it. Keep in sync with the
 // tar --exclude list in deploy.yml.
-const EXCLUDE = new Set(["site.sha256", "site.sha256.sigstore.json", "provenance.json"]);
+const EXCLUDE = new Set(["site.sha256", "site.sha256.sigstore.json", "provenance.json", "rekor/index.html"]);
 
 async function walk(dir) {
   const out = [];
