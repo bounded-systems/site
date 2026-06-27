@@ -509,6 +509,231 @@
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
+  "blog/trust-lives-outside-the-page.md#0634ec8cf8b7": {
+    "$value": "That post drew the line between who built it and was the build authorized",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#08afbadda63b": {
+    "$value": "The regress only ends with a checker the page has no say over:",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#0962c509842e": {
+    "$value": "There is one thing a page genuinely can't fake: an entry in a public transparency log it doesn't run",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#15dde78099c6": {
+    "$value": "Here is the part that took us a while to internalize",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#17e43205c986": {
+    "$value": "Say you add a \"verify this site\" button: JavaScript that fetches the signed manifest, re-hashes the page, and shows a green check",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#20f0a6376565": {
+    "$value": "Signing and logging are the easy 80%",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#2295fb242781": {
+    "$value": "This one is about a smaller, sharper trap — and where it bottoms out",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#291188c4aa2a": {
+    "$value": "The link is a claim; the destination is the check",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#2e2d3b1731a1": {
+    "$value": "What flagged it was monitoring: someone watching the log for an identity showing up where it shouldn't",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#348e50f4da61": {
+    "$value": "Trust is something the visitor brings from outside",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#3632c1fd9657": {
+    "$value": "In-page JavaScript is teaching and UX",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#40edba1ecf50": {
+    "$value": "Follow it and you land on infrastructure we don't control, showing the certificate identity and the artifact digest",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#47a24aabefba": {
+    "$value": "So instead of verifying in the page, point out of it",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#4edbf6571c3b": {
+    "$value": "A malicious page pins its own",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#710984c2c066": {
+    "$value": "- Reproducible (Nix) — the deployed bytes are a function of public source.\n- Identity (keyless OIDC + Sigstore) — who built it, no stored key.\n- Registry (Rekor) — an immutable, public, per-version record of those proofs.\n- Monitoring (rekor-monitor) — because a record nobody watches is not a control.\n- The ceiling — none of it proves the build was authorized",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#80c1c60d1f01": {
+    "$value": "This is the sequel to provenance is not legitimacy",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#839293533885": {
+    "$value": "Each rung proves a different thing, and naming what each one does not prove is the point — not a disclaimer bolted on at the end",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#89ed9278ff21": {
+    "$value": "An unwatched entry is a receipt nobody reads",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#8d300a6b22a7": {
+    "$value": "It's turtles: the validator only runs because the page chose to load it — and chose its hash",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#944cad341755": {
+    "$value": "The page is grading its own homework",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#a5742541ad30": {
+    "$value": "Builds here ship a /rekor link to this version's actual entry on search.sigstore.dev",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#a5a1e14023cd": {
+    "$value": "What the page can't forge",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#a7c3e6418452": {
+    "$value": "If we lied about which entry, the digest there wouldn't match the one we serve — so the lie is detectable, not hidden",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#a8bb86fff55b": {
+    "$value": "That genuinely helps — it shrinks the trusted surface from \"arbitrary inline script\" to \"this one pinned, auditable artifact.\" But it doesn't escape the trap, because the page still chooses which script to load and which hash to pin",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#b081013da31c": {
+    "$value": "So the honest question is not \"how do I verify inside the page,\" but \"what can the page not forge.\"",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#b2456fafd976": {
+    "$value": "A tampered page swaps the bytes and the verifier, and the check goes green anyway",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#b633f162645f": {
+    "$value": "- The CLI you run yourself — cosign verify-blob against the published bundle, then sha256sum -c",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#b671a240dcec": {
+    "$value": "A scheduled job follows the public log for our build identities and opens an issue the moment a certificate is minted for us that we didn't trigger",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#ba9014bf40db": {
+    "$value": "The verifier you can run yourself is verify-site; this build's log entry is one click away at /rekor",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#bfa8f11f0a60": {
+    "$value": "The page can't reach into your shell.\n- A browser extension you installed — verifies regardless of page script, because you chose it.\n- A third-party monitor watching the log on your behalf.\n- In CI: admission control (policy-controller) that refuses anything not signed by an allowed identity — outside any single artifact's say-so",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#c7452e639896": {
+    "$value": "Neither asks you to trust this page.",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#c74e1a330071": {
+    "$value": "A verifier a page ships is also a claim the page controls — if the bytes can lie, the script that checks them can lie too",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#c96bfe435826": {
+    "$value": "This is not hypothetical",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#cf9e66e17728": {
+    "$value": "A badge a page renders is a claim the page controls",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#d11f0f596f21": {
+    "$value": "The supply-chain worm from earlier this year minted its own OIDC token at runtime and produced provenance that passed the standard checks — green badge, real CI identity, genuine Rekor entry — while stealing credentials",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#d1a8b1482fbe": {
+    "$value": "Trust lives outside the page",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#d78991170121": {
+    "$value": "State what the mechanism shows, name what it can't, and put the trust where the page can't reach",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#d8373b2e9286": {
+    "$value": "A log nobody watches proves nothing",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#d9ba8773e3ab": {
+    "$value": "SRI only checks the bytes match the hash you declared; it doesn't make the page trustworthy for declaring it",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#dc4c41000e5e": {
+    "$value": "So we now run that watch",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#dcede48a0c3b": {
+    "$value": "The transparency log's whole value is that it can be watched — and watching is the publisher's job, not Sigstore's",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#df508fe578cd": {
+    "$value": "Identity and integrity, not legitimacy",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#e048a47591bc": {
+    "$value": "The reflex fix is Subresource Integrity plus a provenance-backed CDN: load the verifier from a third party, pin it by hash, and now the page can't swap the validator",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#e884247ec8d1": {
+    "$value": "users are responsible for monitoring the log for unauthorized certificates issued to their identities … if no third parties monitor the logs, then any misbehaviour might go undetected",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#f953bfa9341a": {
+    "$value": "Sigstore's security model is blunt about it:",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
   "blog/verbspec-author-once-project-everywhere.md#0a2291c1ef5f": {
     "$value": "The surfaces aren't generated-then-edited; they're computed from the spec on\ndemand",
     "$type": "body",
