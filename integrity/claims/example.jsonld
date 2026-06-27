@@ -1,0 +1,70 @@
+{
+  "//": "SPIKE — a nanopublication-shaped, Sigstore-securable claims graph for the bounded.tools honesty section. Three named graphs: assertion (the graded claims), provenance (what backs them + when), publication-info (who, secured by the keyless build signature). See README.md.",
+  "@context": {
+    "schema": "https://schema.org/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "np": "http://www.nanopub.org/nschema#",
+    "bt": "https://bounded.tools/ns/claims#",
+    "claim": "bt:claim",
+    "grade": "bt:grade",
+    "gap": "bt:gap",
+    "evidence": { "@id": "bt:evidence", "@type": "@id" },
+    "subject": { "@id": "schema:subjectOf", "@type": "@id" },
+    "wasDerivedFrom": { "@id": "prov:wasDerivedFrom", "@type": "@id" },
+    "generatedAtTime": { "@id": "prov:generatedAtTime", "@type": "schema:DateTime" },
+    "wasAttributedTo": { "@id": "prov:wasAttributedTo", "@type": "@id" },
+    "securedBy": { "@id": "bt:securedBy", "@type": "@id" }
+  },
+  "@id": "https://bounded.tools/claims#",
+  "@graph": [
+    {
+      "@id": "https://bounded.tools/claims#assertion",
+      "@graph": [
+        {
+          "@id": "https://bounded.tools/claims#c1",
+          "@type": "bt:Claim",
+          "claim": "Docs generate from source and fail CI on drift.",
+          "grade": "enforced",
+          "evidence": "https://github.com/bounded-systems/guest-room"
+        },
+        {
+          "@id": "https://bounded.tools/claims#c2",
+          "@type": "bt:Claim",
+          "claim": "A git-write carries a verifiable in-toto / SLSA provenance derivation, signed per-actor and checked fail-closed at the merge gate.",
+          "grade": "partial",
+          "gap": "the sign→verify loop is tested but opt-in today; gh, external reads, and egress are policy-gated, not yet signed.",
+          "evidence": "https://github.com/bounded-systems/anchored-chain"
+        },
+        {
+          "@id": "https://bounded.tools/claims#c3",
+          "@type": "bt:Claim",
+          "claim": "Contracts stay honest between components as they evolve.",
+          "grade": "aspirational",
+          "gap": "the unsolved problem this whole project is aimed at.",
+          "evidence": "https://github.com/bounded-systems/prx"
+        }
+      ]
+    },
+    {
+      "@id": "https://bounded.tools/claims#provenance",
+      "@graph": [
+        {
+          "@id": "https://bounded.tools/claims#assertion",
+          "subject": "https://bounded.tools",
+          "wasDerivedFrom": "https://github.com/bounded-systems/site",
+          "generatedAtTime": "@@DATE@@"
+        }
+      ]
+    },
+    {
+      "@id": "https://bounded.tools/claims#pubinfo",
+      "@graph": [
+        {
+          "@id": "https://bounded.tools/claims#",
+          "wasAttributedTo": "https://github.com/bounded-systems/site",
+          "securedBy": "https://bounded.tools/claims.jsonld.sigstore.json"
+        }
+      ]
+    }
+  ]
+}
