@@ -20,7 +20,9 @@ const short = sha.slice(0, 7);
 const date = new Date().toISOString().slice(0, 10);
 const repo = process.env.GITHUB_REPOSITORY || "bounded-systems/site";
 const url = `https://github.com/${repo}/commit/${sha}`;
-const stamp = `graded against <a href="${url}" style="color:inherit;">commit ${short}</a> &middot; ${date}`;
+// data-build-commit makes the baked-in commit machine-readable, so the on-load
+// freshness probe can compare THIS page's commit to the live deploy + source.
+const stamp = `graded against <a href="${url}" data-build-commit="${sha}" style="color:inherit;">commit ${short}</a> &middot; ${date}`;
 
 const html = readFileSync(file, "utf8").replace(
   /<!-- stamp:start -->[\s\S]*?<!-- stamp:end -->/,
