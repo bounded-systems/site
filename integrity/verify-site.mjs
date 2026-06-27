@@ -55,6 +55,13 @@ const manifest = (await load("site.sha256")).toString("utf8");
 const bundle = (await load("site.sha256.sigstore.json")).toString("utf8");
 console.log(`· site: ${base}`);
 console.log(`· builder: ${repo} @ ${(provenance?.builder?.commit || "").slice(0, 7)} · rekor#${provenance?.siteManifest?.rekorLogIndex ?? "?"}`);
+if (provenance?.builtAt) {
+  const ms = Date.now() - Date.parse(provenance.builtAt);
+  const age = Number.isFinite(ms)
+    ? (ms < 36e5 ? `${Math.round(ms / 6e4)}m` : ms < 864e5 ? `${Math.round(ms / 36e5)}h` : `${Math.round(ms / 864e5)}d`)
+    : "?";
+  console.log(`· built: ${provenance.builtAt} (${age} ago) — authoritative time is the Rekor entry's integratedTime at /rekor`);
+}
 
 // 3: signature (cosign if available)
 const cosign = spawnSync("cosign", ["version"], { stdio: "ignore" });
