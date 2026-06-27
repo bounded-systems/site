@@ -23,6 +23,7 @@
 import { readdir, readFile, writeFile, access } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { join, relative, dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { parseHTML } from "linkedom";
 import { Readability } from "@mozilla/readability";
 
@@ -30,9 +31,12 @@ const dist = resolve(process.argv[2] || "dist");
 const CHECK = process.argv.includes("--check");
 const exists = async (p) => { try { await access(p); return true; } catch { return false; } };
 
-// Generated at deploy by gen-provenance.mjs, so absent from a local build — treat
-// as resolvable rather than dead. (The post-deploy edge check verifies they serve.)
-const DEPLOY_SIDECARS = ["/rekor", "/provenance.json", "/site.sha256"];
+// Generated at deploy, so absent from a local build — treat as resolvable rather
+// than dead. (The post-deploy edge check verifies they serve.) Consumers add their
+// own deploy-time assets via STRUCTURE_AUDIT_SIDECARS (comma-separated), e.g.
+// bd-site's /resume.pdf, which is print-to-pdf'd during deploy.
+const DEPLOY_SIDECARS = ["/rekor", "/provenance.json", "/site.sha256",
+  ...(process.env.STRUCTURE_AUDIT_SIDECARS || "").split(",").map((s) => s.trim()).filter(Boolean)];
 
 async function walk(dir, ext) {
   const out = [];
@@ -122,7 +126,9 @@ for (const key of servedCanon) {
 
 const json = JSON.stringify(Object.fromEntries(Object.keys(structure).sort().map((k) => [k, structure[k]])), null, 2) + "\n";
 const digest = createHash("sha256").update(json).digest("hex").slice(0, 12);
-const outPath = join(dist, "..", "integrity", "structure-audit", "structure.json");
+// Baseline lives next to the script, so the tool is portable wherever it's vendored
+// (bounded's integrity/structure-audit/ or bd-site's vendor/integrity/structure-audit/).
+const outPath = join(dirname(fileURLToPath(import.meta.url)), "structure.json");
 
 if (CHECK) {
   const current = (await exists(outPath)) ? await readFile(outPath, "utf8") : "";
