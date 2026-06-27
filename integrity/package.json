@@ -1,0 +1,23 @@
+{
+  "name": "@bounded-systems/integrity",
+  "version": "0.1.0",
+  "description": "Keyless whole-site build provenance (Sigstore · Rekor · GHCR) + independent verification.",
+  "type": "module",
+  "bin": {
+    "verify-site": "./verify-site.mjs"
+  },
+  "exports": {
+    "./gen-sitemanifest": "./scripts/gen-sitemanifest.mjs",
+    "./gen-provenance": "./scripts/gen-provenance.mjs",
+    "./verify-site": "./verify-site.mjs"
+  },
+  "files": [
+    "scripts",
+    "verify-site.mjs",
+    "action.yml",
+    "promote",
+    "README.md"
+  ],
+  "license": "MIT",
+  "//": "Standalone subtree-split target. No runtime deps (node:crypto + fetch; cosign/oras shelled out). Publish later with npm provenance."
+}
