@@ -1,0 +1,70 @@
+{
+  "404.html": {
+    "h1": "No door here.",
+    "outline": "1",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": [
+      "/",
+      "/",
+      "/#bet",
+      "/blog/",
+      "/blog/"
+    ]
+  },
+  "blog/bifurcation-and-inter-contract-enforcement.html": {
+    "h1": "In agent-built software, the open problem is the seams between the pieces",
+    "outline": "12222",
+    "mains": 1,
+    "readerOk": true,
+    "internalLinks": []
+  },
+  "blog/index.html": {
+    "h1": "Writing",
+    "outline": "122222",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": []
+  },
+  "blog/provenance-is-not-legitimacy.html": {
+    "h1": "Provenance is not legitimacy",
+    "outline": "12222",
+    "mains": 1,
+    "readerOk": true,
+    "internalLinks": []
+  },
+  "blog/trust-lives-outside-the-page.html": {
+    "h1": "Trust lives outside the page",
+    "outline": "122222",
+    "mains": 1,
+    "readerOk": true,
+    "internalLinks": [
+      "/blog/provenance-is-not-legitimacy",
+      "/rekor"
+    ]
+  },
+  "blog/verbspec-author-once-project-everywhere.html": {
+    "h1": "Author a verb once. Get the CLI, the MCP tool, the OpenAPI route, and the model ",
+    "outline": "1222",
+    "mains": 1,
+    "readerOk": true,
+    "internalLinks": []
+  },
+  "blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.html": {
+    "h1": "Why I built this: my coding agent kept doing things I didn't ask for",
+    "outline": "1222",
+    "mains": 1,
+    "readerOk": true,
+    "internalLinks": []
+  },
+  "index.html": {
+    "h1": "Your coding agent wanders. Keep it inside the job you gave it.",
+    "outline": "122222",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": [
+      "/provenance.json",
+      "/rekor"
+    ]
+  }
+}

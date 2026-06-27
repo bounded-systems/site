@@ -59,6 +59,29 @@ jobs:
           fi
           echo "✓ brand pins agree ($lock_rev)"
 
+  # Whole-page structure gate (integrity/structure-audit): reader survivability
+  # (Mozilla Readability) + outline + landmarks + internal link-graph, with a
+  # content-addressed structure.json checked for drift — sibling to the copy
+  # catalog. Deps live in the tool's own package.json (linkedom + readability),
+  # separate from the zero-dep verify-site, so they're installed only for this job.
+  structure-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: npm ci
+      - name: Build dist/ (full site, incl. blog posts)
+        run: npm run build
+      - name: Install structure-audit deps
+        run: npm ci --prefix integrity/structure-audit
+      - name: Structure is intact + structure.json is current
+        run: node integrity/structure-audit/audit.mjs dist --check
+
   # Copy hygiene (prose error + ungrounded claims) via the upstream string-audit
   # reusable gate. Pinned to an immutable commit SHA (v0.6.1) for reproducibility;
   # bump the pin to pick up upstream rule changes. build-cmd regenerates the

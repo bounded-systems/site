@@ -26,21 +26,28 @@ node integrity/structure-audit/audit.mjs <distDir> [--check]
 
 ## Deterministic
 
-Same `dist/` → byte-identical `structure.json` (sorted, hashed). Run with
-`--check` in CI to fail on drift, exactly like the copy catalog. (`structure.json`
-is a per-consumer output and is gitignored here.)
+Same `dist/` → byte-identical `structure.json` (sorted, hashed). The baseline is
+**committed** here, and CI runs `--check` to fail on drift, exactly like the copy
+catalog. Regenerate after an intentional structure change:
 
-## Status / next
+```
+npm run build && node integrity/structure-audit/audit.mjs dist   # rewrites structure.json
+```
 
-Working + tested (passes a clean bounded.tools build; catches dead links, skipped
-headings, lost-in-reader articles). Deps: `linkedom` + `@mozilla/readability`.
-Next, in priority order:
+## Wired in
+
+- **bounded.tools** — the `structure-audit` job in `.github/workflows/brand-checks.yml`
+  builds the full site, installs this tool's deps, and runs `--check`.
+- **robertdelanghe.dev** — pending: vendor this tenant hash-pinned (like
+  `string-audit`) and run `--check` in bd-site's CI. (bd-site already has a DOM via
+  `lone`/Deno; it can run the same `audit.mjs` under Node.)
+
+## Next dimensions
 
 - the **claims** check — validate `integrity/claims/` graphs (every claim graded,
   gap-disclosed, evidence-linked, secured) as the structure-audit "claims" dimension.
 - **linked-data validity** — JSON-LD parses + required props per `@type`; mf2 parses.
 - **semantics-not-styling** — generalise `check-reader` (styled-as-heading / list /
   button without the semantic tag).
-- wire into each site's CI (commit a baseline `structure.json`, run `--check`).
 
 Tenant of `integrity/`; subtree-split into its own repo with the rest later.
