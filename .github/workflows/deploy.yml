@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   id-token: write # OIDC: lets cosign mint a keyless Fulcio cert for build provenance
+  packages: write # push the built site to GHCR as a signed OCI artifact
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -29,17 +30,35 @@ jobs:
       - name: Stage dist for wrangler
         run: cp -rL result dist && chmod -R u+w dist
 
-      # Build provenance: keyless-sign the one built asset (styles.css) with
-      # Sigstore. The Actions OIDC identity authenticates to Fulcio, which mints
-      # a short-lived signing cert; the signature + its Rekor inclusion proof are
-      # written into a bundle, and gen-provenance.mjs distills a /provenance.json
-      # pointer. Both ship inside dist/, served next to the asset they describe.
-      # No stored key. This proves WHO built the bytes and that they are intact —
-      # not that the build was safe (see blog/provenance-is-not-legitimacy).
-      # Only on main (the deployed path); cosign is pinned in the deploy shell.
-      - name: Sign built asset + emit provenance (keyless Sigstore)
+      # Build provenance for the ENTIRE site, keyless (Sigstore), no stored key.
+      # The Actions OIDC identity authenticates to Fulcio, which mints a
+      # short-lived signing cert; signatures + their Rekor inclusion proofs are
+      # public. This proves WHO built the site and that it is intact — not that
+      # the build was safe (see blog/provenance-is-not-legitimacy).
+      # Only on main (the deployed path); cosign + oras are pinned in the deploy shell.
+      #
+      # (1) Whole-site manifest: sha256 of every served file, keyless-signed and
+      #     served, so the live bytes are verifiable in place (cosign verify-blob
+      #     + sha256sum -c).
+      - name: Sign the whole site (keyless Sigstore)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          nix develop .#deploy --command bash -euo pipefail -c '
+            node scripts/gen-sitemanifest.mjs
+            cosign sign-blob --yes \
+              --bundle dist/site.sha256.sigstore.json \
+              dist/site.sha256
+          '
+
+      # (2) Whole dist/ → GHCR as a pullable, versioned OCI artifact, cosign-signed
+      #     by digest. The tar excludes the provenance sidecars so the artifact
+      #     scope matches the signed manifest scope exactly. gen-provenance.mjs
+      #     then writes /provenance.json tying both attestations together.
+      - name: Publish + sign the site as an OCI artifact (GHCR)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
+          GHCR_REPO: ghcr.io/bounded-systems/bounded-tools-site
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_REF: ${{ github.ref }}
@@ -47,10 +66,20 @@ jobs:
           GITHUB_WORKFLOW_REF: ${{ github.workflow_ref }}
         run: |
           nix develop .#deploy --command bash -euo pipefail -c '
-            cosign sign-blob --yes \
-              --bundle dist/styles.css.sigstore.json \
-              dist/styles.css
-            node scripts/gen-provenance.mjs
+            short=$(printf "%s" "$GITHUB_SHA" | cut -c1-7)
+            tar --sort=name --owner=0 --group=0 --numeric-owner --mtime=@0 \
+              --exclude=./site.sha256 --exclude=./site.sha256.sigstore.json --exclude=./provenance.json \
+              -C dist -cf site.tar .
+            gzip -n -f site.tar
+            printf "%s" "$GITHUB_TOKEN" | oras login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            oras push "$GHCR_REPO:$short" \
+              --artifact-type application/vnd.bounded.site.v1+gzip \
+              site.tar.gz:application/gzip | tee oras-push.log
+            oras tag "$GHCR_REPO:$short" latest
+            digest=$(awk "/Digest:/ {print \$2}" oras-push.log)
+            printf "%s" "$GITHUB_TOKEN" | cosign login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            cosign sign --yes "$GHCR_REPO@$digest"
+            OCI_REF="$GHCR_REPO:$short" OCI_DIGEST="$digest" node scripts/gen-provenance.mjs
           '
 
       # Deploy only on main, and only if the token secret is configured —

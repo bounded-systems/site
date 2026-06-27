@@ -1,55 +1,56 @@
 #!/usr/bin/env node
-// Emit dist/provenance.json from the Sigstore bundle that deploy.yml produced
-// for the built stylesheet. Run at deploy time, after `cosign sign-blob`, with
-// the GitHub Actions OIDC env in scope.
+// Emit dist/provenance.json — the build-provenance record for the ENTIRE site.
+// Run at deploy time, after the keyless signing steps, with the GitHub Actions
+// OIDC env in scope.
 //
 //   node scripts/gen-provenance.mjs
 //
-// What this is (and is not)
-// -------------------------
-// The bundle (dist/styles.css.sigstore.json) carries the keyless signature and
-// its Rekor inclusion proof — minted by GitHub Actions' OIDC identity, no stored
-// key. This script distills it into a small, human- and machine-legible record
-// served at /provenance.json: WHO built the bytes, that they are intact, and a
-// pointer to the public transparency-log entry. It proves identity + integrity.
-// It does NOT assert the build was safe or authorized — see the blog post linked
-// in `caveat`. The signed bundle is the ground truth; this file is a convenience
-// view, and `cosign verify-blob` (the `verify` field) is how a visitor confirms
-// it independently rather than trusting our rendering.
-import { readFile, writeFile } from "node:fs/promises";
+// Two keyless attestations, both identity-bound (GitHub Actions OIDC → Fulcio)
+// and logged in the public Rekor transparency log, no stored key:
+//   1. site manifest — cosign sign-blob over dist/site.sha256 (the whole-site
+//      content address). Served, so the live bytes are verifiable in place.
+//   2. OCI artifact  — the whole dist/ pushed to GHCR (oras) and cosign-signed
+//      by digest. Pullable + versioned, addressed by content.
+// This proves WHO built the site and that it is intact — not that the build was
+// safe or authorized. The signed manifest + the Rekor entries are ground truth;
+// this file is a convenience view, and the `verify` recipes are how a visitor
+// confirms it independently rather than trusting our rendering.
+import { readFile, writeFile, access } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const dist = join(dirname(dirname(fileURLToPath(import.meta.url))), "dist");
-const ASSET = "styles.css";
-const BUNDLE = `${ASSET}.sigstore.json`;
+const exists = async (p) => { try { await access(p); return true; } catch { return false; } };
 
 const repo = process.env.GITHUB_REPOSITORY || "bounded-systems/site";
 const sha = process.env.GITHUB_SHA || "";
 const ref = process.env.GITHUB_REF || "";
 const runId = process.env.GITHUB_RUN_ID || "";
 const workflowRef = process.env.GITHUB_WORKFLOW_REF || "";
+const ociRef = process.env.OCI_REF || "";
+const ociDigest = process.env.OCI_DIGEST || "";
 
-// Content digest of the exact bytes we signed and are about to deploy.
-const bytes = await readFile(join(dist, ASSET));
-const sha256 = createHash("sha256").update(bytes).digest("hex");
+// Whole-site content address: the digest of the signed manifest.
+const manifestBytes = await readFile(join(dist, "site.sha256"));
+const manifestSha256 = createHash("sha256").update(manifestBytes).digest("hex");
+const fileCount = manifestBytes.toString("utf8").trim().split("\n").filter(Boolean).length;
 
-// Pull the Rekor log index out of the Sigstore bundle. The bundle is the
-// transparency-log receipt; this is just a convenience pointer to it. Tolerate
-// shape differences across bundle versions rather than hard-failing the deploy.
+// Rekor log index for the manifest signature, pulled from the cosign bundle.
+// Tolerate shape differences across bundle versions rather than failing deploy.
 let logIndex = null;
-try {
-  const bundle = JSON.parse(await readFile(join(dist, BUNDLE), "utf8"));
-  const entry = bundle?.verificationMaterial?.tlogEntries?.[0];
-  if (entry?.logIndex != null) logIndex = String(entry.logIndex);
-} catch {
-  console.warn(`· could not read ${BUNDLE} — provenance.json will omit the Rekor index`);
+const bundlePath = join(dist, "site.sha256.sigstore.json");
+if (await exists(bundlePath)) {
+  try {
+    const bundle = JSON.parse(await readFile(bundlePath, "utf8"));
+    const entry = bundle?.verificationMaterial?.tlogEntries?.[0];
+    if (entry?.logIndex != null) logIndex = String(entry.logIndex);
+  } catch { console.warn("· could not parse site.sha256.sigstore.json — omitting Rekor index"); }
 }
 
 const provenance = {
-  asset: ASSET,
-  sha256,
+  scope: "entire-site",
+  fileCount,
   builder: {
     repository: repo,
     commit: sha,
@@ -58,24 +59,40 @@ const provenance = {
     workflowRef,
     issuer: "https://token.actions.githubusercontent.com",
   },
-  signature: {
-    type: "sigstore-bundle",
-    bundle: BUNDLE,
+  // 1. the served, in-place-verifiable whole-site signature
+  siteManifest: {
+    file: "site.sha256",
+    sha256: manifestSha256,
+    bundle: "site.sha256.sigstore.json",
     transparencyLog: "rekor.sigstore.dev",
     rekorLogIndex: logIndex,
     rekorEntry: logIndex ? `https://search.sigstore.dev/?logIndex=${logIndex}` : null,
+    verify:
+      `cosign verify-blob \\\n` +
+      `  --bundle site.sha256.sigstore.json \\\n` +
+      `  --certificate-identity-regexp '^https://github.com/${repo}/' \\\n` +
+      `  --certificate-oidc-issuer https://token.actions.githubusercontent.com \\\n` +
+      `  site.sha256\n` +
+      `# then check the live bytes against the signed manifest:\n` +
+      `sha256sum -c site.sha256`,
   },
-  // Verify it yourself — don't trust this file, check the log.
-  verify: [
-    `cosign verify-blob`,
-    `  --bundle ${BUNDLE}`,
-    `  --certificate-identity-regexp '^https://github.com/${repo}/'`,
-    `  --certificate-oidc-issuer https://token.actions.githubusercontent.com`,
-    `  ${ASSET}`,
-  ].join(" \\\n"),
+  // 2. the pullable, versioned OCI artifact (the whole dist/)
+  ociArtifact: ociRef
+    ? {
+        registry: "ghcr.io",
+        ref: ociRef,
+        digest: ociDigest || null,
+        pull: `oras pull ${ociRef}`,
+        verify: [
+          `cosign verify ${ociDigest ? ociRef.split(":")[0] + "@" + ociDigest : ociRef}`,
+          `  --certificate-identity-regexp '^https://github.com/${repo}/'`,
+          `  --certificate-oidc-issuer https://token.actions.githubusercontent.com`,
+        ].join(" \\\n"),
+      }
+    : null,
   caveat:
-    "Provenance proves who built this asset and that it is intact — not that the build was safe or authorized. https://bounded.tools/blog/provenance-is-not-legitimacy",
+    "Provenance proves who built this site and that it is intact — not that the build was safe or authorized. https://bounded.tools/blog/provenance-is-not-legitimacy",
 };
 
 await writeFile(join(dist, "provenance.json"), JSON.stringify(provenance, null, 2) + "\n");
-console.log(`✓ provenance: ${ASSET} sha256:${sha256.slice(0, 12)}… rekor#${logIndex ?? "?"} → dist/provenance.json`);
+console.log(`✓ provenance: entire site (${fileCount} files) · manifest sha256:${manifestSha256.slice(0, 12)}… · rekor#${logIndex ?? "?"}${ociRef ? ` · oci ${ociRef}` : ""} → dist/provenance.json`);

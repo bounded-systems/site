@@ -58,12 +58,13 @@
           default = pkgs.mkShell {
             packages = [ pkgs.nodejs_22 ];
           };
-          # Deploy shell: adds wrangler (publish) + cosign (keyless build
-          # provenance). Used by .github/workflows/deploy.yml. cosign is pinned
-          # here via flake.lock for the same reason wrangler is — the deploy
-          # toolchain stays reproducible, no unpinned `nix run nixpkgs#…`.
+          # Deploy shell: wrangler (publish) + cosign (keyless signing) + oras
+          # (push the built site to GHCR as an OCI artifact). Used by
+          # .github/workflows/deploy.yml. All pinned here via flake.lock for the
+          # same reason wrangler is — the deploy toolchain stays reproducible, no
+          # unpinned `nix run nixpkgs#…`.
           deploy = pkgs.mkShell {
-            packages = [ pkgs.nodejs_22 pkgs.wrangler pkgs.cosign ];
+            packages = [ pkgs.nodejs_22 pkgs.wrangler pkgs.cosign pkgs.oras ];
           };
         });
     };

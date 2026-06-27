@@ -2,7 +2,7 @@
 
 A signed build tells you who produced an artifact and that the bytes are intact. It does not tell you the build was meant to happen. That gap is small, easy to oversell, and the entire point.
 
-This site now signs its own stylesheet at deploy time. The badge in the proof section is the result, and it is scoped on purpose: it says *produced by this identity*, not *verified safe*. Here is the ladder it sits on, and the ceiling it stops at.
+This site now signs its entire built output at deploy time — a content-addressed manifest of the whole site, plus the site itself pushed to a registry as a pullable artifact. The badge in the proof section is the result, and it is scoped on purpose: it says *produced by this identity*, not *verified safe*. Here is the ladder it sits on, and the ceiling it stops at.
 
 ## The ladder
 
@@ -10,7 +10,7 @@ Three rungs, each proving a different thing, none of them the next.
 
 **Reproducible — matches public source.** The build is a Nix derivation: `nodejs` and the brand are pinned by `flake.lock`, so `nix build .#site` yields the same `dist/` on any machine. That proves the deployed bytes are a pure function of source anyone can read. It says nothing about who ran the build.
 
-**Identity — who built it, keyless.** In CI, the GitHub Actions OIDC token authenticates to Fulcio, which mints a signing certificate bound to the repository, workflow, and commit. The token is consumed at build time and gone; the certificate lives for one build and expires. There is no key to store, leak, or rotate. What survives is the attestation: *this asset was signed by this identity*.
+**Identity — who built it, keyless.** In CI, the GitHub Actions OIDC token authenticates to Fulcio, which mints a signing certificate bound to the repository, workflow, and commit. The token is consumed at build time and gone; the certificate lives for one build and expires. There is no key to store, leak, or rotate. What survives is the attestation: *this site was signed by this identity*.
 
 ```
 agent/CI → OIDC token → Fulcio → one-build cert → cosign sign-blob → Rekor entry
@@ -30,13 +30,18 @@ So the honest reading of any green badge is narrow. It attests identity and inte
 
 ## What this site claims, graded
 
-- **Enforced** — the stylesheet is keyless-signed at deploy time, and the Rekor entry is public. `cosign verify-blob` against the published bundle confirms identity and integrity. If signing breaks, the deploy step fails.
+- **Enforced** — at deploy time a manifest of the whole site is keyless-signed, and the built site ships to GHCR as a signed OCI artifact; both Rekor entries are public. `cosign verify-blob` plus `sha256sum -c` confirms identity and integrity of the live bytes; `cosign verify` checks the pulled artifact. If signing breaks, the deploy step fails.
 - **Partial** — the badge is a claim *we* render, and your browser does nothing with it. Trust comes from you checking the log, not from the badge existing. The verify recipe is right there so you can; most visitors will not.
 - **Not claimed** — that the build is safe or authorized. There is no native way for a *page* to prove its own legitimacy to a visitor, and identity is not legitimacy. We do not pretend otherwise.
 
-## Why it stops at one asset
+## Why the whole site, and where it stops
 
-The reflex here is to grow it: sign every file, stand up an OCI registry of versioned site artifacts, add a key-management layer "for completeness." Each step feels like rigor and is mostly surface area. One signed asset carries the whole argument — reproducible, identified, logged, and honestly capped. The moment the exhibit sprouts a second signed artifact for its own sake, that is the reflex talking, not the goal.
+The first cut signed one asset — a single stylesheet — on the theory that one signed file carries the whole argument. It does, as an argument. But the honest unit of provenance for a website is the website: a visitor wants to trust the page they are reading, not one file on it. So the scope is the whole built output. Two mechanisms, each earning its place:
+
+- **A signed manifest, served.** One `sha256` line per file, keyless-signed and shipped at `/site.sha256`. A visitor verifies the signature once, then checks the live bytes with `sha256sum -c`. This is the part that covers what you are actually looking at.
+- **A signed OCI artifact, pullable.** The built site pushed to GHCR and cosign-signed by digest, so the exact bytes are fetchable and versioned, not just rebuildable. This earns its place only because there is a real need for a standalone, pull-able copy; absent that, Nix reproducibility already recovers the bytes and this would be surface area.
+
+Where it stops: there. No stored key (the OIDC identity is the key). No third signing mechanism "for completeness." The discipline is not *sign as little as possible* — it is *sign the honest unit, justify each mechanism, and stop when the next one would be ceremony.*
 
 The people who oversell the green badge are the foil. The careful claim — *provenance, not legitimacy* — is the differentiator, and it is the same instrument-versus-finding discipline this whole project runs on: state what the mechanism proves, name what it does not, and grade it against the running code.
 
