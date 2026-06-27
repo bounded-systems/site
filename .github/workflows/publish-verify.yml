@@ -1,0 +1,56 @@
+name: publish-verify
+
+# Publish @bounded-systems/verify to npm WITH Sigstore provenance — the verifier is
+# itself published carrying the kind of provenance it checks. `provenance: true` is
+# set in integrity/verify/package.json, so `npm publish` attaches a Sigstore bundle
+# minted from THIS workflow's OIDC identity (hence id-token: write).
+#
+# Triggered by a GitHub Release whose tag starts with `verify-v` (e.g. verify-v0.1.0),
+# or manually. Gated on the NPM_TOKEN secret, so it no-ops cleanly until that's set
+# (same pattern as the deploy's CLOUDFLARE_API_TOKEN gate). To publish: create the
+# @bounded-systems npm org, add an NPM_TOKEN repo secret with publish rights, then
+# cut a `verify-v*` release.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # npm provenance
+
+jobs:
+  publish:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'verify-v')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrity/verify
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          registry-url: https://registry.npmjs.org
+      - name: Gate on NPM_TOKEN
+        id: gate
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -n "$NPM_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::NPM_TOKEN not set — skipping publish. Add the secret and a @bounded-systems npm org to enable."
+          fi
+      - name: Install
+        if: steps.gate.outputs.ready == 'true'
+        run: npm ci
+      - name: Verify it runs before publishing
+        if: steps.gate.outputs.ready == 'true'
+        run: node verify.mjs https://bounded.tools
+      - name: Publish (with provenance)
+        if: steps.gate.outputs.ready == 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

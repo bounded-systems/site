@@ -6,6 +6,19 @@
   "bin": {
     "bounded-verify": "./verify.mjs"
   },
+  "files": [
+    "verify.mjs",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bounded-systems/site.git",
+    "directory": "integrity/verify"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "license": "MIT",
   "dependencies": {
     "sigstore": "^5.0.0"
