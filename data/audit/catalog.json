@@ -994,11 +994,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#934b97286f01": {
-    "$value": "Built by deploy.yml · entries in the public Rekor log · why this is provenance and not legitimacy",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#94b0ddf863dc": {
     "$value": "verify the whole site yourself",
     "$type": "body",
@@ -1181,6 +1176,11 @@
   },
   "index.html#f769333f3db6": {
     "$value": "This one makes it accountable — the authority layer, designed to run alongside the rest.",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#fb09282c20f9": {
+    "$value": "Built by deploy.yml · this build's Rekor entry & digests in the public log · why this is provenance and not legitimacy",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

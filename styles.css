@@ -283,7 +283,13 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .seams { padding: 34px; }
 .seams__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 8px; }
 .seams__title { font-size: 18px; font-weight: 600; }
-.seams__pkg { font-family: var(--bs-font-mono); font-size: 12px; color: var(--bs-color-ink-mono); }
+.seams__pkg { font-family: var(--bs-font-mono); font-size: 12px; color: var(--bs-color-ink-mono); min-width: 0; }
+/* On narrow viewports the right-aligned section tag (e.g. "Sigstore · OIDC ·
+   Rekor · GHCR") otherwise hugs the card's edge and looks clipped. Drop it to
+   its own left-aligned line instead of letting it jam the corner. */
+@media (max-width: 900px) {
+  .seams__head { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
 .seams__lead { font-size: 14.5px; line-height: 1.55; color: var(--bs-color-ink-soft); margin: 0 0 24px; max-width: 560px; }
 .seam-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
