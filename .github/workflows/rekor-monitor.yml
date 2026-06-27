@@ -1,0 +1,42 @@
+name: rekor-monitor
+
+# Sigstore's security model is explicit that monitoring is OUR job:
+# "users are responsible for monitoring the log for unauthorized certificates
+# issued to their identities … if no third parties monitor the logs, then any
+# misbehaviour might go undetected." (docs.sigstore.dev/about/security)
+#
+# We sign + log on every deploy; this watches the public Rekor log for our two
+# GitHub Actions identities and FILES AN ISSUE if a cert is minted for us in an
+# entry we didn't expect — the control that actually caught the Shai-Hulud worm.
+# It scans incrementally from the last checkpoint (kept in an Actions artifact).
+on:
+  schedule:
+    - cron: "41 * * * *" # hourly, off the :00 mark
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  monitor:
+    permissions:
+      contents: read
+      issues: write # file an issue when one of our identities appears
+      id-token: write
+    # Pinned by SHA (per the repo's "every action pinned by SHA" posture). This is
+    # a HEAD-of-main dependency-bump commit with no functional change to the monitor.
+    uses: sigstore/rekor-monitor/.github/workflows/reusable_monitoring.yml@170374c6119eabdba290f6c8be1612b570b2d0f9
+    with:
+      file_issue: true
+      artifact_retention_days: 14
+      # certSubject + issuers are regular expressions. For keyless GitHub Actions
+      # signing, the Fulcio cert SAN is the workflow ref, e.g.
+      # https://github.com/bounded-systems/site/.github/workflows/deploy.yml@refs/heads/main
+      config: |
+        monitoredValues:
+          certIdentities:
+            - certSubject: ^https://github\.com/bounded-systems/site/
+              issuers:
+                - ^https://token\.actions\.githubusercontent\.com$
+            - certSubject: ^https://github\.com/bdelanghe/site/
+              issuers:
+                - ^https://token\.actions\.githubusercontent\.com$
