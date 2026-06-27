@@ -58,6 +58,10 @@ jobs:
         run: |
           nix develop .#deploy --command bash -euo pipefail -c '
             short=$(printf "%s" "$GITHUB_SHA" | cut -c1-7)
+            # stamp the honesty section with THIS commit + date (freshness the
+            # visitor can see) BEFORE manifesting, so the stamp is covered by the
+            # signed whole-site manifest rather than an unsigned afterthought.
+            node scripts/gen-stamp.mjs
             # whole-site manifest (content only — sidecars do not exist yet), signed
             node scripts/gen-sitemanifest.mjs
             cosign sign-blob --yes --bundle dist/site.sha256.sigstore.json dist/site.sha256

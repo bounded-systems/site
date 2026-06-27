@@ -1,0 +1,37 @@
+# sigstore/policy-controller — admission enforcement for the signed site artifacts.
+#
+# The deploy already fail-closes (it cosign-verifies the OCI artifact before
+# promoting it). This is the SAME policy expressed as cluster admission control, so
+# any environment running policy-controller refuses to pull/run a site artifact
+# unless it was keyless-signed by one of OUR GitHub Actions identities, logged in
+# Rekor. Enforcement is the half that turns "we publish signatures" into "only our
+# signatures are accepted" — the companion to the live rekor-monitor (detection).
+#
+# Apply into a cluster with policy-controller installed (see README.md), then any
+# admission of these images is gated on the keyless identity + issuer + Rekor.
+apiVersion: policy.sigstore.dev/v1beta1
+kind: ClusterImagePolicy
+metadata:
+  name: bounded-sites-keyless
+spec:
+  # The GHCR artifacts both sites publish (the deployable, signed site tarballs).
+  images:
+    - glob: "ghcr.io/bounded-systems/bounded-tools-site**"
+    - glob: "ghcr.io/bdelanghe/robertdelanghe-dev**"
+  authorities:
+    - keyless:
+        # Fulcio is the only CA we accept short-lived certs from.
+        url: https://fulcio.sigstore.dev
+        identities:
+          # Each site's deploy workflow identity. subjectRegExp matches the Fulcio
+          # SAN (the workflow ref), issuer is GitHub Actions OIDC — no stored key.
+          - issuer: https://token.actions.githubusercontent.com
+            subjectRegExp: "^https://github\\.com/bounded-systems/site/\\.github/workflows/.+"
+          - issuer: https://token.actions.githubusercontent.com
+            subjectRegExp: "^https://github\\.com/bdelanghe/site/\\.github/workflows/.+"
+        # Require the signature to be in the public transparency log.
+        ctlog:
+          url: https://rekor.sigstore.dev
+  # Fail CLOSED: if policy-controller can't evaluate (e.g. Fulcio/Rekor
+  # unreachable), deny rather than admit. Matches the deploy's fail-closed posture.
+  mode: enforce

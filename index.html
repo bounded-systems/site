@@ -291,6 +291,8 @@
 <span class="fn">oras</span> pull ghcr.io/bounded-systems/bounded-tools-site:latest</pre>
       </details>
       <p class="seams__lead" style="margin-top:14px;font-size:13px;opacity:.8;">Built by <a href="https://github.com/bounded-systems/site/blob/main/.github/workflows/deploy.yml">deploy.yml</a> &middot; this build's <a href="/rekor">Rekor entry</a> &amp; <a href="/provenance.json">digests</a> &middot; why this is provenance and <a href="blog/provenance-is-not-legitimacy.html">not legitimacy</a>.</p>
+      <!-- freshness probe (JS-only enhancement; the signed stamp above is the no-JS truth) -->
+      <p id="build-freshness" class="seams__lead" style="margin-top:6px;font-size:12px;font-family:var(--bs-font-mono);opacity:.7;" hidden></p>
     </div>
 
     <div class="card seams">
@@ -375,6 +377,53 @@
       <div class="footer__meta">Source-available &middot; PolyForm Noncommercial 1.0.0 &middot; bounded.tools</div>
     </div>
   </footer>
+
+  <!-- On-load freshness probe for #build-provenance. Two honest senses of "latest":
+       (1) is YOUR view current? — compare the signed, baked-in commit to a fresh
+       /provenance.json (same origin → a cache-freshness check, not trust);
+       (2) is the DEPLOY current with source? — compare to the live tip of main via
+       the GitHub API (an authority the page doesn't run). Degrades silently on any
+       error; the signed stamp above is the no-JS truth. -->
+  <script>
+  (async () => {
+    const el = document.getElementById("build-freshness");
+    if (!el) return;
+    const short = (s) => String(s || "").slice(0, 7);
+    const ago = (iso) => {
+      const ms = Date.now() - Date.parse(iso);
+      if (!Number.isFinite(ms)) return "";
+      return ms < 36e5 ? `${Math.round(ms / 6e4)}m` : ms < 864e5 ? `${Math.round(ms / 36e5)}h` : `${Math.round(ms / 864e5)}d`;
+    };
+    const show = (text) => { el.textContent = text; el.hidden = false; };
+    try {
+      const prov = await (await fetch("/provenance.json", { cache: "no-store" })).json();
+      const deploy = prov?.builder?.commit || "";
+      const repo = prov?.builder?.repository || "bounded-systems/site";
+      const baked = document.querySelector("[data-build-commit]")?.dataset.buildCommit || "";
+
+      // (1) your view vs the live deploy
+      if (baked && deploy && baked !== deploy) {
+        show(`↻ a newer build is live (${short(deploy)}) — reload to update your view`);
+        return;
+      }
+
+      const bits = [`commit ${short(deploy)}`];
+      const age = prov?.builtAt ? ago(prov.builtAt) : "";
+      if (age) bits.push(`built ${age} ago`);
+
+      // (2) the deploy vs the source tip (GitHub authority; optional, rate-limited)
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo}/commits/main`, { headers: { Accept: "application/vnd.github.sha" } });
+        if (res.ok) {
+          const head = (await res.text()).trim();
+          if (/^[0-9a-f]{40}$/.test(head)) bits.push(head === deploy ? "matches main" : `main is at ${short(head)}`);
+        }
+      } catch (e) { /* offline or rate-limited — freshness is a nicety, skip */ }
+
+      show(`✓ this build · ${bits.join(" · ")}`);
+    } catch (e) { /* no provenance reachable — leave the signed stamp as the source of truth */ }
+  })();
+  </script>
 
 </body>
 </html>
