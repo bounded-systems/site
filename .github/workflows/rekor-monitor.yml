@@ -22,11 +22,9 @@ jobs:
       contents: read
       issues: write # file an issue when one of our identities appears
       id-token: write
-    # FIXME(pin): sigstore/rekor-monitor is outside this session's repo scope, so
-    # the exact release SHA couldn't be verified here. Relock @main to a pinned
-    # release commit SHA (e.g. `@<sha> # vX.Y.Z`) before merging, to match the
-    # repo's "every action pinned by SHA" posture.
-    uses: sigstore/rekor-monitor/.github/workflows/reusable_monitoring.yml@main
+    # Pinned by SHA (per the repo's "every action pinned by SHA" posture). This is
+    # a HEAD-of-main dependency-bump commit with no functional change to the monitor.
+    uses: sigstore/rekor-monitor/.github/workflows/reusable_monitoring.yml@170374c6119eabdba290f6c8be1612b570b2d0f9
     with:
       file_issue: true
       artifact_retention_days: 14
