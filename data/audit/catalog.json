@@ -259,11 +259,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
-  "blog/provenance-is-not-legitimacy.md#21ebf662147e": {
-    "$value": "The badge in the proof section is the result, and it is scoped on purpose: it says produced by this identity, never verified safe",
-    "$type": "body",
-    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
-  },
   "blog/provenance-is-not-legitimacy.md#2f2b4a3303c0": {
     "$value": "It mints an OIDC token at runtime, submits it to Fulcio, and the provenance it produces passes every standard check: the badge is green, the certificate subject is a real CI identity, the Rekor entry is genuine — and the package still steals credentials",
     "$type": "body",
@@ -344,11 +339,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
-  "blog/provenance-is-not-legitimacy.md#7667d79c828c": {
-    "$value": "This site now signs its own stylesheet on every deploy",
-    "$type": "body",
-    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
-  },
   "blog/provenance-is-not-legitimacy.md#7f48b7dcadb2": {
     "$value": "The verify recipe is right there so you can; most visitors will not.\n- Not claimed — that the build is safe or authorized",
     "$type": "body",
@@ -356,6 +346,11 @@
   },
   "blog/provenance-is-not-legitimacy.md#800c24a65280": {
     "$value": "Provenance is not legitimacy",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#892dc73b005a": {
+    "$value": "The badge in the proof section is the result, and it is scoped on purpose: it says produced by this identity, not verified safe",
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
@@ -371,6 +366,11 @@
   },
   "blog/provenance-is-not-legitimacy.md#a335009f6444": {
     "$value": "What this site claims, graded",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#ad89fbf1fee5": {
+    "$value": "A signed version becomes one entry, keyed to the artifact digest, queryable by anyone",
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
@@ -399,8 +399,13 @@
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
-  "blog/provenance-is-not-legitimacy.md#c40d79362645": {
-    "$value": "Every signed version is one entry, keyed to the artifact digest, queryable by anyone",
+  "blog/provenance-is-not-legitimacy.md#c45b2cc20765": {
+    "$value": "This site now signs its own stylesheet at deploy time",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#cdde77705cee": {
+    "$value": "- Enforced — the stylesheet is keyless-signed at deploy time, and the Rekor entry is public. cosign verify-blob against the published bundle confirms identity and integrity",
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
@@ -431,11 +436,6 @@
   },
   "blog/provenance-is-not-legitimacy.md#ec54f8b94ab5": {
     "$value": "Registry — the immutable, monitorable record",
-    "$type": "body",
-    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
-  },
-  "blog/provenance-is-not-legitimacy.md#eea5e557396c": {
-    "$value": "- Enforced — the stylesheet is keyless-signed on every deploy, and the Rekor entry is public. cosign verify-blob against the published bundle confirms identity and integrity",
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
@@ -844,6 +844,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#4f933bff03cf": {
+    "$value": "The stylesheet you are reading is keyless-signed at deploy time",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#510a2cf91c3d": {
     "$value": "If your team is chewing on the same problem, I'd like to talk",
     "$type": "body",
@@ -1111,11 +1116,6 @@
   },
   "index.html#ea922238c3b6": {
     "$value": "Other agent harnesses make the work cheaper or the output leaner",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#f688af9c78c1": {
-    "$value": "The stylesheet you are reading is keyless-signed on every deploy",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

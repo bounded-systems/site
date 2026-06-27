@@ -272,7 +272,7 @@
         <span class="seams__title">This page proves its own build</span>
         <span class="seams__pkg">Sigstore &middot; OIDC &middot; Rekor</span>
       </div>
-      <p class="seams__lead">The stylesheet you are reading is keyless-signed on every deploy. GitHub Actions' OIDC identity authenticates to Fulcio, which mints a one-build signing certificate that then expires; the signature and its public transparency-log entry ship next to the asset. No stored key. <strong>This proves who built the bytes and that they are intact — it does not prove the build was safe.</strong></p>
+      <p class="seams__lead">The stylesheet you are reading is keyless-signed at deploy time. GitHub Actions' OIDC identity authenticates to Fulcio, which mints a one-build signing certificate that then expires; the signature and its public transparency-log entry ship next to the asset. No stored key. <strong>This proves who built the bytes and that they are intact — it does not prove the build was safe.</strong></p>
       <details class="prov-details">
         <summary style="cursor:pointer;font-family:var(--bs-font-mono);font-size:13px;margin-bottom:10px;">&#9656; verify the bytes you are reading</summary>
         <pre class="code"><span class="c"># the live provenance record for this deploy</span>
