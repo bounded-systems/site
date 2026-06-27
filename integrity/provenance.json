@@ -1,0 +1,12 @@
+{
+  "name": "@bounded-systems/integrity",
+  "version": "0.1.0",
+  "note": "sha256 hash-pin of the canonical files; a vendoring consumer (e.g. bdelanghe/site vendor/integrity/) verifies against this.",
+  "files": {
+    "README.md": "sha256:995c3eca9210ad8495443629d666db4a20b611198d7453b22a5165a77d5dfe24",
+    "package.json": "sha256:1fad0b158f016626931d13b29d45f97d96c6d6cc97e025826cd69c59753c451e",
+    "scripts/gen-provenance.mjs": "sha256:6044b6574c8a44ddd284df50a6f84275f6e2084c227404aed09a879d7ceb6a63",
+    "scripts/gen-sitemanifest.mjs": "sha256:72ca59ff41699854bf9d7cee484ab46da31ce8efb456e0fbabbf6b2a934e99e7",
+    "verify-site.mjs": "sha256:4196ff1ddd194bb649e8b043d736ec75d5cc8689f31bf4e9a88eb2461a8cda24"
+  }
+}
