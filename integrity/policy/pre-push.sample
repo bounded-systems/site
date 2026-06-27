@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# integrity · policy · pre-push (sample) — local-dev enforcement.
+#
+# Don't push if a locally-built, signed dist/ won't verify against its own
+# provenance. Provenance is normally produced at DEPLOY time (the OIDC identity only
+# exists in CI), so this soft-skips when there's no signed dist — it's a guard
+# against pushing a build you've already signed locally that no longer verifies, not
+# a substitute for the deploy's fail-closed gate or the cluster admission policy.
+#
+# Install:
+#   cp integrity/policy/pre-push.sample .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+set -euo pipefail
+
+root="$(git rev-parse --show-toplevel)"
+
+if [ -f "$root/dist/provenance.json" ] && [ -f "$root/dist/site.sha256" ]; then
+  echo "pre-push: verifying local signed build against its provenance…"
+  node "$root/integrity/verify-site.mjs" "$root/dist"
+else
+  echo "pre-push: no signed dist/ (provenance is produced at deploy time) — skipping verify."
+fi
