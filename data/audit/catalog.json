@@ -214,6 +214,301 @@
     "$type": "body",
     "$description": "extracted prose — blog/bifurcation-and-inter-contract-enforcement.md"
   },
+  "blog/provenance-is-not-legitimacy.md#01554029c502": {
+    "$value": "- Enforced — at deploy time a manifest of the whole site is keyless-signed, and the built site ships to GHCR as a signed OCI artifact; both Rekor entries are public. cosign verify-blob plus sha256sum -c confirms identity and integrity of the live bytes; cosign verify checks the pulled artifact",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#089dd3c0cdf2": {
+    "$value": "The token is consumed at build time and gone; the certificate lives for one build and expires",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#0a564b6b5a08": {
+    "$value": "It never proved the build should have happened",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#0b3be0ad5974": {
+    "$value": "The badge links the entry; /provenance.json carries the pointer",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#0b4bd11b9638": {
+    "$value": "We do not pretend otherwise",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#137f51f02211": {
+    "$value": "It does, as an argument",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#139bc915cff8": {
+    "$value": "Provenance proved the package was built in a particular CI environment",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#1486bb9ce97e": {
+    "$value": "The signing pipeline lives in deploy.yml; the per-deploy record is at /provenance.json",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#17a70405759f": {
+    "$value": "The people who oversell the green badge are the foil",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#1debb414a687": {
+    "$value": "The signature and its inclusion proof land in Rekor, the public append-only transparency log",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#2f2b4a3303c0": {
+    "$value": "It mints an OIDC token at runtime, submits it to Fulcio, and the provenance it produces passes every standard check: the badge is green, the certificate subject is a real CI identity, the Rekor entry is genuine — and the package still steals credentials",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#32d1be870c4d": {
+    "$value": "The first cut signed one asset — a single stylesheet — on the theory that one signed file carries the whole argument",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#32fb82285b81": {
+    "$value": "That gap is small, easy to oversell, and the entire point",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#36f79e2ca480": {
+    "$value": "A log entry is not trust by itself, either: the strength of a transparency log is not that it blocks bad entries, but that it makes them monitorable",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#381f1d05a1d6": {
+    "$value": "A signed build tells you who produced an artifact and that the bytes are intact",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#4012cae9be88": {
+    "$value": "The security shows up only when someone watches the log for their own identity appearing when they did not publish — which is, notably, one of the few controls that actually caught the worm",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#4d1b5b4c3ffc": {
+    "$value": "Trust comes from you checking the log, not from the badge existing",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#4d5cf3d099d2": {
+    "$value": "Reproducible — matches public source",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#51cb8e00a3aa": {
+    "$value": "There is no native way for a page to prove its own legitimacy to a visitor, and identity is not legitimacy",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#570e88f05ce0": {
+    "$value": "- A signed manifest, served",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#58519d9781d1": {
+    "$value": "We do not build a registry — Rekor is the per-version registry, and we push to it directly with cosign sign-blob",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#588433ab1164": {
+    "$value": "No stored key (the OIDC identity is the key)",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#629f47e8b258": {
+    "$value": "Here is the ladder it sits on, and the ceiling it stops at",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#69fee581a9f3": {
+    "$value": "Both are graded against the code that backs them.",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#6be7a8351ff3": {
+    "$value": "That proves the deployed bytes are a pure function of source anyone can read",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#6db064d5b369": {
+    "$value": "One sha256 line per file, keyless-signed and shipped at /site.sha256",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#6e2f425f8550": {
+    "$value": "It does not tell you the build was meant to happen",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#6e553c18b7db": {
+    "$value": "But the honest unit of provenance for a website is the website: a visitor wants to trust the page they are reading, not one file on it",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#6f197d015adc": {
+    "$value": "If signing breaks, the deploy step fails.\n- Partial — the badge is a claim we render, and your browser does nothing with it",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#700d42c9014a": {
+    "$value": "In CI, the GitHub Actions OIDC token authenticates to Fulcio, which mints a signing certificate bound to the repository, workflow, and commit",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#7156eb649e8e": {
+    "$value": "Two mechanisms, each earning its place:",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#7a21f58101e5": {
+    "$value": "This site now signs its entire built output at deploy time — a content-addressed manifest of the whole site, plus the site itself pushed to a registry as a pullable artifact",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#7f48b7dcadb2": {
+    "$value": "The verify recipe is right there so you can; most visitors will not.\n- Not claimed — that the build is safe or authorized",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#8009705cc1d4": {
+    "$value": "So the scope is the whole built output",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#800c24a65280": {
+    "$value": "Provenance is not legitimacy",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#8467274312bb": {
+    "$value": "A visitor verifies the signature once, then checks the live bytes with sha256sum -c",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#892dc73b005a": {
+    "$value": "The badge in the proof section is the result, and it is scoped on purpose: it says produced by this identity, not verified safe",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#9205ccbd9652": {
+    "$value": "What survives is the attestation: this site was signed by this identity",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#9611385e4d9a": {
+    "$value": "The build is a Nix derivation: nodejs and the brand are pinned by flake.lock, so nix build.#site yields the same dist/ on any machine",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#9cc78a622b26": {
+    "$value": "It says nothing about who ran the build",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#a335009f6444": {
+    "$value": "What this site claims, graded",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#ad89fbf1fee5": {
+    "$value": "A signed version becomes one entry, keyed to the artifact digest, queryable by anyone",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#b84808026f25": {
+    "$value": "Three rungs, each proving a different thing, none of them the next",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#bea0041cff49": {
+    "$value": "Why the whole site, and where it stops",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#c091f6cf37df": {
+    "$value": "That is the whole pipeline: reproducible proves matches public source; OIDC plus Sigstore proves who built it; Rekor is the immutable per-version record of those proofs",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#c0bcb969978c": {
+    "$value": "Where it stops: there",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#c156503ee909": {
+    "$value": "Identity — who built it, keyless",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#c1a0b3fdb4ac": {
+    "$value": "There is no key to store, leak, or rotate",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#ce46c13b749d": {
+    "$value": "None of it proves the build was authorized",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#d18511889db2": {
+    "$value": "A recent supply-chain worm made this concrete",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#d1b67a25280a": {
+    "$value": "No third signing mechanism \"for completeness.\" The discipline is not sign as little as possible — it is sign the honest unit, justify each mechanism, and stop when the next one would be ceremony",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#d815daf6c400": {
+    "$value": "It attests identity and integrity",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#eb45e8bd9032": {
+    "$value": "So the honest reading of any green badge is narrow",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#ec54f8b94ab5": {
+    "$value": "Registry — the immutable, monitorable record",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#f0e2240a892f": {
+    "$value": "The built site pushed to GHCR and cosign-signed by digest, so the exact bytes are fetchable and versioned, not just rebuildable",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#f629b495b3fd": {
+    "$value": "The careful claim — provenance, not legitimacy — is the differentiator, and it is the same instrument-versus-finding discipline this whole project runs on: state what the mechanism proves, name what it does not, and grade it against the running code",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#f6f1e2cece5c": {
+    "$value": "This is the part that covers what you are actually looking at.\n- A signed OCI artifact, pullable",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#ff4477997792": {
+    "$value": "It does not attest intent",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#ffab07a26240": {
+    "$value": "This earns its place only because there is a real need for a standalone, pull-able copy; absent that, Nix reproducibility already recovers the bytes and this would be surface area",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
   "blog/verbspec-author-once-project-everywhere.md#0a2291c1ef5f": {
     "$value": "The surfaces aren't generated-then-edited; they're computed from the spec on\ndemand",
     "$type": "body",
@@ -494,6 +789,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#1cd9f81d677a": {
+    "$value": "GitHub Actions' OIDC identity authenticates to Fulcio, which mints a one-build certificate that then expires; both signatures land in the public Rekor log",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#21a5159937a6": {
     "$value": "The model, made physical \n Bounded Systems leans on a single mechanism",
     "$type": "body",
@@ -576,6 +876,11 @@
   },
   "index.html#4dafbabd45e3": {
     "$value": "Start here \n guest-room — the model you can run",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#4f37b27be4c1": {
+    "$value": "This whole site proves its own build \n Sigstore · OIDC · Rekor · GHCR",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -689,6 +994,16 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#934b97286f01": {
+    "$value": "Built by deploy.yml · entries in the public Rekor log · why this is provenance and not legitimacy",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#94b0ddf863dc": {
+    "$value": "verify the whole site yourself",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#94fa33afaf95": {
     "$value": "Hand an AI coding agent a real task and it reaches past it — touching files you didn't mean to expose, running a command you didn't intend",
     "$type": "body",
@@ -769,6 +1084,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#b86533ddd41e": {
+    "$value": "This proves who built the site and that it is intact — it does not prove the build was safe.",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#bf743190ee0f": {
     "$value": "Stated as direction so it can't masquerade as done",
     "$type": "body",
@@ -836,6 +1156,11 @@
   },
   "index.html#e4b43b57e4da": {
     "$value": "Partial \n The agent never holds the credential — a broker daemon does. — claude-box runs credential-free; keeperd / netd hold the secret and hand back only the result",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#e514038b72b5": {
+    "$value": "At deploy time a manifest covering the whole site is keyless-signed, and the built site is pushed to GHCR as a signed, pullable OCI artifact",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
