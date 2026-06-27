@@ -58,9 +58,12 @@
           default = pkgs.mkShell {
             packages = [ pkgs.nodejs_22 ];
           };
-          # Deploy shell: adds wrangler. Used by .github/workflows/deploy.yml.
+          # Deploy shell: adds wrangler (publish) + cosign (keyless build
+          # provenance). Used by .github/workflows/deploy.yml. cosign is pinned
+          # here via flake.lock for the same reason wrangler is — the deploy
+          # toolchain stays reproducible, no unpinned `nix run nixpkgs#…`.
           deploy = pkgs.mkShell {
-            packages = [ pkgs.nodejs_22 pkgs.wrangler ];
+            packages = [ pkgs.nodejs_22 pkgs.wrangler pkgs.cosign ];
           };
         });
     };
