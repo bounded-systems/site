@@ -1,6 +1,6 @@
 # Trust lives outside the page
 
-A badge a page renders is a claim the page controls. A verifier a page ships is *also* a claim the page controls — if the bytes can lie, the script that checks them can lie too. So the honest question is never "how do I verify inside the page," but "what can the page *not* forge."
+A badge a page renders is a claim the page controls. A verifier a page ships is *also* a claim the page controls — if the bytes can lie, the script that checks them can lie too. So the honest question is not "how do I verify inside the page," but "what can the page *not* forge."
 
 This is the sequel to [provenance is not legitimacy](/blog/provenance-is-not-legitimacy). That post drew the line between *who built it* and *was the build authorized*. This one is about a smaller, sharper trap — and where it bottoms out.
 
@@ -8,9 +8,9 @@ This is the sequel to [provenance is not legitimacy](/blog/provenance-is-not-leg
 
 Say you add a "verify this site" button: JavaScript that fetches the signed manifest, re-hashes the page, and shows a green check. Useful as a demo. Useless as trust. A tampered page swaps the bytes *and* the verifier, and the check goes green anyway. The page is grading its own homework.
 
-The reflex fix is Subresource Integrity plus a provenance-backed CDN: load the verifier from a third party, pin it by hash, and now the page can't swap *the validator*. That genuinely helps — it shrinks the trusted surface from "arbitrary inline script" to "this one pinned, auditable artifact." But it doesn't escape the trap, because the page still chooses which script to load and which hash to pin. A malicious page pins its own. SRI guarantees the bytes match the hash *you* declared; it doesn't make the page trustworthy for declaring it.
+The reflex fix is Subresource Integrity plus a provenance-backed CDN: load the verifier from a third party, pin it by hash, and now the page can't swap *the validator*. That genuinely helps — it shrinks the trusted surface from "arbitrary inline script" to "this one pinned, auditable artifact." But it doesn't escape the trap, because the page still chooses which script to load and which hash to pin. A malicious page pins its own. SRI only checks the bytes match the hash *you* declared; it doesn't make the page trustworthy for declaring it.
 
-It's turtles all the way down: an in-page verifier rests on another thing the page controls.
+It's turtles: the validator only runs because the page chose to load it — and chose its hash.
 
 ## Where it bottoms out
 

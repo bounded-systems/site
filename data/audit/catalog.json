@@ -554,11 +554,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
   },
-  "blog/trust-lives-outside-the-page.md#2fe13749e021": {
-    "$value": "It's turtles all the way down: an in-page verifier rests on another thing the page controls",
-    "$type": "body",
-    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
-  },
   "blog/trust-lives-outside-the-page.md#348e50f4da61": {
     "$value": "Trust is something the visitor brings from outside",
     "$type": "body",
@@ -604,6 +599,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
   },
+  "blog/trust-lives-outside-the-page.md#8d300a6b22a7": {
+    "$value": "It's turtles: the validator only runs because the page chose to load it — and chose its hash",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
   "blog/trust-lives-outside-the-page.md#944cad341755": {
     "$value": "The page is grading its own homework",
     "$type": "body",
@@ -629,6 +629,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
   },
+  "blog/trust-lives-outside-the-page.md#b081013da31c": {
+    "$value": "So the honest question is not \"how do I verify inside the page,\" but \"what can the page not forge.\"",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
   "blog/trust-lives-outside-the-page.md#b2456fafd976": {
     "$value": "A tampered page swaps the bytes and the verifier, and the check goes green anyway",
     "$type": "body",
@@ -641,16 +646,6 @@
   },
   "blog/trust-lives-outside-the-page.md#b671a240dcec": {
     "$value": "A scheduled job follows the public log for our build identities and opens an issue the moment a certificate is minted for us that we didn't trigger",
-    "$type": "body",
-    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
-  },
-  "blog/trust-lives-outside-the-page.md#b677c5c4c443": {
-    "$value": "So the honest question is never \"how do I verify inside the page,\" but \"what can the page not forge.\"",
-    "$type": "body",
-    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
-  },
-  "blog/trust-lives-outside-the-page.md#b7bbc92e1552": {
-    "$value": "SRI guarantees the bytes match the hash you declared; it doesn't make the page trustworthy for declaring it",
     "$type": "body",
     "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
   },
@@ -701,6 +696,11 @@
   },
   "blog/trust-lives-outside-the-page.md#d8373b2e9286": {
     "$value": "A log nobody watches proves nothing",
+    "$type": "body",
+    "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
+  },
+  "blog/trust-lives-outside-the-page.md#d9ba8773e3ab": {
+    "$value": "SRI only checks the bytes match the hash you declared; it doesn't make the page trustworthy for declaring it",
     "$type": "body",
     "$description": "extracted prose — blog/trust-lives-outside-the-page.md"
   },
