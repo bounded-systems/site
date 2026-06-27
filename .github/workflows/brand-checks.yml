@@ -37,6 +37,14 @@ jobs:
         run: node brand/tools/coverage.mjs --colors --check dist
       - name: Accessibility (WCAG AA contrast + headings)
         run: node brand/tools/a11y.mjs --check dist
+      - name: Claims graphs are well-formed (graded, gap-disclosed, evidence-linked, secured)
+        # Zero-dep gate: every integrity/claims/ graph must be a valid nanopublication —
+        # each claim graded, a non-enforced claim discloses its gap, evidence is an
+        # absolute URL, and the graph names how it's secured. Structure, not truth.
+        run: |
+          for f in integrity/claims/*.jsonld; do
+            node integrity/claims/validate-claims.mjs "$f"
+          done
 
   # The brand is pinned twice: in flake.lock (the hermetic Nix build that deploy.yml
   # ships) and as the git submodule (npm run dev + the checks above). They must point
