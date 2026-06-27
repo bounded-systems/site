@@ -1,5 +1,12 @@
 name: deploy
 
+# Two-phase, promote-the-artifact pipeline:
+#   build   — hermetic nix build → keyless-sign the whole site (Sigstore) →
+#             publish a SIGNED, fully-deployable OCI artifact to GHCR.
+#   deploy  — pull THAT artifact, cosign-verify it, and wrangler-deploy exactly
+#             those bytes. So prod serves the signed artifact by construction,
+#             not a re-staged copy. Fail-closed: a signing/verify failure blocks
+#             the deploy, and the edge check asserts the provenance reached prod.
 on:
   push:
     branches: [main]
@@ -16,45 +23,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      oci: ${{ steps.publish.outputs.oci }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - uses: DeterminateSystems/nix-installer-action@90bb610b90bf290cad97484ba341453bd1cbefea # v19
 
-      # Hermetic build: nodejs + brand are pinned by flake.lock. Runs the brand
-      # token-drift check, then assembles dist/. Same artifact on every machine.
+      # Hermetic build: nodejs + brand are pinned by flake.lock. Same bytes on
+      # every machine; runs the brand token-drift check, then assembles dist/.
       - name: Build (nix)
         run: nix build .#site -L
 
-      - name: Stage dist for wrangler
+      - name: Stage dist
         run: cp -rL result dist && chmod -R u+w dist
 
-      # Build provenance for the ENTIRE site, keyless (Sigstore), no stored key.
-      # The Actions OIDC identity authenticates to Fulcio, which mints a
-      # short-lived signing cert; signatures + their Rekor inclusion proofs are
-      # public. This proves WHO built the site and that it is intact — not that
-      # the build was safe (see blog/provenance-is-not-legitimacy).
-      # Only on main (the deployed path); cosign + oras are pinned in the deploy shell.
-      #
-      # (1) Whole-site manifest: sha256 of every served file, keyless-signed and
-      #     served, so the live bytes are verifiable in place (cosign verify-blob
-      #     + sha256sum -c).
-      - name: Sign the whole site (keyless Sigstore)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          nix develop .#deploy --command bash -euo pipefail -c '
-            node scripts/gen-sitemanifest.mjs
-            cosign sign-blob --yes \
-              --bundle dist/site.sha256.sigstore.json \
-              dist/site.sha256
-          '
-
-      # (2) Whole dist/ → GHCR as a pullable, versioned OCI artifact, cosign-signed
-      #     by digest. The tar excludes the provenance sidecars so the artifact
-      #     scope matches the signed manifest scope exactly. gen-provenance.mjs
-      #     then writes /provenance.json tying both attestations together.
-      - name: Publish + sign the site as an OCI artifact (GHCR)
+      # main only: content-address the whole site, keyless-sign that manifest
+      # (no stored key — the Actions OIDC identity mints a one-build Fulcio cert,
+      # logged in Rekor), write /provenance.json, then publish the WHOLE dist/
+      # (site + provenance sidecars) to GHCR as one signed, deployable OCI
+      # artifact. The deploy job promotes exactly this artifact.
+      - name: Sign + publish the signed OCI artifact (keyless Sigstore → GHCR)
+        id: publish
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GHCR_REPO: ghcr.io/bounded-systems/bounded-tools-site
@@ -67,9 +58,13 @@ jobs:
         run: |
           nix develop .#deploy --command bash -euo pipefail -c '
             short=$(printf "%s" "$GITHUB_SHA" | cut -c1-7)
-            tar --sort=name --owner=0 --group=0 --numeric-owner --mtime=@0 \
-              --exclude=./site.sha256 --exclude=./site.sha256.sigstore.json --exclude=./provenance.json \
-              -C dist -cf site.tar .
+            # whole-site manifest (content only — sidecars do not exist yet), signed
+            node scripts/gen-sitemanifest.mjs
+            cosign sign-blob --yes --bundle dist/site.sha256.sigstore.json dist/site.sha256
+            # /provenance.json (Rekor index from the bundle; OCI digest resolved at verify)
+            OCI_REF="$GHCR_REPO:$short" node scripts/gen-provenance.mjs
+            # pack the WHOLE dist/ (site + provenance sidecars) → one deployable artifact
+            tar --sort=name --owner=0 --group=0 --numeric-owner --mtime=@0 -C dist -cf site.tar .
             gzip -n -f site.tar
             printf "%s" "$GITHUB_TOKEN" | oras login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
             oras push "$GHCR_REPO:$short" \
@@ -79,14 +74,22 @@ jobs:
             digest=$(awk "/Digest:/ {print \$2}" oras-push.log)
             printf "%s" "$GITHUB_TOKEN" | cosign login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
             cosign sign --yes "$GHCR_REPO@$digest"
-            OCI_REF="$GHCR_REPO:$short" OCI_DIGEST="$digest" node scripts/gen-provenance.mjs
+            echo "oci=$GHCR_REPO@$digest" >> "$GITHUB_OUTPUT"
           '
 
-      # Deploy only on main, and only if the token secret is configured —
-      # so the build stays green before the secret is added.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Promote only a real, signed artifact, on main.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build.outputs.oci != ''
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: DeterminateSystems/nix-installer-action@90bb610b90bf290cad97484ba341453bd1cbefea # v19
+
+      # Deploy only if the token secret is configured — so the pipeline stays
+      # green before the secret is added.
       - name: Check for deploy secret
         id: gate
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
@@ -94,8 +97,28 @@ jobs:
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::CLOUDFLARE_API_TOKEN not set — built dist/ but skipped deploy."
+            echo "::warning::CLOUDFLARE_API_TOKEN not set — signed artifact published, skipped deploy."
           fi
+
+      # Promote: pull the SIGNED artifact, verify its keyless signature against
+      # this repo's identity, and unpack exactly those bytes into dist/. If verify
+      # fails, the job fails and nothing ships.
+      - name: Pull + verify the signed OCI artifact
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          OCI: ${{ needs.build.outputs.oci }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nix develop .#deploy --command bash -euo pipefail -c '
+            printf "%s" "$GITHUB_TOKEN" | cosign login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            cosign verify "$OCI" \
+              --certificate-identity-regexp "^https://github.com/bounded-systems/site/" \
+              --certificate-oidc-issuer https://token.actions.githubusercontent.com > /dev/null
+            printf "%s" "$GITHUB_TOKEN" | oras login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            rm -rf oci-out dist && mkdir -p oci-out dist
+            oras pull "$OCI" -o oci-out
+            tar -xzf oci-out/site.tar.gz -C dist
+          '
 
       - name: Deploy to Cloudflare Workers
         if: steps.gate.outputs.ready == 'true'
@@ -103,26 +126,24 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
-      # Prove the edge actually serves the bytes we just built. Workers Static
-      # Assets revalidate on a content-hash ETag, so a successful deploy should
-      # self-invalidate (no purge needed). This asserts that rather than trusting
-      # it — failing loudly if the edge serves something stale.
-      - name: Verify edge serves the deployed asset
+      # Assert the provenance reached prod: the edge must serve the freshly-signed
+      # whole-site manifest (byte-identical) + provenance.json. Fails loudly if
+      # prod is stale or missing them, so a deploy that drops the provenance can't
+      # pass silently.
+      - name: Verify prod serves the signed provenance
         if: steps.gate.outputs.ready == 'true'
         run: |
-          if [ ! -f dist/styles.css ]; then
-            echo "::error::dist/styles.css not found — build layout changed?"; exit 1
-          fi
-          expected=$(sha256sum dist/styles.css | cut -d' ' -f1)
-          echo "expected sha256=$expected"
+          expected=$(sha256sum dist/site.sha256 | cut -d' ' -f1)
+          echo "expected site.sha256=$expected"
           for i in 1 2 3 4 5; do
-            live=$(curl -fsS https://bounded.tools/styles.css | sha256sum | cut -d' ' -f1) || live="(fetch failed)"
-            if [ "$live" = "$expected" ]; then
-              echo "edge serves freshly-deployed styles.css ✓"
+            live=$(curl -fsS https://bounded.tools/site.sha256 | sha256sum | cut -d' ' -f1) || live="(fetch failed)"
+            code=$(curl -fsS -o /dev/null -w '%{http_code}' https://bounded.tools/provenance.json) || code="000"
+            if [ "$live" = "$expected" ] && [ "$code" = "200" ]; then
+              echo "prod serves the freshly-signed whole-site manifest + provenance.json ✓"
               exit 0
             fi
-            echo "edge not fresh yet (attempt $i/5): live=$live"
+            echo "edge not fresh yet (attempt $i/5): manifest=$live provenance=$code"
             sleep 10
           done
-          echo "::error::Edge still serving stale styles.css ~50s after deploy (expected $expected)"
+          echo "::error::prod is not serving the freshly-signed provenance (manifest or provenance.json)"
           exit 1
