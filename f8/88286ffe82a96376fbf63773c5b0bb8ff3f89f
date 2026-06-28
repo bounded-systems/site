@@ -1,0 +1,21 @@
+index.html
+  s_b5919f7afb1662::t_ccd51ac8b76860 277
+data/audit/catalog.json
+  s_b5919f7afb1662::t_aa2095cc0c7542 1037-1041,1052-1056,1217-1221
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "f888286ffe82a96376fbf63773c5b0bb8ff3f89f",
+  "prompts": {},
+  "sessions": {
+    "s_b5919f7afb1662": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cb4544af-9213-455e-a2ec-fde13b59b4f0",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
