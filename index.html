@@ -290,6 +290,12 @@
 <span class="fn">cosign</span> verify ghcr.io/bounded-systems/bounded-tools-site:latest --certificate-oidc-issuer <span class="s">https://token.actions.githubusercontent.com</span> --certificate-identity-regexp <span class="s">'^https://github.com/bounded-systems/site/'</span>
 <span class="fn">oras</span> pull ghcr.io/bounded-systems/bounded-tools-site:latest</pre>
       </details>
+      <details class="prov-details">
+        <summary style="cursor:pointer;font-family:var(--bs-font-mono);font-size:13px;margin-bottom:10px;">&#9656; run a self-check in your browser</summary>
+        <p class="seams__lead" style="font-size:13px;opacity:.85;margin:0 0 10px;">A demo, not proof. This script ships <em>with</em> the page, so a tampered page could ship a tampered checker and still go green — re-hashing only shows the page is self-consistent. The one step that reaches outside the page is the public-log check. Real verification is the <a href="#build-provenance">commands above</a>, <code>jsr:@bounded-systems/verify</code>, or the <a href="/rekor">Rekor entry</a> you open yourself — see <a href="blog/trust-lives-outside-the-page.html">trust lives outside the page</a>.</p>
+        <button id="selfcheck-run" type="button" style="font-family:var(--bs-font-mono);font-size:13px;padding:7px 12px;border:1px solid currentColor;border-radius:6px;background:transparent;color:inherit;cursor:pointer;">Re-hash this site &amp; check the public log</button>
+        <ol id="selfcheck-out" aria-live="polite" style="font-family:var(--bs-font-mono);font-size:12.5px;line-height:1.6;margin:12px 0 0;padding-left:1.2em;"></ol>
+      </details>
       <p class="seams__lead" style="margin-top:14px;font-size:13px;opacity:.8;">Built by <a href="https://github.com/bounded-systems/site/blob/main/.github/workflows/deploy.yml">deploy.yml</a> &middot; this build's <a href="/rekor">Rekor entry</a> &amp; <a href="/provenance.json">digests</a> &middot; why this is provenance and <a href="blog/provenance-is-not-legitimacy.html">not legitimacy</a>.</p>
       <!-- freshness probe (JS-only enhancement; the signed stamp above is the no-JS truth) -->
       <p id="build-freshness" class="seams__lead" style="margin-top:6px;font-size:12px;font-family:var(--bs-font-mono);opacity:.7;" hidden></p>
@@ -422,6 +428,79 @@
 
       show(`✓ this build · ${bits.join(" · ")}`);
     } catch (e) { /* no provenance reachable — leave the signed stamp as the source of truth */ }
+  })();
+  </script>
+
+  <!-- In-page self-check for #build-provenance (opt-in). Edge-aware, mirroring the CLI
+       verifier: re-hash served files against the signed manifest, stripping the SAME
+       named CDN transforms before failing; then cross-check the manifest digest against
+       the public Rekor log — the one step the page doesn't run. Honest by construction:
+       steps 1-2 only prove self-consistency; the loud caveat says so. -->
+  <script>
+  (() => {
+    const btn = document.getElementById("selfcheck-run");
+    const out = document.getElementById("selfcheck-out");
+    if (!btn || !out || !(window.crypto && crypto.subtle)) return;
+    const toHex = (b) => [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
+    const sha256 = async (b) => toHex(await crypto.subtle.digest("SHA-256", b));
+    const enc = new TextEncoder(), dec = new TextDecoder();
+    // named CDN edge transforms — same set the CLI verifier strips
+    const EDGE = [
+      { applies: (p) => /\.html$/.test(p), re: /<script\b[^>]*>(?:(?!<\/script>)[\s\S])*?(?:__CF\$cv\$params|cdn-cgi\/challenge-platform)(?:(?!<\/script>)[\s\S])*?<\/script>/g },
+      { applies: (p) => /(^|\/)robots\.txt$/.test(p), re: /^[\s\S]*?# END Cloudflare Managed Content\n+/ },
+    ];
+    const get = (p) => fetch(p, { cache: "no-store" });
+    const line = (state, msg) => {
+      const el = document.createElement("li");
+      el.textContent = (state === null ? "· " : state ? "✓ " : "✗ ") + msg;
+      if (state === true) el.style.color = "#1a7f37";
+      else if (state === false) el.style.color = "#cf222e";
+      else el.style.opacity = ".7";
+      out.appendChild(el);
+    };
+    btn.addEventListener("click", async () => {
+      btn.disabled = true; out.innerHTML = "";
+      try {
+        const prov = await (await get("/provenance.json")).json();
+        const idx = prov.siteManifest && prov.siteManifest.rekorLogIndex;
+        const claimed = prov.siteManifest && prov.siteManifest.sha256;
+
+        const manBuf = await (await get("/site.sha256")).arrayBuffer();
+        const manHash = await sha256(manBuf);
+        line(manHash === claimed, "manifest digest matches provenance.json (" + manHash.slice(0, 12) + "…)");
+
+        const rows = dec.decode(manBuf).trim().split("\n").filter(Boolean).map((l) => {
+          const i = l.indexOf("  "); return { hash: l.slice(0, i), path: l.slice(i + 2) };
+        });
+        let bad = 0, edged = 0;
+        for (const { hash, path } of rows) {
+          try {
+            const buf = await (await get("/" + path)).arrayBuffer();
+            if ((await sha256(buf)) === hash) continue;
+            let s = dec.decode(buf), hit = false;
+            for (const r of EDGE) { if (r.applies(path)) { const n = s.replace(r.re, ""); if (n !== s) { s = n; hit = true; } } }
+            if (hit && (await sha256(enc.encode(s))) === hash) { edged++; continue; }
+            bad++;
+          } catch (e) { bad++; }
+        }
+        line(bad === 0, rows.length + " served files match the signed manifest" + (bad ? " (" + bad + " differ)" : edged ? " (" + edged + " after removing a named Cloudflare edge transform)" : ""));
+        line(null, "re-hashing alone only shows the page is self-consistent — a tampered page passes it too");
+
+        if (idx) {
+          const r = await (await get("https://rekor.sigstore.dev/api/v1/log/entries?logIndex=" + encodeURIComponent(idx))).json();
+          const e = r[Object.keys(r)[0]];
+          const body = JSON.parse(atob(e.body));
+          const logged = body.spec && body.spec.data && body.spec.data.hash && body.spec.data.hash.value;
+          line(logged === manHash, "public Rekor #" + idx + " logged this exact manifest digest");
+          line(null, "logged " + new Date(e.integratedTime * 1000).toISOString().replace("T", " ").slice(0, 16) + " UTC — a log this page doesn't run");
+        }
+        line(null, "a demo, not proof — real verification is the commands above, jsr:@bounded-systems/verify, or /rekor, none of which trust this page");
+      } catch (e) {
+        line(false, "self-check error: " + (e && e.message ? e.message : e));
+      } finally {
+        btn.disabled = false;
+      }
+    });
   })();
   </script>
 

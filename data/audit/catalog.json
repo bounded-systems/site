@@ -1149,6 +1149,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#510a65218fec": {
+    "$value": "run a self-check in your browser \n A demo, not proof",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#561829f4d3e6": {
     "$value": "The engine names no guest",
     "$type": "body",
@@ -1259,6 +1264,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#94359c136242": {
+    "$value": "The one step that reaches outside the page is the public-log check",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#94b0ddf863dc": {
     "$value": "verify the whole site yourself",
     "$type": "body",
@@ -1304,6 +1314,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#a97393577ad4": {
+    "$value": "This script ships with the page, so a tampered page could ship a tampered checker and still go green — re-hashing only shows the page is self-consistent",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#a98e04f4f31e": {
     "$value": "Bounded Systems scopes that down: each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point that checks your policy, acts or refuses, and records what happened",
     "$type": "body",
@@ -1316,6 +1331,11 @@
   },
   "index.html#aecaa15715c2": {
     "$value": "Bounded Systems works there: privileged effects are attributable to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure, so the contracts can't quietly rot",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#af393a9d15b0": {
+    "$value": "Re-hash this site & check the public log",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1436,6 +1456,11 @@
   },
   "index.html#f769333f3db6": {
     "$value": "This one makes it accountable — the authority layer, designed to run alongside the rest.",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#fe74cfb73119": {
+    "$value": "Real verification is the commands above, jsr:@bounded-systems/verify, or the Rekor entry you open yourself — see trust lives outside the page",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
