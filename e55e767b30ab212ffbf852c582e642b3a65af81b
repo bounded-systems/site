@@ -1,0 +1,36 @@
+.github/workflows/axe.yml
+  s_98e316d0b3248a::t_5c5865b4e74d28 1-47
+package.json
+  s_98e316d0b3248a::t_0fc8a76c450dfa 17
+  s_98e316d0b3248a::t_eba47b9f53da9b 26,28-29
+package-lock.json
+  s_98e316d0b3248a::t_92a51fe7cbbe00 11,13-14,19-31,1198-1207,1383-1429
+vendor/conformance-kit/gates/axe-gate.mjs
+  s_98e316d0b3248a::t_3610985dc02340 1-325
+vendor/conformance-kit.lock.json
+  s_f55b845e7eac7c::t_bb5f16f4b54de7 7,23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "e55e767b30ab212ffbf852c582e642b3a65af81b",
+  "prompts": {},
+  "sessions": {
+    "s_98e316d0b3248a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8db980ee-eb6b-4866-832b-f795cef7f33c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    },
+    "s_f55b845e7eac7c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a155be6b47e994008",
+        "model": "unknown"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}

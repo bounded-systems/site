@@ -1,0 +1,123 @@
+package.json
+  s_98e316d0b3248a::t_aedbcbc4b7eeaa 8-9,13-18
+vendor/conformance-kit/generators/gen-cid.mjs
+  s_98e316d0b3248a::t_bbf1c0a67c3b5a 1-144
+vendor/conformance-kit/provenance.json
+  s_98e316d0b3248a::t_5a31f0671009dd 1-42
+contract/jsonld.shapes.ttl
+  s_98e316d0b3248a::t_f0316bbbf0c2fe 5-8,10-16,18-19,34-44,54-75,77,79-87
+  s_98e316d0b3248a::t_7f51f6ab716c11 1-4,9,17,20-33,45-53,76,78,88
+integrity/README.md
+  s_98e316d0b3248a::t_bd80b4879153d7 3-9,11,13,15-20,22-24,26,28-37
+vendor/conformance-kit/fixtures/site/blog/index.html
+  s_98e316d0b3248a::t_879acbb465391b 1-18
+vendor/conformance-kit/fixtures/site/index.html
+  s_98e316d0b3248a::t_c6a2b827db446f 1-19
+vendor/conformance-kit/generators/openapi.mjs
+  s_98e316d0b3248a::t_e1ffb47dd00231 1-61
+vendor/conformance-kit/fixtures/jsonld.shapes.ttl
+  s_98e316d0b3248a::t_b56364e3459e59 1-19
+vendor/conformance-kit/fixtures/package-lock.json
+  s_98e316d0b3248a::t_47911fc2a72475 2-3,8-20,23-25
+vendor/conformance-kit/package.json
+  s_98e316d0b3248a::t_0f9351f4407ebe 2,4,6-10,12-24,26-27,29-37
+vendor/conformance-kit/package-lock.json
+  s_98e316d0b3248a::t_de03c54ffc782d 2,8,12-17,21-68,80-88,105-113,135-433,508-520,543-886,905-930,943-966,985-1185,1188-1191,1194,1197,1212-1227,1245-1281,1288-1296,1342-1361,1371-1519,1521-1527,1529,1686-1698,1708-1769,1798-1806,1816-1824,1842-2008,2028-2033,2101-2119,2134-2178
+vendor/conformance-kit/gates/sbom/check-sbom.mjs
+  s_98e316d0b3248a::t_528db505e1376b 1-112
+vendor/conformance-kit/integrity/structure-audit/audit.mjs
+  s_98e316d0b3248a::t_60ee54e8c554ca 6-8,11,22-33,41,45-47,108,111,135-136,138,144-148
+.github/workflows/brand-checks.yml
+  s_98e316d0b3248a::t_f232912d144609 70-76,88-89,93-122
+vendor/conformance-kit/gates/semantic/deno.json
+  s_98e316d0b3248a::t_c9dbd4b6237de0 3-5
+vendor/conformance-kit/gates/semantic/gate.ts
+  s_98e316d0b3248a::t_d037a635b248a4 1-34
+vendor/conformance-kit/fixtures/site/robots.txt
+  s_98e316d0b3248a::t_0708c1f2b5f984 1-3
+vendor/conformance-kit/vendor.example.json
+  s_98e316d0b3248a::t_76bbf6a3ddcad6 2-6,8-23
+vendor/conformance-kit/fixtures/renderer.mjs
+  s_98e316d0b3248a::t_525eb9a9ec67b7 1-28
+vendor/conformance-kit/lib/schema-validate.mjs
+  s_98e316d0b3248a::t_294746c7d5519e 1-68
+vendor/conformance-kit/lib/config.mjs
+  s_98e316d0b3248a::t_1fd88b00bee491 1-36
+scripts/gen-sbom.mjs
+  s_98e316d0b3248a::t_3c83bbfbbeb45a 1-11
+scripts/emit-artifacts.mjs
+  s_98e316d0b3248a::t_4fdc585843e48c 1-84
+vendor/conformance-kit/gates/sbom/gen-sbom.mjs
+  s_98e316d0b3248a::t_981667f9a84dc6 1-167
+vendor/conformance-kit/fixtures/site/blog/hello.html
+  s_98e316d0b3248a::t_697390f69d233e 1-26
+vendor/conformance-kit/integrity/http-probe.mjs
+  s_98e316d0b3248a::t_ae756283f9f782 1-131
+vendor/conformance-kit/generators/gen-identity.mjs
+  s_98e316d0b3248a::t_c05b62d0d7d88b 1-120
+.github/workflows/semantic.yml
+  s_98e316d0b3248a::t_83861784ede2f3 1-42
+vendor/conformance-kit/README.md
+  s_98e316d0b3248a::t_36928e49ec93fd 1,3-11,14-19,22-24,26,28,30-39,41-60,62-70,72-88,90-94,96,98-102
+vendor/conformance-kit/gates/commonmark-runner.mjs
+  s_98e316d0b3248a::t_b09735e1263287 1-98
+scripts/verify-vendor.mjs
+  s_98e316d0b3248a::t_9303b5c093c8a7 1-12,14-20,30-33,35-64
+  s_98e316d0b3248a::t_420933d0b1961e 13
+  s_98e316d0b3248a::t_da2d369c2d9dff 21-24,27-29,34
+  s_98e316d0b3248a::t_cdffa5e71c3429 25-26
+vendor/conformance-kit/fixtures/site/404.html
+  s_98e316d0b3248a::t_f3bdf5a367c937 1-12
+vendor/conformance-kit/integrity/verify/package.json
+  s_98e316d0b3248a::t_44dba5ca8c1bb1 15
+vendor/conformance-kit/fixtures/corpus.json
+  s_98e316d0b3248a::t_a85d149e093a6c 1-5
+vendor/conformance-kit/gates/readability-gate.mjs
+  s_98e316d0b3248a::t_6295c15b069da1 1-134
+vendor/conformance-kit/emitters/index.mjs
+  s_98e316d0b3248a::t_454c1b1b2573eb 1-68
+vendor/conformance-kit/gates/seo-gate.mjs
+  s_98e316d0b3248a::t_7c0db8a79ee9d8 1-208
+scripts/gen-provenance.mjs
+  s_98e316d0b3248a::t_c16d588ba35c58 2-4,6
+flake.nix
+  s_98e316d0b3248a::t_fcdaa91131fde8 37-38,44-46,48
+  s_98e316d0b3248a::t_beff83158d1b7d 47
+vendor/conformance-kit/integrity/gen-sitemanifest.mjs
+  s_98e316d0b3248a::t_b74d2b0fa95a7f 10-12,14-19,22,24-25,34-37,41
+vendor/conformance-kit/gates/shacl-runner.mjs
+  s_98e316d0b3248a::t_740919705bb0dc 1-160
+vendor/conformance-kit.lock.json
+  s_98e316d0b3248a::t_5631a78c055443 1-50
+scripts/gen-sitemanifest.mjs
+  s_98e316d0b3248a::t_e423b112f94b9d 2-5
+vendor/conformance-kit/integrity/gen-provenance.mjs
+  s_98e316d0b3248a::t_3ab4f6ce4b3cd1 6,18-21,24,26-27
+vendor/conformance-kit/.gitignore
+  s_98e316d0b3248a::t_14cffb9f40e616 2-5
+vendor/conformance-kit/test/run.mjs
+  s_98e316d0b3248a::t_bc3f7563fd7160 1-143
+.github/workflows/deploy.yml
+  s_98e316d0b3248a::t_453438aac71e27 65-75,78-80
+  s_98e316d0b3248a::t_2bcba09887dd6a 177-178
+vendor/conformance-kit/fixtures/site/sitemap.xml
+  s_98e316d0b3248a::t_8dbfa41cdbdb28 1-6
+vendor/conformance-kit/LICENSE
+  s_98e316d0b3248a::t_29aae1d5a97264 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "b6e8227b51b89ff217802e3e111ea1bd1b552469",
+  "prompts": {},
+  "sessions": {
+    "s_98e316d0b3248a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8db980ee-eb6b-4866-832b-f795cef7f33c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
