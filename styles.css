@@ -69,8 +69,24 @@ em { font-style: normal; color: var(--bs-color-forest); }
   color: var(--bs-color-forest); border: 1px solid var(--site-green-line);
   border-radius: 8px; padding: 6px 12px;
 }
-/* mobile menu control — hidden on desktop, a burger disclosure on phones */
-.nav__toggle, .nav__burger { display: none; }
+/* mobile menu control — hidden on desktop, a burger disclosure on phones.
+   A real <button> disclosure (aria-expanded toggled by JS), keyboard-operable. */
+.nav__burger { display: none; }
+
+/* ---------- focus visibility (2.4.7) ---------- */
+/* A visible focus ring on every interactive element. Brand-token coloured;
+   light on the dark surfaces so it stays visible there too. Never outline:none
+   without this replacement. */
+:focus-visible {
+  outline: 2px solid var(--bs-color-forest);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.hero :focus-visible,
+.honesty :focus-visible,
+.footer :focus-visible {
+  outline-color: var(--site-cream);
+}
 
 /* ---------- the mark as a tile ---------- */
 .mark {
@@ -336,6 +352,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
   .nav__burger {
     display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
     width: 42px; height: 38px; cursor: pointer;
+    background: transparent; padding: 0; color: inherit; font: inherit;
     border: 1px solid var(--bs-color-line); border-radius: 10px;
   }
   .nav__burger span { width: 18px; height: 2px; background: var(--bs-color-ink); border-radius: 2px; }
@@ -349,7 +366,8 @@ em { font-style: normal; color: var(--bs-color-forest); }
   }
   .nav__links a { padding: 10px 12px; border-radius: 9px; }
   .nav__gh { text-align: center; }
-  .nav__toggle:checked ~ .nav__links { display: flex; }
+  /* the disclosure is driven by the button's aria-expanded state (set by nav.js) */
+  .nav__burger[aria-expanded="true"] ~ .nav__links { display: flex; }
 }
 
 /* Small phones — where the page was read first. Keep the hero legible. */
