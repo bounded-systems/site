@@ -453,8 +453,8 @@
     const line = (state, msg) => {
       const el = document.createElement("li");
       el.textContent = (state === null ? "· " : state ? "✓ " : "✗ ") + msg;
-      if (state === true) el.style.color = "#1a7f37";
-      else if (state === false) el.style.color = "#cf222e";
+      if (state === true) el.style.color = "var(--bs-grade-enforced-fg)";
+      else if (state === false) el.style.color = "var(--bs-grade-partial-fg)";
       else el.style.opacity = ".7";
       out.appendChild(el);
     };
