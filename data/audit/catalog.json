@@ -1169,11 +1169,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#6a68b10c4fb3": {
-    "$value": "The bet \n The model \n Honesty \n Proof \n Writing \n GitHub",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#6d2ec85e9cff": {
     "$value": "Converging the two — and signing across every door — is the work in progress",
     "$type": "body",
@@ -1216,6 +1211,11 @@
   },
   "index.html#7b08b210a8cd": {
     "$value": "Source-available · PolyForm Noncommercial 1.0.0 · bounded.tools",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#7b5a70809296": {
+    "$value": "The bet \n The model \n Honesty \n Conformance \n Proof \n Writing \n GitHub",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1344,6 +1344,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#bdd216084bfa": {
+    "$value": "Beyond the hand-graded claims, the build runs a battery of fail-closed gates: lone blesses each rendered page's DOM for semantic HTML and accessibility, the JSON-LD is checked against SHACL shapes, an SPDX SBOM is generated and completeness-checked, a signed whole-site manifest and RFC 9530 content digests cover the served bytes, and the nix build is reproducible",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#bf743190ee0f": {
     "$value": "Stated as direction so it can't masquerade as done",
     "$type": "body",
@@ -1436,6 +1441,11 @@
   },
   "index.html#f769333f3db6": {
     "$value": "This one makes it accountable — the authority layer, designed to run alongside the rest.",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#f886926b888f": {
+    "$value": "Each verdict folds into one honest conformance projection &mdash; lone's web-build model, which emits the strong WCAG 2.2 AA / OWASP ASVS claim only when every gating criterion passes, so manual and unsupplied criteria stay not assessed rather than overclaimed",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

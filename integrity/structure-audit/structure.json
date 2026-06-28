@@ -57,12 +57,49 @@
     "readerOk": true,
     "internalLinks": []
   },
+  "conformance.html": {
+    "h1": "Conformance, computed against the running build",
+    "outline": "12222222222",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": [
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
+      "/llms.txt",
+      "/provenance.json",
+      "/sbom.spdx.json",
+      "/site.sha256",
+      "/sitemap.xml"
+    ]
+  },
   "index.html": {
     "h1": "Your coding agent wanders. Keep it inside the job you gave it.",
     "outline": "122222",
     "mains": 1,
     "readerOk": null,
     "internalLinks": [
+      "/conformance",
+      "/conformance",
       "/provenance.json",
       "/rekor"
     ]
