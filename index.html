@@ -47,8 +47,7 @@
         <span class="mark mark--rounded" style="width:28px;height:28px;"><img src="brand/mark/mark-white.svg" width="20" height="20" alt="Bounded Systems"></span>
         <span class="lock__name">bounded.tools</span>
       </a>
-      <input type="checkbox" id="nav-toggle" class="nav__toggle" hidden>
-      <label class="nav__burger" for="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></label>
+      <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
       <div class="nav__links" id="nav-menu">
         <a href="#bet">The bet</a>
         <a href="#model">The model</a>
@@ -155,7 +154,7 @@
       <div class="bs-text-label eyebrow--light">03&nbsp;/&nbsp;Kept&nbsp;honest</div>
       <h2>Every claim here is graded against the running code.</h2>
       <p class="honesty__lead">An instrument built to catch my <em>own</em> over-statements and file the gap. Docs generate from source and fail CI on drift; guest-room's specs execute against its engine. I keep myself as honest as I keep the agents.</p>
-      <p class="honesty__stamp" style="font-family:var(--bs-font-mono);font-size:12px;margin:14px 0 0;opacity:.65;letter-spacing:.02em;">
+      <p class="honesty__stamp" style="font-family:var(--bs-font-mono);font-size:12px;margin:14px 0 0;color:var(--site-on-dark-mono);opacity:.85;letter-spacing:.02em;">
         <!-- stamp:start -->graded against the latest commit<!-- stamp:end -->
       </p>
       <p class="honesty__lead" style="margin-top:18px;">Beyond the hand-graded claims, the build runs a battery of fail-closed gates: <a href="https://github.com/bounded-systems/lone">lone</a> blesses each rendered page's DOM for semantic HTML and accessibility, the JSON-LD is checked against SHACL shapes, an SPDX SBOM is generated and completeness-checked, a signed whole-site manifest and RFC&nbsp;9530 content digests cover the served bytes, and the nix build is reproducible. Each verdict folds into one honest <a href="/conformance">conformance projection</a> &mdash; lone's web-build model, which emits the strong WCAG&nbsp;2.2&nbsp;AA / OWASP&nbsp;ASVS claim only when every gating criterion passes, so manual and unsupplied criteria stay not assessed rather than overclaimed.</p>
@@ -505,6 +504,9 @@
     });
   })();
   </script>
+
+  <!-- accessible mobile-nav disclosure -->
+  <script src="nav.js" defer></script>
 
 </body>
 </html>

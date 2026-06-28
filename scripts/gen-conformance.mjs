@@ -124,7 +124,8 @@ const page = `<!doctype html>
         <span class="mark mark--rounded" style="width:28px;height:28px;"><img src="brand/mark/mark-white.svg" width="20" height="20" alt="Bounded Systems"></span>
         <span class="lock__name">bounded.tools</span>
       </a>
-      <div class="nav__links">
+      <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
+      <div class="nav__links" id="nav-menu">
         <a href="index.html#honesty">Honesty</a>
         <a href="index.html#proof">Proof</a>
         <a href="blog/">Writing</a>
@@ -150,6 +151,7 @@ const page = `<!doctype html>
       <div class="footer__meta">Graded against ${esc(report.standard)} v${esc(report.version)} &middot; bounded.tools</div>
     </div>
   </footer>
+  <script src="nav.js" defer></script>
 </body>
 </html>
 `;
