@@ -272,7 +272,7 @@
         <span class="seams__title">This whole site proves its own build</span>
         <span class="seams__pkg">Sigstore &middot; OIDC &middot; Rekor &middot; GHCR</span>
       </div>
-      <p class="seams__lead">At deploy time a manifest covering the whole site is keyless-signed, and the built site is pushed to GHCR as a signed, pullable OCI artifact. GitHub Actions' OIDC identity authenticates to Fulcio, which mints a one-build certificate that then expires; both signatures land in the public Rekor log. No stored key. <strong>This proves who built the site and that it is intact — it does not prove the build was safe.</strong></p>
+      <p class="seams__lead">At deploy time a manifest covering the whole site is keyless-signed, and the built site is pushed to GHCR as a signed, pullable OCI artifact. GitHub Actions' OIDC identity authenticates to Fulcio, which mints a one-build certificate that then expires; both signatures land in the public Rekor log. No stored key. <strong>This attests origin, not authority</strong> — it proves who built the site and that it is intact, not that the build was authorized or safe.</p>
       <details class="prov-details">
         <summary style="cursor:pointer;font-family:var(--bs-font-mono);font-size:13px;margin-bottom:10px;">&#9656; verify the whole site yourself</summary>
         <pre class="code"><span class="c"># the live provenance record (manifest digest, Rekor entries, OCI ref)</span>
