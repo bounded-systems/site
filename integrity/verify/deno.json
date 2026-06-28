@@ -1,0 +1,12 @@
+{
+  "name": "@bounded-systems/verify",
+  "version": "0.1.0",
+  "license": "MIT",
+  "exports": "./verify.mjs",
+  "imports": {
+    "sigstore": "npm:sigstore@^5.0.0"
+  },
+  "publish": {
+    "include": ["verify.mjs", "README.md", "deno.json"]
+  }
+}
