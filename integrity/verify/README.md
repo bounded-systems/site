@@ -8,13 +8,14 @@ logged.
 ```
 node integrity/verify/verify.mjs https://bounded.tools
 node integrity/verify/verify.mjs ./dist
-# once published: npx @bounded-systems/verify https://bounded.tools
+# once published: deno run -A jsr:@bounded-systems/verify https://bounded.tools
 ```
 
 Wired in two places: the deploy **fail-closes** on it (a post-deploy step verifies
 prod against the freshly-signed manifest), and `publish-verify.yml` publishes it to
-npm **with its own Sigstore provenance** on a `verify-v*` release (gated on
-`NPM_TOKEN`).
+**JSR — keyless, via GitHub OIDC** (no stored token, matching the rest of this
+project) on a `verify-v*` release. Runs in both Deno and Node; the `sigstore` dep is
+mapped through `deno.json` so `import "sigstore"` resolves in either runtime.
 
 ## What it checks
 
