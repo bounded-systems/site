@@ -1,0 +1,88 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+# SHACL contract for bounded.tools' structured data. Schema.org alone is flexible
+# guidance; Schema.org + SHACL is an ENFORCEABLE structural contract — the vendored
+# conformance-kit shacl-runner expands every JSON-LD block in the BUILT HTML to RDF
+# and fails CI unless it conforms to these shapes.
+#
+# This file is an INPUT the site owns (the kit ships only the runner). The site
+# emits two kinds of JSON-LD:
+#   • index.html (~L37): the primary schema.org Organization (name/url/description/
+#     sameAs).
+#   • blog/<post>.html: a schema.org BlogPosting whose publisher is a lighter
+#     Organization (name/url only).
+# Keep these shapes in lockstep with that markup.
+
+# --- floor: every Organization (primary + blog publisher) ----------------------
+# name + url is the minimum any Organization node on the site must carry.
+schema:OrganizationShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Organization ;
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+# --- strict: the PRIMARY Organization (index.html) -----------------------------
+# Targeted by the one feature unique to it — it links out via schema:sameAs (the
+# blog's publisher Organization does not). The primary org must additionally carry
+# a non-empty description and at least one sameAs IRI, so index.html's full
+# name/url/description/sameAs contract is enforced without touching the lighter
+# publisher org the blog emits.
+schema:PrimaryOrganizationShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf schema:sameAs ;
+    sh:property [
+        sh:path schema:description ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
+# --- blog posts: every BlogPosting ---------------------------------------------
+schema:BlogPostingShape
+    a sh:NodeShape ;
+    sh:targetClass schema:BlogPosting ;
+    sh:property [
+        sh:path schema:headline ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:description ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:property [
+        sh:path schema:author ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:publisher ;
+        sh:minCount 1 ;
+        sh:class schema:Organization ;
+    ] .

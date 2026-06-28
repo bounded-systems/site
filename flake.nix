@@ -34,11 +34,18 @@
               rm -rf brand
               cp -rL ${brand} brand
               chmod -R u+w brand
+              # Fail closed if the vendored conformance-kit drifted from its hash-pin.
+              node scripts/verify-vendor.mjs
               # Same drift gate the project argues for, then assemble dist/.
               node brand/tokens/build-tokens.mjs --check
               node build.mjs
               node scripts/gen-blog.mjs
               node scripts/gen-sitemap.mjs
+              # Deterministic SPDX SBOM of the supply chain (flake.lock + package-lock).
+              # A pure function of the committed lockfiles (no clock, no network) — so it
+              # is reproducible and covered by the signed whole-site manifest.
+              node scripts/gen-sbom.mjs
+              node vendor/conformance-kit/gates/sbom/check-sbom.mjs
               runHook postBuild
             '';
             installPhase = ''

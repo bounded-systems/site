@@ -67,11 +67,13 @@ jobs:
           fi
           echo "✓ brand pins agree ($lock_rev)"
 
-  # Whole-page structure gate (integrity/structure-audit): reader survivability
-  # (Mozilla Readability) + outline + landmarks + internal link-graph, with a
-  # content-addressed structure.json checked for drift — sibling to the copy
-  # catalog. Deps live in the tool's own package.json (linkedom + readability),
-  # separate from the zero-dep verify-site, so they're installed only for this job.
+  # Whole-page structure gate (vendored conformance-kit structure-audit): reader
+  # survivability (Mozilla Readability) + outline + landmarks + internal link-graph,
+  # with a content-addressed structure.json checked for drift — sibling to the copy
+  # catalog. The tool is now the ONE vendored copy under vendor/conformance-kit/; its
+  # deps (linkedom + readability) come from the kit's package-lock, and the drift
+  # BASELINE stays here in the consumer ($STRUCTURE_BASELINE) so a re-vendor can't
+  # mutate it.
   structure-audit:
     runs-on: ubuntu-latest
     steps:
@@ -83,12 +85,41 @@ jobs:
           node-version: "22"
       - name: Install
         run: npm ci
+      - name: Install conformance-kit gate deps
+        run: npm ci --prefix vendor/conformance-kit
       - name: Build dist/ (full site, incl. blog posts)
         run: npm run build
-      - name: Install structure-audit deps
-        run: npm ci --prefix integrity/structure-audit
       - name: Structure is intact + structure.json is current
-        run: node integrity/structure-audit/audit.mjs dist --check
+        env:
+          STRUCTURE_BASELINE: integrity/structure-audit/structure.json
+        run: node vendor/conformance-kit/integrity/structure-audit/audit.mjs dist --check
+
+  # Structured-data + supply-chain gates from the vendored conformance-kit:
+  #   • SHACL — turn the schema.org JSON-LD (Organization in index.html, BlogPosting
+  #     in each post) into an ENFORCEABLE contract via contract/jsonld.shapes.ttl.
+  #   • SBOM — the deterministic SPDX SBOM is generated + completeness-checked inside
+  #     `npm run build`; re-asserted here as a named, fail-closed gate step.
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: npm ci
+      - name: Install conformance-kit gate deps
+        run: npm ci --prefix vendor/conformance-kit
+      - name: Verify the vendored conformance-kit hash-pin
+        run: node scripts/verify-vendor.mjs
+      - name: Build dist/ (full site; generates + checks the SPDX SBOM)
+        run: npm run build
+      - name: SBOM completeness (SPDX-2.3, pinned-set ⊆ SBOM ⊆ pinned-set)
+        run: node vendor/conformance-kit/gates/sbom/check-sbom.mjs
+      - name: JSON-LD conforms to the SHACL contract
+        run: node vendor/conformance-kit/gates/shacl-runner.mjs contract/jsonld.shapes.ttl dist
 
   # Copy hygiene (prose error + ungrounded claims) via the upstream string-audit
   # reusable gate. Pinned to an immutable commit SHA (v0.6.1) for reproducibility;
