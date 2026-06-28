@@ -19,9 +19,11 @@ let posts = [];
 try { posts = (await readdir(join(root, "blog"))).filter((f) => f.endsWith(".md")).sort(); }
 catch { /* no blog/ */ }
 
-// Served files (guaranteed 200): home, blog index, each post at /blog/<slug>.html.
+// Served files (guaranteed 200): home, the conformance projection, blog index,
+// each post at /blog/<slug>.html.
 const urls = [
   `${SITE}/`,
+  `${SITE}/conformance`,
   `${SITE}/blog/`,
   ...posts.map((f) => `${SITE}/blog/${basename(f, ".md")}.html`),
 ];

@@ -53,6 +53,7 @@
         <a href="#bet">The bet</a>
         <a href="#model">The model</a>
         <a href="#honesty">Honesty</a>
+        <a href="/conformance">Conformance</a>
         <a href="#proof">Proof</a>
         <a href="blog/">Writing</a>
         <a class="nav__gh" href="https://github.com/bounded-systems">GitHub&nbsp;&#8599;</a>
@@ -157,6 +158,7 @@
       <p class="honesty__stamp" style="font-family:var(--bs-font-mono);font-size:12px;margin:14px 0 0;opacity:.65;letter-spacing:.02em;">
         <!-- stamp:start -->graded against the latest commit<!-- stamp:end -->
       </p>
+      <p class="honesty__lead" style="margin-top:18px;">Beyond the hand-graded claims, the build runs a battery of fail-closed gates: <a href="https://github.com/bounded-systems/lone">lone</a> blesses each rendered page's DOM for semantic HTML and accessibility, the JSON-LD is checked against SHACL shapes, an SPDX SBOM is generated and completeness-checked, a signed whole-site manifest and RFC&nbsp;9530 content digests cover the served bytes, and the nix build is reproducible. Each verdict folds into one honest <a href="/conformance">conformance projection</a> &mdash; lone's web-build model, which emits the strong WCAG&nbsp;2.2&nbsp;AA / OWASP&nbsp;ASVS claim only when every gating criterion passes, so manual and unsupplied criteria stay not assessed rather than overclaimed.</p>
 
       <div class="legend">
         <div class="legend__card">

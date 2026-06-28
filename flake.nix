@@ -40,6 +40,10 @@
               node brand/tokens/build-tokens.mjs --check
               node build.mjs
               node scripts/gen-blog.mjs
+              # Compute + render the conformance projection (lone's web-build model
+              # folded over the gate-backed evidence contract) — the /conformance page
+              # + its machine-readable twin, part of the pure, hermetic output.
+              node scripts/gen-conformance.mjs
               node scripts/gen-sitemap.mjs
               # Deterministic SPDX SBOM of the supply chain (flake.lock + package-lock).
               # A pure function of the committed lockfiles (no clock, no network) — so it

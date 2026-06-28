@@ -1,0 +1,24 @@
+{
+  "_source": "Conformance evidence — the gate verdicts bounded.tools GENUINELY verifies, fed into lone's conformance() model (the report at /conformance + dist/api/v1/conformance.json). Each entry below is RE-PROVEN by a named gate that BLOCKS on failure, so this declaration cannot drift from reality without turning CI red — the same discipline as the structure-audit baseline and data/audit/*. scripts/gen-conformance.mjs merges this contract UNDER its own in-process build-facts (ai-readability: llms.txt + Markdown siblings, which it self-checks against the built dist/). HONEST BY CONSTRUCTION: the strong WCAG 2.2 AA / OWASP ASVS compact claim stays WITHHELD — the manual + external GATING criteria (manual WCAG audit, OWASP ASVS L2, full axe scan, Nu HTML Checker, Core Web Vitals p75 field data, Baseline, known-vuln scan, runtime reliability, CommonMark) are deliberately NOT asserted here, so they report not-assessed and the headline claim is partial. bounded.tools also does NOT emit an in-toto/SLSA provenance statement, an IPFS CID, an OpenAPI document, or an Atom feed, so those criteria are likewise left not-assessed rather than overclaimed.",
+
+  "_gates": {
+    "loneFindings": "semantic.yml — `deno run vendor/conformance-kit/gates/semantic/gate.ts` over dist/blog (SELECTOR main) blesses every rendered blog DOM with @bounded-systems/lone; the gate is BLOCKING (any error-severity finding fails CI), so 0 error-severity findings (empty array) = the lone-measurable tier-1 criteria (HTML author / WAI-ARIA / WCAG-automatable) + the cognitive interface-complexity budget are met on the blessed DOM.",
+    "jsonLdShacl": "brand-checks.yml `conformance` job / `npm run shacl` — vendor/conformance-kit/gates/shacl-runner.mjs validates the schema.org JSON-LD (Organization in index.html, BlogPosting in each post) against contract/jsonld.shapes.ttl and reports conforms:true, 0 violating blocks.",
+    "seoTechnical": "check-seo.mjs (index.html canonical/title/meta, fail-closed), gen-sitemap.mjs (RFC 9309 robots.txt + resolving sitemap.xml), and the structure-audit internal link-graph (0 broken internal links) — together they re-prove correct canonicals, unique titles, a valid robots.txt, a resolving sitemap, and zero broken internal links on every build.",
+    "sbom": "`npm run build` runs scripts/gen-sbom.mjs (deterministic SPDX-2.3) then vendor/conformance-kit/gates/sbom/check-sbom.mjs (well-formed + complete: pinned set ⊆ SBOM ⊆ pinned set), re-asserted as a named fail-closed step in brand-checks.yml; deploy.yml keyless-signs the SBOM blob (cosign sign-blob → dist/sbom.spdx.json.sigstore.json).",
+    "signedReleaseManifest": "deploy.yml runs vendor/conformance-kit/integrity/gen-sitemanifest.mjs to content-address the whole site to dist/site.sha256, then keyless-signs it (cosign sign-blob → dist/site.sha256.sigstore.json); the post-deploy step + the standalone verify.mjs re-fetch the live edge and fail closed unless prod serves that exact signed manifest.",
+    "contentDigests": "deploy.yml runs scripts/emit-artifacts.mjs, which writes RFC 9530 Repr-Digest representation digests (over the exact served bytes of each canonical HTML route) into dist/_headers, covered by the signed whole-site manifest.",
+    "reproducibleBuild": "`nix build .#site` (deploy.yml) is a pure, hermetic function of the contracts + the flake.lock-pinned toolchain + brand submodule — same inputs, same bytes; the brand-pins-agree job blocks if flake.lock and the submodule diverge."
+  },
+
+  "loneFindings": [],
+
+  "evidence": {
+    "jsonLdShacl": { "conforms": true, "blocks": 0 },
+    "seoTechnical": { "canonicalOk": true, "titlesUnique": true, "robotsRfc9309Ok": true, "sitemapResolves": true, "brokenInternalLinks": 0 },
+    "reproducibleBuild": { "reproducible": true },
+    "sbom": { "present": true, "valid": true, "complete": true, "signed": true },
+    "signedReleaseManifest": { "present": true, "signed": true },
+    "contentDigests": { "reprDigestHeaders": true }
+  }
+}
