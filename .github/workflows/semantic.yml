@@ -1,0 +1,42 @@
+name: semantic
+
+# The lone semantic gate from the vendored conformance-kit: bless each rendered
+# blog page's DOM with @bounded-systems/lone (semantic HTML + a11y). Blocking —
+# any error-severity finding fails CI. Standalone because it needs Deno + JSR
+# (jsr:@bounded-systems/lone, pinned by the kit's gates/semantic/deno.json), so it
+# does not belong in the Node-only brand-checks workflow.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  semantic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - uses: denoland/setup-deno@e95548e56dfa95d4e1a28d6f422fafe75c4c26fb # v2
+        with:
+          deno-version: v2.x
+      - name: Install
+        run: npm ci
+      - name: Verify the vendored conformance-kit hash-pin
+        run: node scripts/verify-vendor.mjs
+      - name: Build dist/ (full site, incl. blog posts)
+        run: npm run build
+      - name: lone blesses every rendered blog page (errors fail CI)
+        env:
+          SEMANTIC_DIR: dist/blog
+          SEMANTIC_SELECTOR: main
+        run: >
+          deno run --allow-read --allow-env --allow-net
+          --config vendor/conformance-kit/gates/semantic/deno.json
+          vendor/conformance-kit/gates/semantic/gate.ts

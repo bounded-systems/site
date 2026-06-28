@@ -62,9 +62,22 @@ jobs:
             # visitor can see) BEFORE manifesting, so the stamp is covered by the
             # signed whole-site manifest rather than an unsigned afterthought.
             node scripts/gen-stamp.mjs
-            # whole-site manifest (content only — sidecars do not exist yet), signed
+            # Fail closed if the vendored conformance-kit drifted from its hash-pin.
+            node scripts/verify-vendor.mjs
+            # The deterministic SPDX SBOM is already in dist/ from the hermetic build;
+            # refuse to ship an incomplete bill, then emit the standards-compliant
+            # sidecars (RFC 9116 security.txt, web app manifest, RFC 9530 Repr-Digest
+            # _headers) onto the final, stamped bytes — all BEFORE the manifest, so the
+            # signed whole-site digest covers them (the SBOM becomes a signed subject).
+            node vendor/conformance-kit/gates/sbom/check-sbom.mjs
+            node scripts/emit-artifacts.mjs
+            # whole-site manifest (covers content + sbom + security.txt + manifest;
+            # _headers and the signature bundles are excluded), signed
             node scripts/gen-sitemanifest.mjs
             cosign sign-blob --yes --bundle dist/site.sha256.sigstore.json dist/site.sha256
+            # also keyless-sign the SBOM blob itself, so it carries its own verifiable
+            # Sigstore bundle alongside being a subject of the signed site manifest
+            cosign sign-blob --yes --bundle dist/sbom.spdx.json.sigstore.json dist/sbom.spdx.json
             # /provenance.json (Rekor index from the bundle; OCI digest resolved at verify)
             OCI_REF="$GHCR_REPO:$short" node scripts/gen-provenance.mjs
             # pack the WHOLE dist/ (site + provenance sidecars) → one deployable artifact
@@ -161,5 +174,5 @@ jobs:
       - name: Cryptographically verify prod (standalone verifier)
         if: steps.gate.outputs.ready == 'true'
         run: |
-          npm ci --prefix integrity/verify
-          node integrity/verify/verify.mjs https://bounded.tools
+          npm ci --prefix vendor/conformance-kit
+          node vendor/conformance-kit/integrity/verify/verify.mjs https://bounded.tools

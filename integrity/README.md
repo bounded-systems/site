@@ -1,39 +1,37 @@
 # integrity
 
-Shared **build-provenance tooling** for the Bounded Systems sites: keyless,
-whole-site signing (Sigstore → Rekor → GHCR) plus independent verification.
+Site-specific **integrity inputs** for bounded.tools. The shared build-provenance
+**tooling** that used to live here (whole-site signing, provenance, verification,
+structure audit) was extracted into the standalone
+[`bounded-systems/conformance-kit`](https://github.com/bounded-systems/conformance-kit)
+and is now consumed as a single hash-pinned, vendored copy under
+[`vendor/conformance-kit/`](../vendor/conformance-kit/) — so there is exactly **one
+copy** of each tool, not a per-site duplicate.
 
-This is a **plain directory** in `bounded-systems/site` for now — not a submodule,
-not a nested git repo. It is the `git subtree split` boundary: once the interface
-settles it carves out into its own `bounded-systems/integrity` repo and publishes
-as a package + reusable GitHub Action.
+## Where the tooling went
 
-## Contents
+| Was (`integrity/…`) | Now (`vendor/conformance-kit/…`) |
+|---|---|
+| `scripts/gen-sitemanifest.mjs` | `integrity/gen-sitemanifest.mjs` (via `scripts/gen-sitemanifest.mjs` shim) |
+| `scripts/gen-provenance.mjs` | `integrity/gen-provenance.mjs` (via `scripts/gen-provenance.mjs` shim) |
+| `verify-site.mjs` | `integrity/verify-site.mjs` |
+| `verify/verify.mjs` | `integrity/verify/verify.mjs` (deploy verifies prod with this) |
+| `structure-audit/audit.mjs` | `integrity/structure-audit/audit.mjs` |
+| `provenance.json` (hash-pin) | `../vendor/conformance-kit.lock.json` (verified by `scripts/verify-vendor.mjs`) |
+
+The vendored copy is integrity-checked before every use (`node
+scripts/verify-vendor.mjs`); re-vendor by copying the kit at a new pinned commit
+and regenerating the lock.
+
+## What stays here (site-owned inputs, not tooling)
 
 | Path | What |
 |---|---|
-| `scripts/gen-sitemanifest.mjs` | Content-address the whole built site → `dist/site.sha256` (cwd-relative `dist`, `$DIST` override). |
-| `scripts/gen-provenance.mjs` | Emit `dist/provenance.json` + the `/rekor` redirect sidecar. Superset of both sites (conditional `intotoStatement`; `$PROVENANCE_DOC_URL` for the caveat link). |
-| `verify-site.mjs` | **Independent verifier/CLI** — `node integrity/verify-site.mjs <https://site \| ./dist>`. cosign-verifies the signed manifest against the builder's OIDC identity + Rekor, then re-hashes every served file. The honest, out-of-page counterpart to the badge. |
-| `provenance.json` | sha256 hash-pin of the files here (mirrors `vendor/string-audit/provenance.json`), so a vendoring consumer can verify integrity. |
-| `structure-audit/`, `policy/` | Stubs for the next tenants (semantic/reader audit; policy-controller/OIDC enforcement). |
+| `structure-audit/structure.json` | The content-addressed **structure baseline** for the kit's structure-audit (`$STRUCTURE_BASELINE`). The baseline belongs to the consumer, never the vendored kit, so a re-vendor can't mutate it. |
+| `claims/` | Nanopublication **claim graphs** + `validate-claims.mjs` (a bounded.tools-specific gate: every claim graded, gaps disclosed, evidence linked). |
+| `policy/` | The cosign / policy-controller **admission policy** + verify recipes for the signed OCI artifact. |
+| `verifier-decision.md` | The decision record for the out-of-page verifier. |
 
-## How the sites consume it
-
-- **bounded-systems/site (this repo)**: `scripts/gen-sitemanifest.mjs` and
-  `scripts/gen-provenance.mjs` are thin shims that `import` the canonical versions
-  here, run from the repo root so `dist` resolves correctly. The deploy pipeline
-  is unchanged.
-- **bdelanghe/site (separate repo)**: will **vendor** this directory hash-pinned
-  (same pattern as `vendor/string-audit/`) — no submodule — and point its shims at
-  the vendored copy. (Tracked as the next step.)
-
-## Next
-
-- A composite GitHub Action (`action.yml`) wrapping the shared deploy STEPS
-  (sign manifest → gen-provenance → tar + `oras push` + `cosign sign`; and a
-  `promote` sibling: `cosign verify` + `oras pull` + extract). Composite (not a
-  reusable workflow) because the two sites' build jobs differ in shape. Wired +
-  tested during the deploy migration so prod stays fail-closed.
-- Publish to npm **with Sigstore provenance**, SRI-pinnable, so a browser
-  extension / CI policy can consume `verify-site` directly.
+The SHACL structured-data contract for the site lives in
+[`../contract/jsonld.shapes.ttl`](../contract/jsonld.shapes.ttl) and is run by the
+kit's `gates/shacl-runner.mjs`.
