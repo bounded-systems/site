@@ -314,6 +314,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
+  "blog/provenance-is-not-legitimacy.md#580ea6a148e6": {
+    "$value": "Closing that second gap takes a different mechanism: a capability boundary that checks each privileged action as it happens — which is the rest of what Bounded Systems is for",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
   "blog/provenance-is-not-legitimacy.md#58519d9781d1": {
     "$value": "We do not build a registry — Rekor is the per-version registry, and we push to it directly with cosign sign-blob",
     "$type": "body",
@@ -324,8 +329,18 @@
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
+  "blog/provenance-is-not-legitimacy.md#5eb76b0dc8eb": {
+    "$value": "The badge attests origin, not authority",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
   "blog/provenance-is-not-legitimacy.md#629f47e8b258": {
     "$value": "Here is the ladder it sits on, and the ceiling it stops at",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#641ce0daa26c": {
+    "$value": "Put precisely: this is authentication, not authorization, and the two are orthogonal",
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
@@ -361,6 +376,11 @@
   },
   "blog/provenance-is-not-legitimacy.md#700d42c9014a": {
     "$value": "In CI, the GitHub Actions OIDC token authenticates to Fulcio, which mints a signing certificate bound to the repository, workflow, and commit",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#70e5ed7c5394": {
+    "$value": "Authentication asks who — and a signature checked against a transparency log answers that statically, after the fact",
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
@@ -414,6 +434,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
+  "blog/provenance-is-not-legitimacy.md#a30a177a4dc3": {
+    "$value": "A build can be impeccably authenticated and still act outside what it was ever meant to",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
   "blog/provenance-is-not-legitimacy.md#a335009f6444": {
     "$value": "What this site claims, graded",
     "$type": "body",
@@ -451,6 +476,11 @@
   },
   "blog/provenance-is-not-legitimacy.md#c1a0b3fdb4ac": {
     "$value": "There is no key to store, leak, or rotate",
+    "$type": "body",
+    "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
+  },
+  "blog/provenance-is-not-legitimacy.md#cc06d020fa80": {
+    "$value": "Authorization asks what this is allowed to do — a question about behavior at runtime that no signature observes",
     "$type": "body",
     "$description": "extracted prose — blog/provenance-is-not-legitimacy.md"
   },
@@ -1194,6 +1224,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#7dc396d3ac06": {
+    "$value": "This attests origin, not authority — it proves who built the site and that it is intact, not that the build was authorized or safe.",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#811e4cd9bae5": {
     "$value": "Both are being broken onto that shared runtime: two tools today, converging into one door-based system",
     "$type": "body",
@@ -1306,11 +1341,6 @@
   },
   "index.html#b6eef77a81e1": {
     "$value": "Partial \n A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate. — the sign→verify loop is tested but opt-in today; gh, external reads, and egress are policy-gated, not yet signed",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#b86533ddd41e": {
-    "$value": "This proves who built the site and that it is intact — it does not prove the build was safe.",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

@@ -28,6 +28,8 @@ A recent supply-chain worm made this concrete. It mints an OIDC token at runtime
 
 So the honest reading of any green badge is narrow. It attests identity and integrity. It does not attest intent. A log entry is not trust by itself, either: the strength of a transparency log is not that it blocks bad entries, but that it makes them *monitorable*. The security shows up only when someone watches the log for their own identity appearing when they did not publish — which is, notably, one of the few controls that actually caught the worm.
 
+Put precisely: this is **authentication**, not **authorization**, and the two are orthogonal. Authentication asks *who* — and a signature checked against a transparency log answers that statically, after the fact. Authorization asks *what this is allowed to do* — a question about behavior at runtime that no signature observes. A build can be impeccably authenticated and still act outside what it was ever meant to. Closing that second gap takes a different mechanism: a capability boundary that checks each privileged action as it happens — which is the rest of what Bounded Systems is for. The badge attests origin, not authority.
+
 ## What this site claims, graded
 
 - **Enforced** — at deploy time a manifest of the whole site is keyless-signed, and the built site ships to GHCR as a signed OCI artifact; both Rekor entries are public. `cosign verify-blob` plus `sha256sum -c` confirms identity and integrity of the live bytes; `cosign verify` checks the pulled artifact. If signing breaks, the deploy step fails.
