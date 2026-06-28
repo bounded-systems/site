@@ -1034,6 +1034,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#0b49ecc9acc8": {
+    "$value": "This attests origin, not authority — it proves who built the site and that it is intact, not that the build was authorized or safe",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#0e5207905938": {
     "$value": "Read the one idea \n guest-room on GitHub",
     "$type": "body",
@@ -1041,6 +1046,11 @@
   },
   "index.html#0ee1277fdb93": {
     "$value": "Get in touch \n robertdelanghe.dev \n github.com/bounded-systems",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#134eddf8bdea": {
+    "$value": "It is bounded separately: one capability seam per kind of ambient power, attenuate-only tokens that narrow but never widen, an explicit deny set, and egress gated through brokers — enforced at the boundary, not granted by default.",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1204,6 +1214,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#783e79012bd1": {
+    "$value": "Authority is the other axis — what the running agent is permitted to do, the thing provenance is silent on",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#7a09673e8787": {
     "$value": "I keep myself as honest as I keep the agents.",
     "$type": "body",
@@ -1226,11 +1241,6 @@
   },
   "index.html#7c3e7123a6ff": {
     "$value": "Colophon \n Built by Robert DeLanghe — in public, against running code",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#7dc396d3ac06": {
-    "$value": "This attests origin, not authority — it proves who built the site and that it is intact, not that the build was authorized or safe.",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
