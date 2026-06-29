@@ -11,7 +11,9 @@
     "sbom": "`npm run build` runs scripts/gen-sbom.mjs (deterministic SPDX-2.3) then vendor/conformance-kit/gates/sbom/check-sbom.mjs (well-formed + complete: pinned set ⊆ SBOM ⊆ pinned set), re-asserted as a named fail-closed step in brand-checks.yml; deploy.yml keyless-signs the SBOM blob (cosign sign-blob → dist/sbom.spdx.json.sigstore.json).",
     "signedReleaseManifest": "deploy.yml runs vendor/conformance-kit/integrity/gen-sitemanifest.mjs to content-address the whole site to dist/site.sha256, then keyless-signs it (cosign sign-blob → dist/site.sha256.sigstore.json); the post-deploy step + the standalone verify.mjs re-fetch the live edge and fail closed unless prod serves that exact signed manifest.",
     "contentDigests": "deploy.yml runs scripts/emit-artifacts.mjs, which writes RFC 9530 Repr-Digest representation digests (over the exact served bytes of each canonical HTML route) into dist/_headers, covered by the signed whole-site manifest.",
-    "reproducibleBuild": "`nix build .#site` (deploy.yml) is a pure, hermetic function of the contracts + the flake.lock-pinned toolchain + brand submodule — same inputs, same bytes; the brand-pins-agree job blocks if flake.lock and the submodule diverge."
+    "reproducibleBuild": "`nix build .#site` (deploy.yml) is a pure, hermetic function of the contracts + the flake.lock-pinned toolchain + brand submodule — same inputs, same bytes; the brand-pins-agree job blocks if flake.lock and the submodule diverge.",
+    "agentHeuristic": "a11y-heuristic.yml / `npm run a11y-heuristic` — vendor/conformance-kit/gates/a11y-heuristic-gate.mjs runs a static heuristic pass over every built page: ARIA landmarks, interactive element accessible names, heading hierarchy, image alts, skip-nav, tabindex sanity, inline focus-ring removal, invalid ARIA roles. HONEST LABELING: AGENT/STATIC HEURISTIC — NOT AT-user testing. a11y.wcag22-aa-manual stays not-assessed.",
+    "focusBudget": "a11y-heuristic.yml — vendor/conformance-kit/gates/cognitive/focus-budget-gate.mjs runs COGA Obj-5 proxy: (A) content density (Coleman-Liau grade 12.9 > threshold 10, avg sentence 25.1 > threshold 20, jargon 16 terms/2331 words ≈ 0.69/100 > threshold 0.5) and (B) DOM interaction patterns (all patterns met). Measured baseline: 2331 words, 31 acronym types, 16 unexpanded jargon terms. Gate reports not-yet-met honestly. AGENT/STATIC PROXY for COGA Obj-5 — NOT COGA usability testing. cognitive.coga-usability-testing stays not-assessed."
   },
 
   "loneFindings": [],
@@ -25,6 +27,38 @@
     "reproducibleBuild": { "reproducible": true },
     "sbom": { "present": true, "valid": true, "complete": true, "signed": true },
     "signedReleaseManifest": { "present": true, "signed": true },
-    "contentDigests": { "reprDigestHeaders": true }
+    "contentDigests": { "reprDigestHeaders": true },
+    "agentHeuristic": {
+      "_note": "AGENT/STATIC HEURISTIC — NOT AT-user testing. Machine-checkable properties only. Run: npm run a11y-heuristic. a11y.wcag22-aa-manual stays not-assessed.",
+      "landmarksPresent": true,
+      "interactiveNamesClean": true,
+      "headingHierarchyClean": true,
+      "imagesAltClean": true,
+      "focusRingClean": true,
+      "errors": 0,
+      "warnings": 0,
+      "pages": 7
+    },
+    "focusBudget": {
+      "_note": "AGENT/STATIC PROXY for COGA Obj-5 — NOT COGA usability testing. Measured baseline: 2331 words, grade 12.9, avg sentence 25.1, 16 unexpanded jargon terms. All three content density thresholds exceeded → not-yet-met. DOM interaction patterns: all met.",
+      "contentDensity": {
+        "grade": 12.9,
+        "avgSentenceLength": 25.1,
+        "jargonPer100": 0.69,
+        "thresholdsMet": false,
+        "breaches": ["readingGrade", "avgSentenceLength", "jargonDensity"]
+      },
+      "interactionPatterns": {
+        "autoDialogOnLoad": false,
+        "autoplayMedia": false,
+        "timeLimits": false,
+        "focusRingRemoved": false,
+        "animationUnguarded": false,
+        "ariaCurrent": true,
+        "patternsMet": true
+      },
+      "thresholdsMet": false,
+      "status": "not-yet-met"
+    }
   }
 }
