@@ -1,0 +1,21 @@
+content/strings.json
+  s_0e0b4d6cd22542::t_b72c859024d029 7-11
+content/marketing.feature
+  s_0e0b4d6cd22542::t_169606b6a0d4db 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "09c09563c12e0b0a5c7a03260e78abfc7c1a4f58",
+  "prompts": {},
+  "sessions": {
+    "s_0e0b4d6cd22542": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "25ca02d8-0ea9-405f-8441-40cf7bf0ee57",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
