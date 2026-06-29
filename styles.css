@@ -291,7 +291,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .proof-card { text-decoration: none; padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-3); }
 .proof-card__head { display: flex; align-items: center; justify-content: space-between; }
 .proof-card__name { font-family: var(--bs-font-mono); font-size: 16px; font-weight: 600; color: var(--bs-color-forest); }
-.proof-card__title { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--bs-color-ink); }
+.proof-card__title { font-size: var(--text-title); font-weight: 600; letter-spacing: -0.01em; color: var(--bs-color-ink); margin: 0; }
 .proof-card__body { font-size: 15px; line-height: 1.55; color: var(--bs-color-ink-soft); }
 .proof-card__more { font-family: var(--bs-font-mono); font-size: 12.5px; color: var(--bs-color-forest); margin-top: var(--space-1); }
 .tag {
@@ -309,7 +309,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
 
 .seams { padding: var(--space-8); }
 .seams__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-1); flex-wrap: wrap; gap: var(--space-2); }
-.seams__title { font-size: 18px; font-weight: 600; }
+.seams__title { font-size: var(--text-title); font-weight: 600; margin: 0; }
 .seams__pkg { font-family: var(--bs-font-mono); font-size: 12px; color: var(--bs-color-ink-mono); min-width: 0; }
 /* On narrow viewports the right-aligned section tag (e.g. "Sigstore · OIDC ·
    Rekor · GHCR") otherwise hugs the card's edge and looks clipped. Drop it to
