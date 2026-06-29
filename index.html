@@ -135,11 +135,12 @@
     <div class="section__grid">
       <div class="section__num">01&nbsp;/&nbsp;The&nbsp;bet</div>
       <div>
+        <h2 class="u-sr-only" data-str="bet-heading">The bet</h2>
         <p class="statement">Good software splits into parts. Each good idea becomes its own piece with clear edges and a defined contract — a promise about what it does. Those clear edges are also what let you scope an agent to one piece.</p>
         <p class="copy">An agent can author one of those abstractions cheaply now. What nobody has solved yet is keeping many of them honest as they evolve — enforcing contracts between ideas, not just within one.</p>
         <p class="copy copy--last">Most tooling secures a single action. The unsolved work lives in the seams between them. Bounded Systems works there: effects are tied to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure. Contracts can't quietly rot.</p>
         <div class="grade-inline">
-          <span class="grade-inline__label">This claim, graded:</span>
+          <span class="grade-inline__label" data-str="bet-grade-label">This claim, graded:</span>
           <span class="grade grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
           <span class="grade-inline__note">Inter-contract enforcement is the open problem — stated as a bet, not a solved result.</span>
         </div>
@@ -182,7 +183,7 @@
   <section class="honesty" id="honesty">
     <div class="honesty__inner">
       <div class="bs-text-label eyebrow--light">03&nbsp;/&nbsp;Kept&nbsp;honest</div>
-      <h2>Every claim here is graded against the running code.</h2>
+      <h2 data-str="honesty-heading">Every claim here is graded against the running code.</h2>
       <p class="honesty__lead">An instrument built to catch my own over-statements and file the gap. Docs generate from source and fail CI on drift; guest-room's specs execute against its engine. I keep myself as honest as I keep the agents.</p>
       <p class="honesty__stamp" style="font-family:var(--bs-font-mono);font-size:12px;margin:14px 0 0;color:var(--site-on-dark-mono);opacity:.85;letter-spacing:.02em;">
         <!-- stamp:start -->graded against the latest commit<!-- stamp:end -->
@@ -207,11 +208,11 @@
       <div class="claims">
         <div class="claim">
           <span class="grade grade--on-dark grade--enforced"><span class="grade__dot"></span>Enforced</span>
-          <span class="claim__text">Docs generate from source and fail CI on drift.</span>
+          <span class="claim__text" data-str="claim-docs">Docs generate from source and fail CI on drift.</span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--enforced"><span class="grade__dot"></span>Enforced</span>
-          <span class="claim__text">guest-room's behaviour specs execute against the engine.</span>
+          <span class="claim__text" data-str="claim-specs">guest-room's behaviour specs execute against the engine.</span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--partial"><span class="grade__dot"></span>Partial</span>
@@ -236,24 +237,24 @@
   <!-- PROOF -->
   <section class="wrap section" id="proof">
     <div class="bs-text-label eyebrow" style="margin-bottom:22px;">04&nbsp;/&nbsp;The&nbsp;proof</div>
-    <h2 style="font-size:34px;line-height:1.1;font-weight:600;letter-spacing:-0.02em;margin:0 0 36px;">The proof is the code</h2>
+    <h2 style="font-size:34px;line-height:1.1;font-weight:600;letter-spacing:-0.02em;margin:0 0 36px;" data-str="section-proof">The proof is the code</h2>
 
     <div class="proof-cards">
       <a class="card proof-card" href="https://github.com/bounded-systems/guest-room">
         <div class="proof-card__head">
           <span class="proof-card__name">guest-room</span>
-          <span class="tag tag--green">Flagship</span>
+          <span class="tag tag--green" data-str="proof-tag-flagship">Flagship</span>
         </div>
-        <div class="proof-card__title">The library that scopes what an agent can do</div>
+        <h3 class="proof-card__title" data-str="proof-guest-room-title">The library that scopes what an agent can do</h3>
         <div class="proof-card__body">A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement. Its Gherkin specs execute against the engine, so the docs cannot drift from the code. The model everything else is built on.</div>
         <div class="proof-card__more">Read guest-room&nbsp;&#8599;</div>
       </a>
       <a class="card proof-card" href="https://github.com/bounded-systems/prx">
         <div class="proof-card__head">
           <span class="proof-card__name">prx</span>
-          <span class="tag tag--mute">At scale</span>
+          <span class="tag tag--mute" data-str="proof-tag-at-scale">At scale</span>
         </div>
-        <div class="proof-card__title">The CLI that runs agent tasks at scale</div>
+        <h3 class="proof-card__title" data-str="proof-prx-title">The CLI that runs agent tasks at scale</h3>
         <div class="proof-card__body">guest-room's model run at full scale: capability-scoped agents driving each work unit through one signed, content-addressed pipeline to a merged PR. Git-writes are signed and verified against the keeper; the other seams are wired in-process as imports today.</div>
         <div class="proof-card__more">Read prx&nbsp;&#8599;</div>
       </a>
@@ -262,7 +263,7 @@
           <span class="proof-card__name">claude-box</span>
           <span class="tag tag--mute">The guest</span>
         </div>
-        <div class="proof-card__title">Claude Code, scoped to one room</div>
+        <h3 class="proof-card__title" data-str="proof-claude-box-title">Claude Code, scoped to one room</h3>
         <div class="proof-card__body">The first guest: a Claude Code runtime whose authority is the door references it holds — keeper, scout, concierge, net — and nothing beyond them. Everything else is denied and recorded.</div>
         <div class="proof-card__more">Read claude-box&nbsp;&#8599;</div>
       </a>
@@ -271,7 +272,7 @@
     <div class="card start-here">
       <div class="start-here__head">
         <span class="tag tag--green">Start&nbsp;here</span>
-        <span class="start-here__where">guest-room — the model you can run</span>
+        <span class="start-here__where" data-str="proof-start-here">guest-room — the model you can run</span>
       </div>
       <p class="start-here__lead">Your first move: clone the runtime, then watch its behaviour specs execute against the engine — the same specs that grade the claims above.</p>
       <pre class="code code--cmd"><span class="c"># clone the door runtime</span>
@@ -283,7 +284,7 @@
 
     <div class="card provenance" id="provenance">
       <div class="seams__head">
-        <span class="seams__title">Provenance you can open</span>
+        <h3 class="seams__title" data-str="proof-provenance-heading">Provenance you can open</h3>
         <span class="seams__pkg"><a href="https://in-toto.io" rel="noopener">in-toto</a> &middot; <a href="https://slsa.dev" rel="noopener">SLSA</a> &middot; <a href="https://github.com/secure-systems-lab/dsse" rel="noopener">DSSE</a></span>
       </div>
       <p class="seams__lead">Git-writes carry a signed in-toto / SLSA derivation — a per-actor <a href="https://ed25519.cr.yp.to" rel="noopener">ed25519</a> signature over content-addressed inputs and outputs, recorded in a derivation ledger. Open one:</p>
@@ -300,7 +301,7 @@
 
     <div class="card provenance" id="build-provenance">
       <div class="seams__head">
-        <span class="seams__title">This whole site proves its own build</span>
+        <h3 class="seams__title" data-str="proof-build-heading">This whole site proves its own build</h3>
         <span class="seams__pkg"><a href="https://sigstore.dev" rel="noopener">Sigstore</a> &middot; <a href="https://openid.net/connect/" rel="noopener">OIDC</a> &middot; <a href="https://docs.sigstore.dev/rekor/overview/" rel="noopener">Rekor</a> &middot; <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" rel="noopener">GHCR</a></span>
       </div>
       <p class="seams__lead">At deploy time, the whole site is keyless-signed as a manifest. The built site is also pushed to GHCR as a signed, pullable <a href="https://opencontainers.org" rel="noopener">OCI</a> artifact. GitHub Actions' OIDC identity authenticates to <a href="https://docs.sigstore.dev/fulcio/overview/" rel="noopener">Fulcio</a>. Fulcio mints a one-build certificate that then expires. Both signatures land in the public Rekor log. No stored key. <strong>This attests origin, not authority</strong>: it proves who built it and that it is intact. It does not prove the build was authorized or safe.</p>
@@ -335,7 +336,7 @@
 
     <div class="card seams">
       <div class="seams__head">
-        <span class="seams__title">The capability seams</span>
+        <h3 class="seams__title" data-str="proof-seams-heading">The capability seams</h3>
         <span class="seams__pkg">@bounded-systems/*</span>
       </div>
       <p class="seams__lead">One narrow seam per kind of ambient system power — the single sanctioned access point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and policy stays enforceable.</p>
@@ -393,7 +394,7 @@
   <div class="wrap">
     <section class="colophon">
       <div class="bs-text-label eyebrow--light" style="margin-bottom:24px;">Colophon</div>
-      <h2>Built by Robert DeLanghe — in public, against running code.</h2>
+      <h2 data-str="byline">Built by Robert DeLanghe — in public, against running code.</h2>
       <p>I'm Bobby. I build agent infrastructure and capability-security systems.</p>
       <p><b class="term" data-term="https://bounded.tools/#org">Bounded Systems</b> is where I work out, in the open, how agent-authored software stays trustworthy as it grows. A solo project — every claim on this page graded against the code that backs it.</p>
       <p class="last" data-str="bio-talk">If your team is chewing on the same problem, I'd like to talk.</p>
