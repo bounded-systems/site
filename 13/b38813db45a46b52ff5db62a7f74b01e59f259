@@ -1,0 +1,28 @@
+.github/workflows/brand-checks.yml
+  s_29527a1cf44457::t_ac7b188e7a3489 123-124
+index.html
+  s_29527a1cf44457::t_02c53fdd33f844 394
+data/conformance-evidence.json
+  s_29527a1cf44457::t_6ac8f00ee5b1de 21
+  s_29527a1cf44457::t_ebc086c18e790a 6
+vendor/conformance-kit.lock.json
+  s_29527a1cf44457::t_aa46940419120f 7,28
+vendor/conformance-kit/gates/html-validator-gate.mjs
+  s_29527a1cf44457::t_d7824677a43e74 1-120
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "13b38813db45a46b52ff5db62a7f74b01e59f259",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
