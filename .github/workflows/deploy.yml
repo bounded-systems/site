@@ -94,85 +94,19 @@ jobs:
             echo "oci=$GHCR_REPO@$digest" >> "$GITHUB_OUTPUT"
           '
 
+
+  # DEPLOY: hand the signed artifact to the CANONICAL reusable pipeline (preview → deterministic
+  # preview-URL verify → gated promote) — the same source of truth as robertdelanghe.dev. The
+  # required-reviewers `site-promote` Environment lives in THIS repo, so approval is enforced here.
+  # This ADDS an approval gate bounded.tools didn't have before (was straight build→deploy).
+  # (Pinned to the opt-in-probe branch until bounded-systems/.github#42 merges; then -> @<sha>.)
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-    # Promote only a real, signed artifact, on main.
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.build.outputs.oci != ''
-    steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: DeterminateSystems/nix-installer-action@90bb610b90bf290cad97484ba341453bd1cbefea # v19
-
-      # Deploy only if the token secret is configured — so the pipeline stays
-      # green before the secret is added.
-      - name: Check for deploy secret
-        id: gate
-        env:
-          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: |
-          if [ -n "$CF_TOKEN" ]; then
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::CLOUDFLARE_API_TOKEN not set — signed artifact published, skipped deploy."
-          fi
-
-      # Promote: pull the SIGNED artifact, verify its keyless signature against
-      # this repo's identity, and unpack exactly those bytes into dist/. If verify
-      # fails, the job fails and nothing ships.
-      - name: Pull + verify the signed OCI artifact
-        if: steps.gate.outputs.ready == 'true'
-        env:
-          OCI: ${{ needs.build.outputs.oci }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          nix develop .#deploy --command bash -euo pipefail -c '
-            printf "%s" "$GITHUB_TOKEN" | cosign login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
-            cosign verify "$OCI" \
-              --certificate-identity-regexp "^https://github.com/bounded-systems/site/" \
-              --certificate-oidc-issuer https://token.actions.githubusercontent.com > /dev/null
-            printf "%s" "$GITHUB_TOKEN" | oras login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
-            rm -rf oci-out dist && mkdir -p oci-out dist
-            oras pull "$OCI" -o oci-out
-            tar -xzf oci-out/site.tar.gz -C dist
-          '
-
-      - name: Deploy to Cloudflare Workers
-        if: steps.gate.outputs.ready == 'true'
-        run: nix develop .#deploy --command wrangler deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-
-      # Assert the provenance reached prod: the edge must serve the freshly-signed
-      # whole-site manifest (byte-identical) + provenance.json. Fails loudly if
-      # prod is stale or missing them, so a deploy that drops the provenance can't
-      # pass silently.
-      - name: Verify prod serves the signed provenance
-        if: steps.gate.outputs.ready == 'true'
-        run: |
-          expected=$(sha256sum dist/site.sha256 | cut -d' ' -f1)
-          echo "expected site.sha256=$expected"
-          for i in 1 2 3 4 5; do
-            live=$(curl -fsS https://bounded.tools/site.sha256 | sha256sum | cut -d' ' -f1) || live="(fetch failed)"
-            code=$(curl -fsS -o /dev/null -w '%{http_code}' https://bounded.tools/provenance.json) || code="000"
-            if [ "$live" = "$expected" ] && [ "$code" = "200" ]; then
-              echo "prod serves the freshly-signed whole-site manifest + provenance.json ✓"
-              exit 0
-            fi
-            echo "edge not fresh yet (attempt $i/5): manifest=$live provenance=$code"
-            sleep 10
-          done
-          echo "::error::prod is not serving the freshly-signed provenance (manifest or provenance.json)"
-          exit 1
-
-      # Independent, cryptographic confirmation that prod serves verified bytes: run
-      # the standalone verifier (sigstore-js, in-process bundle verification — no
-      # cosign, no Rekor query API) against the live edge. Fail-closed: if the
-      # deployed site doesn't verify against an allowed identity + the signed
-      # manifest, the deploy fails. Runs after the freshness wait above, so the edge
-      # has already propagated.
-      - name: Cryptographically verify prod (standalone verifier)
-        if: steps.gate.outputs.ready == 'true'
-        run: |
-          npm ci --prefix vendor/conformance-kit
-          node vendor/conformance-kit/integrity/verify/verify.mjs https://bounded.tools
+    if: needs.build.outputs.oci != ''
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@c46a1dc7b8e6b2a9ad146bffb93a80f8689dd34e # main
+    with:
+      oci: ${{ needs.build.outputs.oci }}
+      domain: "https://bounded.tools"
+      identity_regexp: "^https://github.com/bounded-systems/site/"
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

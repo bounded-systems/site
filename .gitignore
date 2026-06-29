@@ -5,3 +5,4 @@ result
 result-*
 .DS_Store
 seed/
+vendor/conformance-kit/integrity/verify/node_modules/
