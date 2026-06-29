@@ -1339,6 +1339,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#7cf0ba906692": {
+    "$value": "The hand-graded claims above are also published as a signed graph &mdash; claims.jsonld &mdash; each carrying its grade, its gap, and the evidence link, secured by the same build signature",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#7ff944b86a94": {
     "$value": "Bounded Systems scopes that down",
     "$type": "body",
