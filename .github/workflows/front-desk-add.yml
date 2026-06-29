@@ -37,15 +37,21 @@ jobs:
       - name: broker not configured — skipping
         if: ${{ vars.FRONT_DESK_BROKER_URL == '' }}
         run: echo "FRONT_DESK_BROKER_URL unset; relying on the central sweep."
+      # Best-effort: front-desk-add must never red-flag a PR — the central sweep
+      # is the backstop, so a transient mint/add failure (e.g. an installation
+      # rate-limit burst) is non-fatal. continue-on-error on both steps; the add
+      # is additionally gated on a non-empty token (claude-box #174 posture).
       - name: Mint Front Desk token via the OIDC broker
         id: app-token
         if: ${{ vars.FRONT_DESK_BROKER_URL != '' }}
+        continue-on-error: true
         uses: bounded-systems/.github/.github/actions/broker-gh-token@4a77867f40419ea5b38f3a3be7c481fa7e0eab84 # broker-gh-token (prx-26bq)
         with:
           app: front-desk
           broker-url: ${{ vars.FRONT_DESK_BROKER_URL }}
       - name: Add to Front Desk
-        if: ${{ vars.FRONT_DESK_BROKER_URL != '' }}
+        if: ${{ vars.FRONT_DESK_BROKER_URL != '' && steps.app-token.outputs.token != '' }}
+        continue-on-error: true
         uses: actions/add-to-project@244f685bbc3b7adfa8466e08b698b5577571133e # v1.0.2
         with:
           project-url: https://github.com/orgs/bounded-systems/projects/2
