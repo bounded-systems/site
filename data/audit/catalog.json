@@ -1014,6 +1014,16 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
+  "content/strings.json#bet-grade-label": {
+    "$value": "This claim, graded:",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#bet-grade-label"
+  },
+  "content/strings.json#bio-talk": {
+    "$value": "If your team is chewing on the same problem, I'd like to talk.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#bio-talk"
+  },
   "content/strings.json#byline": {
     "$value": "Built by Robert DeLanghe — in public, against running code.",
     "$type": "body",
@@ -1034,6 +1044,11 @@
     "$type": "headline",
     "$description": "micro-copy token — content/strings.json#hero-pitch"
   },
+  "content/strings.json#honesty-heading": {
+    "$value": "Every claim here is graded against the running code.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#honesty-heading"
+  },
   "content/strings.json#proof-claude-box-title": {
     "$value": "Claude Code, scoped to one room",
     "$type": "body",
@@ -1044,10 +1059,30 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#proof-guest-room-title"
   },
+  "content/strings.json#proof-provenance-heading": {
+    "$value": "Provenance you can open",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-provenance-heading"
+  },
   "content/strings.json#proof-prx-title": {
     "$value": "The CLI that runs agent tasks at scale",
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#proof-prx-title"
+  },
+  "content/strings.json#proof-start-here": {
+    "$value": "guest-room — the model you can run",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-start-here"
+  },
+  "content/strings.json#proof-tag-at-scale": {
+    "$value": "At scale",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-tag-at-scale"
+  },
+  "content/strings.json#proof-tag-flagship": {
+    "$value": "Flagship",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-tag-flagship"
   },
   "content/strings.json#section-model": {
     "$value": "The model, in running code",
