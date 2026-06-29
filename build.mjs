@@ -39,7 +39,7 @@ const nav = JSON.parse(await readFile(join(root, "data", "nav.jsonld"), "utf8"))
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const renderSite = (items) => items.map((i) =>
   i.kind === "external"
-    ? `<a class="nav__gh" href="${i.url}" rel="noopener">${esc(i.name)}&nbsp;&#8599;</a>`
+    ? `<a class="nav__gh" href="${i.url}" rel="noopener">${esc(i.name)}&nbsp;&#8599;<span class="u-sr-only"> (external site)</span></a>`
     : `<a href="${i.url}">${esc(i.name)}</a>`
 ).join("\n          ");
 const renderToc = (items) =>

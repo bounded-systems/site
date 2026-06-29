@@ -69,6 +69,12 @@ em { font-style: normal; color: var(--bs-color-forest); }
    distinct labelled <nav> in the accessibility tree. */
 .nav__links > nav { display: contents; }
 .nav__sep { width: 1px; align-self: center; height: 18px; background: var(--bs-color-line); }
+/* visually hidden, still announced by assistive tech — used to spell out
+   "external" / "opens email" cues that the ↗ glyph only hints at visually. */
+.u-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
 .nav__gh {
   font-family: var(--bs-font-mono); font-size: 12px;
   color: var(--bs-color-forest); border: 1px solid var(--site-green-line);
