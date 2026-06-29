@@ -1429,11 +1429,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#8e75b9a3218d": {
-    "$value": "Good software splits into parts",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#8f9af3153667": {
     "$value": "At deploy time, the whole site is keyless-signed as a manifest",
     "$type": "body",
@@ -1701,6 +1696,11 @@
   },
   "index.html#f769333f3db6": {
     "$value": "This one makes it accountable — the authority layer, designed to run alongside the rest.",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#f78209e79f7a": {
+    "$value": "The bet \n Good software splits into parts",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
