@@ -59,10 +59,13 @@
   },
   "conformance.html": {
     "h1": "Conformance, computed against the running build",
-    "outline": "12222222222",
+    "outline": "123333333333",
     "mains": 1,
     "readerOk": null,
     "internalLinks": [
+      "/#build-provenance",
+      "/#build-provenance",
+      "/#build-provenance",
       "/#build-provenance",
       "/#build-provenance",
       "/#build-provenance",
