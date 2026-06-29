@@ -7,7 +7,7 @@
   "scripts": {
     "build": "node build.mjs && node scripts/gen-blog.mjs && node scripts/gen-conformance.mjs && node scripts/gen-sitemap.mjs && node scripts/gen-sbom.mjs && node vendor/conformance-kit/gates/sbom/check-sbom.mjs && node scripts/gen-stamp.mjs && node scripts/obfuscate-email.mjs && node scripts/add-sri.mjs && node scripts/gen-claims.mjs && node scripts/emit-catalog.mjs && node scripts/check-link-graph.mjs dist",
     "conformance": "node scripts/gen-conformance.mjs",
-    "check": "node scripts/verify-vendor.mjs && node brand/tokens/build-tokens.mjs --check && node scripts/gen-seams.mjs --check && node scripts/gen-blog.mjs --check && node scripts/gen-strings.mjs --check && node scripts/gen-claims.mjs --check && node scripts/emit-catalog.mjs --check && node scripts/check-reader.mjs && node scripts/check-seo.mjs",
+    "check": "node scripts/verify-vendor.mjs && node brand/tokens/build-tokens.mjs --check && node scripts/gen-seams.mjs --check && node scripts/gen-blog.mjs --check && node scripts/gen-strings.mjs --check && node scripts/gen-claims.mjs --check && node scripts/emit-catalog.mjs --check && node scripts/check-reader.mjs && node scripts/check-seo.mjs && node scripts/check-node-uniqueness.mjs",
     "strings": "node scripts/gen-strings.mjs",
     "seams": "node scripts/gen-seams.mjs",
     "blog": "node scripts/gen-blog.mjs",
