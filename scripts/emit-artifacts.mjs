@@ -21,7 +21,6 @@
 // Cloudflare control file (excluded from the manifest, served as config, not bytes),
 // so its wall-clock-independent digests stay honest against the served documents.
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { join, resolve } from "node:path";
 import { reprDigest, securityTxt, securityTxtExpires, webManifest, markdownSiblingHeaders } from "../vendor/conformance-kit/emitters/index.mjs";
 
@@ -76,14 +75,12 @@ const routes = [
 
 const blocks = [];
 for (const [route, file] of routes) {
-  const bytes = await readFile(file);
-  // Strong ETag over the exact served bytes — declared in _headers so Cloudflare
-  // serves it on text/html (it already serves the sibling Repr-Digest there; CF
-  // only strips ETags it would otherwise GENERATE for HTML, or that an HTML-mutating
-  // feature rewrites). Lets the RFC 9110 §13.1.2 conditional (If-None-Match → 304)
-  // path be exercised on HTML — provided the zone's HTML-mutating features stay off.
-  const etag = '"' + createHash("sha256").update(bytes).digest("hex").slice(0, 32) + '"';
-  blocks.push(`${route}\n  Repr-Digest: ${reprDigest(bytes)}\n  ETag: ${etag}`);
+  // NOTE: we deliberately do NOT declare an ETag here. Cloudflare strips ETag on
+  // text/html on egress — from every source (a Worker-set one AND a _headers-declared
+  // one), even on a cache MISS with the sibling Repr-Digest passing through — so an
+  // ETag would never reach a client and `integrity.http-rfc9110`'s conditional check
+  // stays honestly not-assessed (the http-probe correctly skips it). Verified live.
+  blocks.push(`${route}\n  Repr-Digest: ${reprDigest(await readFile(file))}`);
 }
 
 const headers = blocks.join("\n") + "\n" + markdownSiblingHeaders();
