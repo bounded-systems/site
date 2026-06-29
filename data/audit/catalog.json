@@ -1029,10 +1029,20 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#byline"
   },
+  "content/strings.json#claim-broker": {
+    "$value": "The agent never holds the credential — a broker daemon does.",
+    "$type": "claim",
+    "$description": "micro-copy token — content/strings.json#claim-broker"
+  },
   "content/strings.json#claim-docs": {
     "$value": "Docs generate from source and fail CI on drift.",
     "$type": "claim",
     "$description": "micro-copy token — content/strings.json#claim-docs"
+  },
+  "content/strings.json#claim-provenance": {
+    "$value": "A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate.",
+    "$type": "claim",
+    "$description": "micro-copy token — content/strings.json#claim-provenance"
   },
   "content/strings.json#claim-specs": {
     "$value": "guest-room's behaviour specs execute against the engine.",
