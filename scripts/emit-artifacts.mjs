@@ -73,14 +73,19 @@ const routes = [
   ...posts.map((f) => [`/blog/${f.replace(/\.html$/, "")}`, join(dist, "blog", f)]),
 ];
 
+// HTML caching policy — a fixed CONSTANT (no clock/derived value, so the build stays
+// deterministic + reproducible). `s-maxage=120` lets the Cloudflare edge cache HTML for
+// 120s so it can answer `If-None-Match` with a `304` FROM CACHE (Cloudflare generates the
+// strong ETag once HTML is cache-eligible — see the `respect_strong_etags` cache rule in
+// bounded-systems/infra cloudflare/terraform). `max-age=0, must-revalidate` keeps BROWSERS
+// always-fresh (they revalidate every visit, getting a cheap 304 — no client staleness).
+// We do NOT declare an ETag here: Cloudflare's cache-generated one is what's served. The
+// policy lives in this deterministic artifact, not a CF-side TTL knob (which respect_origin).
+const HTML_CACHE_CONTROL = "public, max-age=0, s-maxage=120, must-revalidate";
+
 const blocks = [];
 for (const [route, file] of routes) {
-  // NOTE: we deliberately do NOT declare an ETag here. Cloudflare strips ETag on
-  // text/html on egress — from every source (a Worker-set one AND a _headers-declared
-  // one), even on a cache MISS with the sibling Repr-Digest passing through — so an
-  // ETag would never reach a client and `integrity.http-rfc9110`'s conditional check
-  // stays honestly not-assessed (the http-probe correctly skips it). Verified live.
-  blocks.push(`${route}\n  Repr-Digest: ${reprDigest(await readFile(file))}`);
+  blocks.push(`${route}\n  Cache-Control: ${HTML_CACHE_CONTROL}\n  Repr-Digest: ${reprDigest(await readFile(file))}`);
 }
 
 const headers = blocks.join("\n") + "\n" + markdownSiblingHeaders();
