@@ -114,6 +114,10 @@ jobs:
         run: npm ci --prefix vendor/conformance-kit
       - name: Verify the vendored conformance-kit hash-pin
         run: node scripts/verify-vendor.mjs
+      - name: Known vulnerabilities (0 critical/high; re-proves evidence.vulns)
+        env:
+          VULN_OMIT_DEV: "false"
+        run: node vendor/conformance-kit/gates/vuln-gate.mjs
       - name: Build dist/ (full site; generates + checks the SPDX SBOM)
         run: npm run build
       - name: SBOM completeness (SPDX-2.3, pinned-set ⊆ SBOM ⊆ pinned-set)
