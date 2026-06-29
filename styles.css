@@ -64,6 +64,11 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .lock__name { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
 .nav__links { display: flex; align-items: center; gap: 26px; font-size: 13.5px; color: var(--site-ink-2); }
 .nav__links a { text-decoration: none; }
+/* Two landmarks live in the bar — the on-page TOC and the primary site nav.
+   display:contents lets their links flow as one row while keeping each a
+   distinct labelled <nav> in the accessibility tree. */
+.nav__links > nav { display: contents; }
+.nav__sep { width: 1px; align-self: center; height: 18px; background: var(--bs-color-line); }
 .nav__gh {
   font-family: var(--bs-font-mono); font-size: 12px;
   color: var(--bs-color-forest); border: 1px solid var(--site-green-line);
@@ -365,6 +370,8 @@ em { font-style: normal; color: var(--bs-color-forest); }
     box-shadow: 0 12px 32px rgba(12, 90, 66, 0.14);
   }
   .nav__links a { padding: 10px 12px; border-radius: 9px; }
+  /* in the stacked dropdown the separator becomes a full-width rule */
+  .nav__sep { width: auto; height: 1px; align-self: stretch; margin: 4px 0; }
   .nav__gh { text-align: center; }
   /* the disclosure is driven by the button's aria-expanded state (set by nav.js) */
   .nav__burger[aria-expanded="true"] ~ .nav__links { display: flex; }
