@@ -1,0 +1,29 @@
+data/audit/catalog.json
+  s_71a0aecf45d82c::t_2e1993c39bcad5 1132-1133,1137-1138,1147-1148,1152-1153,1162-1163,1182-1183,1187-1188,1207-1211,1222-1226,1237-1246,1252-1256,1277-1281,1292-1296,1307-1316,1377-1378,1392-1396,1402-1406,1412-1416,1447-1448,1457-1461,1467-1476,1502-1503,1507-1508,1537-1538,1587-1591,1612-1616,1622-1626,1632-1633,1637-1638,1647-1651,1662-1671,1682-1683
+vendor/conformance-kit/gates/a11y-heuristic-gate.mjs
+  s_e338dc2aaa8535::t_3dce3c23e6f26a 44,346-352,357-360,362-363,365
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "2d83c3c4815d472fcc4940617b88e47af78cafd4",
+  "prompts": {},
+  "sessions": {
+    "s_71a0aecf45d82c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f6f6e806-c9db-459c-ba56-79aa27861998",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    },
+    "s_e338dc2aaa8535": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a8bc92ed0bbf13bbb",
+        "model": "unknown"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
