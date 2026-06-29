@@ -1,0 +1,49 @@
+scripts/gen-conformance.mjs
+  s_98e316d0b3248a::t_28cfb0322d6536 25-28
+data/conformance-evidence.json
+  s_98e316d0b3248a::t_5bf5526e1508cf 18
+  s_98e316d0b3248a::t_c61e0038bb049d 5
+  s_98e316d0b3248a::t_be65ab6f952796 2
+index.html
+  s_98e316d0b3248a::t_23244472dfea99 270
+  s_98e316d0b3248a::t_85569c92b2642f 287
+  s_98e316d0b3248a::t_de072a11787d45 320
+styles.css
+  s_98e316d0b3248a::t_3dc65b52250a0b 4
+  s_98e316d0b3248a::t_47c2cc56d878b2 21
+package.json
+  s_98e316d0b3248a::t_80603731895625 26,28-29
+  s_98e316d0b3248a::t_464e8a85bf1297 17
+.github/workflows/axe.yml
+  s_98e316d0b3248a::t_07b0e72e08d80d 1-47
+package-lock.json
+  s_98e316d0b3248a::t_b5ee4b5f9c50bf 11,13-14,19-31,1198-1207,1383-1429
+vendor/conformance-kit.lock.json
+  s_c4318117f42b02::t_eac0339350f0e2 7,23
+vendor/conformance-kit/gates/axe-gate.mjs
+  s_98e316d0b3248a::t_cc7ab56cb22c8c 1-325
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "a4e9f54b5e01f976d3cb2d6b28f1bedc4251aa52",
+  "prompts": {},
+  "sessions": {
+    "s_98e316d0b3248a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8db980ee-eb6b-4866-832b-f795cef7f33c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    },
+    "s_c4318117f42b02": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b707ec58-424b-452d-b628-e6eb4bd39018",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
