@@ -110,6 +110,8 @@ jobs:
           node-version: "22"
       - name: Install
         run: npm ci
+      - name: Known vulnerabilities (0 critical/high, re-proves the committed evidence)
+        run: node scripts/check-vulns.mjs
       - name: Install conformance-kit gate deps
         run: npm ci --prefix vendor/conformance-kit
       - name: Verify the vendored conformance-kit hash-pin
