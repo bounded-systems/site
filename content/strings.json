@@ -17,5 +17,7 @@
   "bet-grade-label": { "$value": "This claim, graded:", "$description": "Inline grade label on the bet." },
   "bio-talk": { "$value": "If your team is chewing on the same problem, I'd like to talk.", "$description": "Colophon bio — contact prompt." },
   "claim-docs": { "$value": "Docs generate from source and fail CI on drift.", "$description": "Honesty claim (ENFORCED) — typed `claim`, grounded in content/grounding.json." },
-  "claim-specs": { "$value": "guest-room's behaviour specs execute against the engine.", "$description": "Honesty claim (ENFORCED) — typed `claim`, grounded in content/grounding.json." }
+  "claim-specs": { "$value": "guest-room's behaviour specs execute against the engine.", "$description": "Honesty claim (ENFORCED) — typed `claim`, grounded in content/grounding.json." },
+  "claim-provenance": { "$value": "A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate.", "$description": "Honesty claim (PARTIAL) — mechanisms verified in ocap-provenance/prx/anchored-chain; grounded; gap carried by the PARTIAL grade." },
+  "claim-broker": { "$value": "The agent never holds the credential — a broker daemon does.", "$description": "Honesty claim (PARTIAL) — verified in keeperd/daemon.ts + claude-box CAPABILITIES.md; grounded; macOS transport gap carried by the PARTIAL grade." }
 }

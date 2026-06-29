@@ -6,5 +6,12 @@
   "reproducible build",
   "sbom",
   "signed release manifest",
-  "content digests"
+  "content digests",
+  "in-toto",
+  "slsa",
+  "signed per-actor",
+  "content-addressed in a derivation ledger",
+  "fail-closed at the merge gate",
+  "broker daemon",
+  "never holds the credential"
 ]

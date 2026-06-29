@@ -75,3 +75,11 @@ Feature: bounded.tools marketing micro-copy
   @marketing
   Scenario: The behaviour-specs claim (enforced) is consistent
     Then surfaces present the claim "guest-room's behaviour specs execute against the engine."
+
+  @marketing
+  Scenario: The provenance claim (partial) is consistent
+    Then surfaces present the claim "A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate."
+
+  @marketing
+  Scenario: The broker-credential claim (partial) is consistent
+    Then surfaces present the claim "The agent never holds the credential — a broker daemon does."
