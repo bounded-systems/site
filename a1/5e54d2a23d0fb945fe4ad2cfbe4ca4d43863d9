@@ -1,0 +1,19 @@
+.github/workflows/notify-front-desk.yml
+  s_dc3042bf98674e::t_3f9424a5bcc1f9 2-6,14-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "a15e54d2a23d0fb945fe4ad2cfbe4ca4d43863d9",
+  "prompts": {},
+  "sessions": {
+    "s_dc3042bf98674e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4a4c41b5-bdca-4635-99d7-b7338a15ff09",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
