@@ -41,7 +41,7 @@
 
 import { readFile, readdir, access, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
-import { join, relative, resolve, extname } from "node:path";
+import { join, relative, resolve, extname, sep } from "node:path";
 import { parseHTML } from "linkedom";
 
 // ── Pure static checks (no browser) ──────────────────────────────────────────
@@ -343,22 +343,26 @@ async function startServer(root) {
   const rootAbs = resolve(root);
   const server = createServer(async (req, res) => {
     try {
-      let urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
-      let file = resolve(join(rootAbs, urlPath));
-      if (urlPath.endsWith("/")) file = join(file, "index.html");
-      // Guard path traversal: resolved path must remain inside rootAbs
-      if (file !== rootAbs && !file.startsWith(rootAbs + "/")) {
-        res.writeHead(403); return res.end("forbidden");
+      const urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
+      // Resolve to a canonical absolute path; handle directory requests before resolving.
+      const candidate = join(rootAbs, urlPath.endsWith("/") ? urlPath + "index.html" : urlPath);
+      const file = resolve(candidate);
+      // Guard path traversal: resolved path must remain inside rootAbs.
+      if (!file.startsWith(rootAbs + sep) && file !== rootAbs) {
+        res.writeHead(403); return res.end("Forbidden");
       }
       let buf;
       try { buf = await readFile(file); }
       catch {
-        const withHtml = file + ".html";
-        try { buf = await readFile(withHtml); file = withHtml; }
+        // Try appending .html; re-resolve and re-check bounds.
+        const fileHtml = resolve(file + ".html");
+        if (!fileHtml.startsWith(rootAbs + sep)) { res.writeHead(404); return res.end("not found"); }
+        try { buf = await readFile(fileHtml); }
         catch { res.writeHead(404); return res.end("not found"); }
+        res.writeHead(200, { "content-type": MIME[extname(fileHtml).toLowerCase()] || "application/octet-stream" });
+        return res.end(buf);
       }
-      const ext = extname(file).toLowerCase();
-      res.writeHead(200, { "content-type": MIME[ext] || "application/octet-stream" });
+      res.writeHead(200, { "content-type": MIME[extname(file).toLowerCase()] || "application/octet-stream" });
       res.end(buf);
     } catch { res.writeHead(500); res.end("Internal server error"); }
   });
