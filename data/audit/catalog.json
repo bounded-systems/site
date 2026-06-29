@@ -1039,16 +1039,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#0e5207905938": {
-    "$value": "Read the one idea \n guest-room on GitHub",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#0ee1277fdb93": {
-    "$value": "Get in touch \n robertdelanghe.dev \n github.com/bounded-systems",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#134eddf8bdea": {
     "$value": "It is bounded separately: one capability seam per kind of ambient power, attenuate-only tokens that narrow but never widen, an explicit deny set, and egress gated through brokers — enforced at the boundary, not granted by default.",
     "$type": "body",
@@ -1374,6 +1364,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#beac811841e4": {
+    "$value": "Get in touch (opens your email app) \n robertdelanghe.dev (external site) \n github.com/bounded-systems (external site)",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#bf743190ee0f": {
     "$value": "Stated as direction so it can't masquerade as done",
     "$type": "body",
@@ -1421,6 +1416,11 @@
   },
   "index.html#d7b061c6761b": {
     "$value": "A capability model — the idea behind reference monitors and seccomp — in front of an agent's authority",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#dc2484b1b756": {
+    "$value": "Read the one idea \n guest-room on GitHub (external site)",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
