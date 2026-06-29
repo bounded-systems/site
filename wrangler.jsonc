@@ -2,11 +2,19 @@
   // Static-assets Worker for bounded.tools — serves the built dist/ folder.
   // Build: `npm run build` (assembles dist/ from the page + brand submodule).
   // Deploy: `npx wrangler deploy`.
+  //
+  // Canonical routes are served PURE STATIC: with `run_worker_first` unset, a
+  // request that matches a static asset is served directly and `worker.js` is
+  // NOT invoked. The Worker runs only for non-asset paths — it gives the "/c/"
+  // prefix an opt-in conditional-caching variant (ETag + 304 on HTML) via the
+  // ASSETS binding. See worker.js.
   "name": "bounded-tools-site",
   "account_id": "a2ca40f474fa65ed8f751a3efdf74c01",
   "compatibility_date": "2026-06-21",
+  "main": "worker.js",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    "binding": "ASSETS"
   }
 }
