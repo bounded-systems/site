@@ -1,0 +1,26 @@
+data/conformance-evidence.json
+  s_29527a1cf44457::t_3eeaa8c1ac2799 20
+  s_29527a1cf44457::t_ca1ff6d8f21ad1 6
+.github/workflows/brand-checks.yml
+  s_29527a1cf44457::t_542ab29e3c5efe 117-120
+vendor/conformance-kit.lock.json
+  s_29527a1cf44457::t_9d85e6199ef419 7,35
+vendor/conformance-kit/gates/vuln-gate.mjs
+  s_29527a1cf44457::t_1cd22f53f6364a 1-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "d4ca99dcac1b5b4336ee0a4e4394c4adae2cd307",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
