@@ -1,0 +1,27 @@
+data/audit/grounding.json
+  s_0e0b4d6cd22542::t_379dfefbb50fe7 9-16
+content/strings.json
+  s_0e0b4d6cd22542::t_2022b5dba68fd1 20-22
+content/grounding.json
+  s_0e0b4d6cd22542::t_e84e42037912db 2-3,11-19
+content/marketing.feature
+  s_0e0b4d6cd22542::t_0ec98c6e057f43 78-85
+data/audit/catalog.json
+  s_0e0b4d6cd22542::t_379dfefbb50fe7 1032-1036,1042-1046
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "06f414e0d83ff418a92ac3a4b4b87f61b5f340c9",
+  "prompts": {},
+  "sessions": {
+    "s_0e0b4d6cd22542": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "25ca02d8-0ea9-405f-8441-40cf7bf0ee57",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
