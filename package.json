@@ -14,6 +14,7 @@
     "verify-vendor": "node scripts/verify-vendor.mjs",
     "sbom": "node scripts/gen-sbom.mjs && node vendor/conformance-kit/gates/sbom/check-sbom.mjs",
     "shacl": "node vendor/conformance-kit/gates/shacl-runner.mjs contract/jsonld.shapes.ttl dist",
+    "axe": "node vendor/conformance-kit/gates/axe-gate.mjs dist",
     "structure": "STRUCTURE_BASELINE=integrity/structure-audit/structure.json node vendor/conformance-kit/integrity/structure-audit/audit.mjs dist --check",
     "semantic": "SEMANTIC_DIR=dist/blog SEMANTIC_SELECTOR=main deno run --allow-read --allow-env --allow-net --config vendor/conformance-kit/gates/semantic/deno.json vendor/conformance-kit/gates/semantic/gate.ts",
     "artifacts": "node scripts/emit-artifacts.mjs",
@@ -22,7 +23,10 @@
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
     "an-array-of-english-words": "^2.0.0",
+    "axe-core": "^4.10.0",
+    "playwright": "^1.48.0",
     "wrangler": "^4",
     "write-good": "^1.0.8"
   }

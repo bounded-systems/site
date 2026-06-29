@@ -4,7 +4,7 @@
   "commit": "bf20952d61e4e536d01ea64c7f0210266c5286c5",
   "fetched": "2026-06-28",
   "vendoredTo": "vendor/conformance-kit/",
-  "note": "Hash-pinned, vendored copy of bounded-systems/conformance-kit (mirrors the bdelanghe/site vendor/*/provenance.json shape). Re-vendor by copying the kit at the pinned commit; verify before use with `node scripts/verify-vendor.mjs`, which re-hashes each file below and fails closed on any mismatch. 2026-06-28: re-vendored to add the conformance-projection gates (gates/conformance-report.mjs + the zero-dep lone web-build model in gates/conformance/), byte-identical to the copy shipped in bdelanghe/site; their sha256 pins are added below.",
+  "note": "Hash-pinned, vendored copy of bounded-systems/conformance-kit (mirrors the bdelanghe/site vendor/*/provenance.json shape). Re-vendor by copying the kit at the pinned commit; verify before use with `node scripts/verify-vendor.mjs`, which re-hashes each file below and fails closed on any mismatch. 2026-06-28: re-vendored to add the conformance-projection gates (gates/conformance-report.mjs + the zero-dep lone web-build model in gates/conformance/), byte-identical to the copy shipped in bdelanghe/site; their sha256 pins are added below. 2026-06-28: added gates/axe-gate.mjs (the axe-core a11y gate), byte-identical to conformance-kit PR #6 / the copy in bdelanghe/site; its sha256 pin is added below.",
   "files": {
     ".gitignore": "sha256:5f6adeaed232a001b6801f8a4e611ea490adcd7ab279e04d1841d92a30a72d21",
     "LICENSE": "sha256:559e93c466421832cdcfe7a000d0c19cdb2cec9d24bfb9b41f7c5bd9d448f65e",
@@ -20,6 +20,7 @@
     "fixtures/site/index.html": "sha256:50617e9438deac8247d4a37e10df08f86179dab08947621b6f4f086bee3df90f",
     "fixtures/site/robots.txt": "sha256:1626492e9355a23eb133fa20856d90d05546d6bf76f61021cce94b4a1280ef47",
     "fixtures/site/sitemap.xml": "sha256:5066e5bdbb7e870b96a6c1129c7896a02cf6696af77ea707b414276225983d71",
+    "gates/axe-gate.mjs": "sha256:a8b19486e4e2379310112cad7390ac86abde885a162172e2ade9cb4d902ada79",
     "gates/commonmark-runner.mjs": "sha256:bbc05d54d426e9f56337fa1c9e958f452e5d32e60a0bd3a2ab60191a8ab7eab3",
     "gates/conformance-report.mjs": "sha256:bb7e494d3ced672b5b5ba500289f9e9d31bea201813824bd5aed81156020d66a",
     "gates/conformance/conformance.mjs": "sha256:5d17bea295458433860e9774728e06981bba3a947e969ab23ebb75dd26ecefbb",

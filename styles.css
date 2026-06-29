@@ -1,7 +1,7 @@
 /* bounded.tools — site styles. Brand tokens (var(--bs-*)) come from the
    brand submodule: brand/tokens/tokens.css. Site-only shades live here. */
 :root {
-  --site-forest-mute: #7FB8A2;
+  --site-forest-mute: #A7D2BF;
   --site-cream: #CFE4DA;
   --site-ink-2: #3C4A42;
   --site-dark: var(--bs-color-ink);
@@ -18,7 +18,7 @@
   --site-on-dark-ok: #7FE0B0;
   --site-on-dark-warn: #E6B45C;
   /* code-block syntax (on dark) */
-  --site-code-comment: #6F9F8C;
+  --site-code-comment: #7DAE9A;
   --site-code-string: #E8C98A;
   --site-code-ok: #9FE3C4;
   /* light surface tints */
