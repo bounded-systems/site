@@ -1019,6 +1019,11 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#bet-grade-label"
   },
+  "content/strings.json#bet-heading": {
+    "$value": "The bet",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#bet-heading"
+  },
   "content/strings.json#bio-talk": {
     "$value": "If your team is chewing on the same problem, I'd like to talk.",
     "$type": "body",
@@ -1069,6 +1074,11 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#honesty-heading"
   },
+  "content/strings.json#proof-build-heading": {
+    "$value": "This whole site proves its own build",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-build-heading"
+  },
   "content/strings.json#proof-claude-box-title": {
     "$value": "Claude Code, scoped to one room",
     "$type": "body",
@@ -1089,6 +1099,11 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#proof-prx-title"
   },
+  "content/strings.json#proof-seams-heading": {
+    "$value": "The capability seams",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-seams-heading"
+  },
   "content/strings.json#proof-start-here": {
     "$value": "guest-room — the model you can run",
     "$type": "body",
@@ -1103,6 +1118,11 @@
     "$value": "Flagship",
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#proof-tag-flagship"
+  },
+  "content/strings.json#section-graph": {
+    "$value": "Every capability is a typed node; the edges are how they compose.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#section-graph"
   },
   "content/strings.json#section-model": {
     "$value": "The model, in running code",
