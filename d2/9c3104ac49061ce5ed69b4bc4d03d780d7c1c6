@@ -1,0 +1,21 @@
+vendor/conformance-kit.lock.json
+  s_11b38b7b21408c::t_3ab0ad3622774c 23
+vendor/conformance-kit/gates/a11y-heuristic-gate.mjs
+  s_11b38b7b21408c::t_35b9edecb3c67a 349-352,355-357,359-362,364
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "d29c3104ac49061ce5ed69b4bc4d03d780d7c1c6",
+  "prompts": {},
+  "sessions": {
+    "s_11b38b7b21408c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-aff0a7797842838f5",
+        "model": "unknown"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
