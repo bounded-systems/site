@@ -1,0 +1,27 @@
+.github/workflows/deploy.yml
+  s_4ccf8ec3ddcbc8::t_75f7b7db9ca38b 97-102,105-112
+.gitignore
+  s_4ccf8ec3ddcbc8::t_9916e860231af4 8
+vendor/conformance-kit/integrity/verify/package-lock.json
+  s_4ccf8ec3ddcbc8::t_43dfe15988032b 1-1207
+vendor/conformance-kit/integrity/verify/package.json
+  s_4ccf8ec3ddcbc8::t_5148eb24228424 2,4-5,7-9
+vendor/conformance-kit/integrity/verify/verify.mjs
+  s_4ccf8ec3ddcbc8::t_65b15697ff19f4 25,80-86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "086ce78cec975904dee27347d6e32c76f5ba99dc",
+  "prompts": {},
+  "sessions": {
+    "s_4ccf8ec3ddcbc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "684a1b39-b25c-4f45-ac97-97af68184b7a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
