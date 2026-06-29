@@ -52,10 +52,65 @@ merits (it improves the site regardless of the testing decision):
   [agent pre-screen findings](coga-prescreen-findings.md) — retained as a
   pre-test backlog should real-participant testing be picked back up.
 
+## External-evidence providers (for when this reopens)
+
+The row needs a **named independent verifier** running real-participant testing —
+not just recruitment. The useful question is therefore "who recruits
+cognitive/learning-disability participants, **moderates**, *and* signs an
+independent report." Three real options, ranked by how cleanly each satisfies that
+gate:
+
+| Provider | Cognitive/learning testers | Moderates? | Independent report (= the verifier) | Fit for the gate |
+|---|---|---|---|---|
+| **[Knowbility AccessWorks](https://knowbility.org/services/accessworks)** (nonprofit) | Yes — explicitly recruits testers with "a cognitive or neurological condition" | Yes — full-service recruit + moderate | Yes — "we will moderate your usability test and provide you with a report of findings" | **Best.** One vendor supplies participants + moderation + an independent third-party report → satisfies the named-verifier requirement directly. This is the AccessWorks route from the original recruitment brief. |
+| **[Fable (Engage)](https://makeitfable.com/accessibility-testing-fable-engage/)** | Yes — testers "with cognitive accessibility needs related to memory, learning, and focus" | Engage = moderated sessions | Not explicit — more a platform than an independent auditor | Good for evidence; verifier-independence is weaker (you'd run/interpret). |
+| **[User Interviews](https://www.userinterviews.com/accessibility-research)** | Yes — 415k+ participants with accessibility characteristics incl. cognitive | Recruitment-first (you moderate) | No — recruit-only | Cheapest/fastest, but you moderate → cannot cleanly claim independent verification. |
+
+### Cost reality
+
+Neither AccessWorks nor Fable publishes per-participant pricing — **both are
+quote-only** (AccessWorks sends a statement of work; Fable is "book a call"). That
+is itself the answer to the budget half of the original decision gate: **a number
+cannot be set without an RFQ.** Participant incentives for disability UX research
+typically run ~$75–150/session, and W3C notes a useful round is achievable with a
+small N (5–8) on a modest budget — so a first round is plausibly low-four-figures
+all-in, but the binding number comes from a quote.
+
 ## To reopen
 
-Reopening means restarting the real-participant track: choose a recruitment route
-and budget, recruit 5–8 participants across a range of profiles, run moderated
-think-aloud sessions over the task scenarios, and record the result in the lone
-conformance envelope with an independent verifier named. Only then does the row
-move off `not-assessed`.
+Reopening means restarting the real-participant track: choose a provider/route,
+recruit 5–8 participants across a range of profiles, run moderated think-aloud
+sessions over the [six task scenarios](coga-test-tasks.md), and record the result
+in the lone conformance envelope with an **independent verifier named**. Only then
+does the row move off `not-assessed`.
+
+**The zero-commit first step** is an RFQ to AccessWorks — it returns the missing
+budget number *and* the independent-report path without committing spend. Draft,
+ready to send to `aw-services@knowbility.org`:
+
+> **Subject:** RFQ — moderated COGA usability test, 5–8 participants (cognitive/learning disabilities)
+>
+> Hi AccessWorks team,
+>
+> We run bounded.tools, a small static documentation site, and want a moderated
+> usability test with **people who have cognitive and/or learning disabilities**,
+> across a range of profiles. We're seeking your full-service option: recruitment,
+> moderation, and an independent report of findings.
+>
+> - **Scope:** ~5–8 participants, one round; remote, moderated ~45–60 min
+>   think-aloud sessions.
+> - **Protocol:** six predefined task scenarios over the site's critical journeys
+>   (we'll share the task list and the live URL).
+> - **Deliverable we need:** your independent report of findings — task
+>   completion, facilitator-rescue events, and observed barriers — which we'll
+>   record as external conformance evidence with AccessWorks named as the
+>   independent verifier.
+>
+> Could you send a statement of work and quote (incl. participant incentives) for
+> this scope, plus rough lead time? Happy to hop on a call.
+>
+> Thanks,
+> Robert DeLanghe — bounded.tools
+
+Logging the returned quote here converts this decision from "called off for lack
+of a number" to "paused, with a real number and verifier path on file."
