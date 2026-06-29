@@ -1,0 +1,36 @@
+name: link-check
+
+# External-link liveness MONITOR — NOT a build gate.
+#
+# Internal links are gated hermetically by the structure-audit (0 broken internal
+# links, every page in one connected graph). External links depend on the public
+# internet, which is neither hermetic nor reproducible — so wiring them into the
+# build would make a green build hostage to someone else's outage. Instead this
+# runs on a schedule (the sibling of rekor-monitor): it builds the site and probes
+# every external link, and the run goes red when a link rots.
+on:
+  schedule:
+    - cron: "23 6 * * 1" # weekly, Monday 06:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: npm ci
+      - name: Install conformance-kit gate deps
+        run: npm ci --prefix vendor/conformance-kit
+      - name: Build dist/ (full site, incl. blog posts)
+        run: npm run build
+      - name: External links are all live
+        run: node scripts/check-external-links.mjs dist
