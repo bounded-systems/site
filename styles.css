@@ -32,7 +32,7 @@
 
 /* ---------- primitives ---------- */
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space-7); }
-.eyebrow { color: var(--bs-color-ink-mono); }            /* pairs with .bs-text-label */
+.eyebrow { color: var(--bs-color-ink-mono); white-space: nowrap; }   /* pairs with .bs-text-label; no-break is presentation, not a &nbsp; in the copy */
 .eyebrow--light { color: var(--site-forest-mute); }
 /* Semantic emphasis — meaning first, rendering chosen here (not the browser default). */
 strong { font-weight: 600; }                                /* genuine importance (key claims) */
