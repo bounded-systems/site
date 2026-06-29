@@ -1039,6 +1039,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#0b62e9b0e2af": {
+    "$value": "Claude Code, scoped to one room \n The first guest: a Claude Code runtime whose authority is the door references it holds — keeper, scout, concierge, net — and nothing beyond them",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#134eddf8bdea": {
     "$value": "It is bounded separately: one capability seam per kind of ambient power, attenuate-only tokens that narrow but never widen, an explicit deny set, and egress gated through brokers — enforced at the boundary, not granted by default.",
     "$type": "body",
@@ -1046,11 +1051,6 @@
   },
   "index.html#1cd9f81d677a": {
     "$value": "GitHub Actions' OIDC identity authenticates to Fulcio, which mints a one-build certificate that then expires; both signatures land in the public Rekor log",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#21a5159937a6": {
-    "$value": "The model, made physical \n Bounded Systems leans on a single mechanism",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1081,11 +1081,6 @@
   },
   "index.html#32efcc50dee6": {
     "$value": "The graph below is generated from that metadata and fails CI on drift; the full node-edge diagram lives on the org profile",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#362214abfe70": {
-    "$value": "Agentic development works by bifurcation: a good idea earns its own bounded abstraction with a defined contract — and that boundary is exactly what lets you scope an agent to it",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1129,6 +1124,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#4ca4cf48de4e": {
+    "$value": "The CLI that runs agent tasks at scale \n guest-room's model run at full scale: capability-scoped agents driving each work unit through one signed, content-addressed pipeline to a merged PR",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#4dafbabd45e3": {
     "$value": "Start here \n guest-room — the model you can run",
     "$type": "body",
@@ -1169,8 +1169,8 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#5f79624888f7": {
-    "$value": "The agent-run work-unit CLI \n guest-room's model run at full scale: capability-scoped agents driving each work unit through one signed, content-addressed pipeline to a merged PR",
+  "index.html#61b00f748b4e": {
+    "$value": "Read the bet &darr; \n guest-room on GitHub (external site)",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1199,6 +1199,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#76e1bf0442d9": {
+    "$value": "Each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#77af5f0dbdfb": {
     "$value": "Backed by cas (content addressing) and anchored-chain (signed derivations); string-audit emits one per audit",
     "$type": "body",
@@ -1224,8 +1229,18 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#7c2257a4d0c4": {
+    "$value": "The model, in running code \n Bounded Systems leans on a single mechanism",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#7c3e7123a6ff": {
     "$value": "Colophon \n Built by Robert DeLanghe — in public, against running code",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#7ff944b86a94": {
+    "$value": "Bounded Systems scopes that down",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1236,6 +1251,16 @@
   },
   "index.html#885ff9450ca6": {
     "$value": "The move is onto guest-room's out-of-process doors — same model, enforced across a socket — with claude-box as the first guest",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#8e75b9a3218d": {
+    "$value": "Good software splits into parts",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#90b8b3dbd548": {
+    "$value": "That point checks your policy, acts or refuses, and records what happened",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1279,11 +1304,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#9b7da21fddbd": {
-    "$value": "Claude Code, plugged into a room \n The first guest: a Claude Code runtime whose authority is the door references it holds — keeper, scout, concierge, net — and nothing beyond them",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#9da25dafbac3": {
     "$value": "Its Gherkin specs execute against the engine, so the docs cannot drift from the code",
     "$type": "body",
@@ -1314,11 +1334,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#a98e04f4f31e": {
-    "$value": "Bounded Systems scopes that down: each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point that checks your policy, acts or refuses, and records what happened",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#ad5ec81a63e7": {
     "$value": "The libraries, as a graph \n Every capability is a typed node; the edges are how they compose",
     "$type": "body",
@@ -1336,11 +1351,6 @@
   },
   "index.html#af71e79828a2": {
     "$value": "Git-writes carry a signed in-toto / SLSA derivation — a per-actor ed25519 signature over content-addressed inputs and outputs, recorded in a derivation ledger",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#aff660b39d0c": {
-    "$value": "The capability model, as a runnable library \n A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1389,6 +1399,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#c221c55d03b6": {
+    "$value": "The library that scopes what an agent can do \n A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#c5b96f90dd2e": {
     "$value": "Their shared contracts and SDKs are lifted into standalone, versioned interfaces — guest-room (the room/door contract), ocap-provenance (the signed predicate), and the wire schemas — so each piece composes against a published boundary, never another's internals",
     "$type": "body",
@@ -1414,13 +1429,13 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#d7b061c6761b": {
-    "$value": "A capability model — the idea behind reference monitors and seccomp — in front of an agent's authority",
+  "index.html#cf605373d29c": {
+    "$value": "Those clear edges are also what let you scope an agent to one piece",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#dc2484b1b756": {
-    "$value": "Read the one idea \n guest-room on GitHub (external site)",
+  "index.html#d9c9f28e3270": {
+    "$value": "It's a well-known security idea: one checkpoint in front of everything the agent can do",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1451,6 +1466,11 @@
   },
   "index.html#e5b75075a255": {
     "$value": "Every claim on this page is graded against the running code.",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#e752a2fcbf96": {
+    "$value": "Each good idea becomes its own piece with clear edges and a defined contract — a promise about what it does",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
