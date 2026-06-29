@@ -86,12 +86,36 @@ for (const [rel, strip] of surfaces) {
   }
 }
 
+// Micro-copy tokens enter the audit as TYPED symbols, so string-audit applies
+// type-scoped checks (cta → action-verb, headline → length/punch, claim →
+// grounding) instead of auditing them as generic body prose. Type is inferred
+// from the token key, mirroring string-audit's own catalog.mjs inference.
+const inferType = (key) =>
+  /tagline/i.test(key) ? "tagline" :
+  /\bname\b/i.test(key) ? "name" :
+  /desc|meta/i.test(key) ? "meta" :
+  /headline|hero/i.test(key) ? "headline" :
+  /cta|button/i.test(key) ? "cta" :
+  /thesis|statement|claim/i.test(key) ? "claim" : "body";
+
+let tokenCount = 0;
+const tokens = JSON.parse(await readFile(join(root, "content", "strings.json"), "utf8"));
+for (const [key, tok] of Object.entries(tokens)) {
+  if (key.startsWith("$") || !tok || typeof tok !== "object" || typeof tok.$value !== "string") continue;
+  catalog[`content/strings.json#${key}`] = {
+    "$value": tok.$value,
+    "$type": inferType(key),
+    "$description": `micro-copy token — content/strings.json#${key}`,
+  };
+  tokenCount++;
+}
+
 // Stable serialization: sorted keys, 2-space indent, trailing newline.
 const sorted = Object.fromEntries(Object.keys(catalog).sort().map((k) => [k, catalog[k]]));
 const catalogJson = JSON.stringify(sorted, null, 2) + "\n";
 const groundingJson = "[]\n"; // no `claim`-typed symbols → grounding unused, emitted for an explicit, present input
 
-const summary = `emit-catalog — ${blockCount} prose blocks from ${surfaces.length} surface(s) → data/audit/catalog.json`;
+const summary = `emit-catalog — ${blockCount} prose blocks from ${surfaces.length} surface(s) + ${tokenCount} typed micro-copy token(s) → data/audit/catalog.json`;
 
 if (CHECK) {
   let current = "";
