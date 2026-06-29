@@ -1,0 +1,19 @@
+data/audit/catalog.json
+  s_98e316d0b3248a::t_2f523df08c6cd3 1022-1026,1077-1081,1102-1106,1122-1126
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "493ee993ea117e3cd0ba1a22b46e30bb3acfb83f",
+  "prompts": {},
+  "sessions": {
+    "s_98e316d0b3248a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8db980ee-eb6b-4866-832b-f795cef7f33c",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
