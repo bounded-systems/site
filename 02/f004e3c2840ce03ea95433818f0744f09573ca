@@ -1,0 +1,26 @@
+scripts/emit-artifacts.mjs
+  s_29527a1cf44457::t_f9d41301d51cd5 24
+  s_29527a1cf44457::t_07357efefdf377 92-129,132
+flake.nix
+  s_29527a1cf44457::t_4e85f3428b7996 55-57
+package.json
+  s_29527a1cf44457::t_9039f5bbf08f07 8
+scripts/add-sri.mjs
+  s_29527a1cf44457::t_2e986f87e95b7e 1-78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "02f004e3c2840ce03ea95433818f0744f09573ca",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
