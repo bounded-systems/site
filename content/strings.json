@@ -4,5 +4,9 @@
   "section-model": { "$value": "The model, in running code", "$description": "Section heading — the capability-model diagram." },
   "section-proof": { "$value": "The proof is the code", "$description": "Section heading — claims graded against running code." },
   "byline": { "$value": "Built by Robert DeLanghe — in public, against running code.", "$description": "Author byline / colophon." },
-  "contact-cta": { "$value": "Get in touch", "$description": "Contact call-to-action label." }
+  "contact-cta": { "$value": "Get in touch", "$description": "Contact call-to-action label." },
+  "cta-read-bet": { "$value": "Read the bet", "$description": "Hero primary CTA — jumps to the bet section." },
+  "proof-guest-room-title": { "$value": "The library that scopes what an agent can do", "$description": "Proof card title — guest-room." },
+  "proof-prx-title": { "$value": "The CLI that runs agent tasks at scale", "$description": "Proof card title — prx." },
+  "proof-claude-box-title": { "$value": "Claude Code, scoped to one room", "$description": "Proof card title — claude-box." }
 }
