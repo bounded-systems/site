@@ -1,0 +1,23 @@
+scripts/check-emphasis.mjs
+  s_71a0aecf45d82c::t_19368a7ea0dfeb 33-40
+  s_71a0aecf45d82c::t_345b76100dbae9 54-62
+  s_71a0aecf45d82c::t_f3907f108601b0 66
+index.html
+  s_71a0aecf45d82c::t_13d22ce16c33b7 307-308
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "b97ed5d5d34d0a1714e5d0c937f132179d98ac6e",
+  "prompts": {},
+  "sessions": {
+    "s_71a0aecf45d82c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f6f6e806-c9db-459c-ba56-79aa27861998",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
