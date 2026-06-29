@@ -1,0 +1,21 @@
+docs/coga-usability-testing-decision.md
+  s_29527a1cf44457::t_187d183690429a 1-61
+data/conformance-evidence.json
+  s_29527a1cf44457::t_debc306d524613 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "685702a12a47c4e7634d1a675a47297992ad9dc3",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
