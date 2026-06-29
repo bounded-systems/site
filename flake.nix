@@ -52,6 +52,9 @@
               #   • check-link-graph — prove the site is one connected graph, emit sitegraph.json.
               # KEEP IN SYNC with package.json "build" (the local-dev mirror of this list).
               node scripts/obfuscate-email.mjs
+              #   • add-sri — pin every self-hosted <script>/<link> by sha384 (browser-enforced
+              #     subresource integrity); MUST run before the Repr-Digest so it's signed.
+              node scripts/add-sri.mjs
               node scripts/check-link-graph.mjs dist
               # Deterministic SPDX SBOM of the supply chain (flake.lock + package-lock).
               # A pure function of the committed lockfiles (no clock, no network) — so it

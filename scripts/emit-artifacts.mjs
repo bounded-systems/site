@@ -21,6 +21,7 @@
 // Cloudflare control file (excluded from the manifest, served as config, not bytes),
 // so its wall-clock-independent digests stay honest against the served documents.
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { join, resolve } from "node:path";
 import { reprDigest, securityTxt, securityTxtExpires, webManifest, markdownSiblingHeaders } from "../vendor/conformance-kit/emitters/index.mjs";
 
@@ -88,12 +89,47 @@ for (const [route, file] of routes) {
   blocks.push(`${route}\n  Cache-Control: ${HTML_CACHE_CONTROL}\n  Repr-Digest: ${reprDigest(await readFile(file))}`);
 }
 
-// Security headers — applied to every route (`/*`), owned here as fixed CONSTANTS so the
-// whole header policy stays in this one deterministic, reproducible artifact. CSP is left
-// out for now: the page loads nav.js + inline scripts and uses inline styles, so a strict
-// CSP needs those hashed/refactored — a separate, browser-tested change.
+// Content-Security-Policy — shipped REPORT-ONLY first: a wrong directive only REPORTS to
+// the console, never blocks, so it can't break the page; flip to enforcing once verified
+// clean in a browser. Generated from the page's actual inline-script sha256 hashes so
+// `script-src` needs no 'unsafe-inline'. `style-src` keeps 'unsafe-inline' (the inline
+// `style=` attributes can't be hashed without a refactor); `connect-src` allows the two
+// endpoints the inline scripts fetch (GitHub freshness + the Rekor self-check). Deterministic
+// (content-derived hashes, sorted).
+async function htmlFilesIn(dir) {
+  const out = [];
+  for (const e of await readdir(dir, { withFileTypes: true })) {
+    const abs = join(dir, e.name);
+    if (e.isDirectory()) out.push(...await htmlFilesIn(abs));
+    else if (e.name.endsWith(".html")) out.push(abs);
+  }
+  return out;
+}
+const scriptHashes = new Set();
+for (const f of await htmlFilesIn(dist)) {
+  const html = await readFile(f, "utf8");
+  for (const m of html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld)[^>]*>([\s\S]*?)<\/script>/g)) {
+    scriptHashes.add("'sha256-" + createHash("sha256").update(m[1]).digest("base64") + "'");
+  }
+}
+const CSP = [
+  "default-src 'self'",
+  `script-src 'self' ${[...scriptHashes].sort().join(" ")}`.trim(),
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self'",
+  "font-src 'self'",
+  "connect-src 'self' https://api.github.com https://rekor.sigstore.dev",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "object-src 'none'",
+].join("; ");
+
+// Security headers — applied to every route (`/*`), owned here so the whole response-header
+// policy stays in this one deterministic, reproducible artifact.
 const SECURITY_HEADERS = [
   "/*",
+  `  Content-Security-Policy-Report-Only: ${CSP}`,
   // Don't let browsers MIME-sniff a response into a different type.
   "  X-Content-Type-Options: nosniff",
   // Send only the origin on cross-origin navigations; full URL same-origin.
