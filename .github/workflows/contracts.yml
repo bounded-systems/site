@@ -1,0 +1,32 @@
+name: contracts
+
+# The pull-shape contract gate: validate each canonical page-data cut (data/*.jsonld)
+# against its typed Zod contract (contract/page.ts). Blocking — a cut whose shape
+# drifts from its declared contract, or grows an undeclared key, fails CI before it
+# can render. Standalone because it needs Deno + npm:zod (pinned by contract/deno.json),
+# so it does not belong in the Node-only brand-checks workflow.
+#
+# Source-side and offline: it reads data/, not dist/, so it needs no build step.
+# This is the typed render-boundary contract — the pull-shape member of the
+# contract family, alongside shacl (source-graph integrity) and semantic (a11y).
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: denoland/setup-deno@e95548e56dfa95d4e1a28d6f422fafe75c4c26fb # v2
+        with:
+          deno-version: v2.x
+      - name: Each page-data cut conforms to its typed contract (drift fails CI)
+        run: >
+          deno run --allow-read
+          --config contract/deno.json
+          contract/gate.ts
