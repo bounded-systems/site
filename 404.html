@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body id="top">
-  <nav class="nav">
+  <header class="nav">
     <div class="nav__inner">
       <a class="lock" href="/">
         <span class="mark mark--rounded" style="width:28px;height:28px;"><img src="/brand/mark/mark-white.svg" width="20" height="20" alt="Bounded Systems"></span>
@@ -22,12 +22,13 @@
       </a>
       <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
       <div class="nav__links" id="nav-menu">
-        <a href="/#bet">The bet</a>
-        <a href="/blog/">Writing</a>
-        <a class="nav__gh" href="https://github.com/bounded-systems">GitHub&nbsp;&#8599;</a>
+        <!-- Primary site nav: same source as every other page (no on-page TOC — the 404 has no sections) -->
+        <nav class="nav__site" aria-label="Main">
+          <!--SITE-NAV-->
+        </nav>
       </div>
     </div>
-  </nav>
+  </header>
   <main class="prose" style="text-align:center; padding-top:96px;">
     <p style="font-size:84px; font-weight:700; letter-spacing:-0.03em; margin:0; line-height:1;">404</p>
     <h1 style="margin-top:8px;">No door here.</h1>

@@ -58,7 +58,7 @@
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- NAV -->
-  <nav class="nav">
+  <header class="nav">
     <div class="nav__inner">
       <a class="lock" href="#top">
         <span class="mark mark--rounded" style="width:28px;height:28px;"><img src="brand/mark/mark-white.svg" width="20" height="20" alt="Bounded Systems"></span>
@@ -66,16 +66,18 @@
       </a>
       <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
       <div class="nav__links" id="nav-menu">
-        <a href="#bet">The bet</a>
-        <a href="#model">The model</a>
-        <a href="#honesty">Honesty</a>
-        <a href="/conformance">Conformance</a>
-        <a href="#proof">Proof</a>
-        <a href="blog/">Writing</a>
-        <a class="nav__gh" href="https://github.com/bounded-systems">GitHub&nbsp;&#8599;</a>
+        <!-- On-page section list (a table of contents, not site nav): home only -->
+        <nav class="nav__toc" aria-label="On this page">
+            <!--DOC-TOC-->
+        </nav>
+        <span class="nav__sep" aria-hidden="true"></span>
+        <!-- Primary site nav (separate pages + external): generated from data/nav.jsonld, identical on every page -->
+        <nav class="nav__site" aria-label="Main">
+          <!--SITE-NAV-->
+        </nav>
       </div>
     </div>
-  </nav>
+  </header>
 
   <!-- HERO -->
   <main class="wrap" id="main">

@@ -7,9 +7,9 @@
     "internalLinks": [
       "/",
       "/",
-      "/#bet",
       "/blog/",
-      "/blog/"
+      "/blog/",
+      "/conformance"
     ]
   },
   "blog/bifurcation-and-inter-contract-enforcement.html": {
@@ -98,6 +98,7 @@
     "mains": 1,
     "readerOk": null,
     "internalLinks": [
+      "/blog/",
       "/conformance",
       "/conformance",
       "/provenance.json",
