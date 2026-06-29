@@ -1,0 +1,41 @@
+vendor/conformance-kit.lock.json
+  s_29527a1cf44457::t_deb09b159af3ba 3-5,7,9,11,25-27,49-52
+vendor/conformance-kit/.gitignore
+  s_29527a1cf44457::t_d5fc6094d29e30 6
+vendor/conformance-kit/README.md
+  s_29527a1cf44457::t_308694da750d2f 15-18,30,42-48,77-88,90,93-100,108-109,116-131,135,141-146
+vendor/conformance-kit/gates/conformance-report.mjs
+  s_29527a1cf44457::t_5fbdb668acf11e 80-81,87-91,98,107
+vendor/conformance-kit/gates/conformance/conformance.mjs
+  s_29527a1cf44457::t_290e9a8c63af41 38-40,61-73,83-90,93,99-105,210-223
+vendor/conformance-kit/gates/conformance/web-build.mjs
+  s_29527a1cf44457::t_7b49785c5e76e1 156-167,351-377,481-483,489,493-496,503-508,538-541
+vendor/conformance-kit/integrity/verify/package-lock.json
+  s_29527a1cf44457::t_f1909e7125cb19 1-1207
+vendor/conformance-kit/integrity/verify/package.json
+  s_29527a1cf44457::t_5e45942c84406f 2,4-5,7-9
+vendor/conformance-kit/integrity/verify/verify.mjs
+  s_29527a1cf44457::t_85eb573b6b8741 25,80-86
+vendor/conformance-kit/package-lock.json
+  s_29527a1cf44457::t_197d82e87e9a27 3,9,14-16,20-24,27-28,36-37,43-67,82-86,88-120,122-141,143-146,149-186,189-269,281-308,318-352,702-713,1102-1131,1134-1137,1140-1192,1226-1237,1292-1313,1331-1389,1406-1418,1431-1442,1536-1541,1554-1571,1590-1645,1669-1706,1731-1742,1776-1869,1876-1887,1999-2002,2005,2008-2011,2013-2016,2018,2024-2031,2034-2191,2243-2258,2260-2261,2264-2267,2270-2277,2279-2288,2291,2294-2299,2330-2335,2371-2420,2565-2582,2642-2650,2675-2704,2730-2820,2856-2893,3041-3091,3137-3148,3166-3194,3233-3241,3273-3476,3491-3503,3511-3513,3516,3525-3542,3549-3561,3571-3594
+vendor/conformance-kit/package.json
+  s_29527a1cf44457::t_cf5f18e360a5bc 3,12-39,44-66,70-72,76-80
+vendor/conformance-kit/test/run.mjs
+  s_29527a1cf44457::t_8c253d2721d948 141-688
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "a2b40e876c5994d0ce5d44e33c35de4554973b48",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
