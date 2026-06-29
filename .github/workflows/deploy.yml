@@ -103,7 +103,7 @@ jobs:
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@fix/optional-http-probe
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@c46a1dc7b8e6b2a9ad146bffb93a80f8689dd34e # main
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
