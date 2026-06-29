@@ -19,3 +19,23 @@ Feature: bounded.tools marketing micro-copy
   @marketing
   Scenario: The claude-box proof card states its function
     Then surfaces present the title "Claude Code, scoped to one room"
+
+  @marketing
+  Scenario: The hero sub-headline is consistent
+    Then surfaces present the hero "Your coding agent wanders. Keep it inside the job you gave it."
+
+  @marketing
+  Scenario: The model section heading is consistent
+    Then surfaces present the heading "The model, in running code"
+
+  @marketing
+  Scenario: The proof section heading is consistent
+    Then surfaces present the heading "The proof is the code"
+
+  @marketing
+  Scenario: The byline is consistent
+    Then surfaces present the byline "Built by Robert DeLanghe — in public, against running code."
+
+  @marketing
+  Scenario: The contact CTA is consistent
+    Then surfaces present the cta "Get in touch"
