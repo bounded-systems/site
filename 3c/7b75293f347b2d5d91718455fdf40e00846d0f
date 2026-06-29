@@ -1,0 +1,19 @@
+docs/coga-protocol-trial.md
+  s_29527a1cf44457::t_1d11c012056c3c 1-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "3c7b75293f347b2d5d91718455fdf40e00846d0f",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
