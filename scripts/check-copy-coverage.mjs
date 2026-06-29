@@ -30,8 +30,10 @@ const html = readFileSync(join(root, "index.html"), "utf8");
 const wired = (html.match(/\bdata-str(?:-md)?="/g) || []).length;
 let debt = 0;
 for (const m of html.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi)) {
-  const text = m[2].replace(/<[^>]+>/g, "").trim();
-  if (text.length > 20 && !/\bdata-str/.test(m[1])) debt++;
+  // Raw inner-content length is a fine proxy for "a substantial body paragraph". We don't
+  // strip tags — this is a metric, not a sanitiser, and a partial tag-strip is both
+  // unnecessary and (per CodeQL js/incomplete-multi-character-sanitization) a smell.
+  if (m[2].trim().length > 40 && !/\bdata-str/.test(m[1])) debt++;
 }
 
 console.log(`copy-coverage — ${wired} single-sourced (floor ${FLOOR}); ${debt} body paragraph(s) still static (tracked debt, blocked on the body-copy approach decision — beads prx-gwr8)`);
