@@ -120,6 +120,8 @@ jobs:
         run: node vendor/conformance-kit/gates/vuln-gate.mjs
       - name: Build dist/ (full site; generates + checks the SPDX SBOM)
         run: npm run build
+      - name: HTML validity (Nu HTML Checker, 0 errors; re-proves evidence.htmlValidator)
+        run: node vendor/conformance-kit/gates/html-validator-gate.mjs dist
       - name: SBOM completeness (SPDX-2.3, pinned-set ⊆ SBOM ⊆ pinned-set)
         run: node vendor/conformance-kit/gates/sbom/check-sbom.mjs
       - name: JSON-LD conforms to the SHACL contract

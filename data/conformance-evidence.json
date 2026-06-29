@@ -3,6 +3,7 @@
 
   "_gates": {
     "axe": "axe.yml — `node vendor/conformance-kit/gates/axe-gate.mjs dist` runs axe-core (WCAG 2.x A/AA ruleset) over every BUILT page in a REAL browser (Playwright's bundled Chromium), so it catches the layout/computed-style rules a jsdom gate cannot — including color-contrast (WCAG 1.4.3). The gate FAILS CLOSED on any serious/critical violation, so `axe: { serious: 0, critical: 0 }` below cannot drift from reality without turning CI red. This backs the AUTOMATABLE a11y criterion only; the manual WCAG 2.2 AA audit (a11y.wcag22-aa-manual) stays not-assessed.",
+    "htmlValidator": "brand-checks.yml `conformance` job / `node vendor/conformance-kit/gates/html-validator-gate.mjs dist` runs the Nu HTML Checker (vnu, the reference conformance checker, as a self-contained Java jar — headless, no network) over every BUILT page and FAILS CLOSED on any error, so `htmlValidator: { errors: 0 }` below cannot drift from reality without turning CI red. Backs html.validator-clean.",
     "vulns": "brand-checks.yml `conformance` job / `VULN_OMIT_DEV=false node vendor/conformance-kit/gates/vuln-gate.mjs` re-runs `npm audit` over the committed package-lock.json (all deps), counts known critical + high advisories, and FAILS CLOSED when that count exceeds 0 — so `vulns: { knownCriticalOrHighVulns: 0 }` below cannot drift from reality without turning CI red (same discipline as the axe gate). Backs security.no-critical-vulns.",
     "loneFindings": "semantic.yml — `deno run vendor/conformance-kit/gates/semantic/gate.ts` over dist/blog (SELECTOR main) blesses every rendered blog DOM with @bounded-systems/lone; the gate is BLOCKING (any error-severity finding fails CI), so 0 error-severity findings (empty array) = the lone-measurable tier-1 criteria (HTML author / WAI-ARIA / WCAG-automatable) + the cognitive interface-complexity budget are met on the blessed DOM.",
     "jsonLdShacl": "brand-checks.yml `conformance` job / `npm run shacl` — vendor/conformance-kit/gates/shacl-runner.mjs validates the schema.org JSON-LD (Organization in index.html, BlogPosting in each post) against contract/jsonld.shapes.ttl and reports conforms:true, 0 violating blocks.",
@@ -17,6 +18,7 @@
 
   "evidence": {
     "axe": { "serious": 0, "critical": 0 },
+    "htmlValidator": { "errors": 0 },
     "vulns": { "knownCriticalOrHighVulns": 0 },
     "jsonLdShacl": { "conforms": true, "blocks": 0 },
     "seoTechnical": { "canonicalOk": true, "titlesUnique": true, "robotsRfc9309Ok": true, "sitemapResolves": true, "brokenInternalLinks": 0 },
