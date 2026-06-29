@@ -47,4 +47,4 @@ This is not hypothetical. The supply-chain worm from earlier this year minted it
 
 Each rung proves a different thing, and naming what each one does *not* prove is the point — not a disclaimer bolted on at the end. State what the mechanism shows, name what it can't, and put the trust where the page can't reach.
 
-*The verifier you can run yourself is [`verify-site`](https://github.com/bounded-systems/site/blob/main/integrity/verify-site.mjs); this build's log entry is one click away at [/rekor](/rekor). Neither asks you to trust this page.*
+*The verifier you can run yourself is [`verify-site`](https://github.com/bounded-systems/site/blob/main/vendor/conformance-kit/integrity/verify-site.mjs); this build's log entry is one click away at [/rekor](/rekor). Neither asks you to trust this page.*
