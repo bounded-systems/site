@@ -113,15 +113,26 @@ for (const [key, tok] of Object.entries(tokens)) {
 // Stable serialization: sorted keys, 2-space indent, trailing newline.
 const sorted = Object.fromEntries(Object.keys(catalog).sort().map((k) => [k, catalog[k]]));
 const catalogJson = JSON.stringify(sorted, null, 2) + "\n";
-const groundingJson = "[]\n"; // no `claim`-typed symbols → grounding unused, emitted for an explicit, present input
+// Grounding source: content/grounding.json maps each genuinely-backed fact to
+// WHY it's backed; we emit its keys as string-audit's flat grounded-terms array.
+// A `claim`-typed symbol passes only if it contains one of these terms — so this
+// file is the honesty boundary (only real, backed facts belong in it).
+let grounded = [];
+try {
+  const g = JSON.parse(await readFile(join(root, "content", "grounding.json"), "utf8"));
+  grounded = Object.keys(g).filter((k) => !k.startsWith("_"));
+} catch { /* no grounding source → empty (claims would fail, as intended) */ }
+const groundingJson = JSON.stringify(grounded, null, 2) + "\n";
 
 const summary = `emit-catalog — ${blockCount} prose blocks from ${surfaces.length} surface(s) + ${tokenCount} typed micro-copy token(s) → data/audit/catalog.json`;
 
 if (CHECK) {
   let current = "";
   try { current = await readFile(CATALOG_PATH, "utf8"); } catch { /* missing → drift */ }
-  if (current !== catalogJson) {
-    console.error("✗ data/audit/catalog.json is stale — run `node scripts/emit-catalog.mjs` and commit.");
+  let currentGround = "";
+  try { currentGround = await readFile(GROUNDING_PATH, "utf8"); } catch { /* missing → drift */ }
+  if (current !== catalogJson || currentGround !== groundingJson) {
+    console.error("✗ data/audit/{catalog,grounding}.json is stale — run `node scripts/emit-catalog.mjs` and commit.");
     process.exit(1);
   }
   console.log(`✓ ${summary} (current)`);
