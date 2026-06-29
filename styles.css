@@ -34,8 +34,10 @@
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space-7); }
 .eyebrow { color: var(--bs-color-ink-mono); }            /* pairs with .bs-text-label */
 .eyebrow--light { color: var(--site-forest-mute); }
-strong { font-weight: 600; }
-em { font-style: normal; color: var(--bs-color-forest); }
+/* Semantic emphasis — meaning first, rendering chosen here (not the browser default). */
+strong { font-weight: 600; }                                /* genuine importance (key claims) */
+em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, not italics */
+.term { font-weight: 600; }                                 /* a defined term/keyword (<b class="term">), not "important" */
 
 .btn-primary {
   display: inline-block; text-decoration: none;
@@ -148,7 +150,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
   border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3);
 }
 .hero h1 {
-  font-size: 52px; line-height: 1.04; font-weight: 600;
+  font-size: var(--text-display); line-height: 1.04; font-weight: 600;
   letter-spacing: -0.03em; color: var(--bs-color-white); margin: 0 0 var(--space-6);
 }
 .hero__lead {
@@ -174,7 +176,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
   padding-top: var(--space-2); position: sticky; top: var(--space-24);
 }
 .section h2 {
-  font-size: 34px; line-height: 1.1; font-weight: 600;
+  font-size: var(--text-h2); line-height: 1.1; font-weight: 600;
   letter-spacing: -0.02em; margin: 0 0 var(--space-3);
 }
 .statement {
@@ -248,7 +250,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .honesty { margin-top: var(--space-24); background: var(--site-dark); }
 .honesty__inner { max-width: var(--maxw); margin: 0 auto; padding: var(--space-20) var(--space-7); }
 .honesty h2 {
-  font-size: 40px; line-height: 1.08; font-weight: 600; letter-spacing: -0.025em;
+  font-size: var(--text-h2); line-height: 1.08; font-weight: 600; letter-spacing: -0.025em;
   color: var(--bs-color-white); margin: 0 0 var(--space-5); max-width: 760px;
 }
 .honesty__lead { font-size: 18px; line-height: 1.6; color: var(--site-on-dark-mute); margin: 0 0 var(--space-12); max-width: 640px; }
@@ -328,7 +330,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
 
 /* ---------- colophon + footer ---------- */
 .colophon { background: var(--bs-color-forest); border-radius: var(--radius-lg); padding: var(--space-16); margin-top: var(--space-24); }
-.colophon h2 { font-size: 36px; line-height: 1.12; font-weight: 600; letter-spacing: -0.02em; color: var(--bs-color-white); margin: 0 0 var(--space-5); max-width: 680px; }
+.colophon h2 { font-size: var(--text-h2); line-height: 1.12; font-weight: 600; letter-spacing: -0.02em; color: var(--bs-color-white); margin: 0 0 var(--space-5); max-width: 680px; }
 .colophon p { font-size: 18px; line-height: 1.6; color: var(--site-cream); margin: 0 0 var(--space-4); max-width: 620px; }
 .colophon p.last { margin-bottom: var(--space-8); }
 .colophon__cta { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
@@ -355,8 +357,8 @@ em { font-style: normal; color: var(--bs-color-forest); }
   /* Lead with the words on a phone — the metaphor figure follows, never leads. */
   .hero__panel { order: 1; }
   .hero { padding: var(--space-12) var(--space-8); }
-  .hero h1 { font-size: 38px; }
-  .honesty h2 { font-size: 30px; }
+  .hero h1 { font-size: var(--text-h1); }
+  .honesty h2 { font-size: var(--text-h2); }
   .colophon { padding: var(--space-10) var(--space-8); }
   /* nav collapses to a burger-toggled dropdown */
   .nav__inner { position: relative; }
@@ -387,22 +389,22 @@ em { font-style: normal; color: var(--bs-color-forest); }
 @media (max-width: 520px) {
   .wrap { padding: 0 var(--space-4); }
   .hero { padding: var(--space-10) var(--space-5); border-radius: var(--radius-lg); }
-  .hero h1 { font-size: 30px; line-height: 1.1; }
+  .hero h1 { font-size: var(--text-h2); line-height: 1.1; }
   .hero__lead { font-size: 16px; }
   .code--hero { font-size: 11.5px; line-height: 1.7; }
   .hero__panel { padding: var(--space-6) var(--space-5); }
   .hero__panel .mark { width: 120px; height: 120px; }
   .hero__panel .mark img { width: 86px; height: 86px; }
   .honesty__inner { padding: var(--space-16) var(--space-4); }
-  .honesty h2 { font-size: 26px; }
+  .honesty h2 { font-size: var(--text-h2); }
   .colophon { padding: var(--space-8) var(--space-6); }
-  .colophon h2 { font-size: 28px; }
+  .colophon h2 { font-size: var(--text-h2); }
 }
 
 /* --- blog / prose --------------------------------------------------------- */
 .prose { max-width: 720px; margin: 0 auto; padding: var(--space-16) var(--space-6) var(--space-24); line-height: 1.7; }
-.prose h1 { font-size: 40px; line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 var(--space-2); }
-.prose h2 { font-size: 24px; letter-spacing: -0.01em; margin: var(--space-10) 0 var(--space-3); }
+.prose h1 { font-size: var(--text-h1); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 var(--space-2); }
+.prose h2 { font-size: var(--text-h3); letter-spacing: -0.01em; margin: var(--space-10) 0 var(--space-3); }
 .prose p { margin: 0 0 var(--space-4); }
 .prose a { color: var(--site-forest); text-underline-offset: 2px; }
 .prose strong { font-weight: 650; }
@@ -420,7 +422,7 @@ em { font-style: normal; color: var(--bs-color-forest); }
 .conf { max-width: 860px; margin: 0 auto; padding: var(--space-20) var(--space-6) var(--space-24); }
 .conf__intro { margin: 0 0 var(--space-8); }
 .conf__intro .eyebrow a { color: inherit; text-decoration: none; }
-.conf h1 { font-size: 38px; line-height: 1.12; letter-spacing: -0.02em; color: var(--bs-color-ink); margin: var(--space-2) 0 var(--space-4); }
+.conf h1 { font-size: var(--text-h1); line-height: 1.12; letter-spacing: -0.02em; color: var(--bs-color-ink); margin: var(--space-2) 0 var(--space-4); }
 .conf__lead { font-size: 17px; line-height: 1.6; color: var(--site-ink-2); margin: 0 0 var(--space-3); max-width: 64ch; }
 .conf__lead a { color: var(--bs-color-forest); text-decoration: none; border-bottom: 1px solid var(--bs-color-forest-soft); }
 .conf__machine { font-family: var(--bs-font-mono); font-size: 12px; color: var(--bs-color-ink-mono); margin: 0; }
