@@ -88,7 +88,27 @@ for (const [route, file] of routes) {
   blocks.push(`${route}\n  Cache-Control: ${HTML_CACHE_CONTROL}\n  Repr-Digest: ${reprDigest(await readFile(file))}`);
 }
 
-const headers = blocks.join("\n") + "\n" + markdownSiblingHeaders();
+// Security headers — applied to every route (`/*`), owned here as fixed CONSTANTS so the
+// whole header policy stays in this one deterministic, reproducible artifact. CSP is left
+// out for now: the page loads nav.js + inline scripts and uses inline styles, so a strict
+// CSP needs those hashed/refactored — a separate, browser-tested change.
+const SECURITY_HEADERS = [
+  "/*",
+  // Don't let browsers MIME-sniff a response into a different type.
+  "  X-Content-Type-Options: nosniff",
+  // Send only the origin on cross-origin navigations; full URL same-origin.
+  "  Referrer-Policy: strict-origin-when-cross-origin",
+  // No framing — anti-clickjacking (CSP frame-ancestors will supersede this later).
+  "  X-Frame-Options: DENY",
+  // HSTS: 2y + subdomains + preload-eligible. Backs the security.hsts-preload criterion
+  // (the domain must also be submitted to hstspreload.org). A real commitment: every
+  // bounded.tools subdomain must stay HTTPS.
+  "  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload",
+  // Deny powerful features the site never uses.
+  "  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+].join("\n");
+
+const headers = SECURITY_HEADERS + "\n" + blocks.join("\n") + "\n" + markdownSiblingHeaders();
 await writeFile(join(dist, "_headers"), headers);
 
 console.log(`✓ artifacts: /.well-known/security.txt · /site.webmanifest · /_headers (${routes.length} Repr-Digest route(s)) → ${process.env.DIST || "dist"}/`);
