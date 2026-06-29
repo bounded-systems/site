@@ -50,7 +50,18 @@
   </style>
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Bounded Systems","url":"https://bounded.tools","description":"Capability security for AI agents — authority drawn at the door, not the process or container. Every claim graded against the running code.","sameAs":["https://github.com/bounded-systems"]}
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://bounded.tools/#org","name":"Bounded Systems","url":"https://bounded.tools","description":"Capability security for AI agents — authority drawn at the door, not the process or container. Every claim graded against the running code.","sameAs":["https://github.com/bounded-systems"]}
+  </script>
+  <!-- Glossary: the domain terms, as a graph. A <b class="term"> may only emphasise a word
+       that resolves to a DefinedTerm here (or to the Organization) — emphasis is grounded
+       in RDF, never decorative. check-emphasis.mjs enforces it. -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"DefinedTermSet","@id":"https://bounded.tools/#glossary","name":"Bounded Systems glossary","hasDefinedTerm":[
+    {"@type":"DefinedTerm","@id":"https://bounded.tools/#term-capability-seam","name":"capability seam","description":"The single sanctioned access point for one kind of system power (git, the shell, the environment, your tools): it checks policy, acts or refuses, and records what happened."},
+    {"@type":"DefinedTerm","@id":"https://bounded.tools/#term-door","name":"door","description":"A capability seam you hold a socket to, never the keys behind it — a scoped reference that grants an action without exposing the authority behind it."},
+    {"@type":"DefinedTerm","@id":"https://bounded.tools/#term-verb","name":"verb","description":"A capability that acts — a package whose role is to do something."},
+    {"@type":"DefinedTerm","@id":"https://bounded.tools/#term-noun","name":"noun","description":"Data that flows — a package whose role is to carry something."}
+  ]}
   </script>
 </head>
 <body id="top">
@@ -90,7 +101,7 @@
             <span class="bs-text-label eyebrow--light" data-str="name">Bounded Systems</span>
           </div>
           <h1 data-str="hero-pitch">Your coding agent wanders. Keep it inside the job you gave it.</h1>
-          <p class="hero__lead">Hand an AI coding agent a real task and it reaches past it — touching files you didn't mean to expose, running a command you didn't intend. Today it does that with <strong>your</strong> access. Bounded Systems scopes that down. Each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point. That point checks your policy, acts or refuses, and records what happened. It's a well-known security idea: one checkpoint in front of everything the agent can do.</p>
+          <p class="hero__lead">Hand an AI coding agent a real task and it reaches past it — touching files you didn't mean to expose, running a command you didn't intend. Today it does that with your access. Bounded Systems scopes that down. Each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point. That point checks your policy, acts or refuses, and records what happened. It's a well-known security idea: one checkpoint in front of everything the agent can do.</p>
           <pre class="code code--hero"><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })
 &nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span>
 
@@ -125,7 +136,7 @@
       <div>
         <h2 class="u-sr-only" data-str="bet-heading">The bet</h2>
         <p class="statement">Good software splits into parts. Each good idea becomes its own piece with clear edges and a defined contract — a promise about what it does. Those clear edges are also what let you scope an agent to one piece.</p>
-        <p class="copy">An agent can author one of those abstractions cheaply now. What it can't do yet — what nobody has solved — is <strong>keep many of them honest against each other as they evolve</strong>, enforcing the contracts <em>between</em> ideas, not just within one.</p>
+        <p class="copy">An agent can author one of those abstractions cheaply now. What it can't do yet — what nobody has solved — is <strong>keep many of them honest against each other as they evolve</strong>, enforcing the contracts between ideas, not just within one.</p>
         <p class="copy copy--last">Most tooling secures a single action; the unsolved work lives in the seams between them. Bounded Systems works there: privileged effects are attributable to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure, so the contracts can't quietly rot.</p>
         <div class="grade-inline">
           <span class="grade-inline__label" data-str="bet-grade-label">This claim, graded:</span>
@@ -142,7 +153,7 @@
       <div class="section__num">02&nbsp;/&nbsp;The&nbsp;model</div>
       <div>
         <h2 data-str="section-model">The model, in running code</h2>
-        <p class="lead-2">Bounded Systems leans on a single mechanism. For each kind of system power there is exactly one sanctioned way through — a <b class="term">capability seam</b>: a <b class="term">door</b> you hold a socket to, never the keys behind it. The guest-room runtime makes that concrete.</p>
+        <p class="lead-2">Bounded Systems leans on a single mechanism. For each kind of system power there is exactly one sanctioned way through — a <b class="term" data-term="https://bounded.tools/#term-capability-seam">capability seam</b>: a <b class="term" data-term="https://bounded.tools/#term-door">door</b> you hold a socket to, never the keys behind it. The guest-room runtime makes that concrete.</p>
 
         <div class="card model-card model-card--defns">
           <div class="defn"><span class="defn__term">room</span><span class="defn__body">a named bundle of doors for one kind of stay. Ask for a room it doesn't know and it fails closed — a typo never widens authority.</span></div>
@@ -172,7 +183,7 @@
     <div class="honesty__inner">
       <div class="bs-text-label eyebrow--light">03&nbsp;/&nbsp;Kept&nbsp;honest</div>
       <h2 data-str="honesty-heading">Every claim here is graded against the running code.</h2>
-      <p class="honesty__lead">An instrument built to catch my <em>own</em> over-statements and file the gap. Docs generate from source and fail CI on drift; guest-room's specs execute against its engine. I keep myself as honest as I keep the agents.</p>
+      <p class="honesty__lead">An instrument built to catch my own over-statements and file the gap. Docs generate from source and fail CI on drift; guest-room's specs execute against its engine. I keep myself as honest as I keep the agents.</p>
       <p class="honesty__stamp" style="font-family:var(--bs-font-mono);font-size:12px;margin:14px 0 0;color:var(--site-on-dark-mono);opacity:.85;letter-spacing:.02em;">
         <!-- stamp:start -->graded against the latest commit<!-- stamp:end -->
       </p>
@@ -216,7 +227,7 @@
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
-          <span class="claim__text">Contracts stay honest <em>between</em> components as they evolve. <span class="claim__gap">— the unsolved problem this whole project is aimed at.</span></span>
+          <span class="claim__text">Contracts stay honest between components as they evolve. <span class="claim__gap">— the unsolved problem this whole project is aimed at.</span></span>
         </div>
       </div>
     </div>
@@ -293,7 +304,7 @@
         <span class="seams__pkg">Sigstore &middot; OIDC &middot; Rekor &middot; GHCR</span>
       </div>
       <p class="seams__lead">At deploy time a manifest covering the whole site is keyless-signed, and the built site is pushed to GHCR as a signed, pullable OCI artifact. GitHub Actions' OIDC identity authenticates to Fulcio, which mints a one-build certificate that then expires; both signatures land in the public Rekor log. No stored key. <strong>This attests origin, not authority</strong> — it proves who built the site and that it is intact, not that the build was authorized or safe.</p>
-      <p class="seams__lead" style="margin-top:14px;"><strong>Authority is the other axis</strong> — what the running agent is permitted to <em>do</em>, the thing provenance is silent on. It is bounded separately: one capability seam per kind of ambient power, attenuate-only tokens that narrow but never widen, an explicit deny set, and egress gated through brokers — enforced at the boundary, not granted by default.</p>
+      <p class="seams__lead" style="margin-top:14px;"><strong>Authority is the other axis</strong> — what the running agent is permitted to do, the thing provenance is silent on. It is bounded separately: one capability seam per kind of ambient power, attenuate-only tokens that narrow but never widen, an explicit deny set, and egress gated through brokers — enforced at the boundary, not granted by default.</p>
       <details class="prov-details">
         <summary style="cursor:pointer;font-family:var(--bs-font-mono);font-size:13px;margin-bottom:10px;">&#9656; verify the whole site yourself</summary>
         <pre class="code"><span class="c"># the live provenance record (manifest digest, Rekor entries, OCI ref)</span>
@@ -313,7 +324,7 @@
       </details>
       <details class="prov-details">
         <summary style="cursor:pointer;font-family:var(--bs-font-mono);font-size:13px;margin-bottom:10px;">&#9656; run a self-check in your browser</summary>
-        <p class="seams__lead" style="font-size:13px;opacity:.85;margin:0 0 10px;">A demo, not proof. This script ships <em>with</em> the page, so a tampered page could ship a tampered checker and still go green — re-hashing only shows the page is self-consistent. The one step that reaches outside the page is the public-log check. Real verification is the <a href="#build-provenance">commands above</a>, <code>jsr:@bounded-systems/verify</code>, or the <a href="/rekor">Rekor entry</a> you open yourself — see <a href="blog/trust-lives-outside-the-page.html">trust lives outside the page</a>.</p>
+        <p class="seams__lead" style="font-size:13px;opacity:.85;margin:0 0 10px;">A demo, not proof. This script ships with the page, so a tampered page could ship a tampered checker and still go green — re-hashing only shows the page is self-consistent. The one step that reaches outside the page is the public-log check. Real verification is the <a href="#build-provenance">commands above</a>, <code>jsr:@bounded-systems/verify</code>, or the <a href="/rekor">Rekor entry</a> you open yourself — see <a href="blog/trust-lives-outside-the-page.html">trust lives outside the page</a>.</p>
         <button id="selfcheck-run" type="button" style="font-family:var(--bs-font-mono);font-size:13px;padding:7px 12px;border:1px solid currentColor;border-radius:6px;background:transparent;color:inherit;cursor:pointer;">Re-hash this site &amp; check the public log</button>
         <ol id="selfcheck-out" aria-live="polite" style="font-family:var(--bs-font-mono);font-size:12.5px;line-height:1.6;margin:12px 0 0;padding-left:1.2em;"></ol>
       </details>
@@ -345,7 +356,7 @@
   <section class="wrap section" id="graph">
     <div class="bs-text-label eyebrow" style="margin-bottom:24px;">The libraries, as a graph</div>
     <h2 data-str="section-graph">Every capability is a typed node; the edges are how they compose.</h2>
-    <p class="seams__lead">Each <code>@bounded-systems/*</code> package declares what it is — a <b class="term">verb</b> (a capability that acts) or a <b class="term">noun</b> (data that flows) — plus its role and domain, in its own <code>package.json</code>. The graph below is generated from that metadata and fails CI on drift; the full node-edge diagram lives <a href="https://github.com/bounded-systems">on the org profile</a>.</p>
+    <p class="seams__lead">Each <code>@bounded-systems/*</code> package declares what it is — a <b class="term" data-term="https://bounded.tools/#term-verb">verb</b> (a capability that acts) or a <b class="term" data-term="https://bounded.tools/#term-noun">noun</b> (data that flows) — plus its role and domain, in its own <code>package.json</code>. The graph below is generated from that metadata and fails CI on drift; the full node-edge diagram lives <a href="https://github.com/bounded-systems">on the org profile</a>.</p>
     <!-- registry:start · generated from data/registry.json by scripts/gen-registry.mjs — do not edit by hand -->
       <div class="seam-grid">
         <div class="seam"><div class="seam__name">disposition <span class="facet facet--verb">verb</span> <span class="kind">guest</span></div><div class="seam__desc">Pure classifier mapping work-unit surface state to a disposition (ok/prune/repair/review)</div></div>
@@ -384,7 +395,7 @@
       <div class="bs-text-label eyebrow--light" style="margin-bottom:24px;">Colophon</div>
       <h2 data-str="byline">Built by Robert DeLanghe — in public, against running code.</h2>
       <p>I'm Bobby. I build agent infrastructure and capability-security systems.</p>
-      <p><b class="term">Bounded Systems</b> is where I work out, in the open, how agent-authored software stays trustworthy as it grows. A solo project — every claim on this page graded against the code that backs it.</p>
+      <p><b class="term" data-term="https://bounded.tools/#org">Bounded Systems</b> is where I work out, in the open, how agent-authored software stays trustworthy as it grows. A solo project — every claim on this page graded against the code that backs it.</p>
       <p class="last" data-str="bio-talk">If your team is chewing on the same problem, I'd like to talk.</p>
       <div class="colophon__cta">
         <a class="btn-primary" href="mailto:hello@bounded.tools">Get in touch<span class="u-sr-only"> (opens your email app)</span></a>

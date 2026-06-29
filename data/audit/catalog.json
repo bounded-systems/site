@@ -1314,6 +1314,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#7002b10b749b": {
+    "$value": "may only emphasise a word\n that resolves to a DefinedTerm here (or to the Organization) — emphasis is grounded\n in RDF, never decorative. check-emphasis.mjs enforces it. -->",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#72e0b0860f76": {
     "$value": "The gap is written down, not glossed over",
     "$type": "body",
