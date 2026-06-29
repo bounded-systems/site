@@ -49,6 +49,8 @@ jobs:
           node-version: "22"
       - name: Install deps
         run: npm ci
+      - name: Install conformance-kit gate deps
+        run: npm ci --prefix vendor/conformance-kit
       - name: Build dist/
         run: npm run build
       - name: a11y heuristic gate (static runner — AGENT/STATIC HEURISTIC, NOT AT-user testing)

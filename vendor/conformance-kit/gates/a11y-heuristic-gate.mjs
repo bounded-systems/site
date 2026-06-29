@@ -340,18 +340,27 @@ const MIME = {
 };
 
 async function startServer(root) {
+  const rootAbs = resolve(root);
   const server = createServer(async (req, res) => {
     try {
       let urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
-      let file = join(root, urlPath);
+      let file = resolve(join(rootAbs, urlPath));
       if (urlPath.endsWith("/")) file = join(file, "index.html");
+      // Guard path traversal: resolved path must remain inside rootAbs
+      if (file !== rootAbs && !file.startsWith(rootAbs + "/")) {
+        res.writeHead(403); return res.end("forbidden");
+      }
       let buf;
       try { buf = await readFile(file); }
-      catch { try { buf = await readFile(file + ".html"); file += ".html"; } catch { res.writeHead(404); return res.end("not found"); } }
+      catch {
+        const withHtml = file + ".html";
+        try { buf = await readFile(withHtml); file = withHtml; }
+        catch { res.writeHead(404); return res.end("not found"); }
+      }
       const ext = extname(file).toLowerCase();
       res.writeHead(200, { "content-type": MIME[ext] || "application/octet-stream" });
       res.end(buf);
-    } catch (e) { res.writeHead(500); res.end(String(e)); }
+    } catch { res.writeHead(500); res.end("Internal server error"); }
   });
   await new Promise((r) => server.listen(0, "127.0.0.1", r));
   const { port } = server.address();
