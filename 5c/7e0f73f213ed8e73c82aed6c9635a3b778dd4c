@@ -1,0 +1,37 @@
+.github/workflows/a11y-heuristic.yml
+  s_98e316d0b3248a::t_d2d015e48b44b5 1-68
+package.json
+  s_98e316d0b3248a::t_1416e95f69dd59 18-19
+data/conformance-evidence.json
+  s_98e316d0b3248a::t_6fe7dd9dc47ba7 57
+  s_98e316d0b3248a::t_96c40e466d88c0 14-16
+  s_98e316d0b3248a::t_22c422ec81a40e 30-56,58-62
+vendor/conformance-kit.lock.json
+  s_98e316d0b3248a::t_ecc4c7f6fab1fc 3-5,7,23,25,28-29,54
+vendor/conformance-kit/gates/a11y-heuristic-gate.mjs
+  s_98e316d0b3248a::t_4a989d648be160 1-517
+vendor/conformance-kit/gates/cognitive/focus-budget-gate.mjs
+  s_98e316d0b3248a::t_c4b1b639fbf0c9 1-664
+vendor/conformance-kit/gates/conformance/conformance.mjs
+  s_98e316d0b3248a::t_483384ff59d470 82-128,313-370
+vendor/conformance-kit/gates/conformance/web-build.mjs
+  s_98e316d0b3248a::t_6b9f1ddd68f000 134-218,483-509,660-699,705-722
+vendor/conformance-kit/package.json
+  s_98e316d0b3248a::t_afae20e672dace 3,35-37,56,63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "5c7e0f73f213ed8e73c82aed6c9635a3b778dd4c",
+  "prompts": {},
+  "sessions": {
+    "s_98e316d0b3248a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8db980ee-eb6b-4866-832b-f795cef7f33c",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
