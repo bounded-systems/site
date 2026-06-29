@@ -346,16 +346,22 @@ async function startServer(root) {
       let urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
       let file = resolve(join(rootAbs, urlPath));
       if (urlPath.endsWith("/")) file = join(file, "index.html");
-      // Guard path traversal: resolved path must remain inside rootAbs
-      if (file !== rootAbs && !file.startsWith(rootAbs + "/")) {
-        res.writeHead(403); return res.end("forbidden");
+      // Path-traversal guard (CWE-022): resolved path must stay within rootAbs.
+      // Both the primary path and the .html fallback are validated before any fs read.
+      if (!file.startsWith(rootAbs + "/")) {
+        res.writeHead(403); res.end("forbidden"); return;
       }
       let buf;
-      try { buf = await readFile(file); }
-      catch {
+      try {
+        buf = await readFile(file);
+      } catch {
         const withHtml = file + ".html";
+        // Re-validate the .html variant (explicit guard for each readFile call)
+        if (!withHtml.startsWith(rootAbs + "/")) {
+          res.writeHead(404); res.end("not found"); return;
+        }
         try { buf = await readFile(withHtml); file = withHtml; }
-        catch { res.writeHead(404); return res.end("not found"); }
+        catch { res.writeHead(404); res.end("not found"); return; }
       }
       const ext = extname(file).toLowerCase();
       res.writeHead(200, { "content-type": MIME[ext] || "application/octet-stream" });

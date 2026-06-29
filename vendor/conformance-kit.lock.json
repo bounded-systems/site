@@ -20,7 +20,7 @@
     "fixtures/site/index.html": "sha256:50617e9438deac8247d4a37e10df08f86179dab08947621b6f4f086bee3df90f",
     "fixtures/site/robots.txt": "sha256:1626492e9355a23eb133fa20856d90d05546d6bf76f61021cce94b4a1280ef47",
     "fixtures/site/sitemap.xml": "sha256:5066e5bdbb7e870b96a6c1129c7896a02cf6696af77ea707b414276225983d71",
-    "gates/a11y-heuristic-gate.mjs": "sha256:bfb8d0dbaac6c9cd66285e484ae9cb9c04aaa927e289b646a0a7793b45a7479d",
+    "gates/a11y-heuristic-gate.mjs": "sha256:84d31ce731d669b003f21d83a2243be7ccaab3b4d57ff69b933ce6cfd2178b33",
     "gates/axe-gate.mjs": "sha256:a8b19486e4e2379310112cad7390ac86abde885a162172e2ade9cb4d902ada79",
     "gates/cognitive/focus-budget-gate.mjs": "sha256:2727783740fd6ec805b3f1c31bbd447add698cb6e28f7a748f77971b86225c72",
     "gates/commonmark-runner.mjs": "sha256:bbc05d54d426e9f56337fa1c9e958f452e5d32e60a0bd3a2ab60191a8ab7eab3",
