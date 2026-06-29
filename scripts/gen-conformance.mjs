@@ -22,8 +22,10 @@
 //   2. in-process build-facts — what THIS render self-checks and so asserts most
 //      directly: llms.txt is present in dist/ and every blog post exposes a Markdown
 //      sibling (the ai-readability tier-2 criterion).
-// HONEST: the manual + external GATING criteria (manual WCAG audit, OWASP ASVS L2,
-// full axe scan, Nu HTML Checker, Core Web Vitals field data, Baseline, known-vuln
+// The automatable axe-core serious/critical scan IS asserted (gate-backed by
+// axe.yml's real-browser Playwright run — see data/conformance-evidence.json).
+// HONEST: the manual + external GATING criteria (manual WCAG 2.2 AA audit, OWASP
+// ASVS L2, Nu HTML Checker, Core Web Vitals field data, Baseline, known-vuln
 // scan, runtime reliability, CommonMark), plus the criteria bounded.tools does not
 // emit at all (in-toto/SLSA statement, IPFS CID, OpenAPI, Atom feed), are NOT
 // supplied by any layer → they report `not-assessed` and the strong WCAG/ASVS
