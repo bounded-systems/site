@@ -1,22 +1,10 @@
 {
-  "name": "@bounded-systems/verify",
+  "name": "@conformance-kit/integrity-verify",
   "version": "0.1.0",
-  "description": "Standalone out-of-page verifier: cryptographically verifies a deployed site's published Sigstore bundle offline (sigstore-js) and re-hashes the served bytes.",
+  "private": true,
+  "description": "Standalone, offline cryptographic verifier — checks a site serves bytes matching its keyless-signed manifest (sigstore-js, in-process bundle verify).",
   "type": "module",
-  "bin": {
-    "bounded-verify": "./verify.mjs"
-  },
-  "files": [
-    "verify.mjs",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bounded-systems/conformance-kit.git",
-    "directory": "integrity/verify"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "sigstore": "^5.0.0"
-  }
+  "bin": { "verify": "./verify.mjs" },
+  "dependencies": { "sigstore": "^2.3.1" },
+  "engines": { "node": ">=20" }
 }
