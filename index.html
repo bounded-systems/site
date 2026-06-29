@@ -32,13 +32,30 @@
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css">
 
-  <style>html { scroll-behavior: smooth; }</style>
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 1000;
+      padding: 10px 16px;
+      background: var(--bs-color-ink);
+      color: var(--bs-color-white);
+      border-radius: 0 0 6px 0;
+    }
+    .skip-link:focus { left: 0; }
+  </style>
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"Bounded Systems","url":"https://bounded.tools","description":"Capability security for AI agents — authority drawn at the door, not the process or container. Every claim graded against the running code.","sameAs":["https://github.com/bounded-systems"]}
   </script>
 </head>
 <body id="top">
+
+  <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- NAV -->
   <nav class="nav">
@@ -61,7 +78,7 @@
   </nav>
 
   <!-- HERO -->
-  <main class="wrap">
+  <main class="wrap" id="main">
     <header class="hero">
       <div class="hero__bg"><img src="brand/mark/mark-white.svg" alt=""></div>
       <div class="hero__grid">
