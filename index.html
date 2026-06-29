@@ -90,14 +90,14 @@
             <span class="bs-text-label eyebrow--light">Bounded&nbsp;Systems</span>
           </div>
           <h1>Your coding agent wanders. Keep it inside the job you gave it.</h1>
-          <p class="hero__lead">Hand an AI coding agent a real task and it reaches past it — touching files you didn't mean to expose, running a command you didn't intend. Today it does that with <strong>your</strong> access. Bounded Systems scopes that down: each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point that checks your policy, acts or refuses, and records what happened. A capability model — the idea behind reference monitors and seccomp — in front of an agent's authority.</p>
+          <p class="hero__lead">Hand an AI coding agent a real task and it reaches past it — touching files you didn't mean to expose, running a command you didn't intend. Today it does that with <strong>your</strong> access. Bounded Systems scopes that down. Each kind of system power — git, the shell, your environment, your tools — gets one sanctioned access point. That point checks your policy, acts or refuses, and records what happened. It's a well-known security idea: one checkpoint in front of everything the agent can do.</p>
           <pre class="code code--hero"><span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"keeper"</span> })
 &nbsp;&nbsp;<span class="ok">&#10003; pushed</span><span class="c"> &middot; keeper holds git-write &middot; signed &middot; audited</span>
 
 <span class="k">agent&nbsp;&rarr;</span> <span class="fn">execGit</span>({ subcommand: <span class="s">"push"</span>, role: <span class="s">"scout"</span> })
 &nbsp;&nbsp;<span class="no">&#10007; refused</span><span class="c"> &middot; scout holds no git-write &middot; recorded</span></pre>
           <div class="hero__cta">
-            <a class="btn-primary" href="#bet">Read the one idea&nbsp;&rarr;</a>
+            <a class="btn-primary" href="#bet">Read the bet&nbsp;&darr;</a>
             <a class="btn-link" href="https://github.com/bounded-systems/guest-room">guest-room on GitHub&nbsp;&#8599;<span class="u-sr-only"> (external site)</span></a>
           </div>
           <div class="hero__note">
@@ -124,7 +124,7 @@
     <div class="section__grid">
       <div class="section__num">01&nbsp;/&nbsp;The&nbsp;bet</div>
       <div>
-        <p class="statement">Agentic development works by <em>bifurcation</em>: a good idea earns its own bounded abstraction with a defined contract — and that boundary is exactly what lets you scope an agent to it.</p>
+        <p class="statement">Good software splits into parts. Each good idea becomes its own piece with clear edges and a defined contract — a promise about what it does. Those clear edges are also what let you scope an agent to one piece.</p>
         <p class="copy">An agent can author one of those abstractions cheaply now. What it can't do yet — what nobody has solved — is <strong>keep many of them honest against each other as they evolve</strong>, enforcing the contracts <em>between</em> ideas, not just within one.</p>
         <p class="copy copy--last">Most tooling secures a single action; the unsolved work lives in the seams between them. Bounded Systems works there: privileged effects are attributable to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure, so the contracts can't quietly rot.</p>
         <div class="grade-inline">
@@ -141,7 +141,7 @@
     <div class="section__grid">
       <div class="section__num">02&nbsp;/&nbsp;The&nbsp;model</div>
       <div>
-        <h2>The model, made physical</h2>
+        <h2>The model, in running code</h2>
         <p class="lead-2">Bounded Systems leans on a single mechanism. For each kind of system power there is exactly one sanctioned way through — a <strong>capability seam</strong>: a <strong>door</strong> you hold a socket to, never the keys behind it. The guest-room runtime makes that concrete.</p>
 
         <div class="card model-card model-card--defns">
@@ -233,7 +233,7 @@
           <span class="proof-card__name">guest-room</span>
           <span class="tag tag--green">Flagship</span>
         </div>
-        <div class="proof-card__title">The capability model, as a runnable library</div>
+        <div class="proof-card__title">The library that scopes what an agent can do</div>
         <div class="proof-card__body">A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement. Its Gherkin specs execute against the engine, so the docs cannot drift from the code. The model everything else is built on.</div>
         <div class="proof-card__more">Read guest-room&nbsp;&#8599;</div>
       </a>
@@ -242,7 +242,7 @@
           <span class="proof-card__name">prx</span>
           <span class="tag tag--mute">At scale</span>
         </div>
-        <div class="proof-card__title">The agent-run work-unit CLI</div>
+        <div class="proof-card__title">The CLI that runs agent tasks at scale</div>
         <div class="proof-card__body">guest-room's model run at full scale: capability-scoped agents driving each work unit through one signed, content-addressed pipeline to a merged PR. Git-writes are signed and verified against the keeper; the other seams are wired in-process as imports today.</div>
         <div class="proof-card__more">Read prx&nbsp;&#8599;</div>
       </a>
@@ -251,7 +251,7 @@
           <span class="proof-card__name">claude-box</span>
           <span class="tag tag--mute">The guest</span>
         </div>
-        <div class="proof-card__title">Claude Code, plugged into a room</div>
+        <div class="proof-card__title">Claude Code, scoped to one room</div>
         <div class="proof-card__body">The first guest: a Claude Code runtime whose authority is the door references it holds — keeper, scout, concierge, net — and nothing beyond them. Everything else is denied and recorded.</div>
         <div class="proof-card__more">Read claude-box&nbsp;&#8599;</div>
       </a>
