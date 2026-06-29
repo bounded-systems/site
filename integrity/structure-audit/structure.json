@@ -99,6 +99,7 @@
     "readerOk": null,
     "internalLinks": [
       "/blog/",
+      "/claims.jsonld",
       "/conformance",
       "/conformance",
       "/provenance.json",

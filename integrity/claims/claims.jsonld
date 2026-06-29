@@ -1,0 +1,93 @@
+{
+  "//": "The bounded.tools honesty-section claims, as a nanopublication-shaped, Sigstore-securable graph. Mirrors the visible grade chips (same claims, same grades) so the page's honesty is also machine-checkable data. Grades/gaps/evidence are verified against the linked repos (see content/grounding.json for the per-term evidence). @@DATE@@ is substituted at build by scripts/gen-claims.mjs. Validated by validate-claims.mjs (brand-checks CI).",
+  "@context": {
+    "schema": "https://schema.org/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "np": "http://www.nanopub.org/nschema#",
+    "bt": "https://bounded.tools/ns/claims#",
+    "claim": "bt:claim",
+    "grade": "bt:grade",
+    "gap": "bt:gap",
+    "evidence": { "@id": "bt:evidence", "@type": "@id" },
+    "subject": { "@id": "schema:subjectOf", "@type": "@id" },
+    "wasDerivedFrom": { "@id": "prov:wasDerivedFrom", "@type": "@id" },
+    "generatedAtTime": { "@id": "prov:generatedAtTime", "@type": "schema:DateTime" },
+    "wasAttributedTo": { "@id": "prov:wasAttributedTo", "@type": "@id" },
+    "securedBy": { "@id": "bt:securedBy", "@type": "@id" }
+  },
+  "@id": "https://bounded.tools/claims#",
+  "@graph": [
+    {
+      "@id": "https://bounded.tools/claims#assertion",
+      "@graph": [
+        {
+          "@id": "https://bounded.tools/claims#c1",
+          "@type": "bt:Claim",
+          "claim": "Docs generate from source and fail CI on drift.",
+          "grade": "enforced",
+          "evidence": "https://github.com/bounded-systems/site"
+        },
+        {
+          "@id": "https://bounded.tools/claims#c2",
+          "@type": "bt:Claim",
+          "claim": "guest-room's behaviour specs execute against the engine.",
+          "grade": "enforced",
+          "evidence": "https://github.com/bounded-systems/guest-room"
+        },
+        {
+          "@id": "https://bounded.tools/claims#c3",
+          "@type": "bt:Claim",
+          "claim": "A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate.",
+          "grade": "partial",
+          "gap": "Emission and enforcement are opt-in (a signer plus require-signed) until Sigstore lands; without them the push is bare. Verified mechanisms: ocap-provenance/slsa.ts, prx verify.ts/merge-guard.ts, anchored-chain.",
+          "evidence": "https://github.com/bounded-systems/ocap-provenance"
+        },
+        {
+          "@id": "https://bounded.tools/claims#c4",
+          "@type": "bt:Claim",
+          "claim": "The agent never holds the credential — a broker daemon does.",
+          "grade": "partial",
+          "gap": "On macOS the door is TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.",
+          "evidence": "https://github.com/bounded-systems/prx"
+        },
+        {
+          "@id": "https://bounded.tools/claims#c5",
+          "@type": "bt:Claim",
+          "claim": "prx and claude-box converge onto one guest-room door runtime.",
+          "grade": "aspirational",
+          "gap": "Convergence is in progress — prx wires the seams in-process today; the out-of-process door runtime is the direction, not yet at scale.",
+          "evidence": "https://github.com/bounded-systems/prx"
+        },
+        {
+          "@id": "https://bounded.tools/claims#c6",
+          "@type": "bt:Claim",
+          "claim": "Contracts stay honest between components as they evolve.",
+          "grade": "aspirational",
+          "gap": "Inter-contract enforcement is the open problem this whole project is aimed at — a bet, stated as direction, not a solved result.",
+          "evidence": "https://github.com/bounded-systems/prx"
+        }
+      ]
+    },
+    {
+      "@id": "https://bounded.tools/claims#provenance",
+      "@graph": [
+        {
+          "@id": "https://bounded.tools/claims#assertion",
+          "subject": "https://bounded.tools",
+          "wasDerivedFrom": "https://github.com/bounded-systems/site",
+          "generatedAtTime": "@@DATE@@"
+        }
+      ]
+    },
+    {
+      "@id": "https://bounded.tools/claims#pubinfo",
+      "@graph": [
+        {
+          "@id": "https://bounded.tools/claims#",
+          "wasAttributedTo": "https://github.com/bounded-systems/site",
+          "securedBy": "https://bounded.tools/provenance.json"
+        }
+      ]
+    }
+  ]
+}
