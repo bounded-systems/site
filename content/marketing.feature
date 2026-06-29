@@ -39,3 +39,31 @@ Feature: bounded.tools marketing micro-copy
   @marketing
   Scenario: The contact CTA is consistent
     Then surfaces present the cta "Get in touch"
+
+  @marketing
+  Scenario: The honesty section heading is consistent
+    Then surfaces present the heading "Every claim here is graded against the running code."
+
+  @marketing
+  Scenario: The guest-room proof card tag is consistent
+    Then surfaces present the tag "Flagship"
+
+  @marketing
+  Scenario: The prx proof card tag is consistent
+    Then surfaces present the tag "At scale"
+
+  @marketing
+  Scenario: The start-here card label is consistent
+    Then surfaces present the label "guest-room — the model you can run"
+
+  @marketing
+  Scenario: The provenance card heading is consistent
+    Then surfaces present the heading "Provenance you can open"
+
+  @marketing
+  Scenario: The bet grade label is consistent
+    Then surfaces present the label "This claim, graded:"
+
+  @marketing
+  Scenario: The colophon contact prompt is consistent
+    Then surfaces present the prompt "If your team is chewing on the same problem, I'd like to talk."
