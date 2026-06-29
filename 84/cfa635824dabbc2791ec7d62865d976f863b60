@@ -1,0 +1,30 @@
+index.html
+  s_0e0b4d6cd22542::t_429bd0cd6f2ad8 179
+integrity/claims/claims.jsonld
+  s_0e0b4d6cd22542::t_b397156b38c8d0 1-93
+package.json
+  s_0e0b4d6cd22542::t_0cee5dce8afc7f 10
+  s_0e0b4d6cd22542::t_a0ae7d90ea2780 8
+data/audit/catalog.json
+  s_0e0b4d6cd22542::t_6544616bcabe3d 1342-1346
+integrity/structure-audit/structure.json
+  s_0e0b4d6cd22542::t_05d05a325d0b06 102
+scripts/gen-claims.mjs
+  s_0e0b4d6cd22542::t_fddb8b8650ec5d 1-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "84cfa635824dabbc2791ec7d62865d976f863b60",
+  "prompts": {},
+  "sessions": {
+    "s_0e0b4d6cd22542": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "25ca02d8-0ea9-405f-8441-40cf7bf0ee57",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
