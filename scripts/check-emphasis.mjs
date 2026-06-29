@@ -30,6 +30,14 @@ for (const file of SURFACES) {
     for (const id of m[1].matchAll(/"@id"\s*:\s*"([^"]+)"/g)) ids.add(id[1]);
   }
 
+  // Claims live in the served claims graph (integrity/claims/claims.jsonld), not inline.
+  // A <strong> (a key claim) must reference one of these bt:Claim @ids via data-claim.
+  const claimIds = new Set();
+  try {
+    const cj = readFileSync(join(root, "integrity/claims/claims.jsonld"), "utf8");
+    for (const id of cj.matchAll(/"@id"\s*:\s*"([^"]+)"/g)) claimIds.add(id[1]);
+  } catch { /* optional */ }
+
   // <em> — forbidden (stress isn't an entity).
   for (const m of html.matchAll(/<em\b[^>]*>([\s\S]*?)<\/em>/gi)) {
     console.error(`✗ ${file}: <em>${m[1].slice(0, 30)}</em> — stress emphasis is not a graph entity; demote to plain text`);
@@ -43,7 +51,16 @@ for (const file of SURFACES) {
     if (!ref) { console.error(`✗ ${file}: <b class="term">${m[1].slice(0, 24)}</b> has no data-term — emphasis must reference a graph entity`); errors++; }
     else if (!ids.has(ref[1])) { console.error(`✗ ${file}: data-term="${ref[1]}" does not resolve to any @id in the page graph (glossary/org)`); errors++; }
   }
+
+  // <strong> — a key claim. Must reference a bt:Claim @id via data-claim. A bare <strong> is
+  // ungrounded importance (not an entity); demote it to plain text or ground it to a claim.
+  for (const m of html.matchAll(/<strong\b[^>]*>([\s\S]*?)<\/strong>/gi)) {
+    const open = m[0].slice(0, m[0].indexOf(">") + 1);
+    const ref = open.match(/\bdata-claim="([^"]+)"/);
+    if (!ref) { console.error(`✗ ${file}: <strong>${m[1].slice(0, 24)}</strong> has no data-claim — a claim must reference a bt:Claim @id (or demote to plain text)`); errors++; }
+    else if (!claimIds.has(ref[1])) { console.error(`✗ ${file}: data-claim="${ref[1]}" does not resolve to a claim in claims.jsonld`); errors++; }
+  }
 }
 
 if (errors) { console.error(`✗ check-emphasis: ${errors} ungrounded emphasis — every emphasis must resolve to an RDF entity`); process.exit(1); }
-console.log("✓ check-emphasis — every emphasised span resolves to a graph entity (term → DefinedTerm/Org; no decorative stress)");
+console.log("✓ check-emphasis — every emphasised span resolves to a graph entity (term → DefinedTerm/Org, claim → bt:Claim; no decorative stress)");
