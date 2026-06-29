@@ -1,0 +1,19 @@
+vendor/conformance-kit/gates/a11y-heuristic-gate.mjs
+  s_e338dc2aaa8535::t_ce7468060e6ed8 351
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "28bb2941f05c6072b0c53e1a6e971bb2550f5944",
+  "prompts": {},
+  "sessions": {
+    "s_e338dc2aaa8535": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "agent-a8bc92ed0bbf13bbb",
+        "model": "unknown"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
