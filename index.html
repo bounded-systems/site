@@ -128,7 +128,7 @@
         <p class="copy">An agent can author one of those abstractions cheaply now. What it can't do yet — what nobody has solved — is <strong>keep many of them honest against each other as they evolve</strong>, enforcing the contracts <em>between</em> ideas, not just within one.</p>
         <p class="copy copy--last">Most tooling secures a single action; the unsolved work lives in the seams between them. Bounded Systems works there: privileged effects are attributable to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure, so the contracts can't quietly rot.</p>
         <div class="grade-inline">
-          <span class="grade-inline__label">This claim, graded:</span>
+          <span class="grade-inline__label" data-str="bet-grade-label">This claim, graded:</span>
           <span class="grade grade--aspirational"><span class="grade__dot"></span>Aspirational</span>
           <span class="grade-inline__note">Inter-contract enforcement is the open problem — stated as a bet, not a solved result.</span>
         </div>
@@ -196,11 +196,11 @@
       <div class="claims">
         <div class="claim">
           <span class="grade grade--on-dark grade--enforced"><span class="grade__dot"></span>Enforced</span>
-          <span class="claim__text">Docs generate from source and fail CI on drift.</span>
+          <span class="claim__text" data-str="claim-docs">Docs generate from source and fail CI on drift.</span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--enforced"><span class="grade__dot"></span>Enforced</span>
-          <span class="claim__text">guest-room's behaviour specs execute against the engine.</span>
+          <span class="claim__text" data-str="claim-specs">guest-room's behaviour specs execute against the engine.</span>
         </div>
         <div class="claim">
           <span class="grade grade--on-dark grade--partial"><span class="grade__dot"></span>Partial</span>
@@ -225,13 +225,13 @@
   <!-- PROOF -->
   <section class="wrap section" id="proof">
     <div class="bs-text-label eyebrow" style="margin-bottom:22px;">04&nbsp;/&nbsp;The&nbsp;proof</div>
-    <h2 style="font-size:34px;line-height:1.1;font-weight:600;letter-spacing:-0.02em;margin:0 0 36px;" data-str="section-proof">The proof is the code</h2>
+    <h2 style="margin-bottom:var(--space-8);" data-str="section-proof">The proof is the code</h2>
 
     <div class="proof-cards">
       <a class="card proof-card" href="https://github.com/bounded-systems/guest-room">
         <div class="proof-card__head">
           <span class="proof-card__name">guest-room</span>
-          <span class="tag tag--green">Flagship</span>
+          <span class="tag tag--green" data-str="proof-tag-flagship">Flagship</span>
         </div>
         <h3 class="proof-card__title" data-str="proof-guest-room-title">The library that scopes what an agent can do</h3>
         <div class="proof-card__body">A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement. Its Gherkin specs execute against the engine, so the docs cannot drift from the code. The model everything else is built on.</div>
@@ -240,7 +240,7 @@
       <a class="card proof-card" href="https://github.com/bounded-systems/prx">
         <div class="proof-card__head">
           <span class="proof-card__name">prx</span>
-          <span class="tag tag--mute">At scale</span>
+          <span class="tag tag--mute" data-str="proof-tag-at-scale">At scale</span>
         </div>
         <h3 class="proof-card__title" data-str="proof-prx-title">The CLI that runs agent tasks at scale</h3>
         <div class="proof-card__body">guest-room's model run at full scale: capability-scoped agents driving each work unit through one signed, content-addressed pipeline to a merged PR. Git-writes are signed and verified against the keeper; the other seams are wired in-process as imports today.</div>
@@ -260,7 +260,7 @@
     <div class="card start-here">
       <div class="start-here__head">
         <span class="tag tag--green">Start&nbsp;here</span>
-        <span class="start-here__where">guest-room — the model you can run</span>
+        <span class="start-here__where" data-str="proof-start-here">guest-room — the model you can run</span>
       </div>
       <p class="start-here__lead">Your first move: clone the runtime, then watch its behaviour specs execute against the engine — the same specs that grade the claims above.</p>
       <pre class="code code--cmd"><span class="c"># clone the door runtime</span>
@@ -385,7 +385,7 @@
       <h2 data-str="byline">Built by Robert DeLanghe — in public, against running code.</h2>
       <p>I'm Bobby. I build agent infrastructure and capability-security systems.</p>
       <p><strong>Bounded Systems</strong> is where I work out, in the open, how agent-authored software stays trustworthy as it grows. A solo project — every claim on this page graded against the code that backs it.</p>
-      <p class="last">If your team is chewing on the same problem, I'd like to talk.</p>
+      <p class="last" data-str="bio-talk">If your team is chewing on the same problem, I'd like to talk.</p>
       <div class="colophon__cta">
         <a class="btn-primary" href="mailto:hello@bounded.tools">Get in touch<span class="u-sr-only"> (opens your email app)</span></a>
         <a class="btn-link" href="https://robertdelanghe.dev">robertdelanghe.dev&nbsp;&#8599;<span class="u-sr-only"> (external site)</span></a>
