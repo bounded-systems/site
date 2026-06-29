@@ -15,5 +15,7 @@
   "proof-start-here": { "$value": "guest-room — the model you can run", "$description": "Proof 'start here' card label." },
   "proof-provenance-heading": { "$value": "Provenance you can open", "$description": "Proof provenance card heading." },
   "bet-grade-label": { "$value": "This claim, graded:", "$description": "Inline grade label on the bet." },
-  "bio-talk": { "$value": "If your team is chewing on the same problem, I'd like to talk.", "$description": "Colophon bio — contact prompt." }
+  "bio-talk": { "$value": "If your team is chewing on the same problem, I'd like to talk.", "$description": "Colophon bio — contact prompt." },
+  "claim-docs": { "$value": "Docs generate from source and fail CI on drift.", "$description": "Honesty claim (ENFORCED) — typed `claim`, grounded in content/grounding.json." },
+  "claim-specs": { "$value": "guest-room's behaviour specs execute against the engine.", "$description": "Honesty claim (ENFORCED) — typed `claim`, grounded in content/grounding.json." }
 }

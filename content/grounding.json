@@ -1,0 +1,11 @@
+{
+  "_source": "Grounded facts bounded.tools genuinely backs — the source for string-audit's claim->grounding check (emitted to data/audit/grounding.json by emit-catalog). Each key is a lowercase phrase a `claim`-typed symbol may assert; the value records WHY it is backed. ONLY genuinely-backed facts belong here: adding an unbacked term to pass the gate is the exact overclaim this check exists to prevent. Scope: ENFORCED graded claims + blocking-gate conformance evidence. PARTIAL/ASPIRATIONAL claims are NOT grounded — they stay `body`, never typed `claim`.",
+  "docs generate from source": "ENFORCED — gen-blog / gen-conformance generate from source; --check staleness gates fail CI on drift",
+  "fail ci on drift": "ENFORCED — the committed catalog/structure/blog --check gates block the build on drift",
+  "behaviour specs execute": "ENFORCED graded claim — guest-room's behaviour specs run against the engine (evidence-linked)",
+  "graded against the running code": "ENFORCED — gen-conformance folds blocking-gate verdicts into the conformance projection",
+  "reproducible build": "conformance-evidence.reproducibleBuild — blocking gate",
+  "sbom": "conformance-evidence.sbom — SPDX SBOM generated and completeness-checked",
+  "signed release manifest": "conformance-evidence.signedReleaseManifest — blocking gate",
+  "content digests": "conformance-evidence.contentDigests — RFC 9530, blocking gate"
+}

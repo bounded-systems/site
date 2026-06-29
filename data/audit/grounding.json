@@ -1,1 +1,10 @@
-[]
+[
+  "docs generate from source",
+  "fail ci on drift",
+  "behaviour specs execute",
+  "graded against the running code",
+  "reproducible build",
+  "sbom",
+  "signed release manifest",
+  "content digests"
+]

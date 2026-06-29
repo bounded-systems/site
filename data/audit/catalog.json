@@ -1029,6 +1029,16 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#byline"
   },
+  "content/strings.json#claim-docs": {
+    "$value": "Docs generate from source and fail CI on drift.",
+    "$type": "claim",
+    "$description": "micro-copy token — content/strings.json#claim-docs"
+  },
+  "content/strings.json#claim-specs": {
+    "$value": "guest-room's behaviour specs execute against the engine.",
+    "$type": "claim",
+    "$description": "micro-copy token — content/strings.json#claim-specs"
+  },
   "content/strings.json#contact-cta": {
     "$value": "Get in touch",
     "$type": "cta",

@@ -67,3 +67,11 @@ Feature: bounded.tools marketing micro-copy
   @marketing
   Scenario: The colophon contact prompt is consistent
     Then surfaces present the prompt "If your team is chewing on the same problem, I'd like to talk."
+
+  @marketing
+  Scenario: The docs-generation claim (enforced) is consistent
+    Then surfaces present the claim "Docs generate from source and fail CI on drift."
+
+  @marketing
+  Scenario: The behaviour-specs claim (enforced) is consistent
+    Then surfaces present the claim "guest-room's behaviour specs execute against the engine."
