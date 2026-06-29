@@ -1,0 +1,23 @@
+.github/workflows/link-check.yml
+  s_29527a1cf44457::t_3aaec97148877c 1-36
+scripts/check-external-links.mjs
+  s_29527a1cf44457::t_717de189a83573 1-77
+blog/trust-lives-outside-the-page.md
+  s_29527a1cf44457::t_a7ae9126710eb7 50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "45e0d4c1495af6c299e822c3b8a319ef753205c0",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
