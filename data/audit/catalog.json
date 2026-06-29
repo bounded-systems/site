@@ -1014,6 +1014,51 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
+  "content/strings.json#byline": {
+    "$value": "Built by Robert DeLanghe — in public, against running code.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#byline"
+  },
+  "content/strings.json#contact-cta": {
+    "$value": "Get in touch",
+    "$type": "cta",
+    "$description": "micro-copy token — content/strings.json#contact-cta"
+  },
+  "content/strings.json#cta-read-bet": {
+    "$value": "Read the bet",
+    "$type": "cta",
+    "$description": "micro-copy token — content/strings.json#cta-read-bet"
+  },
+  "content/strings.json#hero-pitch": {
+    "$value": "Your coding agent wanders. Keep it inside the job you gave it.",
+    "$type": "headline",
+    "$description": "micro-copy token — content/strings.json#hero-pitch"
+  },
+  "content/strings.json#proof-claude-box-title": {
+    "$value": "Claude Code, scoped to one room",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-claude-box-title"
+  },
+  "content/strings.json#proof-guest-room-title": {
+    "$value": "The library that scopes what an agent can do",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-guest-room-title"
+  },
+  "content/strings.json#proof-prx-title": {
+    "$value": "The CLI that runs agent tasks at scale",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#proof-prx-title"
+  },
+  "content/strings.json#section-model": {
+    "$value": "The model, in running code",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#section-model"
+  },
+  "content/strings.json#section-proof": {
+    "$value": "The proof is the code",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#section-proof"
+  },
   "index.html#030500883caa": {
     "$value": "graded against the latest commit",
     "$type": "body",
