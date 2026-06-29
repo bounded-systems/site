@@ -14,6 +14,7 @@
     "copy": "node scripts/emit-catalog.mjs",
     "verify-vendor": "node scripts/verify-vendor.mjs",
     "sbom": "node scripts/gen-sbom.mjs && node vendor/conformance-kit/gates/sbom/check-sbom.mjs",
+    "contracts": "deno run --allow-read --config contract/deno.json contract/gate.ts",
     "shacl": "node vendor/conformance-kit/gates/shacl-runner.mjs contract/jsonld.shapes.ttl dist",
     "axe": "node vendor/conformance-kit/gates/axe-gate.mjs dist",
     "a11y-heuristic": "node vendor/conformance-kit/gates/a11y-heuristic-gate.mjs dist",
