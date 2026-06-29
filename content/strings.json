@@ -1,5 +1,6 @@
 {
   "$description": "bounded.tools surface tokens — EXTENDS the canonical Bounded Systems core (the brand submodule). content.mjs merges core + this file; the required core tokens (name/tagline/description) come from core, so this file only adds surface-specific copy.",
+  "site-name": { "$value": "bounded.tools", "$description": "This surface's name (the lock / wordmark) — the site, distinct from the org name (core `name` = Bounded Systems)." },
   "hero-pitch": { "$value": "Your coding agent wanders. Keep it inside the job you gave it.", "$description": "Hero sub-headline — the problem in one line." },
   "section-model": { "$value": "The model, in running code", "$description": "Section heading — the capability-model diagram." },
   "section-proof": { "$value": "The proof is the code", "$description": "Section heading — claims graded against running code." },

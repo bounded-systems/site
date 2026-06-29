@@ -1134,6 +1134,11 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#section-proof"
   },
+  "content/strings.json#site-name": {
+    "$value": "bounded.tools",
+    "$type": "name",
+    "$description": "micro-copy token — content/strings.json#site-name"
+  },
   "index.html#030500883caa": {
     "$value": "graded against the latest commit",
     "$type": "body",
