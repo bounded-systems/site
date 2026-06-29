@@ -1,0 +1,21 @@
+package.json
+  s_29527a1cf44457::t_4a76379380ca2c 8
+scripts/obfuscate-email.mjs
+  s_29527a1cf44457::t_7c36ccf30e15b4 1-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "9a06ecb05cf828715bac645e58c1630c57af0ae0",
+  "prompts": {},
+  "sessions": {
+    "s_29527a1cf44457": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "85265b05-183c-47f0-a52e-e37a83f4211c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
