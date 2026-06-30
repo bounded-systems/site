@@ -36,6 +36,9 @@
               chmod -R u+w brand
               # Fail closed if the vendored conformance-kit drifted from its hash-pin.
               node scripts/verify-vendor.mjs
+              # Node-uniqueness gate — no identity key may repeat in any data cut
+              # (registry nodes, seams, nav links). Fails closed before any page is built.
+              node scripts/check-node-uniqueness.mjs
               # Same drift gate the project argues for, then assemble dist/.
               node brand/tokens/build-tokens.mjs --check
               node build.mjs
