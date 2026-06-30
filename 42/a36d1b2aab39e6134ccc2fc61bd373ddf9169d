@@ -1,0 +1,30 @@
+index.html
+  s_71a0aecf45d82c::t_5364e06cd0f0cf 191
+data/jargon.json
+  s_71a0aecf45d82c::t_e5bd78ebb65abe 1-22
+scripts/check-jargon.mjs
+  s_71a0aecf45d82c::t_6c161d23cb5da2 1-26,37-41
+  s_71a0aecf45d82c::t_dc883081ef839e 32-35
+  s_71a0aecf45d82c::t_71f5bd4a5a2807 27-31,36
+scripts/check-copy-coverage.mjs
+  s_71a0aecf45d82c::t_dfe5b088601aca 27
+  s_71a0aecf45d82c::t_9f5c8befef1552 2,9-14
+package.json
+  s_71a0aecf45d82c::t_a81689dac959a3 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "42a36d1b2aab39e6134ccc2fc61bd373ddf9169d",
+  "prompts": {},
+  "sessions": {
+    "s_71a0aecf45d82c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f6f6e806-c9db-459c-ba56-79aa27861998",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
