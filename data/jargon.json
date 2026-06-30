@@ -1,0 +1,22 @@
+{
+  "$description": "Jargon vocabulary — external concepts a reader may not know. Every one of these, when used in the prose, MUST be grounded: linked to its authoritative source (external-jargon-linking, the chosen body-copy discipline — the external complement to the internal DefinedTerm glossary). check-jargon.mjs enforces it.",
+  "JSON-LD": "https://json-ld.org",
+  "SHACL": "https://www.w3.org/TR/shacl/",
+  "SPDX": "https://spdx.dev",
+  "SBOM": "https://www.cisa.gov/sbom",
+  "WCAG": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+  "OWASP": "https://owasp.org/www-project-application-security-verification-standard/",
+  "ASVS": "https://owasp.org/www-project-application-security-verification-standard/",
+  "in-toto": "https://in-toto.io",
+  "SLSA": "https://slsa.dev",
+  "DSSE": "https://github.com/secure-systems-lab/dsse",
+  "Sigstore": "https://sigstore.dev",
+  "Fulcio": "https://docs.sigstore.dev/fulcio/overview/",
+  "Rekor": "https://docs.sigstore.dev/rekor/overview/",
+  "OIDC": "https://openid.net/connect/",
+  "ed25519": "https://ed25519.cr.yp.to",
+  "GHCR": "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry",
+  "OCI": "https://opencontainers.org",
+  "RFC": "https://www.rfc-editor.org/rfc/rfc9530",
+  "nix": "https://nixos.org"
+}
