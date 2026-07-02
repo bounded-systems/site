@@ -20,7 +20,14 @@ permissions:
 
 concurrency:
   group: deploy-${{ github.ref }}
-  cancel-in-progress: false
+  # A run stuck waiting at the site-promote approval gate (never approved or
+  # rejected) otherwise blocks every subsequent deploy indefinitely. promote's
+  # only prod-affecting step (wrangler versions deploy, in the shared
+  # site-deploy.yml) is a single atomic Cloudflare routing switch, not a
+  # multi-step process that can be left half-applied; cancelling mid-promote
+  # can at worst interrupt the post-switch verification for that one run, not
+  # corrupt what's already live.
+  cancel-in-progress: true
 
 jobs:
   build:
