@@ -8,12 +8,12 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
-const brand = join(root, "brand");
+const brand = join(root, "node_modules", "@bounded-systems", "brand");
 
 async function exists(p) { try { await access(p); return true; } catch { return false; } }
 
 if (!(await exists(join(brand, "tokens", "tokens.css")))) {
-  console.error("✗ brand/ is empty. Run: git submodule update --init --recursive");
+  console.error("✗ @bounded-systems/brand is missing. Run: npm install");
   process.exit(1);
 }
 

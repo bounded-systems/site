@@ -1,9 +1,10 @@
 name: brand-checks
 
-# Gate this surface against the shared design + content system (the brand submodule):
-#   meta + agent-readiness, content tokens (schema + Gherkin + lint), coverage report.
-# Copy hygiene now runs upstream via the string-audit reusable gate (the `copy` job),
-# so the prose rules live in one place and propagate when the pin is bumped.
+# Gate this surface against the shared design + content system
+# (@bounded-systems/brand): meta + agent-readiness, content tokens (schema +
+# Gherkin + lint), coverage report. Copy hygiene now runs upstream via the
+# string-audit reusable gate (the `copy` job), so the prose rules live in one
+# place and propagate when the pin is bumped.
 on:
   push:
     branches: [main]
@@ -17,13 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          submodules: recursive
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
       - name: Install
         run: npm ci
+      - name: Resolve installed brand version
+        id: brand-version
+        run: echo "version=$(node -p "require('./node_modules/@bounded-systems/brand/package.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Checkout brand's source (dev tooling only — not published to npm)
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          repository: bounded-systems/brand
+          ref: v${{ steps.brand-version.outputs.version }}
+          path: brand
       - name: Content catalog is current (extracted prose surfaces)
         # The copy job gates data/audit/catalog.json; fail early if it drifted from source.
         run: node scripts/emit-catalog.mjs --check
@@ -47,25 +55,39 @@ jobs:
           done
 
   # The brand is pinned twice: in flake.lock (the hermetic Nix build that deploy.yml
-  # ships) and as the git submodule (npm run dev + the checks above). They must point
-  # at the same commit — when they drift, the deployed CSS can silently lag the styles
-  # that reference it. That is exactly how the grade badges shipped with empty
-  # var(--bs-grade-*) values: the submodule was bumped but flake.lock was never relocked.
+  # ships) and as the @bounded-systems/brand npm dependency (npm run dev + the checks
+  # above). They must resolve to the same release — when they drift, the deployed CSS
+  # can silently lag the styles that reference it. That is exactly how the grade
+  # badges shipped with empty var(--bs-grade-*) values: the (then-)submodule was
+  # bumped but flake.lock was never relocked. npm's pin is a semver version, not a
+  # git commit, so this resolves it to the exact commit via the release tag
+  # (mint release always tags v<version> at the commit it cuts the release from)
+  # and compares that to flake.lock's pinned rev.
   brand-pins-agree:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - name: flake.lock brand rev == submodule rev
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: npm ci
+      - name: flake.lock brand rev == npm-pinned release commit
         run: |
           lock_rev="$(jq -r '.nodes.brand.locked.rev' flake.lock)"
-          sub_rev="$(git ls-tree HEAD brand | awk '{print $3}')"
-          echo "flake.lock brand: $lock_rev"
-          echo "submodule  brand: $sub_rev"
-          if [ "$lock_rev" != "$sub_rev" ]; then
-            echo "::error::brand pins diverged. Run 'nix flake update brand' and 'git submodule update --remote brand' so both point at the same commit."
+          npm_version="$(node -p "require('./node_modules/@bounded-systems/brand/package.json').version")"
+          tag_rev="$(git ls-remote https://github.com/bounded-systems/brand.git "refs/tags/v${npm_version}" | cut -f1)"
+          echo "flake.lock brand:        $lock_rev"
+          echo "npm brand@$npm_version tag: $tag_rev"
+          if [ -z "$tag_rev" ]; then
+            echo "::error::no v$npm_version tag found on bounded-systems/brand — can't verify the pin."
             exit 1
           fi
-          echo "✓ brand pins agree ($lock_rev)"
+          if [ "$lock_rev" != "$tag_rev" ]; then
+            echo "::error::brand pins diverged. Run 'nix flake update brand' and/or bump the @bounded-systems/brand npm dependency so both resolve to the same release."
+            exit 1
+          fi
+          echo "✓ brand pins agree ($lock_rev, v$npm_version)"
 
   # Whole-page structure gate (vendored conformance-kit structure-audit): reader
   # survivability (Mozilla Readability) + outline + landmarks + internal link-graph,
@@ -78,8 +100,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          submodules: recursive
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
@@ -103,8 +123,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          submodules: recursive
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
