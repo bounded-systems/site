@@ -76,7 +76,15 @@ jobs:
         run: |
           lock_rev="$(jq -r '.nodes.brand.locked.rev' flake.lock)"
           npm_version="$(node -p "require('./node_modules/@bounded-systems/brand/package.json').version")"
-          tag_rev="$(git ls-remote https://github.com/bounded-systems/brand.git "refs/tags/v${npm_version}" | cut -f1)"
+          # mint release cuts a signed/annotated tag — refs/tags/vX.Y.Z alone resolves
+          # to the TAG OBJECT's own sha, not the commit it points to. The ^{} suffix
+          # asks git to peel it to the underlying commit (matches flake.lock's rev,
+          # which nix's git fetcher already dereferences).
+          tag_rev="$(git ls-remote https://github.com/bounded-systems/brand.git "refs/tags/v${npm_version}^{}" | cut -f1)"
+          if [ -z "$tag_rev" ]; then
+            # Lightweight (non-annotated) tag — no ^{} peel target exists; the direct ref IS the commit.
+            tag_rev="$(git ls-remote https://github.com/bounded-systems/brand.git "refs/tags/v${npm_version}" | cut -f1)"
+          fi
           echo "flake.lock brand:        $lock_rev"
           echo "npm brand@$npm_version tag: $tag_rev"
           if [ -z "$tag_rev" ]; then
