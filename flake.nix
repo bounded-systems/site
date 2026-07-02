@@ -4,10 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # Brand is pinned here (flake.lock) for the hermetic build — independent of the
-    # git submodule, which exists only for `npm run dev` / non-Nix builds.
-    # When bumping the brand, update both: `nix flake update brand` + the submodule.
+    # @bounded-systems/brand npm dependency, which exists only for `npm run dev` /
+    # non-Nix builds. Pinned to the release tag (not `main`) so this stays in
+    # lockstep with npm's version-based pin — both track the same RELEASE, not an
+    # arbitrary branch-tip commit. When bumping the brand, update both:
+    # `nix flake update brand` (after bumping the ref below) + `npm install
+    # @bounded-systems/brand@<version>`. brand-checks.yml's brand-pins-agree job
+    # fails closed if they ever diverge.
     brand = {
-      url = "github:bounded-systems/brand";
+      url = "github:bounded-systems/brand?ref=v1.4.0";
       flake = false;
     };
   };

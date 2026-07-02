@@ -8,12 +8,19 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const dist = join(root, "dist");
-const brand = join(root, "brand");
 
 async function exists(p) { try { await access(p); return true; } catch { return false; } }
 
+// `nix build` materializes the flake-pinned brand source directly at brand/
+// (see flake.nix); everywhere else (npm run build, npm run dev, CI) it's the
+// @bounded-systems/brand npm dependency. Prefer brand/ when it's actually
+// populated so the same build.mjs works in both without an env-detection flag.
+const brand = (await exists(join(root, "brand", "tokens", "tokens.css")))
+  ? join(root, "brand")
+  : join(root, "node_modules", "@bounded-systems", "brand");
+
 if (!(await exists(join(brand, "tokens", "tokens.css")))) {
-  console.error("✗ brand/ is empty. Run: git submodule update --init --recursive");
+  console.error("✗ brand/ and node_modules/@bounded-systems/brand are both missing. Run: npm install (or nix build, which materializes brand/ itself).");
   process.exit(1);
 }
 

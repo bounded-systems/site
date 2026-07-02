@@ -14,11 +14,12 @@ import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 // Copy resolves the same way the brand's content.mjs merges it: the CORE strings (the
-// brand submodule — name/tagline/…) plus this surface's strings.json, which EXTENDS core.
-// So data-str can reference a core token (e.g. the org name) as well as a site string.
+// @bounded-systems/brand npm dependency — name/tagline/…) plus this surface's
+// strings.json, which EXTENDS core. So data-str can reference a core token (e.g. the
+// org name) as well as a site string.
 const site = JSON.parse(readFileSync(join(root, "content/strings.json"), "utf8"));
 let core = {};
-try { core = JSON.parse(readFileSync(join(root, "brand/content/strings.json"), "utf8")); } catch { /* core optional */ }
+try { core = JSON.parse(readFileSync(join(root, "node_modules/@bounded-systems/brand/content/strings.json"), "utf8")); } catch { /* core optional */ }
 const strings = { ...core, ...site };
 const siteKeys = new Set(Object.keys(site).filter((k) => !k.startsWith("$"))); // core keys belong to the brand — not unused-checked here
 const SURFACES = ["index.html"]; // HTML surfaces whose data-str copy is single-sourced
