@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contract lattice — Bounded Systems</title>
+  <meta name="description" content="Every inter-repo contract, graded live by its check. Rendered from the signed trellis status projection — the two red edges are real drift, shown honestly.">
+  <link rel="canonical" href="https://bounded.tools/contracts">
+  <link rel="icon" type="image/png" href="brand/favicon-32.png">
+  <meta name="theme-color" content="#0C5A42">
+
+  <link rel="stylesheet" href="brand/css/fonts.css">
+  <link rel="stylesheet" href="brand/tokens/tokens.css">
+  <link rel="stylesheet" href="brand/css/base.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .lattice { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .lattice__intro { color: var(--bs-color-ink, #16241d); max-width: 44rem; }
+    .lattice__tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: .75rem; margin: 1.75rem 0; }
+    .tile { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: .6rem; padding: .85rem 1rem; }
+    .tile__n { font-size: 1.9rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+    .tile__l { font-size: .8rem; opacity: .7; margin-top: .3rem; }
+    .tile--pass .tile__n { color: var(--bs-color-forest, #0C5A42); }
+    .tile--gap .tile__n  { color: #b3261e; }
+    table.grid { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: .95rem; }
+    .grid th, .grid td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); vertical-align: top; }
+    .grid th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; opacity: .65; }
+    .badge { display: inline-block; font-size: .78rem; font-weight: 600; padding: .12rem .5rem; border-radius: 1rem; white-space: nowrap; }
+    .badge--pass { background: color-mix(in srgb, var(--bs-color-forest, #0C5A42) 15%, transparent); color: var(--bs-color-forest, #0C5A42); }
+    .badge--gap  { background: color-mix(in srgb, #b3261e 13%, transparent); color: #b3261e; }
+    .badge--declared { background: color-mix(in srgb, currentColor 9%, transparent); opacity: .8; }
+    code.mono, pre.verify { font-family: var(--bs-font-mono, ui-monospace, monospace); }
+    pre.verify { background: color-mix(in srgb, currentColor 6%, transparent); padding: 1rem; border-radius: .6rem; overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+    .kind { font-family: var(--bs-font-mono, ui-monospace, monospace); font-size: .82rem; opacity: .75; }
+    .muted { opacity: .7; }
+    .home { display: inline-block; margin-bottom: 1.5rem; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main class="lattice" id="main">
+    <a class="home" href="/">&larr; bounded.tools</a>
+    <h1>Contract lattice</h1>
+    <p class="lattice__intro">
+      Every contract between our repos, graded <strong>live</strong> by its own
+      check. This page renders the <strong>signed</strong>
+      <a href="https://github.com/bounded-systems/trellis">trellis</a> status
+      projection — the same one the
+      <a href="https://github.com/bounded-systems/trust/blob/main/CLAIMS.md">Trust
+      Center</a> reads. Nothing here is hand-typed: a 🔴 gap is real drift, shown
+      honestly, until the check goes green.
+    </p>
+
+    <div class="lattice__tiles" id="tiles" aria-live="polite"></div>
+
+    <table class="grid" id="grid">
+      <thead>
+        <tr><th>Contract</th><th>Kind</th><th>Grade</th><th>Governs</th></tr>
+      </thead>
+      <tbody id="rows"><tr><td colspan="4" class="muted">Loading the signed projection…</td></tr></tbody>
+    </table>
+
+    <h2 style="margin-top:2.5rem">Verify it yourself</h2>
+    <p class="lattice__intro muted">
+      The projection is cosign keyless-signed by trellis CI. Don't trust this
+      page — check the source:
+    </p>
+    <pre class="verify">curl -sO https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json
+curl -sO https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json.sigstore.json
+cosign verify-blob --bundle status.json.sigstore.json \
+  --certificate-identity-regexp '^https://github.com/bounded-systems/trellis/' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com status.json</pre>
+    <p class="muted"><small id="stamp"></small></p>
+  </main>
+
+  <script>
+    const STATUS = "https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json";
+    const GRADE = {
+      pass: ["✅ Enforced", "badge--pass"],
+      fail: ["🔴 Gap", "badge--gap"],
+      declared: ["📐 Declared", "badge--declared"],
+    };
+    const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+    fetch(STATUS).then((r) => {
+      if (!r.ok) throw new Error("status " + r.status);
+      return r.json();
+    }).then((d) => {
+      const s = d.summary;
+      const tile = (n, l, cls) => `<div class="tile ${cls || ""}"><div class="tile__n">${n}</div><div class="tile__l">${l}</div></div>`;
+      document.getElementById("tiles").innerHTML =
+        tile(s.nodes, "repos") + tile(s.edges, "edges") +
+        tile(s.verified, "checked") +
+        tile(s.passing, "passing", "tile--pass") +
+        tile(s.failing, "gaps", s.failing ? "tile--gap" : "");
+
+      // verified first (the live-checked ones), then declared
+      const types = [...d.types].sort((a, b) => (b.verified - a.verified) || a.type.localeCompare(b.type));
+      document.getElementById("rows").innerHTML = types.map((t) => {
+        const [label, cls] = t.verified ? GRADE[t.result] : GRADE.declared;
+        return `<tr>
+          <td><code class="mono">${esc(t.type)}</code></td>
+          <td class="kind">${esc(t.kind)}</td>
+          <td><span class="badge ${cls}">${label}</span></td>
+          <td class="muted"><small>${esc(t.summary)}</small></td>
+        </tr>`;
+      }).join("");
+
+      document.getElementById("stamp").textContent =
+        `${s.passing}/${s.verified} verified contracts passing · ${s.nodes} repos mapped · live from the trellis status branch.`;
+    }).catch((e) => {
+      document.getElementById("rows").innerHTML =
+        `<tr><td colspan="4" class="muted">Couldn't load the live projection (${esc(e.message)}). Read it directly: <a href="${STATUS}">status.json</a>.</td></tr>`;
+    });
+  </script>
+</body>
+</html>

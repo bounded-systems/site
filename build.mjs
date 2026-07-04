@@ -28,7 +28,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
 // Page files
-for (const f of ["index.html", "styles.css", "404.html", "llms.txt", "nav.js"]) {
+for (const f of ["index.html", "styles.css", "404.html", "llms.txt", "nav.js", "contracts.html"]) {
   await cp(join(root, f), join(dist, f));
 }
 
