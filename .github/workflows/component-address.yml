@@ -1,0 +1,53 @@
+name: component-address
+
+# Content-addresses the grade-legend components (index.html: Enforced/Partial/
+# Aspirational) via @bounded-systems/baobab's address() and fails closed if the
+# committed baseline (integrity/components/grade-legend.address.json) drifts —
+# a token value, the template, or lone's accessibility verdict changed without an
+# explicit, committed update. See integrity/components/grade-legend.ts for the
+# rationale (closes the same gap that let a stale token snapshot ship silently
+# elsewhere in this ecosystem — bounded-systems/mint#11).
+#
+# --minimum-dependency-age=0: the only things resolved here are first-party
+# @bounded-systems packages (baobab, lone) this workflow already trust-bounds by
+# exact version — Deno 2.9+'s 24h default age-gate adds no real protection for a
+# package this repo's own org just published, only a guaranteed CI failure on
+# every fresh release (bounded-systems/baobab#7, bounded-systems/mint#11).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "integrity/components/**"
+      - "package.json"
+      - ".github/workflows/component-address.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "integrity/components/**"
+      - "package.json"
+      - ".github/workflows/component-address.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  component-address:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Install (populates node_modules/@bounded-systems/brand)
+        run: npm ci
+      - uses: denoland/setup-deno@e95548e56dfa95d4e1a28d6f422fafe75c4c26fb # v2
+        with:
+          deno-version: v2.x
+      - name: Every grade-legend variant matches its committed, blessed address
+        run: >
+          deno run --allow-read --frozen
+          --config integrity/components/deno.json
+          --lock=integrity/components/deno.lock
+          --minimum-dependency-age=0
+          integrity/components/grade-legend.ts --check
