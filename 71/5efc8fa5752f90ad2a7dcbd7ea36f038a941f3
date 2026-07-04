@@ -1,0 +1,30 @@
+integrity/components/grade-legend.ts
+  s_d0a1bec15809bc::t_b4f4ce1c48ecfe 1-92
+integrity/README.md
+  s_d0a1bec15809bc::t_ff03c18eddda2e 31
+.github/workflows/component-address.yml
+  s_d0a1bec15809bc::t_1d65bb29a6af4e 49-52
+  s_d0a1bec15809bc::t_a571afc7fcab22 1-48,53
+integrity/components/deno.json
+  s_d0a1bec15809bc::t_9373f7078fe363 1-3
+integrity/components/deno.lock
+  s_d0a1bec15809bc::t_75280b060aebab 1-112
+integrity/components/grade-legend.address.json
+  s_d0a1bec15809bc::t_03d398e2581ca2 1-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "715efc8fa5752f90ad2a7dcbd7ea36f038a941f3",
+  "prompts": {},
+  "sessions": {
+    "s_d0a1bec15809bc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "297d0fee-c144-4ae1-8a97-9d7922657403",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
