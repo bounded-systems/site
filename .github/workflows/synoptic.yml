@@ -1,8 +1,7 @@
 name: synoptic
-# Layered validation via the shared engine. PRs: validate (report). Push to main:
-# validate --attest, cosign-sign each check's in-toto Statement (keyless, OIDC →
-# Fulcio → Rekor), then VERIFY the bundles against this workflow's own identity —
-# the round-trip proof that a consumer can 'check the checks'.
+# The engine builds + validates the site. Gates live in synoptic (config-driven);
+# this repo just declares them. PRs: build + validate (report). Push to main:
+# + attest each check, cosign-sign (keyless OIDC → Rekor), verify.
 on:
   pull_request:
   push:
@@ -10,7 +9,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  id-token: write # OIDC — cosign keyless
+  id-token: write
 env:
   SIGNER_IDENTITY: https://github.com/bounded-systems/site/.github/workflows/synoptic.yml@refs/heads/main
 jobs:
@@ -24,8 +23,10 @@ jobs:
         with: { repository: bounded-systems/conformance-kit, ref: v0.12.0, path: .conformance-kit, persist-credentials: false }
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with: { node-version: "22" }
+      - run: npm ci
+      - run: npm run build            # dist/ incl. json.ld — the engine checks the built site
       - run: node .synoptic/generators/gen-prose-corpus.mjs
-      - name: validate (+ attest on main)
+      - name: validate (all declared gates via the engine)
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
             CK_GATES="$PWD/.conformance-kit/gates" node .synoptic/validate.mjs --attest attestations
@@ -38,10 +39,10 @@ jobs:
       - name: sign each check attestation (keyless, OIDC)
         if: github.event_name == 'push'
         run: for f in attestations/*.intoto.json; do cosign sign-blob --yes --bundle "$f.sigstore.json" "$f"; done
-      - name: verify the checks (round-trip vs this workflow's identity)
+      - name: verify the checks
         if: github.event_name == 'push'
         run: node .synoptic/verify.mjs attestations --identity "$SIGNER_IDENTITY"
-      - name: upload signed + verified check attestations
+      - name: upload signed check attestations
         if: github.event_name == 'push'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with: { name: check-attestations, path: attestations/ }
