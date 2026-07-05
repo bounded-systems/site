@@ -1,0 +1,21 @@
+.github/workflows/graph-pipeline.yml
+  s_70508ca017cb29::t_d2fdc4d09408f8 1-44
+synoptic.config.json
+  s_70508ca017cb29::t_1a2cb87afd5ca8 4-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "da0a0bb3e89ed25ecd9663063e6f8c15cb8efdb9",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
