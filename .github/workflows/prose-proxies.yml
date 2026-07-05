@@ -1,0 +1,22 @@
+name: prose-proxies
+# Honest-proxy prose gates (report-mode): surface unbounded/unproven/vague claims
+# and monotonous sentence openers on every PR. Non-blocking by design — like the
+# focus-budget cognitive gate, these flag CANDIDATES for human review, not
+# verdicts. Flip to `--strict` per gate once the copy is cleared/allowlisted.
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "22"
+      - name: claim discipline (unbounded / unproven / vague)
+        run: node scripts/check-claim-discipline.mjs
+      - name: grammar repetition (over-repeated openers)
+        run: node scripts/check-grammar-repetition.mjs

@@ -24,7 +24,10 @@
     "artifacts": "node scripts/emit-artifacts.mjs",
     "dev": "python3 -m http.server 8080",
     "prebuild": "npm run check",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "claim-discipline": "node scripts/check-claim-discipline.mjs",
+    "grammar-repetition": "node scripts/check-grammar-repetition.mjs",
+    "prose": "node scripts/check-claim-discipline.mjs && node scripts/check-grammar-repetition.mjs"
   },
   "dependencies": {
     "@bounded-systems/brand": "^1.4.0"
