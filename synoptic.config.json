@@ -32,5 +32,17 @@
         "id": "https://robertdelanghe.dev/#person"
       }
     ]
+  },
+  "build": {
+    "pages": [
+      {
+        "id": "corpus",
+        "title": "The corpus",
+        "route": "corpus",
+        "query": {
+          "type": "SoftwareSourceCode"
+        }
+      }
+    ]
   }
 }
