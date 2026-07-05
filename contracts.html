@@ -29,19 +29,19 @@
 
   <style>
     .lattice { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .lattice__intro { color: var(--bs-color-ink, #16241d); max-width: 44rem; }
+    .lattice__intro { color: var(--bs-color-ink); max-width: 44rem; }
     .lattice__tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: .75rem; margin: 1.75rem 0; }
     .tile { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: .6rem; padding: .85rem 1rem; }
     .tile__n { font-size: 1.9rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
     .tile__l { font-size: .8rem; opacity: .7; margin-top: .3rem; }
-    .tile--pass .tile__n { color: var(--bs-color-forest, #0C5A42); }
-    .tile--gap .tile__n  { color: #b3261e; }
+    .tile--pass .tile__n { color: var(--bs-color-forest); }
+    .tile--gap .tile__n  { color: var(--bs-color-clay); }
     table.grid { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: .95rem; }
     .grid th, .grid td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); vertical-align: top; }
     .grid th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; opacity: .65; }
     .badge { display: inline-block; font-size: .78rem; font-weight: 600; padding: .12rem .5rem; border-radius: 1rem; white-space: nowrap; }
-    .badge--pass { background: color-mix(in srgb, var(--bs-color-forest, #0C5A42) 15%, transparent); color: var(--bs-color-forest, #0C5A42); }
-    .badge--gap  { background: color-mix(in srgb, #b3261e 13%, transparent); color: #b3261e; }
+    .badge--pass { background: color-mix(in srgb, var(--bs-color-forest) 15%, transparent); color: var(--bs-color-forest); }
+    .badge--gap  { background: color-mix(in srgb, var(--bs-color-clay) 13%, transparent); color: var(--bs-color-clay); }
     .badge--declared { background: color-mix(in srgb, currentColor 9%, transparent); opacity: .8; }
     code.mono, pre.verify { font-family: var(--bs-font-mono, ui-monospace, monospace); }
     pre.verify { background: color-mix(in srgb, currentColor 6%, transparent); padding: 1rem; border-radius: .6rem; overflow-x: auto; font-size: .82rem; line-height: 1.5; }
