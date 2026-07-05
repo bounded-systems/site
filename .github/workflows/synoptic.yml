@@ -14,6 +14,3 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    with:
-      browser: true
-      browser-gates: "axe-gate.mjs"
