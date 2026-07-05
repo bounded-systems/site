@@ -1,0 +1,21 @@
+.github/workflows/derived-facts.yml
+  s_70508ca017cb29::t_3dd67d4f06ffff 1-41
+data/derive.model.json
+  s_70508ca017cb29::t_7aac7544c47334 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "14df6d8d1312607d7ce01d76e70b9bfb4f0e2553",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
