@@ -1,0 +1,11 @@
+<section class="lattice" aria-labelledby="lattice-heading">
+  <h2 id="lattice-heading">Contracts, graded against the running code</h2>
+  <p class="lattice__lead">5 contracts carry a live check — <strong>5 passing</strong>, 0 failing — with 34 more declared. Coverage is not conformance; this is what is actually enforced.</p>
+  <ul class="lattice__checks">
+      <li class="lattice__check" data-result="pass"><span class="lattice__type">concierge-wire</span> <span class="lattice__result">pass</span> <span class="lattice__desc">concierged's capability-resolution RPC surface (register/resolve/keys/list/status).</span></li>
+      <li class="lattice__check" data-result="pass"><span class="lattice__type">door-kit-mirror</span> <span class="lattice__result">pass</span> <span class="lattice__desc">The door-kit client + runtime vendored into each door daemon — must stay byte-identical to door-kit HEAD.</span></li>
+      <li class="lattice__check" data-result="pass"><span class="lattice__type">keeper-wire</span> <span class="lattice__result">pass</span> <span class="lattice__desc">keeperd's git-signing RPC surface (commit/push/import-and-push/attest-launch/sign/verify/status/getPublicKey).</span></li>
+      <li class="lattice__check" data-result="pass"><span class="lattice__type">sanctioned-reader-seam</span> <span class="lattice__result">pass</span> <span class="lattice__desc">A 'one sanctioned reader' package upholding its own seam claim (allowed imports + no ambient authority) — a UNARY contract. Wired for fs; env/host/proc/repo-root next.</span></li>
+      <li class="lattice__check" data-result="pass"><span class="lattice__type">scout-wire</span> <span class="lattice__result">pass</span> <span class="lattice__desc">scoutd's external-read RPC surface (repo/pr/issue/fetch/download/status).</span></li>
+  </ul>
+</section>
