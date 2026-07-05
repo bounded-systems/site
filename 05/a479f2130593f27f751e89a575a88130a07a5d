@@ -1,0 +1,21 @@
+.github/workflows/deploy.yml
+  s_70508ca017cb29::t_3eb5ca9ba34f41 54,57,61-62,64-66
+synoptic.config.json
+  s_70508ca017cb29::t_85ac3b51be977a 35-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "05a479f2130593f27f751e89a575a88130a07a5d",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
