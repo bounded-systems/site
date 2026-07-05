@@ -18,12 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with: { repository: bounded-systems/synoptic, ref: v0.1.0, path: .synoptic, persist-credentials: false }
+        with: { repository: bounded-systems/synoptic, ref: v0.2.0, path: .synoptic, persist-credentials: false }
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with: { repository: bounded-systems/conformance-kit, ref: v0.12.0, path: .conformance-kit, persist-credentials: false }
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with: { node-version: "22" }
       - run: npm ci
+      - run: npm --prefix .conformance-kit ci --omit=dev || npm --prefix .conformance-kit install --omit=dev
       - run: npm run build            # dist/ incl. json.ld — the engine checks the built site
       - run: node .synoptic/generators/gen-prose-corpus.mjs
       - name: validate (all declared gates via the engine)
