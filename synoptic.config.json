@@ -23,7 +23,8 @@
       "org",
       "packages",
       "lattice",
-      "jargon"
+      "jargon",
+      "palette"
     ],
     "bridge": [
       {
