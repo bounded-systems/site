@@ -1,0 +1,23 @@
+{
+  "enforced": {
+    "sha": "0938993ce93d719348683cbeaa00999700e59d269eba70c6c0d3960dcd0a1c24",
+    "blessed": true,
+    "used": {
+      "grade.enforced": "#3FB984"
+    }
+  },
+  "partial": {
+    "sha": "b338e796c71c699d600849bbe52e391d993a192b1757fce172a8214956507fe5",
+    "blessed": true,
+    "used": {
+      "grade.partial": "#C8902F"
+    }
+  },
+  "aspirational": {
+    "sha": "347c4881d482bd15b13d8d9263e5be2e8f51f767862f98479a03dad43efa4c80",
+    "blessed": true,
+    "used": {
+      "grade.aspirational": "#7E8C83"
+    }
+  }
+}

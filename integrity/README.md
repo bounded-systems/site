@@ -28,6 +28,7 @@ and regenerating the lock.
 | Path | What |
 |---|---|
 | `structure-audit/structure.json` | The content-addressed **structure baseline** for the kit's structure-audit (`$STRUCTURE_BASELINE`). The baseline belongs to the consumer, never the vendored kit, so a re-vendor can't mutate it. |
+| `components/` | Per-component content-addresses via `@bounded-systems/baobab`'s `address()` — `grade-legend.ts` addresses index.html's grade-legend spans against the real brand tokens + lone's blessing; `grade-legend.address.json` is the committed baseline `--check` fails against on drift. The addressing tooling lives in baobab; only the site-specific template + baseline live here (same split as everything else in this file). |
 | `claims/` | Nanopublication **claim graphs** + `validate-claims.mjs` (a bounded.tools-specific gate: every claim graded, gaps disclosed, evidence linked). |
 | `policy/` | The cosign / policy-controller **admission policy** + verify recipes for the signed OCI artifact. |
 | `verifier-decision.md` | The decision record for the out-of-page verifier. |
