@@ -36,9 +36,34 @@
   "build": {
     "pages": [
       {
+        "id": "home",
+        "route": "",
+        "title": "bounded.tools",
+        "sections": [
+          {
+            "title": "The organization",
+            "query": {
+              "type": "Organization"
+            }
+          },
+          {
+            "title": "The corpus",
+            "query": {
+              "type": "SoftwareSourceCode"
+            }
+          },
+          {
+            "title": "Contracts",
+            "query": {
+              "type": "Dataset"
+            }
+          }
+        ]
+      },
+      {
         "id": "corpus",
-        "title": "The corpus",
         "route": "corpus",
+        "title": "The corpus",
         "query": {
           "type": "SoftwareSourceCode"
         }
