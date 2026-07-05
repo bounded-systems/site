@@ -1,0 +1,26 @@
+scripts/check-grammar-repetition.mjs
+  s_70508ca017cb29::t_976ce2e19146f7 1-79
+scripts/check-claim-discipline.mjs
+  s_70508ca017cb29::t_ea7354e6b617f5 1-71,75-76,80-106
+  s_70508ca017cb29::t_f6e19fdc9e1aed 72-74,77-79
+.github/workflows/prose-proxies.yml
+  s_70508ca017cb29::t_6130f7e90faf3c 1-22
+package.json
+  s_70508ca017cb29::t_0520e845680c00 27-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "589d9ce72c8dc5291105f147f863f2f6a9a8d705",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
