@@ -1,0 +1,41 @@
+name: derived-facts
+# Compute org facts from the SIGNED lattice, cosign-sign them (keyless OIDC), and
+# verify — an ATTESTED-DERIVABLE fact: recomputable AND non-repudiably signed.
+# Nudged, not per-push: a daily schedule + repository_dispatch (e.g. when the lattice
+# updates) + manual. Sign-on-change — the derived digest gates the re-sign.
+on:
+  push:
+    branches: [main]
+    paths: ["data/derive.model.json"]
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [lattice-updated]
+permissions:
+  contents: read
+  id-token: write # OIDC — cosign keyless
+env:
+  SIGNER_IDENTITY: https://github.com/bounded-systems/site/.github/workflows/derived-facts.yml@refs/heads/main
+jobs:
+  derive-and-sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with: { repository: bounded-systems/synoptic, path: .synoptic, persist-credentials: false }
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with: { node-version: "22" }
+      - name: derive facts from the signed lattice
+        run: node .synoptic/derive.mjs data/derive.model.json --out derived-facts.json
+      - uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.7.0
+      - name: sign the derived facts (keyless, OIDC) — attested-derivable
+        run: cosign sign-blob --yes --bundle derived-facts.json.sigstore.json derived-facts.json
+      - name: verify the derived facts (round-trip vs this workflow's identity)
+        run: |
+          cosign verify-blob --bundle derived-facts.json.sigstore.json \
+            --certificate-identity "$SIGNER_IDENTITY" \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+            derived-facts.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with: { name: signed-derived-facts, path: "derived-facts.json*" }
