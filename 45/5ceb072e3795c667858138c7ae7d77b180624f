@@ -1,0 +1,31 @@
+.github/workflows/prose-proxies.yml
+  s_70508ca017cb29::t_aa8f66b4169520 2-5,19-29
+.gitignore
+  s_70508ca017cb29::t_0333b02487c76f 9-12
+package.json
+  s_70508ca017cb29::t_b06fdde694b160 28-33
+scripts/check-claim-discipline.mjs
+  s_70508ca017cb29::t_ddf51152727caf 2,4-5,7-21,24-29,31,49-54,56-63,71,73-74,78,84,96-98,100,102-103,107
+scripts/check-doc-scope.mjs
+  s_70508ca017cb29::t_0a985dfb55e6bb 1-82
+scripts/check-grammar-repetition.mjs
+  s_70508ca017cb29::t_fa62072f9e1899 2,4-5,7-17,20-24,26,28-32,37-39,42-46,51-52,58-60
+scripts/gen-prose-corpus.mjs
+  s_70508ca017cb29::t_ac28cbcb5111a2 1-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "455ceb072e3795c667858138c7ae7d77b180624f",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
