@@ -44,7 +44,8 @@
             "title": "The organization",
             "query": {
               "type": "Organization"
-            }
+            },
+            "render": "hero"
           },
           {
             "title": "The corpus",
