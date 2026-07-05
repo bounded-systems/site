@@ -1,0 +1,727 @@
+{
+  "@context": [
+    "https://schema.org",
+    {
+      "buildsOn": {
+        "@id": "https://bounded.tools//#buildsOn",
+        "@type": "@id"
+      }
+    }
+  ],
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://bounded.tools//#org",
+      "name": "Bounded Systems",
+      "alternateName": "bounded.tools",
+      "url": "https://bounded.tools/",
+      "description": "Bounded authority for AI agents."
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-cas",
+      "name": "cas",
+      "identifier": "@bounded-systems/cas",
+      "codeRepository": "https://github.com/bounded-systems/cas",
+      "description": "Content-addressable storage substrate: bytes addressed by their SHA-256 digest, with a storage-agnostic blob-store port",
+      "keywords": [
+        "room",
+        "noun",
+        "substrate",
+        "content-addressing"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-machine-schema",
+      "name": "machine-schema",
+      "identifier": "@bounded-systems/machine-schema",
+      "codeRepository": "https://github.com/bounded-systems/machine-schema",
+      "description": "Brands, handoff envelope, and state/phase/invariant primitives for work-unit machines",
+      "keywords": [
+        "room",
+        "noun",
+        "schema",
+        "state-machine/types"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-audit-context",
+      "name": "audit-context",
+      "identifier": "@bounded-systems/audit-context",
+      "codeRepository": "https://github.com/bounded-systems/audit-context",
+      "description": "Ambient runtime context for gh-call audit attribution (verb, actor, truth reason)",
+      "keywords": [
+        "room",
+        "noun",
+        "context",
+        "audit/attribution"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-anchored-chain",
+      "name": "anchored-chain",
+      "identifier": "@bounded-systems/anchored-chain",
+      "codeRepository": "https://github.com/bounded-systems/anchored-chain",
+      "description": "Derivation chain with contract validation, signing, lineage tracking, and invalidation",
+      "keywords": [
+        "room",
+        "noun",
+        "data-structure",
+        "provenance"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-cas"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-anchored-chain-sqlite",
+      "name": "anchored-chain-sqlite",
+      "identifier": "@bounded-systems/anchored-chain-sqlite",
+      "codeRepository": "https://github.com/bounded-systems/anchored-chain-sqlite",
+      "description": "SQLite/Drizzle-backed implementation of the anchored-chain stores",
+      "keywords": [
+        "room",
+        "noun",
+        "store-impl",
+        "provenance/persistence"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-anchored-chain"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-cas"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-disposition",
+      "name": "disposition",
+      "identifier": "@bounded-systems/disposition",
+      "codeRepository": "https://github.com/bounded-systems/disposition",
+      "description": "Pure classifier mapping work-unit surface state to a disposition (ok/prune/repair/review)",
+      "keywords": [
+        "guest",
+        "verb",
+        "classifier",
+        "work-unit/state"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-prx-config",
+      "name": "prx-config",
+      "identifier": "@bounded-systems/prx-config",
+      "codeRepository": "https://github.com/bounded-systems/prx-config",
+      "description": "TUI configuration schema parser/emitter for L1 Claude and L2 Warp tools",
+      "keywords": [
+        "guest",
+        "noun",
+        "config-schema",
+        "tui-config"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-env",
+      "name": "env",
+      "identifier": "@bounded-systems/env",
+      "codeRepository": "https://github.com/bounded-systems/env",
+      "description": "The one sanctioned reader of process.env, routing ambient config through capability imports",
+      "keywords": [
+        "door",
+        "verb",
+        "capability-seam",
+        "environment/config"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-fs",
+      "name": "fs",
+      "identifier": "@bounded-systems/fs",
+      "codeRepository": "https://github.com/bounded-systems/fs",
+      "description": "Filesystem capability seam; the one allowed filesystem-access point with an injectable FileSystem",
+      "keywords": [
+        "door",
+        "verb",
+        "capability-seam",
+        "filesystem"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-host",
+      "name": "host",
+      "identifier": "@bounded-systems/host",
+      "codeRepository": "https://github.com/bounded-systems/host",
+      "description": "The one sanctioned reader of host/OS ambient state (home dir, temp dir, hostname), routing ambient authority through capability imports",
+      "keywords": [
+        "door",
+        "verb",
+        "capability-seam",
+        "host-info"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-env"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-proc",
+      "name": "proc",
+      "identifier": "@bounded-systems/proc",
+      "codeRepository": "https://github.com/bounded-systems/proc",
+      "description": "The one allowed subprocess spawn point, routing external-tool invocations through a capability",
+      "keywords": [
+        "door",
+        "verb",
+        "capability-seam",
+        "process/spawn"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-env"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-policy"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-policy",
+      "name": "policy",
+      "identifier": "@bounded-systems/policy",
+      "codeRepository": "https://github.com/bounded-systems/policy",
+      "description": "Tool-policy engine enforcing subcommand allowlists by tool, state, and role",
+      "keywords": [
+        "room",
+        "verb",
+        "engine",
+        "tool-policy/authz"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-verbspec",
+      "name": "verbspec",
+      "identifier": "@bounded-systems/verbspec",
+      "codeRepository": "https://github.com/bounded-systems/verbspec",
+      "description": "Spec-driven CLI core: author a verb once as a typed VerbSpec, project it to CLI, MCP, OpenAPI, and Anthropic tool surfaces",
+      "keywords": [
+        "guest",
+        "verb",
+        "projection-engine",
+        "interface/cli"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-auth",
+      "name": "auth",
+      "identifier": "@bounded-systems/auth",
+      "codeRepository": "https://github.com/bounded-systems/auth",
+      "description": "Service-credential resolver (GitHub, Notion) through a single sanctioned access point",
+      "keywords": [
+        "door",
+        "verb",
+        "capability",
+        "auth"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-env"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-gh",
+      "name": "gh",
+      "identifier": "@bounded-systems/gh",
+      "codeRepository": "https://github.com/bounded-systems/gh",
+      "description": "GitHub CLI wrapper with policy enforcement, rate-limit gating, and budget audit logging",
+      "keywords": [
+        "door",
+        "verb",
+        "client",
+        "github"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-env"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-github-budget"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-policy"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-proc"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-git",
+      "name": "git",
+      "identifier": "@bounded-systems/git",
+      "codeRepository": "https://github.com/bounded-systems/git",
+      "description": "Git CLI wrapper with policy enforcement and stale-lock recovery",
+      "keywords": [
+        "door",
+        "verb",
+        "capability-seam",
+        "git"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-env"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-fs"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-policy"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-proc"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-bd",
+      "name": "bd",
+      "identifier": "@bounded-systems/bd",
+      "codeRepository": "https://github.com/bounded-systems/bd",
+      "description": "Typed interface to the beads CLI with policy enforcement and short-ID guards",
+      "keywords": [
+        "door",
+        "verb",
+        "client",
+        "beads/tasks"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-env"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-policy"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-proc"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-github-budget",
+      "name": "github-budget",
+      "identifier": "@bounded-systems/github-budget",
+      "codeRepository": "https://github.com/bounded-systems/github-budget",
+      "description": "Rate-limit-aware gh wrapper with bucket classification, pre-call gating, and audit trail",
+      "keywords": [
+        "door",
+        "verb",
+        "governor",
+        "github/rate-limit"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-audit-context"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-env"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-proc"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-scout",
+      "name": "scout",
+      "identifier": "@bounded-systems/scout",
+      "codeRepository": "https://github.com/bounded-systems/scout",
+      "description": "Content-addressed surface reads (file/grep/files) with anchored-chain provenance",
+      "keywords": [
+        "door",
+        "verb",
+        "reader",
+        "external-read"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-anchored-chain"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-anchored-chain-sqlite"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-cas"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-slack",
+      "name": "slack",
+      "identifier": "@bounded-systems/slack",
+      "codeRepository": "https://github.com/bounded-systems/slack",
+      "description": "Policy-gated, provenance-tracked Slack read surface: bounded read ops behind a swappable transport port, with keymaker-minted scoped credentials",
+      "keywords": [
+        "door",
+        "verb",
+        "reader",
+        "slack/external"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-anchored-chain"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-anchored-chain-sqlite"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-cas"
+        },
+        {
+          "@id": "https://bounded.tools//#pkg-policy"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-repo-root",
+      "name": "repo-root",
+      "identifier": "@bounded-systems/repo-root",
+      "codeRepository": "https://github.com/bounded-systems/repo-root",
+      "description": "Repo-root resolution capability: lazy git-based runtime root plus the eager .git-marker walk for build/codegen, the one sanctioned root-resolution point",
+      "keywords": [
+        "door",
+        "verb",
+        "resolver",
+        "repo/fs"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-proc"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-surface-sync",
+      "name": "surface-sync",
+      "identifier": "@bounded-systems/surface-sync",
+      "codeRepository": "https://github.com/bounded-systems/surface-sync",
+      "description": "Type ontology for work-unit change-detection across GH/branch/worktree/tmux/beads",
+      "keywords": [
+        "room",
+        "verb",
+        "transform",
+        "surfaces"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "buildsOn": [
+        {
+          "@id": "https://bounded.tools//#pkg-disposition"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-schema-gen",
+      "name": "schema-gen",
+      "identifier": "@bounded-systems/schema-gen",
+      "codeRepository": "https://github.com/bounded-systems/schema-gen",
+      "description": "Project zod schemas to explicit, fast-types-clean TypeScript (zod → JSON Schema → .d.ts)",
+      "keywords": [
+        "guest",
+        "verb",
+        "generator",
+        "schema/types"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-door-kit",
+      "name": "door-kit",
+      "identifier": "@bounded-systems/door-kit",
+      "codeRepository": "https://github.com/bounded-systems/door-kit",
+      "description": "In-box door-client SDK for claude-box's capability doors, over the guest-room protocol",
+      "keywords": [
+        "door",
+        "verb",
+        "client",
+        "door/protocol"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-guest-room",
+      "name": "guest-room",
+      "identifier": "@bounded-systems/guest-room",
+      "codeRepository": "https://github.com/bounded-systems/guest-room",
+      "description": "Guest-agnostic room+door capability runtime — the core library claude-box is built on",
+      "keywords": [
+        "room",
+        "verb",
+        "runtime",
+        "capability/model"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://bounded.tools//#pkg-ocap-provenance",
+      "name": "ocap-provenance",
+      "identifier": "@bounded-systems/ocap-provenance",
+      "codeRepository": "https://github.com/bounded-systems/ocap-provenance",
+      "description": "Capability-use provenance: a schema + SLSA mapping binding each privileged effect to a signed owner + auditable chain",
+      "keywords": [
+        "room",
+        "noun",
+        "contract",
+        "provenance"
+      ],
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://bounded.tools//#lattice",
+      "name": "The contract lattice",
+      "description": "5 contracts with a live check (5 passing, 0 failing); 35 declared; across 72 repos.",
+      "isPartOf": {
+        "@id": "https://bounded.tools//#org"
+      },
+      "variableMeasured": [
+        {
+          "@type": "PropertyValue",
+          "name": "concierge-wire",
+          "value": "pass",
+          "description": "concierged's capability-resolution RPC surface (register/resolve/keys/list/status)."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "door-kit-mirror",
+          "value": "pass",
+          "description": "The door-kit client + runtime vendored into each door daemon — must stay byte-identical to door-kit HEAD."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "keeper-wire",
+          "value": "pass",
+          "description": "keeperd's git-signing RPC surface (commit/push/import-and-push/attest-launch/sign/verify/status/getPublicKey)."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "sanctioned-reader-seam",
+          "value": "pass",
+          "description": "A 'one sanctioned reader' package upholding its own seam claim (allowed imports + no ambient authority) — a UNARY contract. Wired for fs; env/host/proc/repo-root next."
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "scout-wire",
+          "value": "pass",
+          "description": "scoutd's external-read RPC surface (repo/pr/issue/fetch/download/status)."
+        }
+      ],
+      "distribution": {
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json"
+      }
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://bounded.tools//#jargon",
+      "name": "Grounded jargon",
+      "hasDefinedTerm": [
+        {
+          "@type": "DefinedTerm",
+          "name": "JSON-LD",
+          "url": "https://json-ld.org"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "SHACL",
+          "url": "https://www.w3.org/TR/shacl/"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "SPDX",
+          "url": "https://spdx.dev"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "SBOM",
+          "url": "https://www.cisa.gov/sbom"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "WCAG",
+          "url": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "OWASP",
+          "url": "https://owasp.org/www-project-application-security-verification-standard/"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "ASVS",
+          "url": "https://owasp.org/www-project-application-security-verification-standard/"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "in-toto",
+          "url": "https://in-toto.io"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "SLSA",
+          "url": "https://slsa.dev"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "DSSE",
+          "url": "https://github.com/secure-systems-lab/dsse"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Sigstore",
+          "url": "https://sigstore.dev"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Fulcio",
+          "url": "https://docs.sigstore.dev/fulcio/overview/"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Rekor",
+          "url": "https://docs.sigstore.dev/rekor/overview/"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "OIDC",
+          "url": "https://openid.net/connect/"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "ed25519",
+          "url": "https://ed25519.cr.yp.to"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "GHCR",
+          "url": "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "OCI",
+          "url": "https://opencontainers.org"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "RFC",
+          "url": "https://www.rfc-editor.org/rfc/rfc9530"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "nix",
+          "url": "https://nixos.org"
+        }
+      ]
+    }
+  ]
+}

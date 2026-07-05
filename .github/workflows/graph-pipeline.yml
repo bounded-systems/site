@@ -1,0 +1,44 @@
+name: graph-pipeline
+# PoC of the full chain, from the engine: evidence → graph (parse-attested) → claims
+# SBOM (SPDX, edges unrolled) + a page projected from the graph (project-attested).
+# Uploads every artifact so it's testable; publishing to the live site is the deploy's
+# job. Same core (synoptic@v0.6.0), site just supplies evidence + config.
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with: { repository: bounded-systems/synoptic, ref: v0.6.0, path: .synoptic, persist-credentials: false }
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with: { node-version: "22" }
+      - name: refresh evidence (lattice slice)
+        run: node .synoptic/generators/gen-lattice.mjs
+      - name: graph — evidence → one linked graph (parse-attested)
+        run: node .synoptic/graph.mjs --out data/graph.json
+      - name: claims SBOM — SPDX, edges unrolled
+        run: mkdir -p dist && node .synoptic/sbom.mjs --graph data/graph.json --out dist/claims.sbom.spdx.json
+      - name: project the site FROM the graph (project-attested)
+        run: node .synoptic/build-site.mjs --graph data/graph.json --out dist
+      - name: publish /json.ld
+        run: cp data/graph.json dist/json.ld
+      - name: summary — the chain
+        run: |
+          echo "evidence → graph: $(node -e 'console.log(require("./data/graph.json")["@graph"].length)') nodes"
+          echo "parse attestations: $(node -e 'console.log(require("./data/graph.provenance.json").length)')"
+          echo "SBOM: $(node -e 'const s=require("./dist/claims.sbom.spdx.json");console.log(s.packages.length+" packages, "+s.relationships.length+" edges")')"
+          echo "components: $(ls dist/components/*.html | wc -l | tr -d ' ')"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: graph-chain
+          path: |
+            dist/json.ld
+            dist/claims.sbom.spdx.json
+            dist/graph-page.html
+            dist/components/
+            data/graph.provenance.json
