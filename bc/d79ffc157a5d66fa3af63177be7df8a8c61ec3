@@ -1,0 +1,36 @@
+scripts/gen-contracts.mjs
+  s_d0a1bec15809bc::t_938f96e5b268fd 2,5-13,23,35,38,43-52,55,58-59,66-67,74,96
+  s_d0a1bec15809bc::t_74346c802d3190 1,3-4,14-22,24-34,36-37,39-42,53-54,56-57,60-65,68-73,75-95,97-105
+.github/workflows/lattice-refresh.yml
+  s_d0a1bec15809bc::t_fb762f0f13fd37 2-9,11-15,20,22-32,34,36-38,44-67,72-73
+scripts/gen-lattice.mjs
+  s_d0a1bec15809bc::t_6d0d1c7a637e00 10-12,14-18
+  s_d0a1bec15809bc::t_128ec054660179 78-82,84-85
+  s_d0a1bec15809bc::t_79646f34de6ce1 119
+build.mjs
+  s_d0a1bec15809bc::t_8faec721a36d9d 31
+contracts.html
+  s_d0a1bec15809bc::t_90909da1379c87 55-56,61
+  s_d0a1bec15809bc::t_5793298dd3c953 1-54,57-60,62-72
+  s_d0a1bec15809bc::t_5c0379f789b49c 73-320
+data/nav.jsonld
+  s_d0a1bec15809bc::t_48bae2c6435c05 7
+integrity/structure-audit/structure.json
+  s_d0a1bec15809bc::t_702708a68460cd 12-13,106-114,125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "bcd79ffc157a5d66fa3af63177be7df8a8c61ec3",
+  "prompts": {},
+  "sessions": {
+    "s_d0a1bec15809bc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "297d0fee-c144-4ae1-8a97-9d7922657403",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
