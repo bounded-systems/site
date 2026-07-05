@@ -1,8 +1,35 @@
 {
   "site": "bounded.tools",
   "layers": {
-    "jsonld":   { "shapes": "contract/jsonld.shapes.ttl", "doc": "dist" },
-    "markdown": { "proseCorpus": "prose-corpus.json", "docCorpus": "doc-corpus.json" },
-    "website":  { "dist": "dist", "gates": ["a11y-heuristic-gate.mjs", "html-validator-gate.mjs"] }
+    "jsonld": {
+      "shapes": "contract/jsonld.shapes.ttl",
+      "doc": "dist"
+    },
+    "markdown": {
+      "proseCorpus": "prose-corpus.json",
+      "docCorpus": "doc-corpus.json"
+    },
+    "website": {
+      "dist": "dist",
+      "gates": [
+        "a11y-heuristic-gate.mjs",
+        "html-validator-gate.mjs"
+      ]
+    }
+  },
+  "graph": {
+    "id": "https://bounded.tools/#org",
+    "plugins": [
+      "org",
+      "packages",
+      "lattice",
+      "jargon"
+    ],
+    "bridge": [
+      {
+        "predicate": "sameAs",
+        "id": "https://robertdelanghe.dev/#person"
+      }
+    ]
   }
 }
