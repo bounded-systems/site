@@ -25,34 +25,45 @@ const SRC =
 
 const args = new Set(process.argv.slice(2));
 
-/** Curate the render-facing slice — summary + the typed contracts + the edges. */
+/**
+ * Curate the render-facing slice. The site leads with what's HONEST: the
+ * contracts that have an ACTUAL check (`verified` — a live flake derivation that
+ * proves conformance), separated from the ones that are merely `declared`
+ * (mapped, but nothing enforces them yet). The headline is the actual checks, not
+ * the 100%-mapped provider declarations — coverage isn't conformance.
+ */
 function curate(status) {
   const s = status.summary ?? {};
+  const types = (status.types ?? [])
+    .map((t) => ({
+      type: t.type,
+      kind: t.kind,
+      result: t.result,
+      providers: t.providers,
+      edges: t.edges,
+      summary: t.summary,
+    }))
+    .sort((a, b) => a.type.localeCompare(b.type));
+  const verified = new Set(
+    (status.types ?? []).filter((t) => t.verified).map((t) => t.type),
+  );
   return {
     $source: SRC,
     summary: {
       nodes: s.nodes,
       mapped: s.mapped,
-      unmapped: s.unmapped,
-      types: s.types,
-      verified: s.verified,
+      // the honest headline: contracts with a live check, and how many pass
+      checks: s.verified,
       passing: s.passing,
       failing: s.failing,
+      declared: s.types - (s.verified ?? 0),
       acyclic: s.acyclic,
       oneAgreementPerPair: s.oneAgreementPerPair,
     },
-    // typed contracts, sorted stably for a deterministic diff
-    types: (status.types ?? [])
-      .map((t) => ({
-        type: t.type,
-        kind: t.kind,
-        verified: t.verified,
-        result: t.result,
-        providers: t.providers,
-        edges: t.edges,
-        summary: t.summary,
-      }))
-      .sort((a, b) => a.type.localeCompare(b.type)),
+    // the ACTUAL checks — contracts a live derivation proves (what's enforced)
+    checks: types.filter((t) => verified.has(t.type)),
+    // declared but not yet check-backed — mapped honestly, aspirational
+    declared: types.filter((t) => !verified.has(t.type)),
     edges: (status.edges ?? [])
       .map((e) => ({ from: e.from, to: e.to, type: e.type, result: e.result }))
       .sort((a, b) =>
