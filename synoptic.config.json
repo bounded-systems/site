@@ -1,6 +1,8 @@
 {
   "site": "bounded.tools",
   "layers": {
-    "markdown": { "proseCorpus": "prose-corpus.json", "docCorpus": "doc-corpus.json" }
+    "jsonld":   { "shapes": "contract/jsonld.shapes.ttl", "doc": "dist/json.ld" },
+    "markdown": { "proseCorpus": "prose-corpus.json", "docCorpus": "doc-corpus.json" },
+    "website":  { "dist": "dist", "gates": ["a11y-heuristic-gate.mjs", "seo-gate.mjs", "html-validator-gate.mjs"] }
   }
 }
