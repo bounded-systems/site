@@ -1,0 +1,5 @@
+{
+  "repos-on-the-lattice":        { "derive": "trellis", "field": "summary.nodes" },
+  "contracts-with-a-live-check": { "derive": "trellis", "field": "summary.verified" },
+  "contract-types":              { "derive": "trellis", "field": "summary.types" }
+}
