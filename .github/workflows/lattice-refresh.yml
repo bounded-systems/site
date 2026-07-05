@@ -1,0 +1,27 @@
+name: lattice-refresh
+# Keep data/lattice.json in sync with trellis's signed projection — the lattice
+# in the site's build pipeline. Runs daily + on demand; opens a PR when the
+# projection changed (reviewable, like the registry refresh).
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "22"
+      - run: node scripts/gen-lattice.mjs
+      - name: open a PR if the lattice changed
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
+        with:
+          branch: chore/refresh-lattice
+          title: "chore: refresh the lattice projection (data/lattice.json)"
+          commit-message: "chore: refresh data/lattice.json from trellis's signed projection"
+          body: "Automated refresh of the vendored lattice slice from trellis's `status` branch."

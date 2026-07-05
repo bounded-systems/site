@@ -1,0 +1,619 @@
+{
+  "$source": "https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json",
+  "summary": {
+    "nodes": 72,
+    "mapped": 72,
+    "checks": 5,
+    "passing": 5,
+    "failing": 0,
+    "declared": 34,
+    "acyclic": true,
+    "oneAgreementPerPair": true
+  },
+  "checks": [
+    {
+      "type": "concierge-wire",
+      "kind": "wire",
+      "result": "pass",
+      "providers": 1,
+      "edges": 4,
+      "summary": "concierged's capability-resolution RPC surface (register/resolve/keys/list/status)."
+    },
+    {
+      "type": "door-kit-mirror",
+      "kind": "vendored-pin",
+      "result": "pass",
+      "providers": 1,
+      "edges": 4,
+      "summary": "The door-kit client + runtime vendored into each door daemon — must stay byte-identical to door-kit HEAD."
+    },
+    {
+      "type": "keeper-wire",
+      "kind": "wire",
+      "result": "pass",
+      "providers": 1,
+      "edges": 4,
+      "summary": "keeperd's git-signing RPC surface (commit/push/import-and-push/attest-launch/sign/verify/status/getPublicKey)."
+    },
+    {
+      "type": "sanctioned-reader-seam",
+      "kind": "import-boundary",
+      "result": "pass",
+      "providers": 1,
+      "edges": 0,
+      "summary": "A 'one sanctioned reader' package upholding its own seam claim (allowed imports + no ambient authority) — a UNARY contract. Wired for fs; env/host/proc/repo-root next."
+    },
+    {
+      "type": "scout-wire",
+      "kind": "wire",
+      "result": "pass",
+      "providers": 1,
+      "edges": 4,
+      "summary": "scoutd's external-read RPC surface (repo/pr/issue/fetch/download/status)."
+    }
+  ],
+  "declared": [
+    {
+      "type": "ast-git-spec",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "AST-based git clean/smudge diff+merge spec (design stage)."
+    },
+    {
+      "type": "brand-check",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "gh-action-brand-checks — CI gate for brand-token compliance; run by fleet."
+    },
+    {
+      "type": "brand-tokens",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 3,
+      "summary": "brand's W3C design tokens + self-hosted fonts — consumed by the sites, gated by gh-action-brand-checks."
+    },
+    {
+      "type": "component-a11y-spec",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "lone's semantic/a11y blessing for DOM subtrees — the component spec baobab points at."
+    },
+    {
+      "type": "conformance-standard",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 2,
+      "edges": 1,
+      "summary": "The org/repo conformance standard (rules + gates) repos are measured against."
+    },
+    {
+      "type": "content-token-catalog",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "The org-wide content-token catalog aggregated from opted-in repos' content/strings.json."
+    },
+    {
+      "type": "contract-lattice-projection",
+      "kind": "provenance",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "trellis's cosign-signed status.json (the lattice projection) — consumed by the Trust Center + the bounded.tools /contracts page."
+    },
+    {
+      "type": "contracts-check",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "gh-action-contracts — CI gate for contract conformance; run by fleet."
+    },
+    {
+      "type": "design-system-structure",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "baobab's configurable design-system structure — the shape brand pins (no defaults)."
+    },
+    {
+      "type": "deterministic-release",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "mint — deterministic, signed releases from .release/ intent files (bumps deno.json/jsr.json/package.json). Adopted by dev-contracts."
+    },
+    {
+      "type": "dev-contract-schema",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "The DevContracts Zod schemas (dev_contract/lock/token) for declarative project-config contracts — consolidated into @bounded-systems/dev-contracts."
+    },
+    {
+      "type": "dns-as-code",
+      "kind": "external-platform",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "bounded.tools DNS-as-code — reviewer-gated Cloudflare zone records, now schema-defined (deploy/dns-schema.mjs validates every state/*.dns.json)."
+    },
+    {
+      "type": "front-desk-projects",
+      "kind": "external-platform",
+      "result": "declared",
+      "providers": 0,
+      "edges": 0,
+      "summary": "gh-project-room ↔ GitHub Projects v2 GraphQL (fields/views/workflows)."
+    },
+    {
+      "type": "guest-room-protocol",
+      "kind": "vendored-pin",
+      "result": "declared",
+      "providers": 1,
+      "edges": 4,
+      "summary": "The guest-room room+door wire protocol vendored into door-kit and each daemon."
+    },
+    {
+      "type": "jsr-library",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 20,
+      "edges": 1,
+      "summary": "An extracted @bounded-systems/* library's published JSR surface — the typed contract prx consumes."
+    },
+    {
+      "type": "lima-devshell-config",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Bootstrap devshell for Lima VMs + macOS home-manager (Nix flake)."
+    },
+    {
+      "type": "linked-data-structure",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "JSON-LD / schema.org linked-data structure over an Obsidian vault."
+    },
+    {
+      "type": "mcp-tool-surface",
+      "kind": "wire",
+      "result": "declared",
+      "providers": 1,
+      "edges": 2,
+      "summary": "static-mcp's Sigstore-verified static-response MCP surface — the base site-mcp/bounded-tools-mcp implement."
+    },
+    {
+      "type": "net-egress",
+      "kind": "wire",
+      "result": "declared",
+      "providers": 1,
+      "edges": 2,
+      "summary": "netd's allowlist-egress surface — a CONNECT proxy, not a JSON-RPC verb (Proxy-Authorization grant)."
+    },
+    {
+      "type": "nix-facilities",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Shared Nix flakes, devshells, and build substrate for the org."
+    },
+    {
+      "type": "node-uniqueness-check",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "gh-action-node-uniqueness — CI gate asserting node/dep uniqueness; run by fleet."
+    },
+    {
+      "type": "ocap-provenance-predicate",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 2,
+      "summary": "The in-toto SLSA predicate claude-box (producer) and keeperd (signer) both pin byte-for-byte."
+    },
+    {
+      "type": "oci-dev-registry",
+      "kind": "external-platform",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Local-first OCI registry + devcontainer build system with build traceability."
+    },
+    {
+      "type": "oidc-app-token-broker",
+      "kind": "external-platform",
+      "result": "declared",
+      "providers": 1,
+      "edges": 1,
+      "summary": "cf-oidc-token-broker mints GitHub App installation tokens over Actions OIDC (the App key lives only in the broker) — consumed by gh-project-room's front-desk-sync."
+    },
+    {
+      "type": "org-defaults",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Org-level defaults + the public profile README every bounded-systems repo inherits."
+    },
+    {
+      "type": "peercred-helper",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "SO_PEERCRED helper for launcherd (Rust) — peer-identity extraction on unix sockets."
+    },
+    {
+      "type": "roundtrip-validation",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Parse-to-AST + regenerate-source fidelity validation (Deno + SWC)."
+    },
+    {
+      "type": "schema-transform",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Schema transformation/bridging between formats."
+    },
+    {
+      "type": "seam-check-lib",
+      "kind": "import-boundary",
+      "result": "declared",
+      "providers": 1,
+      "edges": 4,
+      "summary": "seam-check's published seam-assertion library — repos devDep it to enforce their own import boundary in tests (door-kit, fs)."
+    },
+    {
+      "type": "signed-static-api",
+      "kind": "provenance",
+      "result": "declared",
+      "providers": 2,
+      "edges": 3,
+      "summary": "A site's signed, content-addressed static API — produced by the sites, verified by verify / the MCP servers."
+    },
+    {
+      "type": "token-audit-toolkit",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Claude Code token-usage auditor + home-manager module."
+    },
+    {
+      "type": "vault-content",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Offline Obsidian vault whose drafts become robertdelanghe.dev posts."
+    },
+    {
+      "type": "verbspec-lib",
+      "kind": "shared-schema",
+      "result": "declared",
+      "providers": 1,
+      "edges": 2,
+      "summary": "verbspec (defineVerb/dispatch + one Zod I/O per verb, projected to CLI/MCP/OpenAPI) — the framework the wire agreements, installer, string-audit et al. import."
+    },
+    {
+      "type": "wasm-hook-builder",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 0,
+      "summary": "Build Rust binaries into Lefthook hooks as WASM components."
+    }
+  ],
+  "edges": [
+    {
+      "from": "gh-action-brand-checks",
+      "to": "fleet",
+      "type": "brand-check",
+      "result": "declared"
+    },
+    {
+      "from": "brand",
+      "to": "bounded.tools",
+      "type": "brand-tokens",
+      "result": "declared"
+    },
+    {
+      "from": "brand",
+      "to": "site",
+      "type": "brand-tokens",
+      "result": "declared"
+    },
+    {
+      "from": "brand",
+      "to": "string-audit",
+      "type": "brand-tokens",
+      "result": "declared"
+    },
+    {
+      "from": "lone",
+      "to": "brand",
+      "type": "component-a11y-spec",
+      "result": "declared"
+    },
+    {
+      "from": "concierge-wire",
+      "to": "claude-box",
+      "type": "concierge-wire",
+      "result": "pass"
+    },
+    {
+      "from": "concierge-wire",
+      "to": "door-concierge",
+      "type": "concierge-wire",
+      "result": "pass"
+    },
+    {
+      "from": "concierge-wire",
+      "to": "door-kit",
+      "type": "concierge-wire",
+      "result": "pass"
+    },
+    {
+      "from": "concierge-wire",
+      "to": "trellis",
+      "type": "concierge-wire",
+      "result": "pass"
+    },
+    {
+      "from": "conformance-kit",
+      "to": "site",
+      "type": "conformance-standard",
+      "result": "declared"
+    },
+    {
+      "from": "trellis",
+      "to": "trust",
+      "type": "contract-lattice-projection",
+      "result": "declared"
+    },
+    {
+      "from": "gh-action-contracts",
+      "to": "fleet",
+      "type": "contracts-check",
+      "result": "declared"
+    },
+    {
+      "from": "baobab",
+      "to": "brand",
+      "type": "design-system-structure",
+      "result": "declared"
+    },
+    {
+      "from": "mint",
+      "to": "dev-contracts",
+      "type": "deterministic-release",
+      "result": "declared"
+    },
+    {
+      "from": "door-kit",
+      "to": "door-concierge",
+      "type": "door-kit-mirror",
+      "result": "pass"
+    },
+    {
+      "from": "door-kit",
+      "to": "door-keeper",
+      "type": "door-kit-mirror",
+      "result": "pass"
+    },
+    {
+      "from": "door-kit",
+      "to": "door-net",
+      "type": "door-kit-mirror",
+      "result": "pass"
+    },
+    {
+      "from": "door-kit",
+      "to": "door-scout",
+      "type": "door-kit-mirror",
+      "result": "pass"
+    },
+    {
+      "from": "guest-room",
+      "to": "door-concierge",
+      "type": "guest-room-protocol",
+      "result": "declared"
+    },
+    {
+      "from": "guest-room",
+      "to": "door-keeper",
+      "type": "guest-room-protocol",
+      "result": "declared"
+    },
+    {
+      "from": "guest-room",
+      "to": "door-kit",
+      "type": "guest-room-protocol",
+      "result": "declared"
+    },
+    {
+      "from": "guest-room",
+      "to": "door-scout",
+      "type": "guest-room-protocol",
+      "result": "declared"
+    },
+    {
+      "from": "surface-sync",
+      "to": "prx",
+      "type": "jsr-library",
+      "result": "declared"
+    },
+    {
+      "from": "keeper-wire",
+      "to": "claude-box",
+      "type": "keeper-wire",
+      "result": "pass"
+    },
+    {
+      "from": "keeper-wire",
+      "to": "door-keeper",
+      "type": "keeper-wire",
+      "result": "pass"
+    },
+    {
+      "from": "keeper-wire",
+      "to": "door-kit",
+      "type": "keeper-wire",
+      "result": "pass"
+    },
+    {
+      "from": "keeper-wire",
+      "to": "trellis",
+      "type": "keeper-wire",
+      "result": "pass"
+    },
+    {
+      "from": "static-mcp",
+      "to": "bounded-tools-mcp",
+      "type": "mcp-tool-surface",
+      "result": "declared"
+    },
+    {
+      "from": "static-mcp",
+      "to": "site-mcp",
+      "type": "mcp-tool-surface",
+      "result": "declared"
+    },
+    {
+      "from": "door-net",
+      "to": "claude-box",
+      "type": "net-egress",
+      "result": "declared"
+    },
+    {
+      "from": "door-net",
+      "to": "door-scout",
+      "type": "net-egress",
+      "result": "declared"
+    },
+    {
+      "from": "gh-action-node-uniqueness",
+      "to": "fleet",
+      "type": "node-uniqueness-check",
+      "result": "declared"
+    },
+    {
+      "from": "ocap-provenance",
+      "to": "claude-box",
+      "type": "ocap-provenance-predicate",
+      "result": "declared"
+    },
+    {
+      "from": "ocap-provenance",
+      "to": "door-keeper",
+      "type": "ocap-provenance-predicate",
+      "result": "declared"
+    },
+    {
+      "from": "cf-oidc-token-broker",
+      "to": "gh-project-room",
+      "type": "oidc-app-token-broker",
+      "result": "declared"
+    },
+    {
+      "from": "scout-wire",
+      "to": "claude-box",
+      "type": "scout-wire",
+      "result": "pass"
+    },
+    {
+      "from": "scout-wire",
+      "to": "door-kit",
+      "type": "scout-wire",
+      "result": "pass"
+    },
+    {
+      "from": "scout-wire",
+      "to": "door-scout",
+      "type": "scout-wire",
+      "result": "pass"
+    },
+    {
+      "from": "scout-wire",
+      "to": "trellis",
+      "type": "scout-wire",
+      "result": "pass"
+    },
+    {
+      "from": "seam-check",
+      "to": "door-kit",
+      "type": "seam-check-lib",
+      "result": "declared"
+    },
+    {
+      "from": "seam-check",
+      "to": "fs",
+      "type": "seam-check-lib",
+      "result": "declared"
+    },
+    {
+      "from": "seam-check",
+      "to": "installer",
+      "type": "seam-check-lib",
+      "result": "declared"
+    },
+    {
+      "from": "seam-check",
+      "to": "schema-gen",
+      "type": "seam-check-lib",
+      "result": "declared"
+    },
+    {
+      "from": "site",
+      "to": "bounded-tools-mcp",
+      "type": "signed-static-api",
+      "result": "declared"
+    },
+    {
+      "from": "site",
+      "to": "site-mcp",
+      "type": "signed-static-api",
+      "result": "declared"
+    },
+    {
+      "from": "site",
+      "to": "verify",
+      "type": "signed-static-api",
+      "result": "declared"
+    },
+    {
+      "from": "verbspec",
+      "to": "installer",
+      "type": "verbspec-lib",
+      "result": "declared"
+    },
+    {
+      "from": "verbspec",
+      "to": "string-audit",
+      "type": "verbspec-lib",
+      "result": "declared"
+    }
+  ]
+}
