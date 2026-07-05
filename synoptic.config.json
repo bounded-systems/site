@@ -43,6 +43,14 @@
           "type": "SoftwareSourceCode"
         }
       }
-    ]
+    ],
+    "theme": {
+      "text": "--color-ink",
+      "surface": "--color-paper",
+      "accent": "--color-forest",
+      "border": "--color-line",
+      "font": "--font-display",
+      "mono": "--font-mono"
+    }
   }
 }
