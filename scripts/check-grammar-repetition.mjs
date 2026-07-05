@@ -1,79 +1,60 @@
 #!/usr/bin/env node
-// check-grammar-repetition — a PROXY gate for monotonous sentence structure:
-// the same opener used over and over ("It's a… It's the… It's a…"). Repetitive
-// grammar reads as flat and lowers density; this surfaces it for review.
+// Grammar-repetition SIGNAL gate — a zero-dep structural proxy over a prose corpus.
 //
-//   node scripts/check-grammar-repetition.mjs           # report over-repeated openers
-//   node scripts/check-grammar-repetition.mjs --strict  # exit 1 if any exceed the threshold
+//   node gates/grammar-repetition-gate.mjs <corpus.json>            # report (WARN-only, exit 0)
+//   node gates/grammar-repetition-gate.mjs <corpus.json> --strict   # escalate WARNs (exit 1)
 //
-// ┌─ HONEST LABELING ───────────────────────────────────────────────────────────┐
-// │ A structural PROXY, like focus-budget/claim-discipline. It counts the first  │
-// │ two words of each sentence; deliberate anaphora (a rhetorical repeat) will   │
-// │ trip it and is fine. It measures form, not quality — a review list.          │
-// └─────────────────────────────────────────────────────────────────────────────┘
-
+// HONEST FRAMING: this is a STRUCTURE SIGNAL, not a style verdict. It counts the
+// first two words of every sentence across the corpus and flags any opener used
+// more than a threshold — monotony that reads flat and lowers density. Deliberate
+// anaphora (a rhetorical repeat) will trip it and is fine. WARN-by-default.
+//
+// The CORPUS IS AN INPUT: a JSON file that is EITHER an array of
+// { "id": "...", "text": "..." } OR an object map { id: text }. Markup is stripped.
+//
+// Site-agnostic injection (all optional):
+//   argv[2] / $REPETITION_CORPUS   path to the corpus JSON (required).
+//   $REPETITION_THRESHOLD          openers used more than this are flagged (default 3).
 import { readFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 
-const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
-const THRESHOLD = 3; // an opener used > this many times is flagged
-
-/** Strip HTML to visible prose. */
-function prose(html) {
-  return html
-    .replace(/<(script|style|pre|code)[\s\S]*?<\/\1>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&[a-z]+;/gi, " ")
-    .replace(/\s+/g, " ");
+const corpusPath = process.argv[2] || process.env.REPETITION_CORPUS;
+const strict = process.argv.includes("--strict");
+if (!corpusPath) {
+  console.error("usage: grammar-repetition-gate <corpus.json> [--strict]");
+  process.exit(2);
 }
+const THRESHOLD = Number(process.env.REPETITION_THRESHOLD || 3);
 
-/** Split into sentences and return each one's opener (first two words, lc). */
+const strip = (s) => String(s).replace(/<[^>]+>/g, " ").replace(/&[a-z]+;/gi, " ").replace(/\s+/g, " ");
+function atoms(corpus) {
+  if (Array.isArray(corpus)) return corpus.map((a) => a.text ?? "");
+  return Object.values(corpus);
+}
 function openers(text) {
   return text
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
-    .filter((s) => s.split(/\s+/).length >= 4) // ignore fragments/labels
-    .map((s) => {
-      const words = s.replace(/^[^A-Za-z]+/, "").toLowerCase().split(/\s+/);
-      return { opener: words.slice(0, 2).join(" "), sentence: s };
-    })
-    .filter((o) => o.opener);
+    .filter((s) => s.split(/\s+/).length >= 4)
+    .map((s) => s.replace(/^[^A-Za-z]+/, "").toLowerCase().split(/\s+/).slice(0, 2).join(" "))
+    .filter(Boolean);
 }
 
-const PAGES = ["index.html", "404.html"];
-const counts = new Map(); // opener -> { n, examples[] }
-
-for (const page of PAGES) {
-  let text;
-  try {
-    text = prose(await readFile(join(ROOT, page), "utf8"));
-  } catch {
-    continue;
-  }
-  for (const { opener, sentence } of openers(text)) {
-    const e = counts.get(opener) ?? { n: 0, examples: [] };
-    e.n += 1;
-    if (e.examples.length < 3) e.examples.push(sentence.slice(0, 70));
-    counts.set(opener, e);
+const corpus = JSON.parse(await readFile(corpusPath, "utf8"));
+const counts = new Map();
+for (const raw of atoms(corpus)) {
+  for (const opener of openers(strip(raw))) {
+    counts.set(opener, (counts.get(opener) ?? 0) + 1);
   }
 }
 
 const flagged = [...counts.entries()]
-  .filter(([, e]) => e.n > THRESHOLD)
-  .sort((a, b) => b[1].n - a[1].n);
+  .filter(([, n]) => n > THRESHOLD)
+  .sort((a, b) => b[1] - a[1]);
 
 if (flagged.length === 0) {
   console.log(`✓ grammar-repetition: no opener used more than ${THRESHOLD}× (proxy)`);
   process.exit(0);
 }
-
-console.log(
-  `grammar-repetition: ${flagged.length} over-repeated opener(s) to review (proxy — not a verdict)\n`,
-);
-for (const [opener, e] of flagged) {
-  console.log(`  "${opener}…" ×${e.n}`);
-  for (const ex of e.examples) console.log(`      · ${ex}…`);
-}
-
-process.exit(process.argv.includes("--strict") ? 1 : 0);
+console.log(`grammar-repetition: ${flagged.length} over-repeated opener(s) — WARN (proxy)\n`);
+for (const [opener, n] of flagged) console.log(`  "${opener}…" ×${n}`);
+process.exit(strict ? 1 : 0);
