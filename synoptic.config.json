@@ -1,0 +1,6 @@
+{
+  "site": "bounded.tools",
+  "layers": {
+    "markdown": { "proseCorpus": "prose-corpus.json", "docCorpus": "doc-corpus.json" }
+  }
+}

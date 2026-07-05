@@ -10,3 +10,5 @@ vendor/conformance-kit/integrity/verify/node_modules/
 # generated prose corpora (built by gen-prose-corpus.mjs)
 prose-corpus.json
 doc-corpus.json
+prose-corpus.json
+doc-corpus.json
