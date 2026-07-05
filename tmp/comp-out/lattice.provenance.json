@@ -1,0 +1,40 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "component/lattice",
+      "digest": {
+        "sha256": "10f9e546cbbb5b7a2632e711432c4e71c22f4e2e9df536b133fc2c343fbb8e2b"
+      }
+    }
+  ],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://bounded.tools/synoptic/component-projection",
+      "externalParameters": {
+        "component": "lattice",
+        "site": "https://bounded.tools",
+        "subgraph": [
+          "https://bounded.tools/#lattice"
+        ]
+      },
+      "resolvedDependencies": [
+        {
+          "uri": "https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json",
+          "digest": {
+            "sha256": "78a79a8df7f1030755487ce24c082c59fae56a53fb9a4dc16c0a50892472b3be"
+          }
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": "https://github.com/bounded-systems/synoptic"
+      },
+      "metadata": {
+        "cacheKey": "be7ff10f340d30eb1bc119bb799bc7d61c57778c490a7fb11ef3162b4eb4cd23"
+      }
+    }
+  }
+}
