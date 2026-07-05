@@ -1,6 +1,5 @@
 name: synoptic
-# The whole site CI lives in synoptic (site-ci.yml). This repo just calls it and
-# configures via synoptic.config.json. No CI implementation here.
+# The whole site CI lives in synoptic (site-ci.yml). This repo just calls it + config.
 on:
   pull_request:
   push:
@@ -11,7 +10,10 @@ permissions:
   id-token: write
 jobs:
   site:
-    uses: bounded-systems/synoptic/.github/workflows/site-ci.yml@v0.3.0
+    uses: bounded-systems/synoptic/.github/workflows/site-ci.yml@v0.4.0
     permissions:
       contents: read
       id-token: write
+    with:
+      browser: true
+      browser-gates: "axe-gate.mjs"
