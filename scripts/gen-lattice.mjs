@@ -7,12 +7,15 @@
 // generated-from-canonical-source pattern as gen-registry / gen-seams), rather
 // than a live client-side fetch.
 //
-//   node scripts/gen-lattice.mjs            refresh data/lattice.json from the projection
-//   node scripts/gen-lattice.mjs --check    exit 1 if data/lattice.json is stale (no writes)
+//   node scripts/gen-lattice.mjs                     refresh data/lattice.json (live fetch, unverified — local/manual use)
+//   node scripts/gen-lattice.mjs --check              exit 1 if data/lattice.json is stale (no writes)
+//   node scripts/gen-lattice.mjs --from-file <path>   curate from an already-fetched, already-verified status.json
 //
-// The cosign signature (status.json.sigstore.json) is verified in CI (the same
-// keyless Sigstore identity the Trust Center checks); this script trusts the
-// signed branch and curates the render-facing slice.
+// --from-file is what lattice-refresh.yml actually uses: the workflow downloads
+// status.json + its .sigstore.json bundle, runs a REAL `cosign verify-blob`
+// against those exact bytes, and only then passes that same file here — so the
+// bytes curated into data/lattice.json are the bytes cosign verified, not a
+// second, separate, unverified fetch of "the same" URL.
 
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -72,7 +75,14 @@ function curate(status) {
   };
 }
 
+function fromFileArg() {
+  const i = process.argv.indexOf("--from-file");
+  return i === -1 ? null : process.argv[i + 1];
+}
+
 async function fetchProjection() {
+  const file = fromFileArg();
+  if (file) return curate(JSON.parse(await readFile(file, "utf8")));
   if (typeof fetch !== "function") {
     console.error("✗ global fetch unavailable — Node 18+ required");
     process.exit(2);
@@ -106,6 +116,6 @@ if (args.has("--check")) {
   const slice = await fetchProjection();
   await writeFile(DATA, serialize(slice));
   console.log(
-    `✓ data/lattice.json — ${slice.summary.mapped}/${slice.summary.nodes} mapped, ${slice.types.length} contracts, ${slice.edges.length} edges`,
+    `✓ data/lattice.json — ${slice.summary.mapped}/${slice.summary.nodes} mapped, ${slice.checks.length + slice.declared.length} contracts, ${slice.edges.length} edges`,
   );
 }

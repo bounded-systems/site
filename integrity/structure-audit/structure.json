@@ -9,7 +9,8 @@
       "/",
       "/blog/",
       "/blog/",
-      "/conformance"
+      "/conformance",
+      "/contracts"
     ]
   },
   "blog/bifurcation-and-inter-contract-enforcement.html": {
@@ -102,6 +103,15 @@
       "/sitemap.xml"
     ]
   },
+  "contracts.html": {
+    "h1": "Contract lattice",
+    "outline": "12",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": [
+      "/"
+    ]
+  },
   "index.html": {
     "h1": "Your coding agent wanders. Keep it inside the job you gave it.",
     "outline": "1222233333322",
@@ -112,6 +122,7 @@
       "/claims.jsonld",
       "/conformance",
       "/conformance",
+      "/contracts",
       "/provenance.json",
       "/rekor",
       "/rekor"
