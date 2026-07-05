@@ -1,27 +1,73 @@
 name: lattice-refresh
-# Keep data/lattice.json in sync with trellis's signed projection — the lattice
-# in the site's build pipeline. Runs daily + on demand; opens a PR when the
-# projection changed (reviewable, like the registry refresh).
+# Keep data/lattice.json — and the /contracts page rendered from it — in sync
+# with trellis's signed projection. Kept honest two ways:
+#   • on PRs — fail if contracts.html's generated section is stale relative to
+#     the committed data/lattice.json (offline gate, mirrors sync-registry.yml)
+#   • daily / on demand — fetch trellis's live signed status.json, run a REAL
+#     cosign verify-blob against it (not just display the command for a human
+#     to run), and only on successful verification + an actual data change,
+#     open a PR.
 on:
+  pull_request:
+    paths:
+      - "contracts.html"
+      - "data/lattice.json"
+      - "scripts/gen-contracts.mjs"
   schedule:
     - cron: "0 7 * * *"
   workflow_dispatch:
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 jobs:
-  refresh:
+  # Offline, deterministic: the committed section must equal render(data/lattice.json).
+  check:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - run: node scripts/gen-contracts.mjs --check
+
+  # Networked: fetch trellis's signed status.json, verify it for real, curate +
+  # render, open a PR on any change. No-op unless verification passes AND the
+  # data changed.
+  refresh:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: "22"
-      - run: node scripts/gen-lattice.mjs
-      - name: open a PR if the lattice changed
+
+      - name: Fetch trellis's signed status projection
+        run: |
+          curl -sfL -o /tmp/status.json \
+            https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json
+          curl -sfL -o /tmp/status.json.sigstore.json \
+            https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json.sigstore.json
+
+      - uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3.9.1
+
+      - name: Verify signature (cosign keyless — fails the job if invalid)
+        run: |
+          cosign verify-blob --bundle /tmp/status.json.sigstore.json \
+            --certificate-identity-regexp '^https://github.com/bounded-systems/trellis/' \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+            /tmp/status.json
+
+      - name: Curate the verified projection into data/lattice.json
+        run: node scripts/gen-lattice.mjs --from-file /tmp/status.json
+
+      - name: Regenerate contracts.html from the curated slice
+        run: node scripts/gen-contracts.mjs
+
+      - name: Open a PR if the verified lattice changed
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
         with:
           branch: chore/refresh-lattice
           title: "chore: refresh the lattice projection (data/lattice.json)"
-          commit-message: "chore: refresh data/lattice.json from trellis's signed projection"
-          body: "Automated refresh of the vendored lattice slice from trellis's `status` branch."
+          commit-message: "chore: refresh data/lattice.json from trellis's cosign-verified status.json"
+          body: "Automated by .github/workflows/lattice-refresh.yml. trellis's signed status.json changed and was re-verified with cosign — review and merge."
