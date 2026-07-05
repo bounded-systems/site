@@ -25,10 +25,12 @@
     "dev": "python3 -m http.server 8080",
     "prebuild": "npm run check",
     "deploy": "wrangler deploy",
-    "claim-discipline": "node scripts/check-claim-discipline.mjs",
-    "grammar-repetition": "node scripts/check-grammar-repetition.mjs",
-    "prose": "node scripts/check-claim-discipline.mjs && node scripts/check-grammar-repetition.mjs",
-    "jsonld": "node scripts/gen-jsonld.mjs"
+    "claim-discipline": "node scripts/check-claim-discipline.mjs prose-corpus.json",
+    "grammar-repetition": "node scripts/check-grammar-repetition.mjs prose-corpus.json",
+    "prose": "node scripts/gen-prose-corpus.mjs && node scripts/check-claim-discipline.mjs prose-corpus.json && node scripts/check-grammar-repetition.mjs prose-corpus.json && node scripts/check-doc-scope.mjs doc-corpus.json",
+    "jsonld": "node scripts/gen-jsonld.mjs",
+    "prose-corpus": "node scripts/gen-prose-corpus.mjs",
+    "doc-scope": "node scripts/check-doc-scope.mjs doc-corpus.json"
   },
   "dependencies": {
     "@bounded-systems/brand": "^1.4.0"
