@@ -1,0 +1,21 @@
+blog/colors-are-coordinates.md
+  s_70508ca017cb29::t_c44249f835cc15 96-113
+data/audit/catalog.json
+  s_70508ca017cb29::t_c124e6a37c1407 227-231,262-271,327-331,347-351,357-361,382-386,422-426,447-451,477-486,542-546,607-611,617-621,662-671,682-686,697-701,737-741,762-776,797-801,812-816,862-866
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "600df1d902285ba1f0afc6bfd4efa968ee6831e8",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
