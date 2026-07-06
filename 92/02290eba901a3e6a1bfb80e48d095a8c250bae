@@ -1,0 +1,25 @@
+.github/workflows/synoptic.yml
+  s_70508ca017cb29::t_3933befb3c5d02 1-4,11,15-20,22-26
+.gitignore
+  s_70508ca017cb29::t_c734cab2f2d8d3 13-14
+package.json
+  s_70508ca017cb29::t_c8a16f47b182d7 28
+synoptic.config.json
+  s_70508ca017cb29::t_377ecc7370b710 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "9202290eba901a3e6a1bfb80e48d095a8c250bae",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}

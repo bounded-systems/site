@@ -1,0 +1,23 @@
+.github/workflows/synoptic.yml
+  s_70508ca017cb29::t_a4dafaa8815c6d 2-5,8-9,13,19,21,25-46
+tmp/comp-out/lattice.html
+  s_70508ca017cb29::t_010687f2e2e9a8 1-11
+tmp/comp-out/lattice.provenance.json
+  s_70508ca017cb29::t_687a8c39b045ae 1-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "7723d98dbead96df830721b0af426c5a988972af",
+  "prompts": {},
+  "sessions": {
+    "s_70508ca017cb29": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d283f13f-34c8-429b-8cb1-b020e645c0e4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Robert DeLanghe <1240090+bdelanghe@users.noreply.github.com>"
+    }
+  }
+}
