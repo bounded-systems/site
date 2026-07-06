@@ -66,6 +66,8 @@ Then comes the part nobody tells you. WCAG only constrains *lightness* — chrom
 
 So AAA banishes your surfaces to the dark, low-chroma end and outlaws the vivid middle. **Accessible palettes are muted not by choice but by geometry** — the dark surfaces most of all. That restrained, desaturated look of a careful accessible site? It isn't taste. It's the shape of the gamut meeting the arithmetic of contrast. The trilogy: **L is the accessibility budget, C is capped at whatever L you're forced to, H is the only thing that's free.**
 
+And that same lightness axis pays a dividend nobody plans for. About **one man in twelve is color-blind** — for most, the red–green axis collapses, so two colors separated only by hue along it become one. But color-blindness attacks the *hue* channels and leaves **lightness intact**. So the light-versus-dark separation you already built for contrast is *also* your color-blindness defense: a text-on-background pair that clears its ratio by lightness is legible to a colorblind reader **by construction**. It's why the honest rule is *never carry meaning by hue alone* — hue is the channel that can vanish, lightness is the one that can't. And it's why this palette's **warm-and-cool** hues survive where red-and-green would fail: warm-versus-cool rides the yellow–blue axis, the one channel red–green blindness keeps. One more force, pushing the same way — **put the distinction on lightness and it survives everything.**
+
 ## The whole space is 8,149 colors
 
 Once you accept that each axis is quantized, you can *pin* the space to a grid — steps a comfortable multiple of the JND, coarse enough that neighbors are clearly distinct:

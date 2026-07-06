@@ -254,6 +254,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#10cc53e8b7db": {
+    "$value": "But color-blindness attacks the hue channels and leaves lightness intact",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#120f3c85ab4c": {
     "$value": "Which is exactly the band AAA forbids",
     "$type": "body",
@@ -299,6 +304,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#1f4c648321dd": {
+    "$value": "And that same lightness axis pays a dividend nobody plans for",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#20542bd41845": {
     "$value": "Three dials, and only one is free",
     "$type": "body",
@@ -326,6 +336,16 @@
   },
   "blog/colors-are-coordinates.md#23be573fc4c6": {
     "$value": "Factor a real 42-color palette and it comes out to 16 choices and 26 forced completions",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#2b273df14527": {
+    "$value": "One more force, pushing the same way — put the distinction on lightness and it survives everything",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#2bef12d4aafd": {
+    "$value": "About one man in twelve is color-blind — for most, the red–green axis collapses, so two colors separated only by hue along it become one",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -464,6 +484,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#5aa96cc32766": {
+    "$value": "It's why the honest rule is never carry meaning by hue alone — hue is the channel that can vanish, lightness is the one that can't",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#5c1b8cda1967": {
     "$value": "Place surfaces in the dark band and text in the light band, leave the moat empty, and make the moat wide enough that the lightest surface still clears the bar against the darkest text",
     "$type": "body",
@@ -559,6 +584,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#8a0c7b3a4c9c": {
+    "$value": "So the light-versus-dark separation you already built for contrast is also your color-blindness defense: a text-on-background pair that clears its ratio by lightness is legible to a colorblind reader by construction",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#8a1b8770f34f": {
     "$value": "Let the set determine the use",
     "$type": "body",
@@ -636,6 +666,11 @@
   },
   "blog/colors-are-coordinates.md#a122bd6b7e80": {
     "$value": "Any requirement you set carves the lightness axis into bands separated by a forbidden moat, and the number of bands you can stack is logarithmic:",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#a17ef3433713": {
+    "$value": "And it's why this palette's warm-and-cool hues survive where red-and-green would fail: warm-versus-cool rides the yellow–blue axis, the one channel red–green blindness keeps",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
