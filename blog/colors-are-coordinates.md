@@ -93,6 +93,24 @@ And because it's just a monotonicity argument, it's **provable**. In Lean 4, the
 
 One chain: `r·(s+off) ≤ r·(Smax+off) ≤ Tmin+off ≤ t+off`. The `∀` is the formal content of "the set determines the use" — pick any surface, any text, it's *already* valid. The kernel checks it. There is no palette in that shape that fails.
 
+## A palette is a Sudoku
+
+Step back and the whole thing has one shape. A palette isn't a list you pick — it's a **Sudoku**.
+
+A Sudoku isn't defined by its filled-in numbers; it's defined by its *rules*. The digits don't fill the board — the constraints do. Give it a few givens and the rest is *forced*. Color works exactly the same way.
+
+The board is the color space — lightness, chroma, hue. The cells are every place a color lands: this text on that background, this border, that link. And a few forces decide what can go in each cell:
+
+- **The JND quantizes it** — below one just-noticeable-difference two colors are the same, so the board is discrete, not continuous: about 8,000 cells, not infinity.
+- **The gamut bounds it** — a color has to be displayable, and the ceiling on saturation is lowest at the light and dark extremes.
+- **Contrast couples it** — a text color and its background can't be too close in lightness, or you can't read it. That's the row-and-column rule: a relation *between* cells, not a property of one.
+
+Contrast is the strong force. It splits lightness into two bands — dark surfaces, light text — with a forbidden moat between them. And the twist: because the gamut's most saturated colors live *in* that forbidden middle, accessibility doesn't just limit color, it **mutes** it. The restrained look of a careful accessible site isn't a taste — it's where the forces settle.
+
+So what do you actually choose? Almost nothing. You pick the **hues** — one or two — because hue is the only axis the forces don't touch. Everything else is forced: contrast sets the lightnesses, the gamut caps the saturation, the JND snaps to the grid. The tints and shades aren't decisions — they're the values the constraints drop into the empty cells. Factor a real 42-color palette and it comes out to **16 choices and 26 forced completions.**
+
+Tighten the rules — AAA over AA, fewer hues — and the solution narrows toward a single point, the way a well-constrained Sudoku has exactly one answer. You don't design the palette. You choose the hues and let the constraints solve it. **Colors don't fill the constraints; the constraints fill the colors.**
+
 ## Colors are coordinates
 
 That's the whole idea, and it's small: **a color is not a name, it's a point.** Name it by its coordinates and the redundancy dissolves — `maroon` becomes `red · V4`, `aliceblue` becomes `neutral · V10`, and two colors that look the same *are* the same. Move between points by ratios, one axis at a time. Let contrast carve the lightness axis into bands, and let the bands assign the roles. What's left is a finite, honest, provable palette — one you construct correct instead of validating after the fact.

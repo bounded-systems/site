@@ -224,6 +224,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#0909e0e77475": {
+    "$value": "- The JND quantizes it — below one just-noticeable-difference two colors are the same, so the board is discrete, not continuous: about 8,000 cells, not infinity.\n- The gamut bounds it — a color has to be displayable, and the ceiling on saturation is lowest at the light and dark extremes.\n- Contrast couples it — a text color and its background can't be too close in lightness, or you can't read it",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#09297d696bda": {
     "$value": "Not \"how many hex values did the designer type.\" How many distinct decisions",
     "$type": "body",
@@ -251,6 +256,16 @@
   },
   "blog/colors-are-coordinates.md#120f3c85ab4c": {
     "$value": "Which is exactly the band AAA forbids",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#12c111e88c6c": {
+    "$value": "You pick the hues — one or two — because hue is the only axis the forces don't touch",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#13b2ee07a8e5": {
+    "$value": "Contrast is the strong force",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -309,6 +324,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#23be573fc4c6": {
+    "$value": "Factor a real 42-color palette and it comes out to 16 choices and 26 forced completions",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#2f4c8914c7d8": {
     "$value": "Every design system you've ever used picks a dozen from those 8,149",
     "$type": "body",
@@ -324,8 +344,18 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#32b1280ee09a": {
+    "$value": "The cells are every place a color lands: this text on that background, this border, that link",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#35b1de457514": {
     "$value": "The full theory, grounded to spec, is in spec/color-model.md",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#37916112001e": {
+    "$value": "A Sudoku isn't defined by its filled-in numbers; it's defined by its rules",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -346,6 +376,11 @@
   },
   "blog/colors-are-coordinates.md#3f20ccde186b": {
     "$value": "A palette is one axiom and some ratios",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#4047121110e2": {
+    "$value": "Step back and the whole thing has one shape",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -384,6 +419,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#4a039710efbe": {
+    "$value": "You don't design the palette",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#4b503b6b69ac": {
     "$value": "The normal way to make an accessible palette is: pick colors, then check each pairing against a contrast tool, then tweak and re-check",
     "$type": "body",
@@ -401,6 +441,11 @@
   },
   "blog/colors-are-coordinates.md#519ca01d43cd": {
     "$value": "L is spent on contrast — we'll get there",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#53346cde864d": {
+    "$value": "And the twist: because the gamut's most saturated colors live in that forbidden middle, accessibility doesn't just limit color, it mutes it",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -426,6 +471,16 @@
   },
   "blog/colors-are-coordinates.md#5ff36e25020a": {
     "$value": "The fix collapses them to neutral",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#600099a3dc4f": {
+    "$value": "Tighten the rules — AAA over AA, fewer hues — and the solution narrows toward a single point, the way a well-constrained Sudoku has exactly one answer",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#604b7935034a": {
+    "$value": "The board is the color space — lightness, chroma, hue",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -481,6 +536,11 @@
   },
   "blog/colors-are-coordinates.md#72cd80f7f8b6": {
     "$value": "You perceive ratios, not absolute steps",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#7a523b0f168a": {
+    "$value": "Everything else is forced: contrast sets the lightnesses, the gamut caps the saturation, the JND snaps to the grid",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -544,8 +604,18 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#99dc73f6f67f": {
+    "$value": "And a few forces decide what can go in each cell:",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#9aac91296575": {
     "$value": "Start with the fact that makes everything else work: every axis of color has a just-noticeable-difference (JND) — a threshold below which two values are, to a human, the same",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#9b3d7fc65dde": {
+    "$value": "You choose the hues and let the constraints solve it",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -589,6 +659,16 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#aa6edaa29f6d": {
+    "$value": "So what do you actually choose? Almost nothing",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#ac891af2d510": {
+    "$value": "Give it a few givens and the rest is forced",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#acd32921f825": {
     "$value": "It's what survives dim light, glare, and color-blindness.\n- C — how colorful",
     "$type": "body",
@@ -599,6 +679,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#adb653b06f8c": {
+    "$value": "The digits don't fill the board — the constraints do",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#aeac2ed34a7a": {
     "$value": "OKLab's cylindrical form, OKLCh, gives a color three coordinates, and they map onto how you actually see:",
     "$type": "body",
@@ -606,6 +691,11 @@
   },
   "blog/colors-are-coordinates.md#b18cc6ea9f91": {
     "$value": "One axis at a time, because coupling axes is what makes derivation confusing",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#b1faf2490350": {
+    "$value": "The restrained look of a careful accessible site isn't a taste — it's where the forces settle",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -644,6 +734,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#c46869c60096": {
+    "$value": "It splits lightness into two bands — dark surfaces, light text — with a forbidden moat between them",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#c5d072430e70": {
     "$value": "They collapse too. 148 names → 49 hues + 23 neutrals, and 31 of those hues are shared by multiple names. green, lime, forestgreen, lightgreen, palegreen, darkgreen, darkseagreen, limegreen, and honeydew are one hue at nine different lightnesses and chromas. maroon is red at low lightness",
     "$type": "body",
@@ -661,6 +756,21 @@
   },
   "blog/colors-are-coordinates.md#d57d15e72568": {
     "$value": "- L: 5% steps → 21 levels\n- C: 25%-of-gamut-ceiling → 5 tiers\n- H: 15° → 24 hues\n- α: 25% → 5 levels",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#d7d5bb00a57b": {
+    "$value": "That's the row-and-column rule: a relation between cells, not a property of one",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#dbb55c34e62a": {
+    "$value": "Colors don't fill the constraints; the constraints fill the colors",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#dbe453141c14": {
+    "$value": "A palette isn't a list you pick — it's a Sudoku",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -684,6 +794,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#e3447d124f20": {
+    "$value": "A palette is a Sudoku",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#e3be3fb43e1d": {
     "$value": "(An audit of those 33 caught a real bug, incidentally: a low chroma tier of a dark color can fall below the JND, leaving cells that differ only in a hue no one can see",
     "$type": "body",
@@ -691,6 +806,11 @@
   },
   "blog/colors-are-coordinates.md#e402c146a270": {
     "$value": "Colors Are Coordinates",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#e6a68138d444": {
+    "$value": "The tints and shades aren't decisions — they're the values the constraints drop into the empty cells",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -736,6 +856,11 @@
   },
   "blog/colors-are-coordinates.md#f9b125c4dc99": {
     "$value": "From gray (0) up toward neon.\n- H — which color",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#f9e297942c00": {
+    "$value": "Color works exactly the same way",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
