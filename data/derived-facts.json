@@ -1,0 +1,24 @@
+{
+  "repos-on-the-lattice": {
+    "value": 74,
+    "proofType": "derivable",
+    "derive": "trellis",
+    "source": "trellis status.json (cosign-signed lattice projection)",
+    "recipe": "summary.nodes of the signed trellis lattice projection"
+  },
+  "contracts-with-a-live-check": {
+    "value": 7,
+    "proofType": "derivable",
+    "derive": "trellis",
+    "source": "trellis status.json (cosign-signed lattice projection)",
+    "recipe": "summary.verified of the signed trellis lattice projection"
+  },
+  "contract-types": {
+    "value": 42,
+    "proofType": "derivable",
+    "derive": "trellis",
+    "source": "trellis status.json (cosign-signed lattice projection)",
+    "recipe": "summary.types of the signed trellis lattice projection"
+  },
+  "$digest": "sha256:992e6a89b0787b6f"
+}
