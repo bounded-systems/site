@@ -1,12 +1,12 @@
 {
   "$source": "https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json",
   "summary": {
-    "nodes": 72,
-    "mapped": 72,
-    "checks": 5,
-    "passing": 5,
-    "failing": 0,
-    "declared": 34,
+    "nodes": 74,
+    "mapped": 73,
+    "checks": 7,
+    "passing": 6,
+    "failing": 1,
+    "declared": 35,
     "acyclic": true,
     "oneAgreementPerPair": true
   },
@@ -18,6 +18,14 @@
       "providers": 1,
       "edges": 4,
       "summary": "concierged's capability-resolution RPC surface (register/resolve/keys/list/status)."
+    },
+    {
+      "type": "descriptor-honesty",
+      "kind": "provenance",
+      "result": "pass",
+      "providers": 0,
+      "edges": 0,
+      "summary": "A repo upholding its OWN descriptor claim — every trellis.json proof claim's provenBy file exists and its git blob hash matches the pin in the generated README. A UNARY contract, verified by @bounded-systems/drift-gate's pure descriptor check (offline; the surface check needs npm and stays in per-repo CI). Wired for guest-room; other descriptor repos next."
     },
     {
       "type": "door-kit-mirror",
@@ -50,6 +58,14 @@
       "providers": 1,
       "edges": 4,
       "summary": "scoutd's external-read RPC surface (repo/pr/issue/fetch/download/status)."
+    },
+    {
+      "type": "trellis-kit-lattice",
+      "kind": "vendored-pin",
+      "result": "fail",
+      "providers": 1,
+      "edges": 1,
+      "summary": "The kit's findCycles/findMultiContractPairs vendored into trellis's check/lattice.ts — it runs `--no-remote` in a sealed derivation and cannot import the kit, so it mirrors it. Must stay equal to trellis-kit HEAD; verified by check/lattice_test.ts (drift fails CI). This is the declared cross-repo clone the overlap check (check/overlap.ts) sanctions in place of an allowlist."
     }
   ],
   "declared": [
@@ -252,6 +268,14 @@
       "providers": 1,
       "edges": 0,
       "summary": "Org-level defaults + the public profile README every bounded-systems repo inherits."
+    },
+    {
+      "type": "org-quality-standard",
+      "kind": "repo-config",
+      "result": "declared",
+      "providers": 1,
+      "edges": 15,
+      "summary": "The reusable repo-standard workflow .github provides (security + the prose-proxy quality gates + test) — every repo that calls it runs the same org quality bar. CI-enforced via GitHub Actions; declared here (no trellis flake check yet)."
     },
     {
       "type": "peercred-helper",
@@ -538,6 +562,96 @@
       "result": "declared"
     },
     {
+      "from": ".github",
+      "to": "anchored-chain",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "cas",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "cf-oidc-token-broker",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "conformance-kit",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "deploy",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "door-kit",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "git-ast",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "hooksmith",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "installer",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "lone",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "mint",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "ocap-provenance",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "schema-gen",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "seam-check",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
+      "from": ".github",
+      "to": "verbspec",
+      "type": "org-quality-standard",
+      "result": "declared"
+    },
+    {
       "from": "scout-wire",
       "to": "claude-box",
       "type": "scout-wire",
@@ -602,6 +716,12 @@
       "to": "verify",
       "type": "signed-static-api",
       "result": "declared"
+    },
+    {
+      "from": "trellis-kit",
+      "to": "trellis",
+      "type": "trellis-kit-lattice",
+      "result": "fail"
     },
     {
       "from": "verbspec",
