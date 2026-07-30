@@ -41,7 +41,7 @@
 
 import { readFile, readdir, access, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
-import { join, relative, resolve, extname } from "node:path";
+import { join, relative, resolve, extname, sep } from "node:path";
 import { parseHTML } from "linkedom";
 
 // ── Pure static checks (no browser) ──────────────────────────────────────────
@@ -343,28 +343,27 @@ async function startServer(root) {
   const rootAbs = resolve(root);
   const server = createServer(async (req, res) => {
     try {
-      let urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
-      let file = resolve(join(rootAbs, urlPath));
-      if (urlPath.endsWith("/")) file = join(file, "index.html");
-      // Path-traversal guard (CWE-022): resolved path must stay within rootAbs.
-      // Both the primary path and the .html fallback are validated before any fs read.
-      if (!file.startsWith(rootAbs + "/")) {
-        res.writeHead(403); res.end("forbidden"); return;
+      const rawPath = decodeURIComponent((req.url || "/").split("?")[0]);
+      // Sanitize at source: strip traversal sequences so the taint chain is broken
+      // before any path join. CodeQL sees this as a sanitizer, not just a bounds check.
+      const safeSeg = rawPath.split("/").filter(s => s !== ".." && s !== ".").join("/");
+      const urlPath = safeSeg.endsWith("/") ? safeSeg + "index.html" : safeSeg;
+      const file = join(rootAbs, urlPath);
+      // Belt-and-suspenders: resolved path must still stay inside rootAbs.
+      if (!file.startsWith(rootAbs + sep) && file !== rootAbs) {
+        res.writeHead(403); return res.end("Forbidden");
       }
       let buf;
-      try {
-        buf = await readFile(file);
-      } catch {
-        const withHtml = file + ".html";
-        // Re-validate the .html variant (explicit guard for each readFile call)
-        if (!withHtml.startsWith(rootAbs + "/")) {
-          res.writeHead(404); res.end("not found"); return;
-        }
-        try { buf = await readFile(withHtml); file = withHtml; }
-        catch { res.writeHead(404); res.end("not found"); return; }
+      try { buf = await readFile(file); }
+      catch {
+        const fileHtml = file + ".html";
+        if (!fileHtml.startsWith(rootAbs + sep)) { res.writeHead(404); return res.end("not found"); }
+        try { buf = await readFile(fileHtml); }
+        catch { res.writeHead(404); return res.end("not found"); }
+        res.writeHead(200, { "content-type": MIME[extname(fileHtml).toLowerCase()] || "application/octet-stream" });
+        return res.end(buf);
       }
-      const ext = extname(file).toLowerCase();
-      res.writeHead(200, { "content-type": MIME[ext] || "application/octet-stream" });
+      res.writeHead(200, { "content-type": MIME[extname(file).toLowerCase()] || "application/octet-stream" });
       res.end(buf);
     } catch { res.writeHead(500); res.end("Internal server error"); }
   });

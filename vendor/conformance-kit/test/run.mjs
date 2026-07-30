@@ -241,6 +241,25 @@ await test("gates/conformance-report: build + render the conformance projection"
   if (gradersBad["integrity.scorecard"] !== "unmet") throw new Error("Scorecard 6.9 must be unmet");
   if (gradersBad["integrity.slsa-level"] !== "unmet") throw new Error("SLSA L2 below target L3 must be unmet");
 
+  // (f) design-token accessibility (token-a11y suite) — recommended (tier-2):
+  // not-assessed absent → met all-true → unmet on any gap.
+  const designIds = ["design.palette-contrast", "design.typography", "design.target-size", "design.opacity-contrast", "design.token-likeness"];
+  for (const id of designIds) if (absent[id] !== "not-assessed") throw new Error(`${id} absent must be not-assessed`);
+  const designGood = statusById(buildConformanceReport({ evidence: {
+    palette: { cvdSafe: true, apcaBaseline: true, nonTextContrast: true },
+    typography: { bodyLineHeight: true, textSpacingAchievable: true, minFontSize: true, weightLegibility: true },
+    targetSize: { minSizeAA: true },
+    opacityContrast: { effectiveContrast: true },
+    tokenLikeness: { distinctCategoricals: true, noRedundantTokens: true },
+  } }));
+  for (const id of designIds) if (designGood[id] !== "met") throw new Error(`${id} all-true must be met`);
+  const designBad = statusById(buildConformanceReport({ evidence: {
+    palette: { cvdSafe: true, apcaBaseline: false, nonTextContrast: true },
+    targetSize: { minSizeAA: false },
+  } }));
+  if (designBad["design.palette-contrast"] !== "unmet") throw new Error("palette gap must be unmet");
+  if (designBad["design.target-size"] !== "unmet") throw new Error("target-size false must be unmet");
+
   // malformed envelope → throw (lone refuses to guess).
   let threw = false;
   try { buildConformanceReport({ evidence: { sbom: { present: "yes" } } }); } catch { threw = true; }
@@ -614,6 +633,14 @@ await test("gates/likeness-gate: near-duplicate + confusable categoricals, e2e o
   const dup = L.findNearDuplicates({ a: "#5C6B63", b: "#5E6B62", c: "#A6432F" });
   if (dup.count !== 1 || dup.duplicates[0].a !== "a") throw new Error("must flag the one near-duplicate ink pair");
   if (L.findNearDuplicates({ x: "#fff", y: "#fff" }).duplicates[0].identical !== true) throw new Error("identical pair flagged");
+  // identical-value pairs are intentional ALIASES — they don't count as redundancy,
+  // only near-but-DISTINCT pairs do (one alias + one near-dup → noRedundantTokens false,
+  // redundantTokens 1; drop the near-dup → noRedundantTokens true).
+  const alias = await L.runLikenessGate({ tokens: { card: "#ffffff", white: "#ffffff", inkA: "#5c6b63", inkB: "#5e6b62" } });
+  if (alias.summary.identicalPairs !== 1 || alias.summary.redundantTokens !== 1) throw new Error(`expected 1 alias + 1 redundant, got ${JSON.stringify(alias.summary)}`);
+  if (alias.likeness.noRedundantTokens !== false) throw new Error("a near-but-distinct pair must keep noRedundantTokens false");
+  const aliasOnly = await L.runLikenessGate({ tokens: { card: "#ffffff", white: "#ffffff", forest: "#0c5a42" } });
+  if (aliasOnly.likeness.noRedundantTokens !== true) throw new Error("identical aliases alone must NOT block noRedundantTokens");
   // (b) e2e: good passes (dup=warn), bad fails (categorical collapse under CVD + dup=error).
   const good = await L.runLikenessGate({ tokens: join(FIX, "likeness", "tokens.css"), config: join(FIX, "likeness", "good.config.json") });
   if (!good.passed || good.summary.nearDuplicates < 1) throw new Error(`good must pass yet surface near-dups, got ${JSON.stringify(good.summary)}`);
@@ -640,8 +667,20 @@ await test("gates/pairing-extractor: derive pairings from CSS + matrix, e2e on f
   // (c) declared ∪ extracted union.
   const u = await P.runPairingExtractor({ tokens: map, css: [".x{color:var(--ink);background:var(--paper)}"], declared: { pairings: [{ fg: "mint", bg: "forest", kind: "text" }] } });
   if (u.summary.declaredAdded < 1) throw new Error("declared pairing must union in");
+  // (d) allowlist (closed-world): the declared set is the opt-in allowlist; an
+  // extracted pairing NOT in it is an `undeclared` violation; declared still pass.
+  const al = await P.runPairingExtractor({
+    tokens: map,
+    css: [".a{color:var(--ink);background:var(--paper)}.b{color:var(--mint);background:var(--forest)}"],
+    declared: { pairings: [{ fg: "ink", bg: "paper", kind: "text" }] },
+    allowlist: true,
+  });
+  if (al.mode !== "allowlist") throw new Error("allowlist mode not flagged");
+  if (al.summary.declared !== 1) throw new Error("exactly 1 declared expected");
+  if (al.summary.undeclared < 1) throw new Error("the undeclared mint/forest pairing must be flagged");
+  if (al.undeclared.some((p) => p.fg === "ink")) throw new Error("the declared pairing must not be undeclared");
   ok("gates/pairing-extractor: derive pairings from CSS + matrix, e2e on fixtures",
-    `extract+containment asserted · ${rep.summary.total} pair(s) scored, declared∪extracted`);
+    `extract+containment asserted · ${rep.summary.total} pair(s) scored · union + allowlist (${al.summary.undeclared} undeclared)`);
 });
 
 // 25. token-a11y: unified runner aggregates all members, fail-closed.
@@ -684,6 +723,27 @@ await test("gates/ai-readability: links + siblings logic, evidence on fixtures",
 
   ok("gates/ai-readability: links + siblings logic, evidence on fixtures",
     `pure logic asserted · good=all-pass · bad: broken=${badr.details.brokenLinks.length}, missing-siblings=${badr.details.missingSiblings.length}`);
+});
+
+// N. css-purity: "no inline values, always tokens" — raw dimensions forbidden.
+await test("gates/css-purity: raw dimensions forbidden, tokens + structural units pass", async () => {
+  const m = await import(join(KIT, "gates", "css-purity-gate.mjs"));
+  // (a) pure: isolate raw lengths outside the token system; allowances pass.
+  if (m.rawLengthsIn("var(--bs-space-4) 12px 0 100%").join() !== "12px") throw new Error("must isolate the lone 12px");
+  if (m.rawLengthsIn("calc(var(--bs-size) - 1px)", { allow: new Set(["1px"]) }).length !== 0) throw new Error("allowlisted 1px must pass");
+  if (m.rawLengthsIn("repeat(2, minmax(160px, 1fr))").join() !== "160px") throw new Error("must flag the 160px inside minmax, not 1fr");
+  // (b) dimension purity: raw px flagged (incl. inside grid-template), 0/100%/fr/auto/tokens pass.
+  const bad = m.checkCssPurity(".c{ width: 420px; gap: var(--bs-space-3); grid-template-columns: 1fr 320px; padding: 0; }");
+  const raws = bad.violations.filter((v) => v.kind === "raw-dimension").map((v) => v.detail).sort();
+  if (raws.join() !== "320px,420px") throw new Error(`expected 420px + 320px, got ${raws}`);
+  const good = m.checkCssPurity(".c{ width: var(--bs-size-card); max-width: 100%; margin: 0 auto; grid-template-columns: repeat(2, minmax(var(--bs-size-col), 1fr)); }");
+  if (!good.ok) throw new Error(`tokenized CSS must pass, got ${JSON.stringify(good.violations)}`);
+  // (c) opt-in colour purity + token-membership against a vocabulary.
+  const col = m.checkCssPurity("a{ color: #fff; background: var(--bs-color-x); }", { colors: true, vocab: new Set(["--bs-color-y"]) });
+  if (!col.violations.some((v) => v.kind === "literal-color") || !col.violations.some((v) => v.kind === "unknown-token"))
+    throw new Error("colours + unknown-token membership must both flag");
+  ok("gates/css-purity: raw dimensions forbidden, tokens + structural units pass",
+    `pure asserted · bad=${raws.length} raw dims (incl. grid-template) · colours+vocab enforced`);
 });
 
 await rm(work, { recursive: true, force: true });

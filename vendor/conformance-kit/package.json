@@ -1,6 +1,6 @@
 {
   "name": "@bounded-systems/conformance-kit",
-  "version": "0.8.0",
+  "version": "0.11.0",
   "description": "Standalone, site-agnostic web-conformance toolkit: integrity tooling + build gates + provenance generators, all parameterized so a site vendors one kit instead of duplicating scripts.",
   "type": "module",
   "license": "MIT",
@@ -39,7 +39,12 @@
     "ck-gen-cid": "generators/gen-cid.mjs",
     "ck-gen-identity": "generators/gen-identity.mjs",
     "ck-gen-snapshots": "generators/gen-snapshots.mjs",
-    "ck-gen-print-snapshots": "generators/gen-print-snapshots.mjs"
+    "ck-gen-print-snapshots": "generators/gen-print-snapshots.mjs",
+    "ck-claim-discipline-gate": "gates/claim-discipline-gate.mjs",
+    "ck-grammar-repetition-gate": "gates/grammar-repetition-gate.mjs",
+    "ck-doc-scope-gate": "gates/doc-scope-gate.mjs",
+    "ck-token-grounding-gate": "gates/token-grounding-gate.mjs",
+    "ck-graph-split": "gates/graph-split.mjs"
   },
   "scripts": {
     "test": "node test/run.mjs"
@@ -70,7 +75,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@mozilla/readability": "^0.5.0",
+    "@mozilla/readability": "^0.6.0",
     "@zazuko/env-node": "^2.1.5",
     "an-array-of-english-words": "^2.0.0",
     "axe-core": "^4.10.0",
