@@ -39,36 +39,11 @@
               rm -rf brand
               cp -rL ${brand} brand
               chmod -R u+w brand
-              # Fail closed if the vendored conformance-kit drifted from its hash-pin.
-              node scripts/verify-vendor.mjs
-              # Node-uniqueness gate — no identity key may repeat in any data cut
-              # (registry nodes, seams, nav links). Fails closed before any page is built.
-              node scripts/check-node-uniqueness.mjs
-              # Same drift gate the project argues for, then assemble dist/.
-              node brand/tokens/build-tokens.mjs --check
-              node build.mjs
-              node scripts/gen-blog.mjs
-              # Compute + render the conformance projection (lone's web-build model
-              # folded over the gate-backed evidence contract) — the /conformance page
-              # + its machine-readable twin, part of the pure, hermetic output.
-              node scripts/gen-conformance.mjs
-              node scripts/gen-sitemap.mjs
-              # Pure HTML transforms — part of the hermetic output, so they MUST run here
-              # (this buildPhase, not just package.json's "build", is what deploys):
-              #   • obfuscate-email — entity-encode mailto in HTML (no JS), in place of CF's
-              #     edge Email Obfuscation which we keep off.
-              #   • check-link-graph — prove the site is one connected graph, emit sitegraph.json.
-              # KEEP IN SYNC with package.json "build" (the local-dev mirror of this list).
-              node scripts/obfuscate-email.mjs
-              #   • add-sri — pin every self-hosted <script>/<link> by sha384 (browser-enforced
-              #     subresource integrity); MUST run before the Repr-Digest so it's signed.
-              node scripts/add-sri.mjs
-              node scripts/check-link-graph.mjs dist
-              # Deterministic SPDX SBOM of the supply chain (flake.lock + package-lock).
-              # A pure function of the committed lockfiles (no clock, no network) — so it
-              # is reproducible and covered by the signed whole-site manifest.
-              node scripts/gen-sbom.mjs
-              node vendor/conformance-kit/gates/sbom/check-sbom.mjs
+              # The hermetic half of the build. The step list is NOT restated here:
+              # scripts/pipeline.mjs is the single source of truth, and deploy.yml
+              # runs its `stamped` half on the staged dist/. Restating the list is
+              # what let gen-claims/gen-jsonld ship in CI but never in prod.
+              node scripts/run-pipeline.mjs derivation hermetic
               runHook postBuild
             '';
             installPhase = ''
