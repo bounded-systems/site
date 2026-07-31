@@ -66,22 +66,15 @@ jobs:
         run: |
           nix develop .#deploy --command bash -euo pipefail -c '
             short=$(printf "%s" "$GITHUB_SHA" | cut -c1-7)
-            # stamp the honesty section with THIS commit + date (freshness the
-            # visitor can see) BEFORE manifesting, so the stamp is covered by the
-            # signed whole-site manifest rather than an unsigned afterthought.
-            node scripts/gen-stamp.mjs
-            # Fail closed if the vendored conformance-kit drifted from its hash-pin.
-            node scripts/verify-vendor.mjs
-            # The deterministic SPDX SBOM is already in dist/ from the hermetic build;
-            # refuse to ship an incomplete bill, then emit the standards-compliant
-            # sidecars (RFC 9116 security.txt, web app manifest, RFC 9530 Repr-Digest
-            # _headers) onto the final, stamped bytes — all BEFORE the manifest, so the
-            # signed whole-site digest covers them (the SBOM becomes a signed subject).
-            node vendor/conformance-kit/gates/sbom/check-sbom.mjs
-            node scripts/emit-artifacts.mjs
-            # whole-site manifest (covers content + sbom + security.txt + manifest;
-            # _headers and the signature bundles are excluded), signed
-            node scripts/gen-sitemanifest.mjs
+            # The `stamped` half of scripts/pipeline.mjs — the steps that embed the
+            # build date or the deploying commit and so cannot live inside the pure
+            # nix derivation. It stamps the honesty section, re-asserts the vendor
+            # pin and the SBOM, emits the standards sidecars (RFC 9116 security.txt,
+            # web app manifest, RFC 9530 Repr-Digest _headers), emits the served
+            # claims + structured-data graphs, and ends with the whole-site manifest
+            # — so every one of those is a signed subject rather than an unsigned
+            # afterthought. The list lives in pipeline.mjs, never restated here.
+            node scripts/run-pipeline.mjs stamped
             cosign sign-blob --yes --bundle dist/site.sha256.sigstore.json dist/site.sha256
             # also keyless-sign the SBOM blob itself, so it carries its own verifiable
             # Sigstore bundle alongside being a subject of the signed site manifest
