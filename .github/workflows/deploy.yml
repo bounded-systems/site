@@ -100,13 +100,13 @@ jobs:
   # preview-URL verify → gated promote) — the same source of truth as robertdelanghe.dev. The
   # required-reviewers `site-promote` Environment lives in THIS repo, so approval is enforced here.
   # This ADDS an approval gate bounded.tools didn't have before (was straight build→deploy).
-  # Pinned by SHA per the repo's "every action pinned by SHA" posture — now that
-  # bounded-systems/.github#42 (RFC 9110 probe opt-in) is merged, this moves off the
-  # temporary branch pin to its merge commit on .github main.
+  # Pinned by SHA per the repo's "every action pinned by SHA" posture. A SHA pin does not
+  # track .github main, so it only moves when bumped here deliberately — this one carries
+  # bounded-systems/.github#64 (per-run Cloudflare token) and #66 (action pin consolidation).
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@c46a1dc7b8e6b2a9ad146bffb93a80f8689dd34e # .github main (#42)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@33b6db390ad8351dae70bf7fd6879fe809c3ecc6 # .github main (#66)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
