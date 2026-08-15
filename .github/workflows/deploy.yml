@@ -102,14 +102,24 @@ jobs:
   # This ADDS an approval gate bounded.tools didn't have before (was straight build→deploy).
   # Pinned by SHA per the repo's "every action pinned by SHA" posture. A SHA pin does not
   # track .github main, so it only moves when bumped here deliberately — this one carries
-  # bounded-systems/.github#64 (per-run Cloudflare token) and #66 (action pin consolidation).
+  # bounded-systems/.github#171 (per-role broker routes + the site-preview environment pin),
+  # which is the exact ref the broker's WORKERS_DEPLOY entries pin: any other SHA fails the
+  # mint 401.
+  #
+  # No stored Cloudflare credential: the callee mints a per-run token from the OIDC broker
+  # (infra#336 option (a)). The URL is a literal, not vars.CF_BROKER_URL, so this public
+  # caller cannot silently break on org-variable visibility; infra's target-host guard pins
+  # the same hostname. The callee appends the job role itself — preview POSTs
+  # /deploy/bounded-tools-site-preview, promote /deploy/bounded-tools-site-promote — so the
+  # path here stays role-less. `site-preview` auto-creates unprotected on first run: that is
+  # deliberate (a broker pin, not a gate); required reviewers stay on `site-promote` only.
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@33b6db390ad8351dae70bf7fd6879fe809c3ecc6 # .github main (#66)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@42db0e942a7ef35430e6e86b0973b9ca1fee1e6e # .github main (#172 — id-token fix over #171)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
       identity_regexp: "^https://github.com/bounded-systems/site/"
-    secrets:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      cf_broker_url: "https://broker.bounded.tools"
+      cf_broker_path: /deploy/bounded-tools-site
