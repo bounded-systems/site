@@ -116,7 +116,7 @@ jobs:
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@48fd2593823d00e45ff79fdf22c4339a21a11883 # .github main (#171)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@42db0e942a7ef35430e6e86b0973b9ca1fee1e6e # .github main (#172 — id-token fix over #171)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
