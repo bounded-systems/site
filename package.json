@@ -37,5 +37,8 @@
     "playwright": "^1.48.0",
     "wrangler": "^4",
     "write-good": "^1.0.8"
+  },
+  "overrides": {
+    "undici": "^7.29.0"
   }
 }
