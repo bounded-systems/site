@@ -24,6 +24,7 @@ catch { /* no blog/ */ }
 const urls = [
   `${SITE}/`,
   `${SITE}/conformance`,
+  `${SITE}/ledger`,
   `${SITE}/blog/`,
   ...posts.map((f) => `${SITE}/blog/${basename(f, ".md")}.html`),
 ];
