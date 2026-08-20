@@ -11,7 +11,8 @@
       "/blog/",
       "/conformance",
       "/contracts",
-      "/ledger"
+      "/ledger",
+      "/map"
     ]
   },
   "blog/bifurcation-and-inter-contract-enforcement.html": {
@@ -125,6 +126,7 @@
       "/conformance",
       "/contracts",
       "/ledger",
+      "/map",
       "/provenance.json",
       "/rekor",
       "/rekor"
@@ -138,6 +140,17 @@
     "internalLinks": [
       "/",
       "/ledger.jsonl"
+    ]
+  },
+  "map.html": {
+    "h1": "Map",
+    "outline": "122",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": [
+      "/",
+      "/contracts",
+      "/ledger"
     ]
   }
 }
