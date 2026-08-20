@@ -19,11 +19,18 @@ let posts = [];
 try { posts = (await readdir(join(root, "blog"))).filter((f) => f.endsWith(".md")).sort(); }
 catch { /* no blog/ */ }
 
-// Served files (guaranteed 200): home, the conformance projection, blog index,
-// each post at /blog/<slug>.html.
+// Served files (guaranteed 200): home, the conformance projection, the contract
+// lattice, the grade ledger, blog index, each post at /blog/<slug>.html.
+//
+// HAND-MAINTAINED, AND THAT IS THE KNOWN WEAKNESS. /contracts went missing here
+// for its whole life because adding a page and adding it to this list are two
+// separate acts of memory (#201). Deriving the page entries from data/nav.jsonld
+// (kind: "page") would make the omission impossible instead of merely fixed —
+// worth doing, and a bigger change than this list.
 const urls = [
   `${SITE}/`,
   `${SITE}/conformance`,
+  `${SITE}/contracts`,
   `${SITE}/ledger`,
   `${SITE}/blog/`,
   ...posts.map((f) => `${SITE}/blog/${basename(f, ".md")}.html`),
