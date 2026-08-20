@@ -67,6 +67,8 @@ export const STEPS = [
     note: "dist/claims.jsonld — build-dated copy of the honesty-section claims graph" },
   { phase: "stamped", cmd: ["scripts/gen-jsonld.mjs"],
     note: "dist/json.ld — the structured-data graph (org + packages + terms)" },
+  { phase: "stamped", cmd: ["scripts/gen-ledger.mjs", "--dist"],
+    note: "dist/ledger.jsonl — the raw grade ledger /ledger says to check for yourself" },
   { phase: "stamped", cmd: ["scripts/gen-sitemanifest.mjs"],
     note: "whole-site manifest; everything above is a signed subject" },
 
