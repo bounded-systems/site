@@ -1,3 +1,4 @@
+<!-- claims: c1, c3 -->
 # Trust lives outside the page
 
 A badge a page renders is a claim the page controls. A verifier a page ships is *also* a claim the page controls — if the bytes can lie, the script that checks them can lie too. So the honest question is not "how do I verify inside the page," but "what can the page *not* forge."

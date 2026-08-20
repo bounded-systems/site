@@ -1,3 +1,4 @@
+<!-- claims: c6 -->
 # Author a verb once. Get the CLI, the MCP tool, the OpenAPI route, and the model schema for free.
 
 Ship one capability to both humans and agents today and you write it four times:

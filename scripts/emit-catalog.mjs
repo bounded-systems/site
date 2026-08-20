@@ -56,6 +56,7 @@ const stripHtml = (s) => normalize(s
 // Unwrap inline markdown to its text (no space injected); drop fenced code, headings,
 // and blockquote markers. Keeps real punctuation so genuine typos still surface.
 const stripMd = (s) => normalize(s
+  .replace(/<!--[\s\S]*?-->/g, " ") // directives (e.g. `<!-- claims: c3 -->`) are metadata, not prose
   .replace(/```[\s\S]*?```/g, " ")
   .replace(/`([^`]+)`/g, "$1")
   .replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1")

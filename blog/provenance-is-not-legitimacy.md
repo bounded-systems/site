@@ -1,3 +1,4 @@
+<!-- claims: c1, c3 -->
 # Provenance is not legitimacy
 
 A signed build tells you who produced an artifact and that the bytes are intact. It does not tell you the build was meant to happen. That gap is small, easy to oversell, and the entire point.
