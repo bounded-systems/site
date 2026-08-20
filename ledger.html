@@ -130,7 +130,10 @@
 <!-- ledger:end -->
 
     <h2 style="margin-top:2.5rem">What a genesis entry is</h2>
-    <p class="ledger__intro muted">
+    <!-- Not .muted: opacity on a parent dims its whole subtree and a child cannot
+         opt out, so .muted (.7) over .badge--genesis (.7) compounds to ~.49 and the
+         badge falls under the AA contrast floor. Caught by the axe gate. -->
+    <p class="ledger__intro">
       A <span class="badge badge--genesis">genesis</span> entry records the grade a
       claim held when this ledger opened. It is a starting position, not a
       movement, so it is marked apart from real transitions rather than padding

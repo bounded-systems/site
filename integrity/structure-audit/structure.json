@@ -10,7 +10,8 @@
       "/blog/",
       "/blog/",
       "/conformance",
-      "/contracts"
+      "/contracts",
+      "/ledger"
     ]
   },
   "blog/bifurcation-and-inter-contract-enforcement.html": {
@@ -123,9 +124,20 @@
       "/conformance",
       "/conformance",
       "/contracts",
+      "/ledger",
       "/provenance.json",
       "/rekor",
       "/rekor"
+    ]
+  },
+  "ledger.html": {
+    "h1": "Grade ledger",
+    "outline": "122",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": [
+      "/",
+      "/ledger.jsonl"
     ]
   }
 }
