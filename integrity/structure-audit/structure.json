@@ -11,6 +11,7 @@
       "/blog/",
       "/conformance",
       "/contracts",
+      "/desk",
       "/ledger",
       "/map"
     ]
@@ -114,6 +115,15 @@
       "/"
     ]
   },
+  "desk.html": {
+    "h1": "Desk",
+    "outline": "12",
+    "mains": 1,
+    "readerOk": null,
+    "internalLinks": [
+      "/"
+    ]
+  },
   "index.html": {
     "h1": "Your coding agent wanders. Keep it inside the job you gave it.",
     "outline": "1222233333322",
@@ -125,6 +135,7 @@
       "/conformance",
       "/conformance",
       "/contracts",
+      "/desk",
       "/ledger",
       "/map",
       "/provenance.json",
