@@ -42,23 +42,11 @@ cd guest-room && npm test
 
 Every claim in [the registry](/conformance#claims) is graded against the running code and published as a signed list ([claims.jsonld](/claims.jsonld)). Three grades:
 
-Enforced
+**Enforced** — A check proves it, and the build fails without it.
 
-A check proves it, and the build fails without it.
+**Partial** — Works, with a named gap.
 
-Docs generate from source and fail the build on drift. guest-room's specs execute against the engine.
-
-Partial
-
-Works, with a named gap.
-
-Git writes carry signed provenance — tested end to end, but opt-in today. The agent runs credential-free, but isolation is a container plus process discipline, not yet a hardened sandbox.
-
-Aspirational
-
-The bet, not yet the result.
-
-prx and claude-box converging onto guest-room as one runtime. Contracts staying honest between components as they evolve — the open problem this whole project aims at.
+**Aspirational** — The bet, not yet the result.
 
 ## If you want to go deeper
 

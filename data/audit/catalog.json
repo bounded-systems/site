@@ -1024,16 +1024,6 @@
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#byline"
   },
-  "content/strings.json#claim-docs": {
-    "$value": "Docs generate from source and fail the build on drift.",
-    "$type": "claim",
-    "$description": "micro-copy token — content/strings.json#claim-docs"
-  },
-  "content/strings.json#claim-specs": {
-    "$value": "guest-room's specs execute against the engine.",
-    "$type": "claim",
-    "$description": "micro-copy token — content/strings.json#claim-specs"
-  },
   "content/strings.json#contact-cta": {
     "$value": "hello@bounded.tools",
     "$type": "cta",
@@ -1159,11 +1149,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#3123b0629f3b": {
-    "$value": "Contracts staying honest between components as they evolve — the open problem this whole project aims at",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#3346b1822829": {
     "$value": "A refusal actually stops the action; either way, it's recorded",
     "$type": "body",
@@ -1189,18 +1174,13 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#48f5802b846c": {
-    "$value": "Aspirational \n The bet, not yet the result. \n prx and claude-box converging onto guest-room as one runtime",
+  "index.html#489bb52c6f20": {
+    "$value": "Aspirational \n The bet, not yet the result",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
   "index.html#49dc63b4d8f7": {
     "$value": "Partial \n Works, with a named gap",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#562fe4e324eb": {
-    "$value": "Docs generate from source and fail the build on drift. guest-room's specs execute against the engine",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1274,11 +1254,6 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#aa88e51bd273": {
-    "$value": "Git writes carry signed provenance — tested end to end, but opt-in today",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#af280106a0e8": {
     "$value": "Status, graded \n Every claim in the registry is graded against the running code and published as a signed list (claims.jsonld)",
     "$type": "body",
@@ -1316,11 +1291,6 @@
   },
   "index.html#ee77fcf93d4b": {
     "$value": "Verify this site yourself",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#f530a9c9adb9": {
-    "$value": "The agent runs credential-free, but isolation is a container plus process discipline, not yet a hardened sandbox",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
