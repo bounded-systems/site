@@ -19,8 +19,9 @@ let posts = [];
 try { posts = (await readdir(join(root, "blog"))).filter((f) => f.endsWith(".md")).sort(); }
 catch { /* no blog/ */ }
 
-// Served files (guaranteed 200): home, every nav page, blog index, each post at
-// /blog/<slug>.html.
+// Served URLs (guaranteed 200): home, every nav page, blog index, each post at
+// its canonical extensionless /blog/<slug> — the host 307-redirects the .html
+// form to it, and a sitemap should advertise final URLs, not redirects.
 //
 // DERIVED, NOT RESTATED (#203). This list used to be hand-maintained, and
 // /contracts went missing from it for its whole life (#201) because shipping a
@@ -45,7 +46,7 @@ const urls = [...new Set([
   `${SITE}/`,
   ...navPages,
   `${SITE}/blog/`,
-  ...posts.map((f) => `${SITE}/blog/${basename(f, ".md")}.html`),
+  ...posts.map((f) => `${SITE}/blog/${basename(f, ".md")}`),
 ])];
 
 const sitemap =

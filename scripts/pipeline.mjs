@@ -47,6 +47,8 @@ export const STEPS = [
     note: "pin every self-hosted script/link by sha384; MUST precede the Repr-Digest" },
   { phase: "hermetic", cmd: ["scripts/check-link-graph.mjs", "dist"],
     note: "prove the site is one connected page graph; emit sitegraph.json" },
+  { phase: "hermetic", cmd: ["scripts/check-fragments.mjs", "dist"],
+    note: "prove every internal #fragment names a real id — the graph gates above strip fragments" },
   // After check-link-graph on purpose: the link graph proves the HTML pages form
   // one connected surface, and the .md twins are the same pages in another form,
   // not new nodes in it. Safe in `hermetic` even though gen-stamp rewrites

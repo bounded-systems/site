@@ -8,6 +8,8 @@
 
 What is worth picking up next, ranked by the board itself. This is the same projection a session reads before it claims work — not a second opinion about it. Anything already claimed, finished, or waiting on a check is held back, and the counts below say how much.
 
+This queue schedules autonomous agent sessions. It is not a product roadmap, and the backlog count is not a count of active human work — most entries are small, and any agent or person can pick one up.
+
 Board projected at 2026-08-20T23:46:48Z, and rendered into this page at build time. The projection refreshes hourly; this page refreshes when the site rebuilds, so it can trail the board.
 
 **25** — shown

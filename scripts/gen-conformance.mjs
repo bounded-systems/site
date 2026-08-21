@@ -83,17 +83,19 @@ await writeFile(join(dist, "api", "v1", "conformance.json"), JSON.stringify(repo
 // ── per-criterion evidence links ────────────────────────────────────────────
 // Each target either resolves in the built dist/ (the SBOM, llms.txt, sitemap) or is
 // a known deploy-time sidecar the structure-audit allow-lists (/provenance.json,
-// /site.sha256); everything else points at the on-page signed-provenance section.
+// /site.sha256); everything else points at the home page's "go deeper" section
+// (id="deeper"), where the signed-provenance / Rekor material lives.
+// check-fragments.mjs proves every one of these fragments names a real id.
 const EVIDENCE_LINKS = {
   "integrity.sbom": "/sbom.spdx.json",
   "integrity.signed-release-manifest": "/site.sha256",
   "integrity.content-digests": "/provenance.json",
-  "integrity.reproducible-build": "/#build-provenance",
-  "semantic.jsonld-shacl": "/#build-provenance",
+  "integrity.reproducible-build": "/#deeper",
+  "semantic.jsonld-shacl": "/#deeper",
   "semantic.ai-readability": "/llms.txt",
   "seo.technical": "/sitemap.xml",
 };
-const evidenceHref = (c) => EVIDENCE_LINKS[c.id] ?? "/#build-provenance";
+const evidenceHref = (c) => EVIDENCE_LINKS[c.id] ?? "/#deeper";
 
 const s = report.summary;
 const description =
@@ -138,8 +140,8 @@ const page = `<!doctype html>
       </a>
       <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
       <div class="nav__links" id="nav-menu">
-        <a href="index.html#honesty">Honesty</a>
-        <a href="index.html#proof">Proof</a>
+        <a href="index.html#status">Honesty</a>
+        <a href="index.html#whats-here">Proof</a>
         <a href="blog/">Writing</a>
         <a class="nav__gh" href="https://github.com/bounded-systems">GitHub&nbsp;&#8599;&#xFE0E;</a>
       </div>
@@ -147,10 +149,10 @@ const page = `<!doctype html>
   </nav>
   <main class="wrap conf">
     <header class="conf__intro">
-      <p class="bs-text-label eyebrow"><a href="index.html#honesty">&larr;&nbsp;Kept honest</a></p>
+      <p class="bs-text-label eyebrow"><a href="index.html#status">&larr;&nbsp;Kept honest</a></p>
       <h1>Conformance, computed against the running build</h1>
       <p class="conf__lead">Two reports over one project, from opposite directions. The conformance criteria below are <em>computed</em>: they fold the gate verdicts this build genuinely verifies through <a href="https://github.com/bounded-systems/lone"><code>lone</code></a>'s web-build conformance model, and report everything they cannot verify as <strong>not assessed</strong> — never as met. The strong WCAG&nbsp;2.2&nbsp;AA / OWASP&nbsp;ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own. <a href="#claims">The claims registry</a> underneath is the other half: what a person asserts about this system and grades by hand, each claim carrying its gap and a link to the code behind it.</p>
-      <p class="conf__machine"><a href="api/v1/conformance.json">machine-readable report&nbsp;&#8599;&#xFE0E;</a> &middot; <a href="/claims.jsonld">claims.jsonld</a> &middot; <a href="index.html#build-provenance">the signed build provenance</a></p>
+      <p class="conf__machine"><a href="api/v1/conformance.json">machine-readable report&nbsp;&#8599;&#xFE0E;</a> &middot; <a href="/claims.jsonld">claims.jsonld</a> &middot; <a href="index.html#deeper">the signed build provenance</a></p>
     </header>
     ${renderConformanceReport(report, { evidenceHref })}
 ${registryHtml}
