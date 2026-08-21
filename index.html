@@ -199,7 +199,7 @@
             </li>
             <li class="legend__claim">
               <p class="legend__claim-text"><strong class="legend__claim-id" data-claim="https://bounded.tools/claims#c4">c4</strong> — The agent never holds the credential — a broker daemon does. <a class="legend__evidence" href="https://github.com/bounded-systems/prx/blob/d1b6030eebd2caffaf22377d21c24c4c6f2c77c1/packages/prx/src/keeperd/daemon.ts" rel="noopener">daemon.ts&nbsp;&#8599;&#xFE0E;<span class="u-sr-only"> (evidence, external site)</span></a></p>
-              <p class="legend__gap"><b class="legend__gap-label">Gap</b> — On macOS the broker listens on TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.</p>
+              <p class="legend__gap"><b class="legend__gap-label">Gap</b> — On macOS the door is TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.</p>
             </li>
             </ul>
           </div>
@@ -208,8 +208,8 @@
             <p data-str="grade-aspirational-def">The bet, not yet the result.</p>
             <ul class="legend__list">
             <li class="legend__claim">
-              <p class="legend__claim-text"><strong class="legend__claim-id" data-claim="https://bounded.tools/claims#c5">c5</strong> — prx and claude-box converge on guest-room as one shared runtime. <a class="legend__evidence" href="https://github.com/bounded-systems/prx" rel="noopener">prx&nbsp;&#8599;&#xFE0E;<span class="u-sr-only"> (evidence, external site)</span></a></p>
-              <p class="legend__gap"><b class="legend__gap-label">Gap</b> — Convergence is in progress — prx wires the pieces in-process today; the shared out-of-process runtime is the direction, not the result.</p>
+              <p class="legend__claim-text"><strong class="legend__claim-id" data-claim="https://bounded.tools/claims#c5">c5</strong> — prx and claude-box converge onto one guest-room door runtime. <a class="legend__evidence" href="https://github.com/bounded-systems/prx" rel="noopener">prx&nbsp;&#8599;&#xFE0E;<span class="u-sr-only"> (evidence, external site)</span></a></p>
+              <p class="legend__gap"><b class="legend__gap-label">Gap</b> — Convergence is in progress — prx wires the seams in-process today; the out-of-process door runtime is the direction, not yet at scale.</p>
             </li>
             <li class="legend__claim">
               <p class="legend__claim-text"><strong class="legend__claim-id" data-claim="https://bounded.tools/claims#c6">c6</strong> — Contracts stay honest between components as they evolve. <a class="legend__evidence" href="https://github.com/bounded-systems/prx" rel="noopener">prx&nbsp;&#8599;&#xFE0E;<span class="u-sr-only"> (evidence, external site)</span></a></p>

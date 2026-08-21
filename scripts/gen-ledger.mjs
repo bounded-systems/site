@@ -63,10 +63,6 @@ function renderEntry(e) {
     ? `<span class="badge badge--genesis">genesis</span> ${badge(e.to)}`
     : `<span class="move">${badge(e.from)} &rarr; ${badge(e.to)}</span>`;
   const pages = (Array.isArray(e.pages) ? e.pages : []).map((p) => {
-    // A page reference is a blog post (the P1 directive) or the homepage claims
-    // registry (data-claim edges — see check-ledger.mjs). Link each to where a
-    // reader actually lands: /blog/<slug>, or the registry's own section.
-    if (String(p) === "index.html") return `<a href="/#status">the claims registry</a>`;
     const slug = String(p).replace(/^blog\//, "").replace(/\.md$/, "");
     return `<a href="/blog/${esc(slug)}">${esc(slug)}</a>`;
   });

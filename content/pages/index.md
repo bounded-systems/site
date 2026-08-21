@@ -61,15 +61,15 @@ Works, with a named gap.
   **Gap** — Emission and enforcement are opt-in (a signer plus require-signed) until [Sigstore](https://sigstore.dev) lands; without them the push is bare. Verified mechanisms: ocap-provenance/slsa.ts, prx verify.ts/merge-guard.ts, anchored-chain.
 - **c4** — The agent never holds the credential — a broker daemon does. [daemon.ts ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx/blob/d1b6030eebd2caffaf22377d21c24c4c6f2c77c1/packages/prx/src/keeperd/daemon.ts)
   
-  **Gap** — On macOS the broker listens on TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.
+  **Gap** — On macOS the door is TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.
 
 Aspirational
 
 The bet, not yet the result.
 
-- **c5** — prx and claude-box converge on guest-room as one shared runtime. [prx ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx)
+- **c5** — prx and claude-box converge onto one guest-room door runtime. [prx ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx)
   
-  **Gap** — Convergence is in progress — prx wires the pieces in-process today; the shared out-of-process runtime is the direction, not the result.
+  **Gap** — Convergence is in progress — prx wires the seams in-process today; the out-of-process door runtime is the direction, not yet at scale.
 - **c6** — Contracts stay honest between components as they evolve. [prx ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx)
   
   **Gap** — Inter-contract enforcement is the open problem this whole project is aimed at — a bet, stated as direction, not a solved result.
