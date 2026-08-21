@@ -96,7 +96,13 @@ if (!footer) {
   fail("no footer__meta block in index.html — the licence line a reader sees is missing");
 } else {
   if (!new RegExp(`\\b${esc(declared)}\\b`).test(footer)) {
-    fail(`the homepage footer does not name "${declared}": ${footer.replace(/<[^>]+>/g, "").trim()}`);
+    // Collapse whitespace and truncate rather than stripping tags. An earlier
+    // version prettified this with /<[^>]+>/g, which CodeQL correctly flags as
+    // an incomplete multi-character sanitizer (js/incomplete-multi-character-
+    // sanitization): one pass over `<<script>script>` leaves `<script>`. The
+    // sanitizer shape was never needed — this string goes to a terminal, not to
+    // HTML — and showing the markup is more useful to whoever has to fix it.
+    fail(`the homepage footer does not name "${declared}": ${footer.replace(/\s+/g, " ").trim().slice(0, 140)}`);
   }
   for (const other of KNOWN_OTHER) {
     if (new RegExp(other, "i").test(footer) && !new RegExp(other, "i").test(declared)) {
