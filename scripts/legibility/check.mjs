@@ -96,7 +96,7 @@ if (flags.includes("--jsonld")) {
     "@type": "bt:Claim",
     claim: "The landing page passes the legibility gate.",
     grade: fail.length ? "aspirational" : "enforced",
-    gap: "The gate measures budgets and banned words, so it can show the page did not regress. It cannot show the page lands: the cold-read scenarios are judged by a model at deploy time, which is a proxy, and the comprehension test itself is one outside human and is not automated.",
+    gap: "The gate measures budgets and banned words, so it can show the page did not regress. It cannot show the page lands: the cold-read scenarios are judged by a model on demand (npm run coldread), by hand and never in the build, and that judge is Opus — a ceiling test, so a red run is strong evidence and a green one is weak. The comprehension test itself is one outside human and is not automated.",
     evidence: run,
   }, null, 2));
 }
