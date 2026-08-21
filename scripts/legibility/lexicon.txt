@@ -1,0 +1,20 @@
+# Deny lexicon — words that made readers recoil or smell like marketing.
+# One regex per line (case-insensitive, applied outside code blocks and URLs).
+# Comments start with #. Repo names like guest-room are excluded by the checker.
+\bdoors?\b
+\brooms?\b
+\bguests?\b
+\bflagship\b
+\bat scale\b
+\bleverag\w*\b
+\bseamless\w*\b
+\bdelve\b
+\bjourney\b
+\bunlock\w*\b
+\bempower\w*\b
+\bcutting.edge\b
+\bgame.chang\w*\b
+\brobust\b
+\bholistic\b
+\bsynerg\w*\b
+\bbifurcat\w*\b

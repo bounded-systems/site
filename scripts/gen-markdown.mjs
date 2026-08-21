@@ -375,14 +375,38 @@ function block(node, out, depth = 0) {
 // --check mean anything.
 const STAMP = /<!--\s*stamp:start\s*-->[\s\S]*?<!--\s*stamp:end\s*-->/gi;
 
+// A `<header>` that is a direct child of `<main>` is the page's hero: the block
+// a skimmer gets before deciding whether to keep reading. HTML says that with a
+// landmark; markdown's only way to say it is a thematic break, so the projection
+// emits one where the hero ends.
+//
+// This is not cosmetic. scripts/legibility/check.mjs budgets "words before the
+// first ---" precisely because that is what a skimmer pays for free, and without
+// the break it reads the whole page as hero and fails every page by 300 words.
+// The alternative — putting an <hr> in the HTML so the markdown would have one —
+// would be adding visual furniture to a page to satisfy a gate, which is the
+// exact dishonesty these gates exist to catch.
+function heroEnd(main) {
+  const kids = (main.children || []).filter((c) => c.tag && !DROP.has(c.tag));
+  const first = kids[0];
+  return first && first.tag === "header" && kids.length > 1 ? first : null;
+}
+
 function toMarkdown(html, { route }) {
   const tree = parse(html.replace(STAMP, ""));
   const main = find(tree, (n) => n.tag === "main") || find(tree, (n) => n.tag === "body") || tree;
   const titleEl = find(tree, (n) => n.tag === "title");
   const title = titleEl ? collapse(textOf(titleEl)).trim() : route;
 
+  const hero = heroEnd(main);
   const out = [];
-  block(main, out);
+  if (hero) {
+    block(hero, out);
+    out.push("---");
+    for (const c of main.children || []) { if (c !== hero) block(c, out); }
+  } else {
+    block(main, out);
+  }
   const body = out.filter(Boolean).join("\n\n").replace(/\n{3,}/g, "\n\n").trim();
 
   // The provenance line lives in a COMMENT, not in the body. A visible header

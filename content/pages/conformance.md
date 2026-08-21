@@ -10,6 +10,8 @@ The honesty section grades each *claim* by hand. This page does the opposite: it
 
 [machine-readable report ↗](api/v1/conformance.json) · [the signed build provenance](index.html#build-provenance)
 
+---
+
 ## Conformance
 
 Partial conformance: automated DOM checks clean; WCAG 2.2 AA (manual audit) not supplied; OWASP ASVS Level 2 not supplied; Core Web Vitals (p75) not supplied; Baseline Widely Available not supplied; runtime reliability not supplied.

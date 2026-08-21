@@ -54,6 +54,14 @@ export const STEPS = [
   // pre-stamp and post-stamp projections are byte-identical.
   { phase: "hermetic", cmd: ["scripts/gen-markdown.mjs", "--dist"],
     note: "every page also served as markdown at the same route (/index.md, /map.md …)" },
+  // Straight after the projection, because the projection is what it reads: the
+  // words a stranger gets, with the markup gone. Deterministic half only — deny
+  // lexicon, hero budget, sentence cap, acronym budget, section budget. The
+  // judged half (scripts/legibility/coldread.feature) is deploy-time and is NOT
+  // wired here on purpose; a flaky proxy in the inner loop rots trust in the gate
+  // around it.
+  { phase: "hermetic", cmd: ["scripts/legibility/check.mjs", "dist/index.md"],
+    note: "the landing page stays legible to a stranger at skim speed" },
   { phase: "hermetic", cmd: ["scripts/gen-sbom.mjs"],
     note: "deterministic SPDX SBOM — a pure function of the committed lockfiles" },
   { phase: "hermetic", cmd: ["vendor/conformance-kit/gates/sbom/check-sbom.mjs"],

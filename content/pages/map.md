@@ -130,4 +130,20 @@ uses → anchored-chain, cas
 
 **prx-config guest config-schema tui-config** — TUI configuration schema parser/emitter for L1 Claude and L2 Warp tools
 
+## The capability seams
+
+One narrow seam per kind of ambient system power — the single sanctioned access point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and policy stays enforceable.
+
+**fs** — the one filesystem door
+
+**proc** — the one subprocess spawn
+
+**env** — the one reader of process.env
+
+**gh** — GitHub CLI, policy-gated
+
+**git** — git CLI, lock-recovering
+
+**cas** — bytes addressed by digest
+
 Contract state between repos lives on [/contracts](/contracts); how honestly the claims hold up, on [/ledger](/ledger). The full source is at [github.com/bounded-systems](https://github.com/bounded-systems).
