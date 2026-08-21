@@ -230,7 +230,11 @@
       <!-- The licence line is three surfaces of one fact: this text, package.json's
            `license` field, and the LICENSE file at the repo root. check-license.mjs
            fails the build if they disagree — the footer is the only one a reader
-           sees, and it was the only one that existed before #233 §4. -->
+           sees, and it was the only one that existed before issue 233 §4.
+           (Issue refs in THIS file are written without a leading hash on
+           purpose: brand/tools coverage.mjs --colors reads a hash followed by
+           three hex digits as a hardcoded colour, so "hash-233" in any comment
+           that reaches dist/ fails the no-hardcoded-colours gate.) -->
       <div class="footer__meta"><a href="https://github.com/bounded-systems/site/blob/main/LICENSE">MIT</a> &middot; bounded.tools</div>
     </div>
   </footer>

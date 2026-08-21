@@ -42,6 +42,11 @@ import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => readFileSync(join(root, p), "utf8");
+// Same escape the repo already uses in check-jargon.mjs. Needed, not decorative:
+// `declared` comes out of package.json, so interpolating it raw into a RegExp is
+// regex injection (CodeQL js/regex-injection, high) — a manifest could inject
+// pattern syntax and make this gate match things it should not, or hang.
+const esc = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 let errors = 0;
 const fail = (msg) => { console.error(`  ✗ ${msg}`); errors++; };
@@ -70,7 +75,7 @@ try {
 }
 if (licenseText) {
   const title = licenseText.split("\n", 1)[0].trim();
-  if (!new RegExp(`\\b${declared}\\b`, "i").test(title)) {
+  if (!new RegExp(`\\b${esc(declared)}\\b`, "i").test(title)) {
     fail(`LICENSE opens with "${title}" but package.json declares "${declared}"`);
   }
   if (!/copyright \(c\)\s+\d{4}/i.test(licenseText)) {
@@ -90,7 +95,7 @@ const footer = (read("index.html").match(/<div class="footer__meta">([\s\S]*?)<\
 if (!footer) {
   fail("no footer__meta block in index.html — the licence line a reader sees is missing");
 } else {
-  if (!new RegExp(`\\b${declared}\\b`).test(footer)) {
+  if (!new RegExp(`\\b${esc(declared)}\\b`).test(footer)) {
     fail(`the homepage footer does not name "${declared}": ${footer.replace(/<[^>]+>/g, "").trim()}`);
   }
   for (const other of KNOWN_OTHER) {
