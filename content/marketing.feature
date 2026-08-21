@@ -10,6 +10,29 @@ Feature: bounded.tools marketing micro-copy
   gone. Deleting a scenario alongside the thing it described is the honest move;
   leaving it to fail, or loosening it to pass, would both be worse.
 
+  Same move again with the claims registry (site issue 233 §3). The two
+  graded-claim scenarios — "The docs-generation claim (enforced)" and "The specs
+  claim (enforced)" — are gone because the copy they pinned is gone: the Status
+  buckets now say what each GRADE means and link to the registry for which claims
+  hold it, instead of carrying example sentences that restated specific claims.
+
+  Those example sentences had drifted from the graph they summarised, and the
+  drift is measured rather than argued. With the registry publishing c1's
+  canonical text on /conformance, check-repetition scored the homepage paraphrase
+  against it at 83% shared vocabulary:
+
+    "Docs generate from source and fail CI on drift."         (c1, canonical)
+    "Docs generate from source and fail the build on drift."  (the paraphrase)
+
+  c5 and c6 scored 50% and 36% the same way. That is one dataset with two
+  sources and visibly different words — the failure this repo argues against, and
+  the finding issue 233 §3 raised. Re-pointing these scenarios at the canonical
+  sentences would have entrenched the second source by copying claim text into
+  content/strings.json; deleting the paraphrases removed it. The claim text is
+  now held to the graph by a stronger mechanism than a Gherkin scenario:
+  scripts/claims-registry.mjs --check asserts on every `npm run check` that each
+  claim's current sentence and gap appear in the committed projection.
+
   @marketing
   Scenario: The hero headline is consistent
     Then surfaces present the hero "Your coding agent runs with your access. Bounded Systems puts a checkpoint in front of it."
@@ -49,14 +72,6 @@ Feature: bounded.tools marketing micro-copy
     Then surfaces present the label "A check proves it, and the build fails without it."
     And surfaces present the label "Works, with a named gap."
     And surfaces present the label "The bet, not yet the result."
-
-  @marketing
-  Scenario: The docs-generation claim (enforced) is consistent
-    Then surfaces present the claim "Docs generate from source and fail the build on drift."
-
-  @marketing
-  Scenario: The specs claim (enforced) is consistent
-    Then surfaces present the claim "guest-room's specs execute against the engine."
 
   @marketing
   Scenario: The deeper-section lead-ins are consistent

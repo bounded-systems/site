@@ -10,6 +10,7 @@
 // Exit 1 on any violation. Budgets are constants below; change them in one place.
 
 import { readFileSync } from "node:fs";
+import { LEGIBILITY_CLAIM } from "./verdict.mjs";
 
 const BUDGET = {
   heroWords: 170,      // words before the first `---` (what a skimmer gets for free)
@@ -87,16 +88,20 @@ if (h2 > BUDGET.h2Sections)
   fail.push(`sections: ${h2} h2s (budget ${BUDGET.h2Sections})`);
 
 // 6. Optional: the verdict, as a node in the graph the page already publishes.
+// The claim/gap text lives in verdict.mjs — the ONE source this emitter shares
+// with the homepage registry renderer (gen-claims-rows.mjs) — so the page and
+// the signed graph carry the same words. Only the grade and the run URL are
+// computed here, because only this run knows them.
 if (flags.includes("--jsonld")) {
   const run = process.env.GITHUB_RUN_ID
     ? `${process.env.GITHUB_SERVER_URL ?? "https://github.com"}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
-    : "https://github.com/bounded-systems/site/blob/main/scripts/legibility/check.mjs";
+    : LEGIBILITY_CLAIM.evidence;
   console.log(JSON.stringify({
-    "@id": "https://bounded.tools/claims#legibility",
+    "@id": LEGIBILITY_CLAIM.id,
     "@type": "bt:Claim",
-    claim: "The landing page passes the legibility gate.",
+    claim: LEGIBILITY_CLAIM.claim,
     grade: fail.length ? "aspirational" : "enforced",
-    gap: "The gate measures budgets and banned words, so it can show the page did not regress. It cannot show the page lands: the cold-read scenarios are judged by a model on demand (npm run coldread), by hand and never in the build, and that judge is Opus — a ceiling test, so a red run is strong evidence and a green one is weak. The comprehension test itself is one outside human and is not automated.",
+    gap: LEGIBILITY_CLAIM.gap,
     evidence: run,
   }, null, 2));
 }

@@ -6,9 +6,9 @@
 
 # Conformance, computed against the running build
 
-The honesty section grades each *claim* by hand. This page does the opposite: it folds the gate verdicts this build genuinely verifies through [`lone`](https://github.com/bounded-systems/lone)'s web-build conformance model, and reports everything it cannot verify as **not assessed** — never as met. The strong WCAG 2.2 AA / OWASP ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own.
+Two reports over one project, from opposite directions. The conformance criteria below are *computed*: they fold the gate verdicts this build genuinely verifies through [`lone`](https://github.com/bounded-systems/lone)'s web-build conformance model, and report everything they cannot verify as **not assessed** — never as met. The strong WCAG 2.2 AA / OWASP ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own. [The claims registry](#claims) underneath is the other half: what a person asserts about this system and grades by hand, each claim carrying its gap and a link to the code behind it.
 
-[machine-readable report ↗︎](api/v1/conformance.json) · [the signed build provenance](index.html#deeper)
+[machine-readable report ↗︎](api/v1/conformance.json) · [claims.jsonld](/claims.jsonld) · [the signed build provenance](index.html#deeper)
 
 ---
 
@@ -405,3 +405,39 @@ cognitive: 1/3 met (1 unmet, 1 not assessed)
   no COGA usability testing supplied (optional)
   
   [evidence](/#deeper)
+
+## The claims registry
+
+Every claim this project makes about itself, with the grade it holds, the gap that grade leaves open, and a link to the code that backs it. Rendered from the same signed graph the site publishes at [claims.jsonld](/claims.jsonld) — the sentences below are that file's, not a summary of it.
+
+- **c1** — enforced [gen-blog.mjs ↗︎ (evidence, external site)](https://github.com/bounded-systems/site/blob/32d10d589af6e6e416c49147163bb7b8c2f36448/scripts/gen-blog.mjs)
+  
+  Docs generate from source and fail CI on drift.
+- **c2** — enforced [guest-room.test.ts ↗︎ (evidence, external site)](https://github.com/bounded-systems/guest-room/blob/8473bdfd95ee3357603da8bad26ab0b876d8d61c/guest-room.test.ts)
+  
+  guest-room's behaviour specs execute against the engine.
+- **legibility** — enforced [check.mjs ↗︎ (evidence, external site)](https://github.com/bounded-systems/site/blob/main/scripts/legibility/check.mjs)
+  
+  The landing page passes the legibility gate.
+  
+  **Gap** — The gate measures budgets and banned words, so it can show the page did not regress. It cannot show the page lands: the cold-read scenarios are judged by a model on demand (npm run coldread), by hand and never in the build. That judge is Opus — a ceiling test, so a red run is strong evidence and a green one is weak. The comprehension test itself is one outside human and is not automated.
+- **c3** — partial [slsa.ts ↗︎ (evidence, external site)](https://github.com/bounded-systems/ocap-provenance/blob/9b5139de0b0d89a0908b67e6ca22a6eb697ce3df/slsa.ts)
+  
+  A git-write carries a verifiable [in-toto](https://in-toto.io) / [SLSA](https://slsa.dev) provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate.
+  
+  **Gap** — Emission and enforcement are opt-in (a signer plus require-signed) until [Sigstore](https://sigstore.dev) lands; without them the push is bare. Verified mechanisms: ocap-provenance/slsa.ts, prx verify.ts/merge-guard.ts, anchored-chain.
+- **c4** — partial [daemon.ts ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx/blob/d1b6030eebd2caffaf22377d21c24c4c6f2c77c1/packages/prx/src/keeperd/daemon.ts)
+  
+  The agent never holds the credential — a broker daemon does.
+  
+  **Gap** — On macOS the door is TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.
+- **c5** — aspirational [prx ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx)
+  
+  prx and claude-box converge onto one guest-room door runtime.
+  
+  **Gap** — Convergence is in progress — prx wires the seams in-process today; the out-of-process door runtime is the direction, not yet at scale.
+- **c6** — aspirational [prx ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx)
+  
+  Contracts stay honest between components as they evolve.
+  
+  **Gap** — Inter-contract enforcement is the open problem this whole project is aimed at — a bet, stated as direction, not a solved result.
