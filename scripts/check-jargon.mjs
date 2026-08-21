@@ -19,7 +19,12 @@ const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 let errors = 0, grounded = 0;
 
 for (const file of SURFACES) {
-  const html = readFileSync(join(root, file), "utf8");
+  // Strip HTML comments first. They are notes to whoever edits this file, not
+  // prose anyone reads, and counting them as usage means an authoring comment
+  // that NAMES a term — including one explaining why the term was removed —
+  // demands a link for text that never renders. `-->|$` rather than `-->`, so an
+  // unterminated comment swallows to end of file instead of surviving the strip.
+  const html = readFileSync(join(root, file), "utf8").replace(/<!--[\s\S]*?(?:-->|$)/g, " ");
   for (const term of Object.keys(vocab)) {
     if (term.startsWith("$")) continue;
     const word = new RegExp(`(?<![\\w-])${esc(term)}(?![\\w-])`);
