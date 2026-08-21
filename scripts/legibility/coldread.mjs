@@ -26,6 +26,7 @@
 
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
+import { createConnection } from "node:net";
 import { grade, SCENARIOS } from "./coldread-grade.mjs";
 
 const MODEL = "claude-opus-5";
@@ -131,7 +132,19 @@ export function buildRequest(page, featureText, { model = MODEL } = {}) {
 }
 
 // --- transport: the thin part -----------------------------------------------
-export async function ask(body, { apiKey, fetchImpl = fetch } = {}) {
+// Two ways out, and which one ran is printed on every run because "who held the
+// credential" is provenance, not a detail:
+//
+//   SCOUTD_SOCK set  → knock on the scout door. This process never sees a key.
+//   otherwise        → direct fetch with ANTHROPIC_API_KEY from the environment.
+//
+// The door is the one the decision in site#229 chose. Everything below the
+// envelope — the wire format, the daemon scaffolding, the proven chokepoint —
+// already exists in guest-room; scoutd is the piece still to be written, and
+// site#231 is the contract it has to match.
+
+/** Direct egress: this process holds the credential. */
+async function askDirect(body, { apiKey, fetchImpl = fetch }) {
   const res = await fetchImpl(ENDPOINT, {
     method: "POST",
     headers: {
@@ -143,6 +156,69 @@ export async function ask(body, { apiKey, fetchImpl = fetch } = {}) {
   });
   if (!res.ok) throw new Error(`anthropic API ${res.status}: ${(await res.text()).slice(0, 400)}`);
   return res.json();
+}
+
+/**
+ * Brokered egress: scoutd holds the credential.
+ *
+ * guest-room's protocol.ts fixes the envelope — newline-delimited JSON,
+ * `{ id, method, params? }` out, `{ id, ok, result?, error? }` back — but its
+ * client half targets Bun's socket API, and this repo is Node. So this is a
+ * small node:net client speaking the same format rather than an import.
+ *
+ * THE POINT: no `x-api-key` goes over this socket. scoutd adds the credential
+ * at egress and the room never holds it. A test asserts that, because it is the
+ * whole reason the door exists and it would fail silently if it regressed.
+ */
+export function askViaScout(body, { socketPath, connect } = {}) {
+  const request = {
+    id: "coldread",
+    method: "read",     // the door's own language: confinement.feature registers
+    params: {           // a "reads" provider on the "scout" door
+      url: ENDPOINT,
+      method: "POST",
+      headers: { "content-type": "application/json", "anthropic-version": API_VERSION },
+      body,
+    },
+  };
+  return new Promise((resolve, reject) => {
+    const socket = connect(socketPath);
+    let buffered = "";
+    let settled = false;
+    const finish = (fn, value) => {
+      if (settled) return;
+      settled = true;
+      try { socket.end(); } catch { /* already gone */ }
+      fn(value);
+    };
+    socket.setEncoding?.("utf8");
+    socket.on("connect", () => socket.write(JSON.stringify(request) + "\n"));
+    socket.on("data", (chunk) => {
+      buffered += chunk;
+      const line = buffered.indexOf("\n");
+      if (line === -1) return;           // envelope not complete yet
+      let res;
+      try { res = JSON.parse(buffered.slice(0, line)); }
+      catch (e) { return finish(reject, new Error(`scoutd sent malformed JSON: ${e.message}`)); }
+      if (res.id !== request.id)
+        return finish(reject, new Error(`scoutd answered "${res.id}", not "${request.id}"`));
+      if (!res.ok)
+        return finish(reject, new Error(`the scout door refused: ${res.error ?? "no reason given"}`));
+      const { status, body: payload } = res.result ?? {};
+      if (typeof status === "number" && status >= 400)
+        return finish(reject, new Error(
+          `anthropic API ${status} (via scoutd): ${JSON.stringify(payload).slice(0, 300)}`));
+      finish(resolve, payload);
+    });
+    socket.on("error", (e) => finish(reject, new Error(`scout door at ${socketPath}: ${e.message}`)));
+    socket.on("close", () => finish(reject, new Error("the scout door closed without answering")));
+  });
+}
+
+/** Pick a door. `socketPath` wins when present — the whole point of setting it. */
+export async function ask(body, { apiKey, socketPath, fetchImpl = fetch, connectImpl } = {}) {
+  if (socketPath) return askViaScout(body, { socketPath, connect: connectImpl ?? createConnection });
+  return askDirect(body, { apiKey, fetchImpl });
 }
 
 // --- response → answers ------------------------------------------------------
@@ -224,20 +300,32 @@ async function main(argv) {
     response = JSON.parse(readFileSync(savedPath, "utf8"));
     console.log(`cold read: grading saved response ${savedPath} against ${pagePath} — no API call\n`);
   } else {
+    // Either door. SCOUTD_SOCK wins, and no key is needed on that path — the
+    // broker holds it. That is the decision recorded in site#229.
+    const socketPath = process.env.SCOUTD_SOCK;
     const apiKey = process.env.ANTHROPIC_API_KEY;
-    if (!apiKey) {
-      console.error("cold read: ANTHROPIC_API_KEY is not set.");
-      console.error("  This tool is local-only and deliberately has no CI credential.");
-      console.error("  To exercise the grader without a key:");
-      console.error("    node --test scripts/legibility/coldread.test.mjs");
-      console.error("    node scripts/legibility/coldread.mjs --response scripts/legibility/fixtures/red-vague.json");
+    if (!socketPath && !apiKey) {
+      console.error("cold read: no way out. Set one of:");
+      console.error("  SCOUTD_SOCK          the scout door — scoutd holds the credential (preferred)");
+      console.error("  ANTHROPIC_API_KEY    direct egress — this process holds it");
+      console.error("This tool is local-only and deliberately has no CI credential.");
+      console.error("To exercise the grader without either:");
+      console.error("  node --test scripts/legibility/coldread.test.mjs");
+      console.error("  node scripts/legibility/coldread.mjs --response scripts/legibility/fixtures/red-vague.json");
       return 2;
     }
     let body;
     try { body = buildRequest(page, featureText); }
     catch (e) { console.error(`cold read: ${e.message}`); return 2; }
-    console.log(`cold read: asking ${MODEL} to read ${pagePath} cold …\n`);
-    try { response = await ask(body, { apiKey }); }
+    console.log(`cold read: asking ${MODEL} to read ${pagePath} cold …`);
+    console.log(
+      socketPath
+        ? `  credential: held by scoutd at ${socketPath} — this process never sees it`
+        : "  credential: ANTHROPIC_API_KEY, in this process's environment\n" +
+          "              (set SCOUTD_SOCK to reach the API through the scout door instead)",
+    );
+    console.log("");
+    try { response = await ask(body, { apiKey, socketPath }); }
     catch (e) { console.error(`cold read: ${e.message}`); return 2; }
   }
 

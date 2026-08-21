@@ -273,3 +273,145 @@ test("a red run says what failed and that red is the strong signal", () => {
   assert.match(report, /RED is strong evidence/);
   assert.match(report, /no mention of an agent/);
 });
+
+// --- the scout door ----------------------------------------------------------
+// The site half of site#229's decision: the credential lives in the broker.
+// scoutd does not exist yet, so everything here runs against an injected socket
+// — the same move the direct transport's test makes with an injected fetch.
+
+import { EventEmitter } from "node:events";
+import { askViaScout } from "./coldread.mjs";
+
+/** A stand-in for scoutd. `reply` is an envelope, a raw string, or a function
+ *  of the parsed request returning either. Records everything written. */
+function fakeScout(reply) {
+  const written = [];
+  const socket = new EventEmitter();
+  socket.setEncoding = () => {};
+  socket.end = () => {};
+  socket.write = (chunk) => {
+    written.push(chunk);
+    queueMicrotask(() => {
+      const res = typeof reply === "function" ? reply(JSON.parse(chunk)) : reply;
+      if (res === undefined) return;                       // model a silent door
+      socket.emit("data", typeof res === "string" ? res : JSON.stringify(res) + "\n");
+    });
+    return chunk.length;
+  };
+  const connect = (path) => {
+    written.path = path;
+    queueMicrotask(() => socket.emit("connect"));
+    return socket;
+  };
+  return { connect, written, socket };
+}
+
+const OK = { id: "coldread", ok: true, result: { status: 200, body: { got: "it" } } };
+
+test("no credential crosses the scout socket", async () => {
+  // THE property the door exists for. scoutd adds the key at egress; this
+  // process never holds one. If this regresses it would regress silently, so it
+  // is asserted rather than intended.
+  const { connect, written } = fakeScout(OK);
+  await ask(buildRequest(PAGE, FEATURE), {
+    apiKey: "sk-ant-MUST-NEVER-APPEAR",     // deliberately supplied, must be ignored
+    socketPath: "/run/scoutd.sock",
+    connectImpl: connect,
+  });
+  // The SECRET must appear nowhere on the wire at all.
+  assert.ok(!written.join("").includes("sk-ant-MUST-NEVER-APPEAR"), "the key went over the socket");
+  // HEADERS are checked as parsed keys, not as substrings of the wire: the page
+  // itself travels in params.body and says "authorization is the other axis", so
+  // a raw-string probe for /authorization/i matches the CONTENT and fails a
+  // request that is perfectly clean. Same false-positive shape the metaphor
+  // canary has, caught here by the test being wrong rather than the code.
+  const sent = JSON.parse(written[0]).params.headers;
+  for (const name of Object.keys(sent)) {
+    assert.ok(!/^(x-api-key|authorization)$/i.test(name), `sent a ${name} header`);
+  }
+  assert.deepEqual(Object.keys(sent).sort(), ["anthropic-version", "content-type"]);
+});
+
+test("the request is one door-protocol envelope on the named socket", async () => {
+  const { connect, written } = fakeScout(OK);
+  const body = buildRequest(PAGE, FEATURE);
+  const result = await ask(body, { socketPath: "/run/scoutd.sock", connectImpl: connect });
+
+  assert.equal(written.path, "/run/scoutd.sock");
+  assert.equal(written.length, 1, "exactly one write");
+  assert.ok(written[0].endsWith("\n"), "newline-delimited, per protocol.ts");
+
+  const req = JSON.parse(written[0]);
+  assert.deepEqual(Object.keys(req).sort(), ["id", "method", "params"]);
+  assert.equal(req.method, "read");
+  assert.equal(req.params.url, "https://api.anthropic.com/v1/messages");
+  assert.equal(req.params.method, "POST");
+  assert.equal(req.params.headers["anthropic-version"], "2023-06-01");
+  assert.deepEqual(req.params.body, body, "the Messages request travels intact");
+  assert.deepEqual(result, { got: "it" }, "the result body is what comes back");
+});
+
+test("the scout door is chosen over fetch whenever it is named", async () => {
+  const { connect } = fakeScout(OK);
+  let fetched = 0;
+  const fetchImpl = async () => { fetched++; return { ok: true, json: async () => ({}) }; };
+  await ask(buildRequest(PAGE, FEATURE), {
+    apiKey: "sk-test", socketPath: "/run/scoutd.sock", connectImpl: connect, fetchImpl,
+  });
+  assert.equal(fetched, 0, "a named door must not be bypassed");
+});
+
+test("a refusal from the door is surfaced, not swallowed", async () => {
+  // A denial is the door working. It must read as a refusal, never as a green run.
+  const { connect } = fakeScout({ id: "coldread", ok: false, error: "caveat host= denies example.com" });
+  await assert.rejects(
+    () => askViaScout({}, { socketPath: "/run/scoutd.sock", connect }),
+    /scout door refused: caveat host=/,
+  );
+});
+
+test("an upstream HTTP error survives the extra hop", async () => {
+  const { connect } = fakeScout({
+    id: "coldread", ok: true,
+    result: { status: 400, body: { error: { message: "temperature: unsupported" } } },
+  });
+  await assert.rejects(
+    () => askViaScout({}, { socketPath: "/run/scoutd.sock", connect }),
+    /anthropic API 400 \(via scoutd\).*temperature/s,
+  );
+});
+
+test("a mismatched, malformed, broken or silent door each refuse to produce a verdict", async () => {
+  const mismatched = fakeScout({ id: "someone-else", ok: true, result: { status: 200, body: {} } });
+  await assert.rejects(
+    () => askViaScout({}, { socketPath: "/s", connect: mismatched.connect }),
+    /answered "someone-else"/,
+  );
+
+  const malformed = fakeScout("not json at all\n");
+  await assert.rejects(
+    () => askViaScout({}, { socketPath: "/s", connect: malformed.connect }),
+    /malformed JSON/,
+  );
+
+  const broken = fakeScout(undefined);
+  const brokenCall = askViaScout({}, { socketPath: "/run/scoutd.sock", connect: broken.connect });
+  queueMicrotask(() => broken.socket.emit("error", new Error("ENOENT")));
+  await assert.rejects(() => brokenCall, /scout door at \/run\/scoutd\.sock: ENOENT/);
+
+  const silent = fakeScout(undefined);
+  const silentCall = askViaScout({}, { socketPath: "/s", connect: silent.connect });
+  queueMicrotask(() => silent.socket.emit("close"));
+  await assert.rejects(() => silentCall, /closed without answering/);
+});
+
+test("a reply split across chunks is reassembled", async () => {
+  const { connect, socket } = fakeScout(undefined);
+  const call = askViaScout({}, { socketPath: "/s", connect });
+  const whole = JSON.stringify(OK) + "\n";
+  queueMicrotask(() => {
+    socket.emit("data", whole.slice(0, 20));
+    socket.emit("data", whole.slice(20));
+  });
+  assert.deepEqual(await call, { got: "it" });
+});
