@@ -40,39 +40,25 @@ cd guest-room && npm test
 
 ## Status, graded
 
-Every claim in the registry below is graded against the running code and published as a signed list ([claims.jsonld](/claims.jsonld)). Three grades:
+Every claim in [the registry](/conformance#claims) is graded against the running code and published as a signed list ([claims.jsonld](/claims.jsonld)). Three grades:
 
 Enforced
 
 A check proves it, and the build fails without it.
 
-- **c1** — Docs generate from source and fail CI on drift. [gen-blog.mjs ↗︎ (evidence, external site)](https://github.com/bounded-systems/site/blob/32d10d589af6e6e416c49147163bb7b8c2f36448/scripts/gen-blog.mjs)
-- **c2** — guest-room's behaviour specs execute against the engine. [guest-room.test.ts ↗︎ (evidence, external site)](https://github.com/bounded-systems/guest-room/blob/8473bdfd95ee3357603da8bad26ab0b876d8d61c/guest-room.test.ts)
-- **legibility** — The landing page passes the legibility gate. [check.mjs ↗︎ (evidence, external site)](https://github.com/bounded-systems/site/blob/main/scripts/legibility/check.mjs)
-  
-  **Gap** — The gate measures budgets and banned words, so it can show the page did not regress. It cannot show the page lands: the cold-read scenarios are judged by a model on demand (npm run coldread), by hand and never in the build. That judge is Opus — a ceiling test, so a red run is strong evidence and a green one is weak. The comprehension test itself is one outside human and is not automated.
+Docs generate from source and fail the build on drift. guest-room's specs execute against the engine.
 
 Partial
 
 Works, with a named gap.
 
-- **c3** — A git-write carries a verifiable [in-toto](https://in-toto.io) / [SLSA](https://slsa.dev) provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate. [slsa.ts ↗︎ (evidence, external site)](https://github.com/bounded-systems/ocap-provenance/blob/9b5139de0b0d89a0908b67e6ca22a6eb697ce3df/slsa.ts)
-  
-  **Gap** — Emission and enforcement are opt-in (a signer plus require-signed) until [Sigstore](https://sigstore.dev) lands; without them the push is bare. Verified mechanisms: ocap-provenance/slsa.ts, prx verify.ts/merge-guard.ts, anchored-chain.
-- **c4** — The agent never holds the credential — a broker daemon does. [daemon.ts ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx/blob/d1b6030eebd2caffaf22377d21c24c4c6f2c77c1/packages/prx/src/keeperd/daemon.ts)
-  
-  **Gap** — On macOS the door is TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.
+Git writes carry signed provenance — tested end to end, but opt-in today. The agent runs credential-free, but isolation is a container plus process discipline, not yet a hardened sandbox.
 
 Aspirational
 
 The bet, not yet the result.
 
-- **c5** — prx and claude-box converge onto one guest-room door runtime. [prx ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx)
-  
-  **Gap** — Convergence is in progress — prx wires the seams in-process today; the out-of-process door runtime is the direction, not yet at scale.
-- **c6** — Contracts stay honest between components as they evolve. [prx ↗︎ (evidence, external site)](https://github.com/bounded-systems/prx)
-  
-  **Gap** — Inter-contract enforcement is the open problem this whole project is aimed at — a bet, stated as direction, not a solved result.
+prx and claude-box converging onto guest-room as one runtime. Contracts staying honest between components as they evolve — the open problem this whole project aims at.
 
 ## If you want to go deeper
 

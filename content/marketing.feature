@@ -10,21 +10,6 @@ Feature: bounded.tools marketing micro-copy
   gone. Deleting a scenario alongside the thing it described is the honest move;
   leaving it to fail, or loosening it to pass, would both be worse.
 
-  Same move again with the claims registry (site issue 233 §3). The two graded-claim
-  scenarios — "The docs-generation claim (enforced)" and "The specs claim (enforced)" —
-  are gone because the copy they pinned is gone: the Status section no longer carries
-  hand-written paraphrases of c1 and c2, it renders those claims' own sentences from
-  integrity/claims/claims.jsonld. The paraphrases had in fact already drifted from the
-  graph they summarised ("fail the build on drift" for c1's "fail CI on drift";
-  "guest-room's specs" for c2's "guest-room's behaviour specs"), so these scenarios
-  were pinning the drift rather than catching it — which is the finding issue 233 §3
-  raised. Re-pointing them at the canonical sentences would mean copying claim text
-  into content/strings.json as a second source beside claims.jsonld, and two sources
-  for one dataset is the drift this repo argues against. The claim text is now held to
-  the graph by a stronger mechanism than a Gherkin scenario: gen-claims-rows.mjs --check
-  compares the rendered rows byte-for-byte against claims.jsonld on every `npm run check`,
-  alongside validate-claims, check-overclaim, check-evidence-pinned and check-ledger.
-
   @marketing
   Scenario: The hero headline is consistent
     Then surfaces present the hero "Your coding agent runs with your access. Bounded Systems puts a checkpoint in front of it."
@@ -64,6 +49,14 @@ Feature: bounded.tools marketing micro-copy
     Then surfaces present the label "A check proves it, and the build fails without it."
     And surfaces present the label "Works, with a named gap."
     And surfaces present the label "The bet, not yet the result."
+
+  @marketing
+  Scenario: The docs-generation claim (enforced) is consistent
+    Then surfaces present the claim "Docs generate from source and fail the build on drift."
+
+  @marketing
+  Scenario: The specs claim (enforced) is consistent
+    Then surfaces present the claim "guest-room's specs execute against the engine."
 
   @marketing
   Scenario: The deeper-section lead-ins are consistent

@@ -34,6 +34,7 @@ import { readFile, writeFile, mkdir, readdir, access } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildConformanceReport, renderConformanceReport } from "../vendor/conformance-kit/gates/conformance-report.mjs";
+import { renderRegistry } from "./claims-registry.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dist = join(root, "dist");
@@ -65,6 +66,15 @@ const confEvidence = { ...(evContract.evidence ?? {}), ...buildFacts };
 const confLoneFindings = Array.isArray(evContract.loneFindings) ? evContract.loneFindings : null;
 
 const report = buildConformanceReport({ loneFindings: confLoneFindings, evidence: confEvidence });
+
+// ── the claims registry ─────────────────────────────────────────────────────
+// The hand-graded claims, rendered from integrity/claims/claims.jsonld. This page
+// is where they belong: it is already the evidence surface, and unlike the landing
+// page it is not held to the deny lexicon that keeps the homepage free of the org's
+// metaphor vocabulary — so the canonical claim text ships here verbatim. Two
+// complementary reports, one graph: the criteria below are COMPUTED from gate
+// verdicts, the registry is what a person asserts and grades by hand.
+const registryHtml = await renderRegistry();
 
 // ── machine-readable twin ───────────────────────────────────────────────────
 await mkdir(join(dist, "api", "v1"), { recursive: true });
@@ -139,10 +149,11 @@ const page = `<!doctype html>
     <header class="conf__intro">
       <p class="bs-text-label eyebrow"><a href="index.html#honesty">&larr;&nbsp;Kept honest</a></p>
       <h1>Conformance, computed against the running build</h1>
-      <p class="conf__lead">The honesty section grades each <em>claim</em> by hand. This page does the opposite: it folds the gate verdicts this build genuinely verifies through <a href="https://github.com/bounded-systems/lone"><code>lone</code></a>'s web-build conformance model, and reports everything it cannot verify as <strong>not assessed</strong> — never as met. The strong WCAG&nbsp;2.2&nbsp;AA / OWASP&nbsp;ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own.</p>
-      <p class="conf__machine"><a href="api/v1/conformance.json">machine-readable report&nbsp;&#8599;&#xFE0E;</a> &middot; <a href="index.html#build-provenance">the signed build provenance</a></p>
+      <p class="conf__lead">Two reports over one project, from opposite directions. The conformance criteria below are <em>computed</em>: they fold the gate verdicts this build genuinely verifies through <a href="https://github.com/bounded-systems/lone"><code>lone</code></a>'s web-build conformance model, and report everything they cannot verify as <strong>not assessed</strong> — never as met. The strong WCAG&nbsp;2.2&nbsp;AA / OWASP&nbsp;ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own. <a href="#claims">The claims registry</a> underneath is the other half: what a person asserts about this system and grades by hand, each claim carrying its gap and a link to the code behind it.</p>
+      <p class="conf__machine"><a href="api/v1/conformance.json">machine-readable report&nbsp;&#8599;&#xFE0E;</a> &middot; <a href="/claims.jsonld">claims.jsonld</a> &middot; <a href="index.html#build-provenance">the signed build provenance</a></p>
     </header>
     ${renderConformanceReport(report, { evidenceHref })}
+${registryHtml}
   </main>
   <footer class="footer">
     <div class="footer__inner">

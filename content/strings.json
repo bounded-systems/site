@@ -64,6 +64,14 @@
     "$value": "The bet, not yet the result.",
     "$description": "What Aspirational means."
   },
+  "claim-docs": {
+    "$value": "Docs generate from source and fail the build on drift.",
+    "$description": "Graded claim (ENFORCED) — typed `claim`, grounded in content/grounding.json."
+  },
+  "claim-specs": {
+    "$value": "guest-room's specs execute against the engine.",
+    "$description": "Graded claim (ENFORCED) — typed `claim`, grounded in content/grounding.json."
+  },
   "deeper-verify": {
     "$value": "Verify this site yourself.",
     "$description": "Lead-in — build provenance and its limit."

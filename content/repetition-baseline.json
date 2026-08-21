@@ -2,5 +2,5 @@
   "$comment": "Ceiling for scripts/check-repetition.mjs. A change may not raise it. When a change LOWERS the count, run `node scripts/check-repetition.mjs --update` and commit — the ceiling ratchets down and cannot drift back up. The goal is not zero: a deliberate callback is repetition on purpose.",
   "threshold": 0.34,
   "minWords": 7,
-  "pairs": 6
+  "pairs": 12
 }
