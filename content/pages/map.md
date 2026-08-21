@@ -8,6 +8,8 @@
 
 Everything we've built, laid out by what it is. **Verbs act** — they are the only places an agent can touch the world. **Nouns hold** — the data those actions run on. Each entry below is generated from the package's own declared labels, so this page can't drift from the code; when it looks wrong, the code is wrong.
 
+The system itself is the three repos on the front page — guest-room, claude-box, prx. Everything else here is the workspace around them: the packages those three are built from, and the tooling that keeps the org honest.
+
 **26** — packages mapped
 
 **72** — repos in the org
