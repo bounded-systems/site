@@ -6,14 +6,22 @@
 //
 //   node scripts/check-fragments.mjs [distDir]   # default: dist
 //
-// Why this gate exists: the other internal-link gates are fragment-blind by
+// Why this gate exists: this site is meant to be a knowledge graph projected to
+// a website — self-consistency by CONSTRUCTION, where the data structure makes a
+// dead link unrepresentable (data/nav.jsonld already models in-page anchors as
+// graph nodes, and the homepage id renames propagated cleanly through everything
+// the graph owns). This gate covers the residue the graph does not yet reach:
+// hand-authored prose hrefs and any generator holding a raw anchor the graph
+// doesn't know. The other internal-link gates are fragment-blind by
 // construction — the structure-audit and check-link-graph both strip the
-// fragment (`href.split("#")[0]`) before resolving, so a link to a renamed or
-// deleted section id still counts as "resolves". That is exactly how the site
-// shipped dozens of links to `#build-provenance`, `#honesty`, `#proof` and
-// `#bet` — ids from older homepage generations — with every gate green. A
-// fragment link that silently lands at the top of the page is a broken promise
-// to the reader; this gate makes that promise checkable.
+// fragment (`href.split("#")[0]`) before resolving — which is exactly how the
+// site shipped dozens of links to `#build-provenance`, `#honesty`, `#proof` and
+// `#bet` (ids from older homepage generations) with every gate green: all of
+// them were references living OUTSIDE the graph. So this gate measures the
+// distance between the site as built and the site as intended: a fragment it
+// flags is a reference that should ultimately become a graph edge. It is
+// verification for the hand-authored residue, not the end state — the end state
+// (references-as-edges) is tracked as a follow-on on #233.
 //
 // Scope: `id="…"` attributes are the anchor surface (this site's HTML uses no
 // legacy <a name> anchors — that is asserted below, so the assumption fails
