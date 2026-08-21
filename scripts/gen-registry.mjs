@@ -1,30 +1,26 @@
 #!/usr/bin/env node
-// Generate the @bounded-systems knowledge-graph section on the homepage from
-// data/registry.json.
+// Keep data/registry.json in sync with what each package declares about itself.
 //
-// The block between `<!-- registry:start … -->` and `<!-- registry:end -->`
-// in index.html is GENERATED — do not hand-edit. Edit the seed
-// (data/registry.json) or pull from the packages, then run this script.
+//   node scripts/gen-registry.mjs --check          validate the seed (offline)
+//   node scripts/gen-registry.mjs --from-bounded   refresh labels from each package's bounded.* (network)
 //
-//   node scripts/gen-registry.mjs               rewrite the marked region in index.html
-//   node scripts/gen-registry.mjs --check       exit 1 if the region is stale (no writes, offline)
-//   node scripts/gen-registry.mjs --from-bounded refresh labels from each package's bounded.* (network)
-//   node scripts/gen-registry.mjs --reconcile    cross-check the node SET against the org (network)
+// This script used to ALSO render a summary of the registry into index.html. It
+// no longer renders anything. The homepage was cut down to what a first-time
+// reader needs (site issue 219), and the registry it used to summarise is
+// rendered in full by gen-map.mjs on /map — where the same numbers already
+// appear as tiles. Two renderers for one dataset is the drift this project
+// exists to argue against, so the second one is gone rather than retargeted.
 //
-// Spec-driven + auditable: the rendered section is a pure function of
-// data/registry.json; CI fails on drift (--check). Canonical labels live in
-// each package's package.json `bounded.{kind,facet,role,domain}` —
-// `--from-bounded` is the networked cutover that refreshes the seed from them.
+// Canonical labels live in each package's package.json `bounded.{kind,facet,role,domain}`;
+// `--from-bounded` is the networked cutover that refreshes the seed from them, and
+// /map is where the result becomes a page.
 
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const HTML = join(root, "index.html");
 const DATA = join(root, "data", "registry.json");
-const START = "<!-- registry:start";
-const END = "<!-- registry:end -->";
 
 const args = new Set(process.argv.slice(2));
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -32,81 +28,6 @@ const id = (s) => s.replace(/[^a-zA-Z0-9]/g, "_");
 
 const loadData = async () => JSON.parse(await readFile(DATA, "utf8"));
 const writeData = async (d) => writeFile(DATA, JSON.stringify(d, null, 2) + "\n");
-
-// --- render -----------------------------------------------------------------
-function renderMermaid({ nodes, edges }) {
-  const decls = nodes.map((n) => `  ${id(n.name)}["${esc(n.name)} · ${esc(n.role)}"]`);
-  const links = edges.map((e) => `  ${id(e.from)} --> ${id(e.to)}`);
-  const nouns = nodes.filter((n) => n.facet === "noun").map((n) => id(n.name));
-  const verbs = nodes.filter((n) => n.facet === "verb").map((n) => id(n.name));
-  return [
-    '      <pre class="mermaid" aria-label="dependency graph of the @bounded-systems libraries">',
-    "flowchart TD",
-    ...decls,
-    ...links,
-    "  classDef noun fill:#1f6f43,stroke:#2ea043,color:#fff;",
-    "  classDef verb fill:#1f4f8f,stroke:#388bfd,color:#fff;",
-    `  class ${nouns.join(",")} noun;`,
-    `  class ${verbs.join(",")} verb;`,
-    "      </pre>",
-  ].join("\n");
-}
-
-function renderCards(nodes) {
-  // grouped: verbs (capabilities) then nouns (data), each a labeled card.
-  const card = (n) =>
-    `        <div class="seam"><div class="seam__name">${esc(n.name)} <span class="facet facet--${esc(n.facet)}">${esc(n.facet)}</span> <span class="kind">${esc(n.kind)}</span></div><div class="seam__desc">${esc(n.tagline)}</div></div>`;
-  const verbs = nodes.filter((n) => n.facet === "verb");
-  const nouns = nodes.filter((n) => n.facet === "noun");
-  return [
-    '      <div class="seam-grid">',
-    ...verbs.map(card),
-    ...nouns.map(card),
-    "      </div>",
-  ].join("\n");
-}
-
-function renderSummary(data) {
-  // A COUNT AND A DOOR, not the whole catalogue (site#208). The homepage used to
-  // render all 26 cards here — 1,252 words, roughly 45% of the page's prose, and
-  // the single densest section the COGA focus-budget gate measured. /map now
-  // renders the same registry with more per node (kind, role, domain, declared
-  // dependencies) and room to read it, so keeping the grid here was asking a
-  // first-time visitor to scroll the catalogue before learning what any of it is
-  // for. Nothing was deleted; it moved to the page built for it.
-  //
-  // renderCards() is kept, unused by this path, because it is what /map's own
-  // renderer was derived from and the shape is still the reference.
-  const verbs = data.nodes.filter((n) => n.facet === "verb").length;
-  const nouns = data.nodes.filter((n) => n.facet === "noun").length;
-  return [
-    '      <div class="seam-grid seam-grid--summary">',
-    `        <div class="seam"><div class="seam__name">${verbs} verbs</div><div class="seam__desc">capabilities that act — the only places an agent touches the world</div></div>`,
-    `        <div class="seam"><div class="seam__name">${nouns} nouns</div><div class="seam__desc">the data those capabilities run on</div></div>`,
-    `        <div class="seam"><div class="seam__name">${data.edges.length} edges</div><div class="seam__desc">declared dependencies between them</div></div>`,
-    "      </div>",
-    '      <p class="seams__lead"><a href="/map">See the whole map &rarr;</a></p>',
-  ].join("\n");
-}
-
-function renderSection(data) {
-  // Cards only on the site — no client-side Mermaid CDN (that would be an
-  // unpinned external dep, against the org's pinned/no-ambient-authority
-  // posture). The node-edge diagram lives on the GitHub surfaces (the org
-  // profile, registry/graph.md) where Markdown renders Mermaid natively.
-  // renderMermaid() stays available for build-time SVG prerender later.
-  return renderSummary(data);
-}
-
-function splice(html, body) {
-  const s = html.indexOf(START);
-  const e = html.indexOf(END);
-  if (s === -1 || e === -1) {
-    throw new Error("registry markers not found in index.html — add <!-- registry:start … --> / <!-- registry:end -->");
-  }
-  const afterStart = html.indexOf("-->", s) + 3;
-  return `${html.slice(0, afterStart)}\n${body}\n      ${html.slice(e)}`;
-}
 
 // --- networked: pull labels from each package's bounded.* -------------------
 async function rawJson(repo, path) {
@@ -150,23 +71,31 @@ async function refreshFromBounded(data) {
 
 // --- main -------------------------------------------------------------------
 const data = await loadData();
-if (args.has("--from-bounded")) await refreshFromBounded(data);
 
-const html = await readFile(HTML, "utf8");
-const next = splice(html, renderSection(data));
-
-if (args.has("--check")) {
-  if (next !== html) {
-    console.error("✗ registry section in index.html is stale — run: node scripts/gen-registry.mjs");
-    process.exit(1);
-  }
-  console.log("✓ registry section is in sync with data/registry.json");
+if (args.has("--from-bounded")) {
+  await refreshFromBounded(data);
+  console.log("  → run `node scripts/gen-map.mjs` to re-render /map from the refreshed seed.");
   process.exit(0);
 }
 
-if (next !== html) {
-  await writeFile(HTML, next);
-  console.log("✓ regenerated registry section in index.html");
-} else {
-  console.log("✓ registry section already up to date");
+// Offline validation: the seed is the source /map renders from, so a malformed
+// entry here is a broken page there. Checked as data, not as rendered markup —
+// gen-map.mjs --check owns the rendering half.
+const REQUIRED = ["name", "pkg", "kind", "facet", "role", "domain", "tagline"];
+let bad = 0;
+for (const n of data.nodes) {
+  const missing = REQUIRED.filter((k) => !n[k]);
+  if (missing.length) { console.error(`✗ ${n.name || "(unnamed node)"}: missing ${missing.join(", ")}`); bad++; }
+  if (n.facet && !["verb", "noun"].includes(n.facet)) { console.error(`✗ ${n.name}: facet "${n.facet}" is neither verb nor noun`); bad++; }
 }
+const names = new Set(data.nodes.map((n) => n.name));
+for (const e of data.edges) {
+  for (const side of ["from", "to"]) {
+    if (!names.has(e[side])) { console.error(`✗ edge ${e.from} → ${e.to}: "${e[side]}" is not a node`); bad++; }
+  }
+}
+if (bad) {
+  console.error(`✗ gen-registry: ${bad} problem(s) in data/registry.json`);
+  process.exit(1);
+}
+console.log(`✓ registry seed valid — ${data.nodes.length} node(s), ${data.edges.length} edge(s); /map renders it (gen-map.mjs --check)`);

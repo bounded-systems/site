@@ -338,6 +338,26 @@
       </div>
 <!-- map:end -->
 
+    <!-- The capability seams. These lived on the homepage until the page was cut
+         down to what a first-time reader needs (site issue 219); the atlas is
+         where they belong anyway — the map is the page about what exists, and
+         these six are the narrowest, most concrete entry in it. Generated from
+         data/seams.json by scripts/gen-seams.mjs; do not hand-edit the region. -->
+    <h2>The capability seams</h2>
+    <p class="atlas__intro muted">One narrow seam per kind of ambient system power — the single sanctioned access
+    point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and
+    policy stays enforceable.</p>
+    <!-- seams:start · generated from data/seams.json by scripts/gen-seams.mjs — do not edit by hand -->
+      <div class="seam-grid">
+        <div class="seam"><div class="seam__name">fs</div><div class="seam__desc">the one filesystem door</div></div>
+        <div class="seam"><div class="seam__name">proc</div><div class="seam__desc">the one subprocess spawn</div></div>
+        <div class="seam"><div class="seam__name">env</div><div class="seam__desc">the one reader of process.env</div></div>
+        <div class="seam"><div class="seam__name">gh</div><div class="seam__desc">GitHub CLI, policy-gated</div></div>
+        <div class="seam"><div class="seam__name">git</div><div class="seam__desc">git CLI, lock-recovering</div></div>
+        <div class="seam"><div class="seam__name">cas</div><div class="seam__desc">bytes addressed by digest</div></div>
+      </div>
+      <!-- seams:end -->
+
     <p class="atlas__intro muted" style="margin-top:2.5rem">
       Contract state between repos lives on <a href="/contracts">/contracts</a>;
       how honestly the claims hold up, on <a href="/ledger">/ledger</a>. The full

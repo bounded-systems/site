@@ -1014,373 +1014,213 @@
     "$type": "body",
     "$description": "extracted prose — blog/why-i-built-this-agent-kept-doing-things-i-didnt-ask-for.md"
   },
-  "content/strings.json#bet-grade-label": {
-    "$value": "This claim, graded:",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#bet-grade-label"
-  },
-  "content/strings.json#bet-heading": {
-    "$value": "The bet",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#bet-heading"
-  },
   "content/strings.json#bio-talk": {
-    "$value": "If your team is chewing on the same problem, I'd like to talk.",
+    "$value": "If your team is chewing on the same problem, I'd like to talk:",
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#bio-talk"
   },
   "content/strings.json#byline": {
-    "$value": "Built by Robert DeLanghe — in public, against running code.",
+    "$value": "I'm Bobby DeLanghe — Brooklyn, NY. I build agent infrastructure and capability-security systems.",
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#byline"
   },
-  "content/strings.json#claim-broker": {
-    "$value": "The agent never holds the credential — a broker daemon does.",
-    "$type": "claim",
-    "$description": "micro-copy token — content/strings.json#claim-broker"
-  },
   "content/strings.json#claim-docs": {
-    "$value": "Docs generate from source and fail CI on drift.",
+    "$value": "Docs generate from source and fail the build on drift.",
     "$type": "claim",
     "$description": "micro-copy token — content/strings.json#claim-docs"
   },
-  "content/strings.json#claim-provenance": {
-    "$value": "A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate.",
-    "$type": "claim",
-    "$description": "micro-copy token — content/strings.json#claim-provenance"
-  },
   "content/strings.json#claim-specs": {
-    "$value": "guest-room's behaviour specs execute against the engine.",
+    "$value": "guest-room's specs execute against the engine.",
     "$type": "claim",
     "$description": "micro-copy token — content/strings.json#claim-specs"
   },
   "content/strings.json#contact-cta": {
-    "$value": "Get in touch",
+    "$value": "hello@bounded.tools",
     "$type": "cta",
     "$description": "micro-copy token — content/strings.json#contact-cta"
   },
-  "content/strings.json#cta-read-bet": {
-    "$value": "Read the bet",
-    "$type": "cta",
-    "$description": "micro-copy token — content/strings.json#cta-read-bet"
+  "content/strings.json#deeper-map": {
+    "$value": "The package map.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#deeper-map"
+  },
+  "content/strings.json#deeper-verify": {
+    "$value": "Verify this site yourself.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#deeper-verify"
+  },
+  "content/strings.json#deeper-writing": {
+    "$value": "Writing.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#deeper-writing"
+  },
+  "content/strings.json#grade-aspirational": {
+    "$value": "Aspirational",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#grade-aspirational"
+  },
+  "content/strings.json#grade-aspirational-def": {
+    "$value": "The bet, not yet the result.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#grade-aspirational-def"
+  },
+  "content/strings.json#grade-enforced": {
+    "$value": "Enforced",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#grade-enforced"
+  },
+  "content/strings.json#grade-enforced-def": {
+    "$value": "A check proves it, and the build fails without it.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#grade-enforced-def"
+  },
+  "content/strings.json#grade-partial": {
+    "$value": "Partial",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#grade-partial"
+  },
+  "content/strings.json#grade-partial-def": {
+    "$value": "Works, with a named gap.",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#grade-partial-def"
   },
   "content/strings.json#hero-pitch": {
-    "$value": "Your coding agent wanders. Keep it inside the job you gave it.",
+    "$value": "Your coding agent runs with your access. Bounded Systems puts a checkpoint in front of it.",
     "$type": "headline",
     "$description": "micro-copy token — content/strings.json#hero-pitch"
   },
   "content/strings.json#honesty-heading": {
-    "$value": "Every claim here is graded against the running code.",
+    "$value": "Status, graded",
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#honesty-heading"
   },
-  "content/strings.json#proof-build-heading": {
-    "$value": "This whole site proves its own build",
+  "content/strings.json#repo-claude-box": {
+    "$value": "Claude Code running inside that scope",
     "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-build-heading"
+    "$description": "micro-copy token — content/strings.json#repo-claude-box"
   },
-  "content/strings.json#proof-claude-box-title": {
-    "$value": "Claude Code, scoped to one room",
+  "content/strings.json#repo-guest-room": {
+    "$value": "The runtime that scopes an agent",
     "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-claude-box-title"
+    "$description": "micro-copy token — content/strings.json#repo-guest-room"
   },
-  "content/strings.json#proof-guest-room-title": {
-    "$value": "The library that scopes what an agent can do",
+  "content/strings.json#repo-prx": {
+    "$value": "The pipeline",
     "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-guest-room-title"
+    "$description": "micro-copy token — content/strings.json#repo-prx"
   },
-  "content/strings.json#proof-provenance-heading": {
-    "$value": "Provenance you can open",
+  "content/strings.json#section-deeper": {
+    "$value": "If you want to go deeper",
     "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-provenance-heading"
+    "$description": "micro-copy token — content/strings.json#section-deeper"
   },
-  "content/strings.json#proof-prx-title": {
-    "$value": "The CLI that runs agent tasks at scale",
+  "content/strings.json#section-whats-here": {
+    "$value": "What's here",
     "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-prx-title"
+    "$description": "micro-copy token — content/strings.json#section-whats-here"
   },
-  "content/strings.json#proof-seams-heading": {
-    "$value": "The capability seams",
+  "content/strings.json#section-who": {
+    "$value": "Who",
     "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-seams-heading"
-  },
-  "content/strings.json#proof-start-here": {
-    "$value": "guest-room — the model you can run",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-start-here"
-  },
-  "content/strings.json#proof-tag-at-scale": {
-    "$value": "At scale",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-tag-at-scale"
-  },
-  "content/strings.json#proof-tag-flagship": {
-    "$value": "Flagship",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#proof-tag-flagship"
-  },
-  "content/strings.json#section-graph": {
-    "$value": "Every capability is a typed node; the edges are how they compose.",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#section-graph"
-  },
-  "content/strings.json#section-model": {
-    "$value": "The model, in running code",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#section-model"
-  },
-  "content/strings.json#section-proof": {
-    "$value": "The proof is the code",
-    "$type": "body",
-    "$description": "micro-copy token — content/strings.json#section-proof"
+    "$description": "micro-copy token — content/strings.json#section-who"
   },
   "content/strings.json#site-name": {
     "$value": "bounded.tools",
     "$type": "name",
     "$description": "micro-copy token — content/strings.json#site-name"
   },
+  "content/strings.json#try-it": {
+    "$value": "Try it",
+    "$type": "body",
+    "$description": "micro-copy token — content/strings.json#try-it"
+  },
   "index.html#030500883caa": {
     "$value": "graded against the latest commit",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#030a84bcf03d": {
-    "$value": "Enforced \n A test, a signature, or a CI gate proves it on every commit",
+  "index.html#0d746ae13887": {
+    "$value": "Bounded Systems puts a checkpoint in front of it",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#0371ae60c2f4": {
-    "$value": "The capability seams \n @bounded-systems/*",
+  "index.html#0e2f291fd868": {
+    "$value": "Claude Code running inside that scope \n The agent never holds a credential",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#096e07922d9e": {
-    "$value": "A signed whole-site manifest and RFC 9530 content digests cover the served bytes",
+  "index.html#15766422363f": {
+    "$value": "Bounded Systems — a checkpoint in front of your coding agent",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#09b35eba74b5": {
-    "$value": "An agent can author one of those abstractions cheaply now",
+  "index.html#26d35efacc14": {
+    "$value": "That proves who built it and that it's intact",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#0b62e9b0e2af": {
-    "$value": "Claude Code, scoped to one room \n The first guest: a Claude Code runtime whose authority is the door references it holds — keeper, scout, concierge, net — and nothing beyond them",
+  "index.html#3123b0629f3b": {
+    "$value": "Contracts staying honest between components as they evolve — the open problem this whole project aims at",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#1259601f43aa": {
-    "$value": "This is generated from that, and fails CI on drift",
+  "index.html#3346b1822829": {
+    "$value": "A refusal actually stops the action; either way, it's recorded",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#1e34eec7519d": {
-    "$value": "This attests origin, not authority: it proves who built it and that it is intact",
+  "index.html#3771545f3894": {
+    "$value": "The rest of this page is what's built, how far along it is, and where to look next",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#222f1ee3a053": {
-    "$value": "For each kind of system power, there is one sanctioned way through",
+  "index.html#387075702ccc": {
+    "$value": "It does not prove the build was authorized — authorization is the other axis, and it's what the checkpoint above exists for",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#22a0dd9a3414": {
-    "$value": "Bounded Systems is where I work out, in the open, how agent-authored software stays trustworthy as it grows",
+  "index.html#3a84ca55d3f8": {
+    "$value": "Enforced \n A check proves it, and the build fails without it",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#239d01f3408f": {
-    "$value": "Each kind of system power — git, the shell, your tools — gets one sanctioned access point",
+  "index.html#43936e040783": {
+    "$value": "Bounded Systems is where I work that out in public, solo: every claim on this page graded against the code behind it",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#2a72c6c142a9": {
-    "$value": "Ask for a room it doesn't know and it fails closed — a typo never widens authority. \n door one unit of authority — a unix socket to a broker daemon that holds the real keys",
+  "index.html#48f5802b846c": {
+    "$value": "Aspirational \n The bet, not yet the result. \n prx and claude-box converging onto guest-room as one runtime",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#2d2ffc210ffc": {
-    "$value": "This claim, graded: \n Aspirational \n Inter-contract enforcement is the open problem — stated as a bet, not a solved result.",
+  "index.html#49dc63b4d8f7": {
+    "$value": "Partial \n Works, with a named gap",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#2d85657878d6": {
-    "$value": "Partial \n True in the common path, with a named gap",
+  "index.html#562fe4e324eb": {
+    "$value": "Docs generate from source and fail the build on drift. guest-room's specs execute against the engine",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#2f239d6c589b": {
-    "$value": "The unsolved work lives in the seams between them",
+  "index.html#57ecc81d63c3": {
+    "$value": "More: provenance is not legitimacy",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#31492d2f276a": {
-    "$value": "Each verdict folds into one honest conformance projection &mdash; lone's web-build model",
+  "index.html#5918dc3a2252": {
+    "$value": "What's here \n Three repos, one idea.",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#36b83d008833": {
-    "$value": "Your first move: clone the runtime, then watch its behaviour specs execute against the engine — the same specs that grade the claims above",
+  "index.html#76b39bb4a44c": {
+    "$value": "The runtime that scopes an agent \n You hand it a named bundle of permissions",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#37e161f1a1f2": {
-    "$value": "If it breaks, the build breaks",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#38109e342c6e": {
-    "$value": "Aspirational \n Contracts stay honest between components as they evolve. — the unsolved problem this whole project is aimed at.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#419dfe66ed15": {
-    "$value": "Beyond the hand-graded claims, the build runs a battery of fail-closed gates. lone blesses each page's DOM for semantic HTML and accessibility",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#44c185168c8f": {
-    "$value": "An instrument built to catch my own over-statements and file the gap",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#455fc9876a84": {
-    "$value": "Concretely: a room is a rootless Podman container, built reproducibly by nix",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#47922b28a4e2": {
-    "$value": "Your coding agent wanders",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#489bb52c6f20": {
-    "$value": "Aspirational \n The bet, not yet the result",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#4be0a26aa91c": {
-    "$value": "What nobody has solved yet is keeping many of them honest as they evolve — enforcing contracts between ideas, not just within one",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#4c97c68c52df": {
-    "$value": "Manual and unsupplied criteria stay not assessed, never overclaimed",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#4ca4cf48de4e": {
-    "$value": "The CLI that runs agent tasks at scale \n guest-room's model run at full scale: capability-scoped agents driving each work unit through one signed, content-addressed pipeline to a merged PR",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#4da2f2b3e751": {
-    "$value": "Give an AI agent a real task and it reaches past it — touching files you didn't mean to expose, running commands you didn't intend",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#4dafbabd45e3": {
-    "$value": "Start here \n guest-room — the model you can run",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#4f37b27be4c1": {
-    "$value": "This whole site proves its own build \n Sigstore · OIDC · Rekor · GHCR",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#510a2cf91c3d": {
-    "$value": "If your team is chewing on the same problem, I'd like to talk",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#510a65218fec": {
-    "$value": "run a self-check in your browser \n A demo, not proof",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#54118eccf691": {
-    "$value": "It is bounded separately",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#561829f4d3e6": {
-    "$value": "The engine names no guest",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#561b22626f45": {
-    "$value": "Enforced \n Docs generate from source and fail CI on drift",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#586ba62adc3f": {
-    "$value": "The hand-graded claims above are published as a signed graph &mdash; claims.jsonld &mdash; each with its grade, its gap, and the evidence link",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#5d735f4ca93c": {
-    "$value": "Git-writes are signed and verified against the keeper; the other seams are wired in-process as imports today",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#61b00f748b4e": {
-    "$value": "Read the bet &darr; \n guest-room on GitHub (external site)",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#62438861a9c3": {
-    "$value": "GitHub Actions' OIDC identity authenticates to Fulcio",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#6491f8fe2d0e": {
-    "$value": "The built site is also pushed to GHCR as a signed, pullable OCI artifact",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#6d2ec85e9cff": {
-    "$value": "Converging the two — and signing across every door — is the work in progress",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#6eb4d2adedd5": {
-    "$value": "room a named bundle of doors for one kind of stay",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#6eee01472e57": {
-    "$value": "Built by deploy.yml · this build's Rekor entry & digests · why this is provenance and not legitimacy",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#72e0b0860f76": {
-    "$value": "The gap is written down, not glossed over",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#73c56e677b34": {
-    "$value": "Isolation today is the container plus in-process discipline, not yet a hardened sandbox",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#77af5f0dbdfb": {
-    "$value": "Backed by cas (content addressing) and anchored-chain (signed derivations); string-audit emits one per audit",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#783e79012bd1": {
-    "$value": "Authority is the other axis — what the running agent is permitted to do, the thing provenance is silent on",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#7a09673e8787": {
-    "$value": "I keep myself as honest as I keep the agents.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#7af2a6ec6c85": {
-    "$value": "guest-room \n Flagship",
+  "index.html#7952b406fd5d": {
+    "$value": "The gate checks who is asking and what they're allowed to do, then acts or refuses",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1389,328 +1229,98 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#7c2257a4d0c4": {
-    "$value": "The model, in running code \n Bounded Systems leans on a single mechanism",
+  "index.html#7bd35779a168": {
+    "$value": "Status, graded \n Every claim I make about this system is graded against the running code and published as a signed list (claims.jsonld)",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#7c3e7123a6ff": {
-    "$value": "Colophon \n Built by Robert DeLanghe — in public, against running code",
+  "index.html#7f1a2dae781b": {
+    "$value": "Here, privileged actions go through one gate instead",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#7d1466005548": {
-    "$value": "Fulcio mints a one-build certificate that then expires",
+  "index.html#8889df1885af": {
+    "$value": "Who \n I'm Bobby DeLanghe — Brooklyn, NY",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#7ff944b86a94": {
-    "$value": "Bounded Systems scopes that down",
+  "index.html#8b64de99baef": {
+    "$value": "If your team is chewing on the same problem, I'd like to talk:",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#811e4cd9bae5": {
-    "$value": "Both are being broken onto that shared runtime: two tools today, converging into one door-based system",
+  "index.html#93129ed5436a": {
+    "$value": "A separate daemon holds it, performs the one permitted action, and hands back only the result",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#844c99e452b1": {
-    "$value": "Tokens that only narrow, never widen",
+  "index.html#a882c83bac6a": {
+    "$value": "The pipeline \n Point it at an issue ticket and it drives a scoped agent through to a merged PR, with each step attributed to a signed owner",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#885ff9450ca6": {
-    "$value": "The move is onto guest-room's out-of-process doors — same model, enforced across a socket — with claude-box as the first guest",
+  "index.html#a9b602e898e9": {
+    "$value": "Each deploy is keyless-signed and recorded in a public log — provenance.json, Rekor, and this build's entry",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#8a356dcd31c8": {
-    "$value": "Bounded Systems works there: effects are tied to a signed owner, one source of truth projects to many surfaces, and drift is caught as a build failure",
+  "index.html#aa88e51bd273": {
+    "$value": "Git writes carry signed provenance — tested end to end, but opt-in today",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#8f9af3153667": {
-    "$value": "At deploy time, the whole site is keyless-signed as a manifest",
+  "index.html#bf74804effbf": {
+    "$value": "Your coding agent runs with your access",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#90b8b3dbd548": {
-    "$value": "That point checks your policy, acts or refuses, and records what happened",
+  "index.html#c0c20d2a6b5a": {
+    "$value": "Its behavior specs run as tests against the engine, so the docs can't drift from the code",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#90e26b934752": {
-    "$value": "Today prx wires these seams in-process, as library imports",
+  "index.html#c4e303894d50": {
+    "$value": "hello@bounded.tools (opens your email app) \n robertdelanghe.dev (external site) \n github.com/bounded-systems (external site)",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#91ddabeaaf9a": {
-    "$value": "guest = your agent \n door = one capability \n room = the doors it holds",
+  "index.html#d1a8b1482fbe": {
+    "$value": "Trust lives outside the page",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#927ff58f5464": {
-    "$value": "Aspirational \n prx and claude-box converge onto one guest-room door runtime. — guest-room v0 ships the model (rooms, doors, attenuation, confinement); prx still runs a parallel in-process door stack",
+  "index.html#d559d3448173": {
+    "$value": "Every capability is a typed node; the graph is generated from the packages and fails CI on drift — /map",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#94359c136242": {
-    "$value": "The one step that reaches outside the page is the public-log check",
+  "index.html#e15461fce55d": {
+    "$value": "If you want to go deeper",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#94b0ddf863dc": {
-    "$value": "verify the whole site yourself",
+  "index.html#e34f6659d7e1": {
+    "$value": "Give an agent a real task and it can touch anything you can — files, git, the network",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#956e3e8df0ca": {
-    "$value": "It does not prove the build was authorized or safe",
+  "index.html#ee77fcf93d4b": {
+    "$value": "Verify this site yourself",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#97b57db8ebb7": {
-    "$value": "A solo project — every claim on this page graded against the code that backs it",
+  "index.html#f530a9c9adb9": {
+    "$value": "The agent runs credential-free, but isolation is a container plus process discipline, not yet a hardened sandbox",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#9da25dafbac3": {
-    "$value": "Its Gherkin specs execute against the engine, so the docs cannot drift from the code",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a30dd3fa0879": {
-    "$value": "Their shared contracts are lifted into standalone interfaces: guest-room (the room/door contract), ocap-provenance (the signed predicate), and the wire schemas",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a32deea55652": {
-    "$value": "Provenance you can open \n in-toto · SLSA · DSSE",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a60d5cb9532f": {
-    "$value": "Everything else is denied and recorded",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a830ac0c90fe": {
-    "$value": "Enforced \n guest-room's behaviour specs execute against the engine",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a93ee238983c": {
-    "$value": "Docs generate from source and fail CI on drift; guest-room's specs execute against its engine",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a97393577ad4": {
-    "$value": "This script ships with the page, so a tampered page could ship a tampered checker and still go green — re-hashing only shows the page is self-consistent",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#abe08df9cf0c": {
-    "$value": "Egress gated through brokers, enforced at the boundary.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#ad5ec81a63e7": {
-    "$value": "The libraries, as a graph \n Every capability is a typed node; the edges are how they compose",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#af393a9d15b0": {
-    "$value": "Re-hash this site & check the public log",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#af71e79828a2": {
-    "$value": "Git-writes carry a signed in-toto / SLSA derivation — a per-actor ed25519 signature over content-addressed inputs and outputs, recorded in a derivation ledger",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#b36357ca3849": {
-    "$value": "One narrow seam per kind of ambient system power — the single sanctioned access point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and policy stays enforceable",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#b54400a836d4": {
-    "$value": "Keep it inside the job you gave it",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#b6eef77a81e1": {
-    "$value": "Partial \n A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate. — the sign→verify loop is tested but opt-in today; gh, external reads, and egress are policy-gated, not yet signed",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#baec5ce88e6f": {
-    "$value": "Each piece composes against a published boundary, never another's internals",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#beac811841e4": {
-    "$value": "Get in touch (opens your email app) \n robertdelanghe.dev (external site) \n github.com/bounded-systems (external site)",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#bf743190ee0f": {
-    "$value": "Stated as direction so it can't masquerade as done",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c00d70c20968": {
-    "$value": "03 / Kept honest \n Every claim here is graded against the running code",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c0aa2046024c": {
-    "$value": "claude-box \n The guest",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c0ce8351cce3": {
-    "$value": "The guest can knock; it cannot do. \n guest the agent the room hosts — for example claude-box, the Claude Code runtime",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c221c55d03b6": {
-    "$value": "The library that scopes what an agent can do \n A guest-agnostic capability runtime: rooms, doors, append-only attenuation, lease-bound confinement",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c8473548c03a": {
-    "$value": "Today it does that with your access",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c8c1a0f8ac3b": {
-    "$value": "▸ a signed derivation (real output)",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c9ebce2f8961": {
-    "$value": "Walls that come standard — drop-all-caps, read-only, no-new-privileges — and a short list of doors",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c9fafc615d91": {
-    "$value": "Contracts can't quietly rot",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#cb428b3d9727": {
-    "$value": "The guest-room runtime makes that concrete.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#cf605373d29c": {
-    "$value": "Those clear edges are also what let you scope an agent to one piece",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#d9c9f28e3270": {
-    "$value": "It's a well-known security idea: one checkpoint in front of everything the agent can do",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#dc2699015054": {
-    "$value": "Bounded Systems — bounded authority for AI agents",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#ddcfa4ae7cf7": {
-    "$value": "The JSON-LD is checked against SHACL shapes, an SPDX SBOM is generated and completeness-checked, and the nix build is reproducible",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e2399ec3f4bc": {
-    "$value": "04 / The proof \n The proof is the code",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e3f5e61ca9ca": {
-    "$value": "Both signatures land in the public Rekor log",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e406bf87a150": {
-    "$value": "Rather not clone? Download the latest release · browse on GitHub",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e40ec1b464a2": {
-    "$value": "Most tooling secures a single action",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e4b43b57e4da": {
-    "$value": "Partial \n The agent never holds the credential — a broker daemon does. — claude-box runs credential-free; keeperd / netd hold the secret and hand back only the result",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e5b75075a255": {
-    "$value": "Every claim on this page is graded against the running code.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e6a845bc257d": {
-    "$value": "A door is a single unix socket bind-mounted in, with a broker daemon holding the authority on the other side",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#e752a2fcbf96": {
-    "$value": "Each good idea becomes its own piece with clear edges and a defined contract — a promise about what it does",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#ea922238c3b6": {
-    "$value": "Other agent harnesses make the work cheaper or the output leaner",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#ec8143d360ef": {
-    "$value": "It emits the strong WCAG 2.2 AA / OWASP ASVS claim only when every criterion passes",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#f0c164cc1df6": {
-    "$value": "We call it a capability seam: a door you hold a socket to, never the keys behind it",
+  "index.html#f55680b198df": {
+    "$value": "Permissions can be narrowed after that, never widened, and anything outside the bundle fails closed",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
   "index.html#f6ab4a26d2a5": {
     "$value": "I build agent infrastructure and capability-security systems",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#f769333f3db6": {
-    "$value": "This one makes it accountable — the authority layer, designed to run alongside the rest.",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#f78209e79f7a": {
-    "$value": "The bet \n Good software splits into parts",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#f9ab4e841cbf": {
-    "$value": "One capability seam per kind of ambient power",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#fe74cfb73119": {
-    "$value": "Real verification is the commands above, jsr:@bounded-systems/verify, or the Rekor entry you open yourself — see trust lives outside the page",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#ff233a9f4c99": {
-    "$value": "Each @bounded-systems/* package says what it is — a verb (a capability that acts) or a noun (data that flows) — in its own package.json",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#ffd8a3d69e99": {
-    "$value": "The model everything else is built on",
     "$type": "body",
     "$description": "extracted prose — index.html"
   }

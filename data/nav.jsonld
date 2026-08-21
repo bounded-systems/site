@@ -50,23 +50,23 @@
   "sections": [
     {
       "@type": "SiteNavigationElement",
-      "name": "The bet",
-      "url": "#bet"
+      "name": "What's here",
+      "url": "#whats-here"
     },
     {
       "@type": "SiteNavigationElement",
-      "name": "The model",
-      "url": "#model"
+      "name": "Status",
+      "url": "#status"
     },
     {
       "@type": "SiteNavigationElement",
-      "name": "Honesty",
-      "url": "#honesty"
+      "name": "Deeper",
+      "url": "#deeper"
     },
     {
       "@type": "SiteNavigationElement",
-      "name": "Proof",
-      "url": "#proof"
+      "name": "Who",
+      "url": "#who"
     }
   ]
 }
