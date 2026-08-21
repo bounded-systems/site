@@ -29,6 +29,8 @@
     "markdown": "node scripts/gen-markdown.mjs",
     "repetition": "node scripts/check-repetition.mjs",
     "legibility": "node scripts/legibility/check.mjs dist/index.md",
+    "coldread": "node scripts/legibility/coldread.mjs dist/index.md",
+    "coldread:test": "node --test scripts/legibility/coldread.test.mjs",
     "card-inset": "node scripts/check-card-inset.mjs dist"
   },
   "dependencies": {

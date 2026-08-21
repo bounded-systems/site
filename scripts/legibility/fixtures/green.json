@@ -1,0 +1,23 @@
+{
+  "id": "msg_fixture_green",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-opus-5",
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "",
+      "signature": ""
+    },
+    {
+      "type": "text",
+      "text": "{\n  \"restate_the_bet\": {\n    \"one_sentence\": \"It is a checkpoint that sits in front of an AI coding agent: privileged actions go through one gate that checks who is asking and what they are allowed to do, then acts or refuses.\"\n  },\n  \"why\": {\n    \"problem\": \"Give an agent a real task and it runs with your own access — files, git, the network — so it can touch anything you can, and nothing stops it.\"\n  },\n  \"what\": {\n    \"named\": [\n      \"guest-room\",\n      \"claude-box\",\n      \"prx\"\n    ],\n    \"what_one_does\": \"guest-room is the runtime that scopes an agent: you hand it a named bundle of permissions, and anything outside that bundle fails closed.\"\n  },\n  \"how_far_along\": {\n    \"working\": [\n      \"Docs generate from source and fail the build on drift\",\n      \"guest-room's behavior specs execute against the engine\",\n      \"Git writes carry signed provenance, tested end to end but opt-in\"\n    ],\n    \"open_bets\": [\n      \"prx and claude-box converging onto guest-room as one runtime\",\n      \"Keeping components honest with each other as they evolve\"\n    ],\n    \"contracts_between_components\": \"open\"\n  },\n  \"who_and_next\": {\n    \"who\": \"Bobby DeLanghe, one person in Brooklyn, working on it in public and solo.\",\n    \"what_they_want\": \"He wants to talk to teams chewing on the same problem — the page ends in an email address, not a checkout.\"\n  }\n}"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 1204,
+    "output_tokens": 588
+  }
+}
