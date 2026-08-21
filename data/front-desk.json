@@ -1,0 +1,243 @@
+{
+  "$source": "trimmed from the org's front-desk-public feed by scripts/trim-front-desk.mjs — do not hand-edit",
+  "generated_at": "2026-08-20T23:46:48Z",
+  "withheld": {
+    "todo_total": 336,
+    "claimed": 4,
+    "pull_requests": 132,
+    "unscored": 0,
+    "beyond_limit": 175
+  },
+  "limit": 25,
+  "items": [
+    {
+      "repo": "bounded-systems/prx",
+      "number": 434,
+      "title": "Cut the signing release (consume accumulated changesets) + add `PRX_PROVENANCE_KEY` repo secret",
+      "url": "https://github.com/bounded-systems/prx/issues/434",
+      "score": 17.3,
+      "labels": [
+        "type::task",
+        "area::prx"
+      ]
+    },
+    {
+      "repo": "bounded-systems/verbspec",
+      "number": 13,
+      "title": "CLI: first-class enum input -> flag (single --mode=a|b for a one-axis choice)",
+      "url": "https://github.com/bounded-systems/verbspec/issues/13",
+      "score": 17.18,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/prx",
+      "number": 215,
+      "title": "feat(prx): ephemeral push credential via GitHub App installation tokens (keeperd)",
+      "url": "https://github.com/bounded-systems/prx/issues/215",
+      "score": 16.75,
+      "labels": [
+        "type::feature",
+        "priority::medium",
+        "area::prx"
+      ]
+    },
+    {
+      "repo": "bounded-systems/claude-box",
+      "number": 195,
+      "title": "credential file is protected by ACL/hook layers, not a real capability boundary (fd/memfd hand-off blocked on harness support)",
+      "url": "https://github.com/bounded-systems/claude-box/issues/195",
+      "score": 16.75,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/prx",
+      "number": 348,
+      "title": "fix(ci): release-binary `image` (GHCR push) job fails — non-blocking but red",
+      "url": "https://github.com/bounded-systems/prx/issues/348",
+      "score": 16.52,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/trellis",
+      "number": 2,
+      "title": "Flip keeper-wire contract-check to blocking once upstream drift is fixed",
+      "url": "https://github.com/bounded-systems/trellis/issues/2",
+      "score": 16.52,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/prx",
+      "number": 230,
+      "title": "Headless planner (prx plan agent) ignores the work unit's issue body and confabulates a parity-chain/XState plan from its system prompt",
+      "url": "https://github.com/bounded-systems/prx/issues/230",
+      "score": 15.75,
+      "labels": [
+        "type::bug",
+        "priority::high",
+        "area::prx"
+      ]
+    },
+    {
+      "repo": "bounded-systems/claude-box",
+      "number": 220,
+      "title": "Wire the PR-open capability into the ticket→PR dispatch story",
+      "url": "https://github.com/bounded-systems/claude-box/issues/220",
+      "score": 15.75,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/claude-box",
+      "number": 245,
+      "title": "Fresh-machine consumers can't obtain the box image: private GHCR packages + unqualified claude-box:latest pod default",
+      "url": "https://github.com/bounded-systems/claude-box/issues/245",
+      "score": 15.75,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/prx",
+      "number": 270,
+      "title": "chore: add a top-of-file doc comment to packages/prx/src/intake/intake-source.ts",
+      "url": "https://github.com/bounded-systems/prx/issues/270",
+      "score": 14.95,
+      "labels": [
+        "type::task",
+        "priority::low",
+        "area::prx"
+      ]
+    },
+    {
+      "repo": "bounded-systems/site",
+      "number": 32,
+      "title": "Confusing: `site` is cloned locally as `bounded.tools/`, and a separate `bounded-systems/bounded.tools` repo exists",
+      "url": "https://github.com/bounded-systems/site/issues/32",
+      "score": 14.9,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/synoptic",
+      "number": 4,
+      "title": "Embedded webfont token (vs the system stack)",
+      "url": "https://github.com/bounded-systems/synoptic/issues/4",
+      "score": 14.9,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/mint",
+      "number": 18,
+      "title": "docs: how to bootstrap a first release + the tag-creation-actor requirement",
+      "url": "https://github.com/bounded-systems/mint/issues/18",
+      "score": 14.9,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/claude-box",
+      "number": 131,
+      "title": "Verify --remote-serve end-to-end on-device",
+      "url": "https://github.com/bounded-systems/claude-box/issues/131",
+      "score": 14.85,
+      "labels": [
+        "test"
+      ]
+    },
+    {
+      "repo": "bounded-systems/claude-box",
+      "number": 132,
+      "title": "Smoke-test v0.7.0 door images on a Linux host (Layer 2/2b)",
+      "url": "https://github.com/bounded-systems/claude-box/issues/132",
+      "score": 14.85,
+      "labels": [
+        "test"
+      ]
+    },
+    {
+      "repo": "bounded-systems/synoptic",
+      "number": 1,
+      "title": "axe / real-a11y verification wired into the gate",
+      "url": "https://github.com/bounded-systems/synoptic/issues/1",
+      "score": 14.8,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/conformance",
+      "number": 25,
+      "title": "audit: mint-released repo ⇒ release identity can create v* tags (implements trellis#34)",
+      "url": "https://github.com/bounded-systems/conformance/issues/25",
+      "score": 14.8,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/front-desk-scheduler",
+      "number": 1,
+      "title": "Delta sync: cut the 1,314-point full-board pull",
+      "url": "https://github.com/bounded-systems/front-desk-scheduler/issues/1",
+      "score": 14.8,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/prx",
+      "number": 360,
+      "title": "pilot loops on the implement stage → abandons: tester leg is served the executor profile + plan, not a test session",
+      "url": "https://github.com/bounded-systems/prx/issues/360",
+      "score": 14.75,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/prx",
+      "number": 261,
+      "title": "Real pilot (PRX_PILOT_REAL) hangs in the submit/CI leg after a correct implement (no error, no progress)",
+      "url": "https://github.com/bounded-systems/prx/issues/261",
+      "score": 14.7,
+      "labels": [
+        "type::bug",
+        "priority::high",
+        "area::prx"
+      ]
+    },
+    {
+      "repo": "bounded-systems/trust",
+      "number": 5,
+      "title": "Decide: operator commit signing on by default? (ledger 7.1)",
+      "url": "https://github.com/bounded-systems/trust/issues/5",
+      "score": 14.15,
+      "labels": [
+        "ledger"
+      ]
+    },
+    {
+      "repo": "bounded-systems/prx",
+      "number": 236,
+      "title": "keeperd slice 4: in-VM signing key — gen in VM, register pubkey via gh (security review APPROVED, conditions a+b)",
+      "url": "https://github.com/bounded-systems/prx/issues/236",
+      "score": 13.87,
+      "labels": [
+        "type::feature",
+        "priority::medium",
+        "area::prx"
+      ]
+    },
+    {
+      "repo": "bounded-systems/site",
+      "number": 40,
+      "title": "Close the coverage gap: promote high-value homepage copy into content/strings.json",
+      "url": "https://github.com/bounded-systems/site/issues/40",
+      "score": 13.85,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/gh-project-room",
+      "number": 10,
+      "title": "Wire window-burn metering (consumedPoints per window)",
+      "url": "https://github.com/bounded-systems/gh-project-room/issues/10",
+      "score": 13.55,
+      "labels": []
+    },
+    {
+      "repo": "bounded-systems/claude-box",
+      "number": 200,
+      "title": "Formalize tonight's dogfooding: recurring capability-boundary verification, not one-off probing",
+      "url": "https://github.com/bounded-systems/claude-box/issues/200",
+      "score": 13.55,
+      "labels": []
+    }
+  ]
+}
