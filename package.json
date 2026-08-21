@@ -28,7 +28,8 @@
     "jsonld": "node scripts/gen-jsonld.mjs",
     "markdown": "node scripts/gen-markdown.mjs",
     "repetition": "node scripts/check-repetition.mjs",
-    "legibility": "node scripts/legibility/check.mjs dist/index.md"
+    "legibility": "node scripts/legibility/check.mjs dist/index.md",
+    "card-inset": "node scripts/check-card-inset.mjs dist"
   },
   "dependencies": {
     "@bounded-systems/brand": "^1.4.0"

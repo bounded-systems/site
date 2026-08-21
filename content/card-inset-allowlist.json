@@ -1,0 +1,4 @@
+{
+  "$comment": "Exemptions from scripts/check-card-inset.mjs — cards whose text is allowed to sit within CARD_MIN_INSET px of their own border. Empty is the goal state and the current state. Same shape and same discipline as content/overclaim-allowlist.json: an entry needs a REASON that would survive someone reading it cold, not a note that the gate was inconvenient. A card whose copy touches its border is nearly always a card variant that forgot to declare an inset (site issue 215) — fix the stylesheet first, and reach for this file only when the flush edge is the design.",
+  "allow": []
+}
