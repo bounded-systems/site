@@ -2,13 +2,13 @@
      /conformance — projected from the built page by scripts/gen-markdown.mjs.
      Do not edit: change the page (or its generator) and rebuild. -->
 
-[← Kept honest](index.html#honesty)
+[← Kept honest](index.html#status)
 
 # Conformance, computed against the running build
 
 The honesty section grades each *claim* by hand. This page does the opposite: it folds the gate verdicts this build genuinely verifies through [`lone`](https://github.com/bounded-systems/lone)'s web-build conformance model, and reports everything it cannot verify as **not assessed** — never as met. The strong WCAG 2.2 AA / OWASP ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own.
 
-[machine-readable report ↗︎](api/v1/conformance.json) · [the signed build provenance](index.html#build-provenance)
+[machine-readable report ↗︎](api/v1/conformance.json) · [the signed build provenance](index.html#deeper)
 
 ---
 
@@ -30,7 +30,7 @@ html: 2/2 met
   
   lone static checks clean (no findings)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   Nu HTML Checker errors
@@ -39,7 +39,7 @@ html: 2/2 met
   
   0 validator errors
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### accessibility 4/6 met
 
@@ -53,7 +53,7 @@ accessibility: 4/6 met (2 not assessed)
   
   lone static checks clean (no findings)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   WCAG 2.2 AA (automated subset)
@@ -62,7 +62,7 @@ accessibility: 4/6 met (2 not assessed)
   
   lone static checks clean (no findings)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   axe serious/critical violations
@@ -71,7 +71,7 @@ accessibility: 4/6 met (2 not assessed)
   
   0 serious/critical violations
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   WCAG 2.2 AA (manual audit)
@@ -80,7 +80,7 @@ accessibility: 4/6 met (2 not assessed)
   
   no manual WCAG 2.2 AA audit supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   WCAG 2.2 AAA (selected)
@@ -89,7 +89,7 @@ accessibility: 4/6 met (2 not assessed)
   
   no AAA attestation supplied (optional)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   Agent heuristic accessibility review
@@ -98,7 +98,7 @@ accessibility: 4/6 met (2 not assessed)
   
   agent heuristic pass clean — 7 page(s), 0 warning(s). AGENT/STATIC HEURISTIC — NOT AT-user testing; a11y.wcag22-aa-manual stays not-assessed.
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### design 0/5 met
 
@@ -112,7 +112,7 @@ design: 0/5 met (5 not assessed)
   
   no palette-token report supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   Typography tokens
@@ -121,7 +121,7 @@ design: 0/5 met (5 not assessed)
   
   no typography-token report supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   Target size (interactive tokens)
@@ -130,7 +130,7 @@ design: 0/5 met (5 not assessed)
   
   no target-size report supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   Effective contrast under opacity
@@ -139,7 +139,7 @@ design: 0/5 met (5 not assessed)
   
   no opacity-contrast report supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   Token likeness hygiene
@@ -148,7 +148,7 @@ design: 0/5 met (5 not assessed)
   
   no token-likeness report supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### security 1/3 met
 
@@ -162,7 +162,7 @@ security: 1/3 met (2 not assessed)
   
   no OWASP ASVS attestation supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   known critical/high vulns
@@ -171,7 +171,7 @@ security: 1/3 met (2 not assessed)
   
   0 known critical/high vulns
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   HSTS preload
@@ -180,7 +180,7 @@ security: 1/3 met (2 not assessed)
   
   no HSTS preload status supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### performance 0/1 met
 
@@ -194,7 +194,7 @@ performance: 0/1 met (1 not assessed)
   
   no Core Web Vitals field data supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### compatibility 0/1 met
 
@@ -208,7 +208,7 @@ compatibility: 0/1 met (1 not assessed)
   
   no Baseline result supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### reliability 0/1 met
 
@@ -222,7 +222,7 @@ reliability: 0/1 met (1 not assessed)
   
   no runtime reliability report supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### semantic 2/5 met
 
@@ -236,7 +236,7 @@ semantic: 2/5 met (3 not assessed)
   
   JSON-LD 1.1 conforms to SHACL shapes (0 violating blocks)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   CommonMark conformance
@@ -245,7 +245,7 @@ semantic: 2/5 met (3 not assessed)
   
   no CommonMark report supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   AI-readability
@@ -263,7 +263,7 @@ semantic: 2/5 met (3 not assessed)
   
   no OpenAPI report supplied (only applies if an API is published)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   Atom feed (RFC 4287)
@@ -272,7 +272,7 @@ semantic: 2/5 met (3 not assessed)
   
   no feed report supplied (optional)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### seo 1/1 met
 
@@ -300,7 +300,7 @@ integrity: 4/9 met (5 not assessed)
   
   no SLSA/in-toto provenance supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   Reproducible build
@@ -309,7 +309,7 @@ integrity: 4/9 met (5 not assessed)
   
   build is byte-reproducible
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - met
   
   SPDX SBOM
@@ -345,7 +345,7 @@ integrity: 4/9 met (5 not assessed)
   
   no IPFS CID report supplied (optional)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   HTTP correctness (RFC 9110)
@@ -354,7 +354,7 @@ integrity: 4/9 met (5 not assessed)
   
   no RFC 9110 HTTP report supplied (optional)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   OpenSSF Scorecard
@@ -363,7 +363,7 @@ integrity: 4/9 met (5 not assessed)
   
   no OpenSSF Scorecard result supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   SLSA build level
@@ -372,7 +372,7 @@ integrity: 4/9 met (5 not assessed)
   
   no SLSA build level supplied
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 
 ### cognitive 1/3 met
 
@@ -386,7 +386,7 @@ cognitive: 1/3 met (1 unmet, 1 not assessed)
   
   lone static checks clean (no findings)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - unmet
   
   COGA Obj-5: Focus budget (attention proxy)
@@ -395,7 +395,7 @@ cognitive: 1/3 met (1 unmet, 1 not assessed)
   
   not-yet-met: readingGrade threshold exceeded, avgSentenceLength threshold exceeded, jargonDensity threshold exceeded. AGENT/STATIC PROXY for COGA Obj-5 — NOT COGA usability testing with cognitive disabilities. Do NOT mass-rewrite content — editorial is the maintainer's call; gate reports honestly.
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
 - not assessed
   
   COGA usability testing
@@ -404,4 +404,4 @@ cognitive: 1/3 met (1 unmet, 1 not assessed)
   
   no COGA usability testing supplied (optional)
   
-  [evidence](/#build-provenance)
+  [evidence](/#deeper)
