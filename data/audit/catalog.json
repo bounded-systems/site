@@ -1169,6 +1169,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#1259601f43aa": {
+    "$value": "This is generated from that, and fails CI on drift",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#1e34eec7519d": {
     "$value": "This attests origin, not authority: it proves who built it and that it is intact",
     "$type": "body",
@@ -1231,11 +1236,6 @@
   },
   "index.html#419dfe66ed15": {
     "$value": "Beyond the hand-graded claims, the build runs a battery of fail-closed gates. lone blesses each page's DOM for semantic HTML and accessibility",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#41c95e934eea": {
-    "$value": "Each @bounded-systems/* package declares what it is — a verb (a capability that acts) or a noun (data that flows) — plus its role and domain, in its own package.json",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1474,18 +1474,8 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#99069680d4c9": {
-    "$value": "The full node-edge diagram lives on the org profile",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#9da25dafbac3": {
     "$value": "Its Gherkin specs execute against the engine, so the docs cannot drift from the code",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#a1975fd86ef9": {
-    "$value": "The graph below is generated from that metadata and fails CI on drift",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1711,6 +1701,11 @@
   },
   "index.html#fe74cfb73119": {
     "$value": "Real verification is the commands above, jsr:@bounded-systems/verify, or the Rekor entry you open yourself — see trust lives outside the page",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#ff233a9f4c99": {
+    "$value": "Each @bounded-systems/* package says what it is — a verb (a capability that acts) or a noun (data that flows) — in its own package.json",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

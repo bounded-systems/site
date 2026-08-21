@@ -66,13 +66,36 @@ function renderCards(nodes) {
   ].join("\n");
 }
 
+function renderSummary(data) {
+  // A COUNT AND A DOOR, not the whole catalogue (site#208). The homepage used to
+  // render all 26 cards here — 1,252 words, roughly 45% of the page's prose, and
+  // the single densest section the COGA focus-budget gate measured. /map now
+  // renders the same registry with more per node (kind, role, domain, declared
+  // dependencies) and room to read it, so keeping the grid here was asking a
+  // first-time visitor to scroll the catalogue before learning what any of it is
+  // for. Nothing was deleted; it moved to the page built for it.
+  //
+  // renderCards() is kept, unused by this path, because it is what /map's own
+  // renderer was derived from and the shape is still the reference.
+  const verbs = data.nodes.filter((n) => n.facet === "verb").length;
+  const nouns = data.nodes.filter((n) => n.facet === "noun").length;
+  return [
+    '      <div class="seam-grid seam-grid--summary">',
+    `        <div class="seam"><div class="seam__name">${verbs} verbs</div><div class="seam__desc">capabilities that act — the only places an agent touches the world</div></div>`,
+    `        <div class="seam"><div class="seam__name">${nouns} nouns</div><div class="seam__desc">the data those capabilities run on</div></div>`,
+    `        <div class="seam"><div class="seam__name">${data.edges.length} edges</div><div class="seam__desc">declared dependencies between them</div></div>`,
+    "      </div>",
+    '      <p class="seams__lead"><a href="/map">See the whole map &rarr;</a></p>',
+  ].join("\n");
+}
+
 function renderSection(data) {
   // Cards only on the site — no client-side Mermaid CDN (that would be an
   // unpinned external dep, against the org's pinned/no-ambient-authority
   // posture). The node-edge diagram lives on the GitHub surfaces (the org
   // profile, registry/graph.md) where Markdown renders Mermaid natively.
   // renderMermaid() stays available for build-time SVG prerender later.
-  return renderCards(data.nodes);
+  return renderSummary(data);
 }
 
 function splice(html, body) {

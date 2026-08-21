@@ -36,6 +36,12 @@
     .tile__l { font-size: .8rem; opacity: .7; margin-top: .3rem; }
     .tile--pass .tile__n { color: var(--bs-color-forest); }
     .tile--gap .tile__n  { color: var(--bs-color-clay); }
+    /* Keep the table's overflow inside the table (the site visual sweep): without this the
+       whole page scrolls sideways on a phone. min-width holds the columns
+       readable rather than letting them crush. */
+    .grid-scroll { overflow-x: auto; margin-top: 1rem; }
+    .grid-scroll table.grid { min-width: 34rem; margin-top: 0; }
+    .grid-scroll:focus-visible { outline: 2px solid var(--bs-color-forest); outline-offset: 2px; }
     table.grid { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: .95rem; }
     .grid th, .grid td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); vertical-align: top; }
     .grid th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; opacity: .65; }
@@ -73,6 +79,7 @@
         <div class="tile "><div class="tile__n">0</div><div class="tile__l">gaps</div></div>
         <div class="tile "><div class="tile__n">34</div><div class="tile__l">declared</div></div>
       </div>
+      <div class="grid-scroll" role="region" aria-label="Contract lattice" tabindex="0">
       <table class="grid">
         <thead>
           <tr><th>Contract</th><th>Kind</th><th>Grade</th><th>Governs</th></tr>
@@ -314,6 +321,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
       <!-- contracts:end -->
 
     <h2 style="margin-top:2.5rem">Verify it yourself</h2>
@@ -323,7 +331,11 @@
       every time this page's data refreshes. Don't take our word for it —
       check the source:
     </p>
-    <pre class="verify">curl -sO https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json
+    <!-- tabindex+role: this block scrolls sideways on a phone, and a scrollable
+         region that cannot be focused cannot be scrolled by keyboard at all
+         (WCAG 2.1.1). Pre-existing, found by the site visual sweep at 390px —
+         invisible at desktop because it only overflows on small screens. -->
+    <pre class="verify" role="region" aria-label="Verify the projection yourself" tabindex="0">curl -sO https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json
 curl -sO https://raw.githubusercontent.com/bounded-systems/trellis/status/status.json.sigstore.json
 cosign verify-blob --bundle status.json.sigstore.json \
   --certificate-identity-regexp '^https://github.com/bounded-systems/trellis/' \
