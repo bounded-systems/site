@@ -1,18 +1,31 @@
 /* bounded.tools — site styles. Brand tokens (var(--bs-*)) come from the
-   brand submodule: brand/tokens/tokens.css. Site-only shades live here. */
+   brand submodule: brand/tokens/tokens.css.
+
+   SITE-LOCAL COLOURS, and why the remaining ones are here.
+
+   Every `--site-*` literal below is a colour the brand package does not define,
+   so it cannot be replaced by a brand token today — measured, not assumed: each
+   was compared against all 19 `--bs-color-*` tokens by perceptual distance, and
+   the nearest is >= 25 away (0-765 scale). Seven others were within 21 and have
+   been folded into the brand token they were re-inventing; see the commit.
+
+   What is left is two families brand has no vocabulary for at all — the
+   dark-surface structure and status shades, and the code-block syntax palette.
+   That is the real cost: a brand change, or a future dark-mode pass, reaches
+   every surface on this site EXCEPT the dark evidence panels, which are the
+   ones carrying the keeper/scout demonstration and the claims registry.
+
+   Retiring them is a change to the brand package, not to this file — they need
+   to become `--bs-*` semantic tokens there and arrive via a release. Until
+   then, keep this list closed: a new colour here widens the gap. */
 :root {
   --site-forest-mute: #A7D2BF;
-  --site-cream: #CFE4DA;
   --site-ink-2: #3C4A42;
-  --site-dark: var(--bs-color-ink);
   --site-dark-card: #1E2B24;
   --site-dark-line: #2C3A31;
-  --site-deep: var(--bs-color-forest-deep);
 
   /* on-dark text — dark sections (honesty, legend, claims, hero caption) */
-  --site-on-dark-text: #D6E0D9;
   --site-on-dark-mono: #9FCBB8;
-  --site-on-dark-soft: #C7D4CB;
   --site-on-dark-mute: #A9B8AF;
   --site-on-dark-dim: #8B998F;
   --site-on-dark-ok: #7FE0B0;
@@ -21,11 +34,6 @@
   --site-code-comment: #7DAE9A;
   --site-code-string: #E8C98A;
   --site-code-ok: #9FE3C4;
-  /* light surface tints */
-  --site-warm-line: #ECE8DD;
-  --site-warm-fill: #F1EEE5;
-  --site-green-fill: #E4F0EA;
-  --site-green-line: #BFD6CB;
 
   --maxw: 1080px;
 }
@@ -46,7 +54,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
   padding: var(--space-3) var(--space-5); border-radius: var(--radius-md);
 }
 .btn-link {
-  color: var(--site-cream);
+  color: var(--bs-color-on-forest);
   font-size: 15px; font-weight: 500; padding: var(--space-3) var(--space-2);
   /* The underline hugs the GLYPHS, not the padding box. As a border-bottom it
      spanned the horizontal padding, so on a phone — where these stack instead of
@@ -58,7 +66,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
-.btn-link:hover { text-decoration-color: var(--site-cream); }
+.btn-link:hover { text-decoration-color: var(--bs-color-on-forest); }
 
 /* ---------- nav ---------- */
 .nav {
@@ -88,7 +96,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 }
 .nav__gh {
   font-family: var(--bs-font-mono); font-size: 12px;
-  color: var(--bs-color-forest); border: 1px solid var(--site-green-line);
+  color: var(--bs-color-forest); border: 1px solid var(--bs-color-on-forest-soft);
   border-radius: var(--radius-sm); padding: var(--space-1) var(--space-3);
 }
 /* mobile menu control — hidden on desktop, a burger disclosure on phones.
@@ -107,7 +115,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 .hero :focus-visible,
 .honesty :focus-visible,
 .footer :focus-visible {
-  outline-color: var(--site-cream);
+  outline-color: var(--bs-color-on-forest);
 }
 
 /* ---------- the mark as a tile ---------- */
@@ -142,7 +150,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 /* hero figure — the room · door · guest panel, the first thing you see */
 .hero__panel {
   display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
-  background: var(--site-deep);
+  background: var(--bs-color-forest-deep);
   border: 1px solid rgba(127, 184, 162, 0.28);
   border-radius: var(--radius-lg); padding: var(--space-8) var(--space-7);
 }
@@ -154,7 +162,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 }
 .hero__roles { display: flex; flex-direction: column; gap: var(--space-2); width: 100%; }
 .hero__role {
-  font-family: var(--bs-font-mono); font-size: 11.5px; color: var(--site-cream);
+  font-family: var(--bs-font-mono); font-size: 11.5px; color: var(--bs-color-on-forest);
   text-align: center; border: 1px solid rgba(127, 184, 162, 0.32);
   border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3);
 }
@@ -163,7 +171,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
   letter-spacing: -0.03em; color: var(--bs-color-white); margin: 0 0 var(--space-6);
 }
 .hero__lead {
-  font-size: 18px; line-height: 1.55; color: var(--site-cream);
+  font-size: 18px; line-height: 1.55; color: var(--bs-color-on-forest);
   margin: 0 0 var(--space-8); max-width: 620px;
 }
 .hero__lead strong { color: var(--bs-color-white); }
@@ -232,15 +240,15 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
   font-family: var(--bs-font-mono); font-size: 10.5px; letter-spacing: 0.1em;
   color: var(--bs-color-ink-mono); text-transform: uppercase;
 }
-.defn { display: flex; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--site-warm-line); }
+.defn { display: flex; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--bs-color-paper); }
 .defn:last-child { border-bottom: 0; }
 .defn__term { font-family: var(--bs-font-mono); font-size: 12px; color: var(--bs-color-forest); padding-top: var(--space-px); }
 .defn__body { font-size: 15px; line-height: 1.5; color: var(--site-ink-2); }
 
 .code {
-  background: var(--site-deep); border-radius: var(--radius-md); padding: var(--space-6) var(--space-7);
+  background: var(--bs-color-forest-deep); border-radius: var(--radius-md); padding: var(--space-6) var(--space-7);
   font-family: var(--bs-font-mono); font-size: 13.5px; line-height: 1.7;
-  color: var(--site-cream); overflow-x: auto;
+  color: var(--bs-color-on-forest); overflow-x: auto;
   /* Wrap long lines instead of letting a <pre>'s min-content (the longest line)
      inflate its container — that was forcing the whole page wider than the phone
      viewport and shrinking the mobile layout to fit. */
@@ -256,7 +264,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 .code--hero { margin: 0 0 var(--space-8); max-width: 560px; font-size: 13px; line-height: 1.85; }
 
 /* ---------- honesty (dark) ---------- */
-.honesty { margin-top: var(--space-24); background: var(--site-dark); }
+.honesty { margin-top: var(--space-24); background: var(--bs-color-ink); }
 .honesty__inner { max-width: var(--maxw); margin: 0 auto; padding: var(--space-20) var(--space-7); }
 .honesty h2 {
   font-size: var(--text-h2); line-height: 1.08; font-weight: 600; letter-spacing: -0.025em;
@@ -274,14 +282,14 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 .legend__head--enforced { color: var(--site-on-dark-ok); }
 .legend__head--partial { color: var(--site-on-dark-warn); }
 .legend__head--aspirational { color: var(--site-on-dark-mute); }
-.legend__card p { font-size: 15px; line-height: 1.55; color: var(--site-on-dark-soft); margin: 0; }
+.legend__card p { font-size: 15px; line-height: 1.55; color: var(--bs-color-on-forest-soft); margin: 0; }
 
 .claims { border-top: 1px solid var(--site-dark-line); }
 .claim {
   display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;
   padding: var(--space-5) 0; border-bottom: 1px solid var(--site-dark-line);
 }
-.claim__text { font-size: 15.5px; color: var(--site-on-dark-text); }
+.claim__text { font-size: 15.5px; color: var(--bs-color-on-forest); }
 .claim__text em { color: var(--bs-color-white); }
 .claim__gap { color: var(--site-on-dark-dim); }
 .grade--on-dark.grade--enforced { color: var(--bs-grade-enforced-on-dark); background: var(--bs-grade-enforced-on-dark-bg); }
@@ -309,8 +317,8 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
   font-family: var(--bs-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
   border-radius: var(--radius-pill); padding: var(--space-1) var(--space-2);
 }
-.tag--green { color: var(--bs-color-forest); background: var(--site-green-fill); }
-.tag--mute { color: var(--bs-color-ink-mono); background: var(--site-warm-fill); }
+.tag--green { color: var(--bs-color-forest); background: var(--bs-color-forest-tint); }
+.tag--mute { color: var(--bs-color-ink-mono); background: var(--bs-color-paper); }
 
 .start-here { padding: var(--space-7) var(--space-8); margin-bottom: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
 .start-here__head { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
@@ -340,7 +348,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 .seams__lead { font-size: 14.5px; line-height: 1.55; color: var(--bs-color-ink-soft); margin: 0 0 var(--space-6); max-width: 560px; }
 .seam-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-px);
-  background: var(--site-warm-line); border: 1px solid var(--site-warm-line); border-radius: var(--radius-md); overflow: hidden;
+  background: var(--bs-color-paper); border: 1px solid var(--bs-color-paper); border-radius: var(--radius-md); overflow: hidden;
 }
 .seam { background: var(--bs-color-white); padding: var(--space-4) var(--space-5); }
 .seam__name { font-family: var(--bs-font-mono); font-size: 13px; font-weight: 600; color: var(--bs-color-forest); margin-bottom: var(--space-1); }
@@ -349,7 +357,7 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 /* ---------- colophon + footer ---------- */
 .colophon { background: var(--bs-color-forest); border-radius: var(--radius-lg); padding: var(--space-16); margin-top: var(--space-24); }
 .colophon h2 { font-size: var(--text-h2); line-height: 1.12; font-weight: 600; letter-spacing: -0.02em; color: var(--bs-color-white); margin: 0 0 var(--space-5); max-width: 680px; }
-.colophon p { font-size: 18px; line-height: 1.6; color: var(--site-cream); margin: 0 0 var(--space-4); max-width: 620px; }
+.colophon p { font-size: 18px; line-height: 1.6; color: var(--bs-color-on-forest); margin: 0 0 var(--space-4); max-width: 620px; }
 .colophon p.last { margin-bottom: var(--space-8); }
 .colophon__cta { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
 
