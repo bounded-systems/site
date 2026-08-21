@@ -1214,6 +1214,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#67fdc0d8acab": {
+    "$value": "Read claude-box &#xFE0E;",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#76b39bb4a44c": {
     "$value": "The runtime that scopes an agent \n You hand it a named bundle of permissions",
     "$type": "body",
@@ -1239,6 +1244,11 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
+  "index.html#8512a37fd45f": {
+    "$value": "hello@bounded.tools (opens your email app) \n robertdelanghe.dev &#xFE0E; (external site) \n github.com/bounded-systems &#xFE0E; (external site)",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
   "index.html#8889df1885af": {
     "$value": "Who \n I'm Bobby DeLanghe — Brooklyn, NY",
     "$type": "body",
@@ -1251,6 +1261,11 @@
   },
   "index.html#93129ed5436a": {
     "$value": "A separate daemon holds it, performs the one permitted action, and hands back only the result",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#9d4c1bba1ac0": {
+    "$value": "Read guest-room &#xFE0E;",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1276,11 +1291,6 @@
   },
   "index.html#c0c20d2a6b5a": {
     "$value": "Its behavior specs run as tests against the engine, so the docs can't drift from the code",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#c4e303894d50": {
-    "$value": "hello@bounded.tools (opens your email app) \n robertdelanghe.dev (external site) \n github.com/bounded-systems (external site)",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

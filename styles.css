@@ -46,10 +46,19 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
   padding: var(--space-3) var(--space-5); border-radius: var(--radius-md);
 }
 .btn-link {
-  text-decoration: none; color: var(--site-cream);
+  color: var(--site-cream);
   font-size: 15px; font-weight: 500; padding: var(--space-3) var(--space-2);
-  border-bottom: 1px solid rgba(207, 228, 218, 0.4);
+  /* The underline hugs the GLYPHS, not the padding box. As a border-bottom it
+     spanned the horizontal padding, so on a phone — where these stack instead of
+     sitting in a row — each link trailed a rule wider than its own text and the
+     colophon read as a list of dividers. The padding stays: it is the touch
+     target, and shrinking that to fix a hairline would be a bad trade. */
+  text-decoration: underline;
+  text-decoration-color: rgba(207, 228, 218, 0.4);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
 }
+.btn-link:hover { text-decoration-color: var(--site-cream); }
 
 /* ---------- nav ---------- */
 .nav {
@@ -396,7 +405,27 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 
 /* Small phones — where the page was read first. Keep the hero legible. */
 @media (max-width: 520px) {
+  /* MEASURED, not eyeballed. At 393px the proof cards rendered 32 characters per
+     line. These are 30-word blurbs rather than long-form prose, so the 45-75
+     guidance does not apply directly — but 32 is tight even for a card, and the
+     cost was structural: the card spent 64px of the viewport on its own inset
+     and the wrap another 32, so a third of the screen was margin.
+
+     Halving the card's inset gets 36 characters and takes ~19% off every card's
+     height (351px → 284px for the tallest), which is the change a reader on a
+     phone actually feels. The page gutter stays at 16px: dropping it to 12 buys
+     one more character and makes the page look like it is falling off the edge.
+
+     16px is also comfortably above the 12px floor the card-inset gate enforces,
+     so that gate still has room to catch a real regression here.
+
+     Nothing in the stack was going to catch the original: axe scores the
+     accessibility tree, not whitespace, and the card-inset gate checks the FLOOR
+     (text must clear its border), so it can never see a ceiling. */
   .wrap { padding: 0 var(--space-4); }
+  .proof-card { padding: var(--space-4); gap: var(--space-2); }
+  .start-here { padding: var(--space-5); }
+  .seams { padding: var(--space-5); }
   .hero { padding: var(--space-10) var(--space-5); border-radius: var(--radius-lg); }
   .hero h1 { font-size: var(--text-h2); line-height: 1.1; }
   .hero__lead { font-size: 16px; }

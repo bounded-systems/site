@@ -8,7 +8,7 @@
 
 The honesty section grades each *claim* by hand. This page does the opposite: it folds the gate verdicts this build genuinely verifies through [`lone`](https://github.com/bounded-systems/lone)'s web-build conformance model, and reports everything it cannot verify as **not assessed** — never as met. The strong WCAG 2.2 AA / OWASP ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own.
 
-[machine-readable report ↗](api/v1/conformance.json) · [the signed build provenance](index.html#build-provenance)
+[machine-readable report ↗︎](api/v1/conformance.json) · [the signed build provenance](index.html#build-provenance)
 
 ---
 
