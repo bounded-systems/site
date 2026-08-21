@@ -6,7 +6,7 @@ Bounded Systems
 
 # Your coding agent runs with your access. Bounded Systems puts a checkpoint in front of it.
 
-Give an agent a real task and it can touch anything you can — files, git, the network. Here, every privileged action goes through one gate instead. The gate checks who is asking and what they're allowed to do, then acts or refuses. A refusal actually stops the action; either way, it's recorded.
+Give an agent a real task and it can touch anything you can — files, git, the network. Here, privileged actions go through one gate instead. The gate checks who is asking and what they're allowed to do, then acts or refuses. A refusal actually stops the action; either way, it's recorded.
 
 ```
 agent → git push (as keeper)
@@ -44,7 +44,7 @@ Every claim I make about this system is graded against the running code and publ
 
 Enforced
 
-CI proves it on every commit.
+A check proves it, and the build fails without it.
 
 Docs generate from source and fail the build on drift. guest-room's specs execute against the engine.
 

@@ -1,34 +1,99 @@
 {
   "$description": "bounded.tools surface tokens — EXTENDS the canonical Bounded Systems core (the brand submodule). content.mjs merges core + this file; the required core tokens (name/tagline/description) come from core, so this file only adds surface-specific copy. Atomic micro-copy only — headings, labels, CTAs, graded claims. Body paragraphs stay inline by design (check-copy-coverage explains why).",
-
-  "site-name": { "$value": "bounded.tools", "$description": "This surface's name (the lock / wordmark) — the site, distinct from the org name (core `name` = Bounded Systems)." },
-  "hero-pitch": { "$value": "Your coding agent runs with your access. Bounded Systems puts a checkpoint in front of it.", "$description": "Hero headline — the problem and the move, in one line." },
-
-  "section-whats-here": { "$value": "What's here", "$description": "Section heading — the three repos." },
-  "section-deeper": { "$value": "If you want to go deeper", "$description": "Section heading — verification, the map, the writing." },
-  "section-who": { "$value": "Who", "$description": "Section heading — the colophon." },
-
-  "repo-guest-room": { "$value": "The runtime that scopes an agent", "$description": "Repo card title — guest-room." },
-  "repo-claude-box": { "$value": "Claude Code running inside that scope", "$description": "Repo card title — claude-box." },
-  "repo-prx": { "$value": "The pipeline", "$description": "Repo card title — prx." },
-  "try-it": { "$value": "Try it", "$description": "Label on the clone-and-run card." },
-
-  "honesty-heading": { "$value": "Status, graded", "$description": "Status section heading — the grade ladder." },
-  "grade-enforced": { "$value": "Enforced", "$description": "Grade name — proven by a check on every commit." },
-  "grade-partial": { "$value": "Partial", "$description": "Grade name — works, with a named gap." },
-  "grade-aspirational": { "$value": "Aspirational", "$description": "Grade name — the bet, not the result." },
-  "grade-enforced-def": { "$value": "CI proves it on every commit.", "$description": "What Enforced means." },
-  "grade-partial-def": { "$value": "Works, with a named gap.", "$description": "What Partial means." },
-  "grade-aspirational-def": { "$value": "The bet, not yet the result.", "$description": "What Aspirational means." },
-
-  "claim-docs": { "$value": "Docs generate from source and fail the build on drift.", "$description": "Graded claim (ENFORCED) — typed `claim`, grounded in content/grounding.json." },
-  "claim-specs": { "$value": "guest-room's specs execute against the engine.", "$description": "Graded claim (ENFORCED) — typed `claim`, grounded in content/grounding.json." },
-
-  "deeper-verify": { "$value": "Verify this site yourself.", "$description": "Lead-in — build provenance and its limit." },
-  "deeper-map": { "$value": "The package map.", "$description": "Lead-in — /map." },
-  "deeper-writing": { "$value": "Writing.", "$description": "Lead-in — the blog." },
-
-  "byline": { "$value": "I'm Bobby DeLanghe — Brooklyn, NY. I build agent infrastructure and capability-security systems.", "$description": "Colophon byline." },
-  "bio-talk": { "$value": "If your team is chewing on the same problem, I'd like to talk:", "$description": "Colophon bio — contact prompt." },
-  "contact-cta": { "$value": "hello@bounded.tools", "$description": "Contact call-to-action label — the address itself, so the link says where it goes." }
+  "site-name": {
+    "$value": "bounded.tools",
+    "$description": "This surface's name (the lock / wordmark) — the site, distinct from the org name (core `name` = Bounded Systems)."
+  },
+  "hero-pitch": {
+    "$value": "Your coding agent runs with your access. Bounded Systems puts a checkpoint in front of it.",
+    "$description": "Hero headline — the problem and the move, in one line."
+  },
+  "section-whats-here": {
+    "$value": "What's here",
+    "$description": "Section heading — the three repos."
+  },
+  "section-deeper": {
+    "$value": "If you want to go deeper",
+    "$description": "Section heading — verification, the map, the writing."
+  },
+  "section-who": {
+    "$value": "Who",
+    "$description": "Section heading — the colophon."
+  },
+  "repo-guest-room": {
+    "$value": "The runtime that scopes an agent",
+    "$description": "Repo card title — guest-room."
+  },
+  "repo-claude-box": {
+    "$value": "Claude Code running inside that scope",
+    "$description": "Repo card title — claude-box."
+  },
+  "repo-prx": {
+    "$value": "The pipeline",
+    "$description": "Repo card title — prx."
+  },
+  "try-it": {
+    "$value": "Try it",
+    "$description": "Label on the clone-and-run card."
+  },
+  "honesty-heading": {
+    "$value": "Status, graded",
+    "$description": "Status section heading — the grade ladder."
+  },
+  "grade-enforced": {
+    "$value": "Enforced",
+    "$description": "Grade name — proven by a check that fails the build."
+  },
+  "grade-partial": {
+    "$value": "Partial",
+    "$description": "Grade name — works, with a named gap."
+  },
+  "grade-aspirational": {
+    "$value": "Aspirational",
+    "$description": "Grade name — the bet, not the result."
+  },
+  "grade-enforced-def": {
+    "$value": "A check proves it, and the build fails without it.",
+    "$description": "What Enforced means."
+  },
+  "grade-partial-def": {
+    "$value": "Works, with a named gap.",
+    "$description": "What Partial means."
+  },
+  "grade-aspirational-def": {
+    "$value": "The bet, not yet the result.",
+    "$description": "What Aspirational means."
+  },
+  "claim-docs": {
+    "$value": "Docs generate from source and fail the build on drift.",
+    "$description": "Graded claim (ENFORCED) — typed `claim`, grounded in content/grounding.json."
+  },
+  "claim-specs": {
+    "$value": "guest-room's specs execute against the engine.",
+    "$description": "Graded claim (ENFORCED) — typed `claim`, grounded in content/grounding.json."
+  },
+  "deeper-verify": {
+    "$value": "Verify this site yourself.",
+    "$description": "Lead-in — build provenance and its limit."
+  },
+  "deeper-map": {
+    "$value": "The package map.",
+    "$description": "Lead-in — /map."
+  },
+  "deeper-writing": {
+    "$value": "Writing.",
+    "$description": "Lead-in — the blog."
+  },
+  "byline": {
+    "$value": "I'm Bobby DeLanghe — Brooklyn, NY. I build agent infrastructure and capability-security systems.",
+    "$description": "Colophon byline."
+  },
+  "bio-talk": {
+    "$value": "If your team is chewing on the same problem, I'd like to talk:",
+    "$description": "Colophon bio — contact prompt."
+  },
+  "contact-cta": {
+    "$value": "hello@bounded.tools",
+    "$description": "Contact call-to-action label — the address itself, so the link says where it goes."
+  }
 }

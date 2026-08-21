@@ -1070,7 +1070,7 @@
     "$description": "micro-copy token — content/strings.json#grade-enforced"
   },
   "content/strings.json#grade-enforced-def": {
-    "$value": "CI proves it on every commit.",
+    "$value": "A check proves it, and the build fails without it.",
     "$type": "body",
     "$description": "micro-copy token — content/strings.json#grade-enforced-def"
   },
@@ -1149,18 +1149,8 @@
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
-  "index.html#13ef23715511": {
-    "$value": "Enforced \n CI proves it on every commit",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
   "index.html#15766422363f": {
     "$value": "Bounded Systems — a checkpoint in front of your coding agent",
-    "$type": "body",
-    "$description": "extracted prose — index.html"
-  },
-  "index.html#1f3ebba0a2f2": {
-    "$value": "Here, every privileged action goes through one gate instead",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1186,6 +1176,11 @@
   },
   "index.html#387075702ccc": {
     "$value": "It does not prove the build was authorized — authorization is the other axis, and it's what the checkpoint above exists for",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#3a84ca55d3f8": {
+    "$value": "Enforced \n A check proves it, and the build fails without it",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },
@@ -1236,6 +1231,11 @@
   },
   "index.html#7bd35779a168": {
     "$value": "Status, graded \n Every claim I make about this system is graded against the running code and published as a signed list (claims.jsonld)",
+    "$type": "body",
+    "$description": "extracted prose — index.html"
+  },
+  "index.html#7f1a2dae781b": {
+    "$value": "Here, privileged actions go through one gate instead",
     "$type": "body",
     "$description": "extracted prose — index.html"
   },

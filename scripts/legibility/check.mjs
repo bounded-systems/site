@@ -20,7 +20,12 @@ const raw = readFileSync(pagePath, "utf8");
 
 // Strip what a reader doesn't parse as prose: comments, code blocks, URLs, repo names.
 const prose = raw
-  .replace(/<!--[\s\S]*?-->/g, "")
+  // `-->|$` rather than `-->`: an UNTERMINATED comment would otherwise survive
+  // the strip and have its body counted as prose — every budget below would then
+  // be measuring an authoring note. CodeQL flagged the incomplete form on this
+  // line. Not an extension of the gate: swallowing to end-of-file is what an
+  // unterminated comment means, so this is the strip stripping comments.
+  .replace(/<!--[\s\S]*?(?:-->|$)/g, "")
   .replace(/```[\s\S]*?```/g, "")
   .replace(/\((https?:\/\/[^)]+|\/[^)]*|mailto:[^)]+|blog\/[^)]+)\)/g, "()")
   .replace(/\bguest-room\b/gi, "GUESTROOM")   // repo name, not the metaphor

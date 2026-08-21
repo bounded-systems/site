@@ -46,7 +46,7 @@ Feature: bounded.tools marketing micro-copy
 
   @marketing
   Scenario: Each grade says what it means
-    Then surfaces present the label "CI proves it on every commit."
+    Then surfaces present the label "A check proves it, and the build fails without it."
     And surfaces present the label "Works, with a named gap."
     And surfaces present the label "The bet, not yet the result."
 
