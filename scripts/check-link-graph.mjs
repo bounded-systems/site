@@ -6,9 +6,12 @@
 //
 //   node scripts/check-link-graph.mjs [distDir]   # default: dist
 //
-// The structure-audit already proves every internal link RESOLVES (0 dead); this
-// proves the stronger property — the link graph is a single connected component
-// rooted at the home page (no orphan/island pages), and publishes the graph.
+// The structure-audit already proves every internal link's PATH resolves to a
+// served file (fragments are stripped before resolving — check-fragments.mjs is
+// the gate that proves each #fragment names a real id on its target page); this
+// proves a different property again — the link graph is a single connected
+// component rooted at the home page (no orphan/island pages) — and publishes
+// the graph. Like the structure-audit, this gate is fragment-blind by design.
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, relative, dirname as pdir, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
