@@ -131,7 +131,7 @@ const page = `<!doctype html>
         <a href="index.html#honesty">Honesty</a>
         <a href="index.html#proof">Proof</a>
         <a href="blog/">Writing</a>
-        <a class="nav__gh" href="https://github.com/bounded-systems">GitHub&nbsp;&#8599;</a>
+        <a class="nav__gh" href="https://github.com/bounded-systems">GitHub&nbsp;&#8599;&#xFE0E;</a>
       </div>
     </div>
   </nav>
@@ -140,7 +140,7 @@ const page = `<!doctype html>
       <p class="bs-text-label eyebrow"><a href="index.html#honesty">&larr;&nbsp;Kept honest</a></p>
       <h1>Conformance, computed against the running build</h1>
       <p class="conf__lead">The honesty section grades each <em>claim</em> by hand. This page does the opposite: it folds the gate verdicts this build genuinely verifies through <a href="https://github.com/bounded-systems/lone"><code>lone</code></a>'s web-build conformance model, and reports everything it cannot verify as <strong>not assessed</strong> — never as met. The strong WCAG&nbsp;2.2&nbsp;AA / OWASP&nbsp;ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own.</p>
-      <p class="conf__machine"><a href="api/v1/conformance.json">machine-readable report&nbsp;&#8599;</a> &middot; <a href="index.html#build-provenance">the signed build provenance</a></p>
+      <p class="conf__machine"><a href="api/v1/conformance.json">machine-readable report&nbsp;&#8599;&#xFE0E;</a> &middot; <a href="index.html#build-provenance">the signed build provenance</a></p>
     </header>
     ${renderConformanceReport(report, { evidenceHref })}
   </main>

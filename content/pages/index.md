@@ -26,9 +26,9 @@ That's the system. The rest of this page is what's built, how far along it is, a
 
 Three repos, one idea.
 
-- [guest-room The runtime that scopes an agent You hand it a named bundle of permissions. Permissions can be narrowed after that, never widened, and anything outside the bundle fails closed. Its behavior specs run as tests against the engine, so the docs can't drift from the code. Read guest-room ↗](https://github.com/bounded-systems/guest-room)
-- [claude-box Claude Code running inside that scope The agent never holds a credential. A separate daemon holds it, performs the one permitted action, and hands back only the result. Read claude-box ↗](https://github.com/bounded-systems/claude-box)
-- [prx The pipeline Point it at an issue ticket and it drives a scoped agent through to a merged PR, with each step attributed to a signed owner. Read prx ↗](https://github.com/bounded-systems/prx)
+- [guest-room The runtime that scopes an agent You hand it a named bundle of permissions. Permissions can be narrowed after that, never widened, and anything outside the bundle fails closed. Its behavior specs run as tests against the engine, so the docs can't drift from the code. Read guest-room ↗︎](https://github.com/bounded-systems/guest-room)
+- [claude-box Claude Code running inside that scope The agent never holds a credential. A separate daemon holds it, performs the one permitted action, and hands back only the result. Read claude-box ↗︎](https://github.com/bounded-systems/claude-box)
+- [prx The pipeline Point it at an issue ticket and it drives a scoped agent through to a merged PR, with each step attributed to a signed owner. Read prx ↗︎](https://github.com/bounded-systems/prx)
 
 Try it
 
@@ -82,4 +82,4 @@ I'm Bobby DeLanghe — Brooklyn, NY. I build agent infrastructure and capability
 
 If your team is chewing on the same problem, I'd like to talk:
 
-[hello@bounded.tools (opens your email app)](mailto:hello@bounded.tools) [robertdelanghe.dev ↗ (external site)](https://robertdelanghe.dev) [github.com/bounded-systems ↗ (external site)](https://github.com/bounded-systems)
+[hello@bounded.tools (opens your email app)](mailto:hello@bounded.tools) [robertdelanghe.dev ↗︎ (external site)](https://robertdelanghe.dev) [github.com/bounded-systems ↗︎ (external site)](https://github.com/bounded-systems)
