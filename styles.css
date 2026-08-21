@@ -309,6 +309,15 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 .start-here__lead { font-size: 14.5px; line-height: 1.55; color: var(--bs-color-ink-soft); margin: 0; max-width: 560px; }
 .code--cmd { margin: 0; max-width: 560px; font-size: 13px; line-height: 1.8; }
 
+/* The JS-only freshness line under "Verify this site yourself". Its own class
+   rather than an inline style: check-inline-purity refuses raw dimensions in
+   inline styles, and a negative margin has to be expressed as a length. */
+.freshness {
+  margin: calc(var(--space-3) * -1) 0 var(--space-6);
+  font-family: var(--bs-font-mono); font-size: var(--text-caption);
+  color: var(--bs-color-ink-mono);
+}
+
 .seams { padding: var(--space-8); }
 .seams__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-1); flex-wrap: wrap; gap: var(--space-2); }
 .seams__title { font-size: var(--text-title); font-weight: 600; margin: 0; }
@@ -391,7 +400,13 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
   .hero { padding: var(--space-10) var(--space-5); border-radius: var(--radius-lg); }
   .hero h1 { font-size: var(--text-h2); line-height: 1.1; }
   .hero__lead { font-size: 16px; }
-  .code--hero { font-size: 11.5px; line-height: 1.7; }
+  /* Give the code blocks their width back on a phone. `.code` wraps rather than
+     scrolls (see its rule), so every px of padding is a px the longest line has
+     to fit in — and the hero block is the one place on the page where a
+     mid-clause break destroys the meaning. Measured: at 390px this is what makes
+     the 42-character line fit instead of breaking. */
+  .code { padding: var(--space-5) var(--space-4); }
+  .code--hero { font-size: 11px; line-height: 1.7; }
   .hero__panel { padding: var(--space-6) var(--space-5); }
   .hero__panel .mark { width: 120px; height: 120px; }
   .hero__panel .mark img { width: 86px; height: 86px; }

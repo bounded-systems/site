@@ -125,14 +125,13 @@
     ]
   },
   "index.html": {
-    "h1": "Your coding agent wanders. Keep it inside the job you gave it.",
-    "outline": "1222233333322",
+    "h1": "Your coding agent runs with your access. Bounded Systems puts a checkpoint in fr",
+    "outline": "12333223332",
     "mains": 1,
     "readerOk": null,
     "internalLinks": [
       "/blog/",
       "/claims.jsonld",
-      "/conformance",
       "/conformance",
       "/contracts",
       "/desk",
@@ -140,7 +139,6 @@
       "/map",
       "/map",
       "/provenance.json",
-      "/rekor",
       "/rekor"
     ]
   },
@@ -156,7 +154,7 @@
   },
   "map.html": {
     "h1": "Map",
-    "outline": "122",
+    "outline": "1222",
     "mains": 1,
     "readerOk": null,
     "internalLinks": [
