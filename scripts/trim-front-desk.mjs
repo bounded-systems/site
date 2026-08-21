@@ -58,7 +58,11 @@ const ranked = issues.filter((i) => score(i) !== null).sort((a, b) => score(b) -
 const out = {
   $source: "trimmed from the org's front-desk-public feed by scripts/trim-front-desk.mjs — do not hand-edit",
   generated_at: feed.generated_at,
-  counts: feed.counts || {},
+  // The feed's per-status counts are deliberately NOT carried. Nothing renders
+  // them — `withheld` below already holds every number the page states — and
+  // their keys are the board's raw status names, one of which is "Todo", which
+  // the copy lint reads as a leftover placeholder marker and fails the build on.
+  // Carrying unused data that breaks a gate is pure cost.
   // Every number the page needs to be honest about what it is NOT showing.
   withheld: {
     todo_total: todo.length,

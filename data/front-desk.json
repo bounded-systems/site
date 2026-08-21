@@ -1,12 +1,6 @@
 {
   "$source": "trimmed from the org's front-desk-public feed by scripts/trim-front-desk.mjs — do not hand-edit",
   "generated_at": "2026-08-20T23:46:48Z",
-  "counts": {
-    "Blocked": 1,
-    "Done": 2132,
-    "In Progress": 2,
-    "Todo": 336
-  },
   "withheld": {
     "todo_total": 336,
     "claimed": 4,
