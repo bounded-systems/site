@@ -75,7 +75,12 @@ function renderTiles() {
   return [
     '      <div class="desk__tiles">',
     tile(data.items.length, "shown"),
-    tile(w.todo_total ?? "?", "on the board as Todo"),
+    // "not started" rather than the board's own status name: the copy lint reads a
+    // bare "Todo" as a leftover placeholder marker and fails the build, which is a
+    // fair rule catching a false positive here. It also reads better cold — a
+    // stranger should not have to learn the board's internal vocabulary to parse a
+    // tile.
+    tile(w.todo_total ?? "?", "not started"),
     tile(w.claimed ?? 0, "already claimed"),
     tile(w.pull_requests ?? 0, "PRs (not claimable)"),
     "      </div>",
