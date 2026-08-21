@@ -59,7 +59,7 @@ function renderRows(checks, declared) {
   const sortedDeclared = [...declared].sort((a, b) => a.type.localeCompare(b.type));
   return [
     // The table is wider than a phone: 590px of columns in a 390px viewport, which
-    // made the PAGE scroll sideways instead of the table (site#209). Wrapping it in
+    // made the PAGE scroll sideways instead of the table (visual sweep). Wrapping it in
     // its own scroll container keeps the overflow where it belongs.
     //
     // tabindex="0" is load-bearing, not decoration: a scrollable region that cannot
