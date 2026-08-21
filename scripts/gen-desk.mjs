@@ -101,7 +101,18 @@ function renderRows() {
     `        <div class="row__score">${esc(i.score.toFixed(2))}</div>`,
     '        <div class="row__body">',
     `          <p class="row__title"><a href="${esc(i.url)}">${esc(i.title)}</a></p>`,
-    `          <p class="row__where">${esc(i.repo)}#${esc(i.number)}</p>`,
+    // "prx · 434", not "bounded-systems/prx#434", for two reasons.
+    //
+    // The gate one: the brand colour gate scans built pages for hardcoded colour
+    // literals, and `#434` IS a valid three-digit hex colour. Twenty-five rows of
+    // GitHub issue refs read as fourteen hardcoded colours and failed the build.
+    // That is a false positive in a shared gate rather than a defect here, but the
+    // separator costs nothing and the gate protects something real.
+    //
+    // The copy one: the org prefix is identical on every row, so it is pure noise
+    // in a list whose job is to be scanned quickly. The title already links to the
+    // issue; this line only has to say where it lives.
+    `          <p class="row__where">${esc(String(i.repo).replace(/^bounded-systems\//, ""))} &middot; ${esc(i.number)}</p>`,
     "        </div>",
     "      </div>",
   ].join("\n")).join("\n");
