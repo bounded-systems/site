@@ -47,6 +47,13 @@ export const STEPS = [
     note: "pin every self-hosted script/link by sha384; MUST precede the Repr-Digest" },
   { phase: "hermetic", cmd: ["scripts/check-link-graph.mjs", "dist"],
     note: "prove the site is one connected page graph; emit sitegraph.json" },
+  // After check-link-graph on purpose: the link graph proves the HTML pages form
+  // one connected surface, and the .md twins are the same pages in another form,
+  // not new nodes in it. Safe in `hermetic` even though gen-stamp rewrites
+  // index.html later, because the projection drops the stamp region — so the
+  // pre-stamp and post-stamp projections are byte-identical.
+  { phase: "hermetic", cmd: ["scripts/gen-markdown.mjs", "--dist"],
+    note: "every page also served as markdown at the same route (/index.md, /map.md …)" },
   { phase: "hermetic", cmd: ["scripts/gen-sbom.mjs"],
     note: "deterministic SPDX SBOM — a pure function of the committed lockfiles" },
   { phase: "hermetic", cmd: ["vendor/conformance-kit/gates/sbom/check-sbom.mjs"],
@@ -75,6 +82,8 @@ export const STEPS = [
   // ---- local: repo codegen, never a served artifact ------------------------
   { phase: "local", cmd: ["scripts/emit-catalog.mjs"],
     note: "regenerate the copy catalog; `npm run check` verifies it with --check" },
+  { phase: "local", cmd: ["scripts/gen-markdown.mjs"],
+    note: "refresh content/pages/*.md so a copy change shows up in review as a prose diff" },
 ];
 
 export const PHASES = ["derivation", "hermetic", "stamped", "local"];
