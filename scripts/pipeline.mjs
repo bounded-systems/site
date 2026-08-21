@@ -79,7 +79,13 @@ export const STEPS = [
   { phase: "stamped", cmd: ["scripts/emit-artifacts.mjs"],
     note: "RFC 9116 security.txt, web app manifest, RFC 9530 Repr-Digest _headers" },
   { phase: "stamped", cmd: ["scripts/gen-claims.mjs"],
-    note: "dist/claims.jsonld — build-dated copy of the honesty-section claims graph" },
+    note: "dist/claims.jsonld — build-dated claims graph, plus the legibility gate's own verdict" },
+  // The served graph now carries a node no human wrote, so the validator that
+  // already guards the hand-written graph is pointed at the served one too.
+  // Not a new gate — the same one, applied to the file that gained a machine
+  // author. An unchecked generated claim in a signed graph is the worst kind.
+  { phase: "stamped", cmd: ["integrity/claims/validate-claims.mjs", "dist/claims.jsonld"],
+    note: "the emitted verdict obeys the same rules as the claims a person wrote" },
   { phase: "stamped", cmd: ["scripts/gen-jsonld.mjs"],
     note: "dist/json.ld — the structured-data graph (org + packages + terms)" },
   { phase: "stamped", cmd: ["scripts/gen-ledger.mjs", "--dist"],

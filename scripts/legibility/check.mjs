@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 // legibility gate — deterministic half.
-// Usage: node check.mjs <page.md> [lexicon.txt]
+// Usage: node check.mjs <page.md> [lexicon.txt] [--jsonld]
+//   --jsonld   also print the verdict as one bt:Claim node, for the graph the
+//              page already publishes. The gate's result is a claim like any
+//              other claim on the page; it goes in the existing graph rather
+//              than getting a schema of its own. The `gap` field is the point:
+//              it carries "this measures regression, not comprehension" into
+//              the signed record so it cannot be quietly forgotten.
 // Exit 1 on any violation. Budgets are constants below; change them in one place.
 
 import { readFileSync } from "node:fs";
@@ -12,8 +18,11 @@ const BUDGET = {
   h2Sections: 6,       // top-level sections a skimmer must hold
 };
 
-const [, , pagePath, lexPath = new URL("lexicon.txt", import.meta.url).pathname] =
-  process.argv;
+// Flags are filtered out of the positional slots, or `--jsonld` gets read as the
+// lexicon path and the gate dies trying to open it.
+const flags = process.argv.slice(2).filter((a) => a.startsWith("--"));
+const [pagePath, lexPath = new URL("lexicon.txt", import.meta.url).pathname] =
+  process.argv.slice(2).filter((a) => !a.startsWith("--"));
 if (!pagePath) { console.error("usage: check.mjs <page.md> [lexicon.txt]"); process.exit(2); }
 
 const raw = readFileSync(pagePath, "utf8");
@@ -76,6 +85,21 @@ if (acr.length > BUDGET.acronyms)
 const h2 = (raw.match(/^## /gm) ?? []).length;
 if (h2 > BUDGET.h2Sections)
   fail.push(`sections: ${h2} h2s (budget ${BUDGET.h2Sections})`);
+
+// 6. Optional: the verdict, as a node in the graph the page already publishes.
+if (flags.includes("--jsonld")) {
+  const run = process.env.GITHUB_RUN_ID
+    ? `${process.env.GITHUB_SERVER_URL ?? "https://github.com"}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+    : "https://github.com/bounded-systems/site/blob/main/scripts/legibility/check.mjs";
+  console.log(JSON.stringify({
+    "@id": "https://bounded.tools/claims#legibility",
+    "@type": "bt:Claim",
+    claim: "The landing page passes the legibility gate.",
+    grade: fail.length ? "aspirational" : "enforced",
+    gap: "The gate measures budgets and banned words, so it can show the page did not regress. It cannot show the page lands: the cold-read scenarios are judged by a model at deploy time, which is a proxy, and the comprehension test itself is one outside human and is not automated.",
+    evidence: run,
+  }, null, 2));
+}
 
 if (fail.length) {
   console.error(`legibility gate: FAIL (${fail.length})`);
