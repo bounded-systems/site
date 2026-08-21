@@ -189,8 +189,27 @@ function inline(node) {
   }
 }
 
+// A pipe inside a GFM table cell ends the cell, so it has to be escaped — but
+// the text arriving here has ALREADY been through esc(), which escaped its
+// backslashes. A second regex pass (`.replace(/\|/g, "\\|")`) is what CodeQL
+// flagged as incomplete escaping, and it is right for the general case: an
+// escaper that handles `|` but not `\` is only correct by accident, and here
+// the accident is that esc() ran first. Re-running a backslash escape would
+// double what esc() emitted; not running one leaves the function wrong on its
+// own terms.
+//
+// So walk it once instead. A backslash is consumed together with whatever it
+// escapes, and a bare pipe — from a code span or a link destination, neither of
+// which goes through esc() — gets escaped exactly once.
 function cell(node) {
-  return inline(node).replace(/\s+/g, " ").replace(/\|/g, "\\|").trim();
+  const s = inline(node).replace(/\s+/g, " ").trim();
+  let out = "";
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (c === "\\" && i + 1 < s.length) { out += c + s[++i]; continue; }
+    out += c === "|" ? "\\|" : c;
+  }
+  return out;
 }
 
 // Serialize a node into markdown blocks. `out` collects block strings.

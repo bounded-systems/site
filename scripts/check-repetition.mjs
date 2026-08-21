@@ -100,7 +100,12 @@ function sentences(md) {
   const units = [];
   let buf = [];
   const flush = () => { if (buf.length) { units.push(buf.join(" ")); buf = []; } };
-  for (const rawLine of md.replace(/<!--[\s\S]*?-->/g, "").split("\n")) {
+  // `-->|$` rather than just `-->`: an UNTERMINATED comment would otherwise
+  // survive the strip and have its body counted as prose. CodeQL flagged the
+  // incomplete form, and while nothing here is rendered as HTML, swallowing to
+  // end-of-file is also what an unterminated comment actually means — so the
+  // complete pattern is both the safer one and the more correct one.
+  for (const rawLine of md.replace(/<!--[\s\S]*?(?:-->|$)/g, "").split("\n")) {
     const line = rawLine.trim();
     if (line.startsWith("```")) { flush(); inFence = !inFence; continue; }
     if (inFence) continue;
