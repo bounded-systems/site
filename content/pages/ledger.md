@@ -8,13 +8,25 @@
 
 Claims on this site carry a grade. This page records every time one **moved** — a grade changing, or a gap narrowing — and what changed our mind. It is rendered at **build time** from [`ledger.jsonl`](https://github.com/bounded-systems/site/blob/main/integrity/claims/ledger.jsonl), the same append-only record the build gate reads: if a grade moves and no entry records it, the build fails. So this is not a changelog someone remembers to write — it is the file that makes forgetting impossible. The raw record is at [`/ledger.jsonl`](/ledger.jsonl).
 
-**0** — movements
+**2** — movements
 
 **6** — claims tracked
 
-**6** — entries
+**8** — entries
 
-**No movement yet.** Every claim below is at the grade it held when this ledger opened — nothing has changed since. The page fills in when a grade first moves, and the gate is what guarantees that entry exists.
+## Movements
+
+2026-08-21 c5 aspirational → aspirational
+
+Claim and gap reworded for the homepage claims registry (site#233 §3): the convergence target is now named plainly as one shared runtime on guest-room. Grade and substance unchanged — direction, not result. The registry is the first page to cite c5.
+
+Explained in: [the claims registry](/#status)
+
+2026-08-21 c4 partial → partial
+
+Gap reworded for the homepage claims registry (site#233 §3): the loopback endpoint is now named plainly as the broker listening on TCP, so the gap reads without org metaphor. Grade and substance unchanged — transport strength on macOS is still the named gap.
+
+Explained in: [the claims registry](/#status)
 
 ## Starting positions
 

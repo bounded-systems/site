@@ -47,15 +47,15 @@
           "@type": "bt:Claim",
           "claim": "The agent never holds the credential — a broker daemon does.",
           "grade": "partial",
-          "gap": "On macOS the door is TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.",
+          "gap": "On macOS the broker listens on TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.",
           "evidence": "https://github.com/bounded-systems/prx/blob/d1b6030eebd2caffaf22377d21c24c4c6f2c77c1/packages/prx/src/keeperd/daemon.ts"
         },
         {
           "@id": "https://bounded.tools/claims#c5",
           "@type": "bt:Claim",
-          "claim": "prx and claude-box converge onto one guest-room door runtime.",
+          "claim": "prx and claude-box converge on guest-room as one shared runtime.",
           "grade": "aspirational",
-          "gap": "Convergence is in progress — prx wires the seams in-process today; the out-of-process door runtime is the direction, not yet at scale.",
+          "gap": "Convergence is in progress — prx wires the pieces in-process today; the shared out-of-process runtime is the direction, not the result.",
           "evidence": "https://github.com/bounded-systems/prx"
         },
         {

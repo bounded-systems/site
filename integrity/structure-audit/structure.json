@@ -144,11 +144,13 @@
   },
   "ledger.html": {
     "h1": "Grade ledger",
-    "outline": "122",
+    "outline": "1222",
     "mains": 1,
     "readerOk": null,
     "internalLinks": [
       "/",
+      "/#status",
+      "/#status",
       "/ledger.jsonl"
     ]
   },

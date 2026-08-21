@@ -70,6 +70,22 @@ for (const name of (await readdir(postsDir)).filter((f) => f.endsWith(".md"))) {
     citedBy.get(id).add(`blog/${name}`);
   }
 }
+// The homepage claims registry (gen-claims-rows.mjs) is a P1 edge too: each row
+// carries data-claim resolving to the claim's @id — the same grounding
+// check-emphasis verifies — and renders the claim's CURRENT sentence, grade,
+// gap and evidence. That makes it the page where a gap's current wording is
+// actually read, which genesis-era comments here said no page did for c5. It is
+// a WEAKER kind of edge than a post (the registry cites every claim by
+// construction, so it cannot single one out) — so a ledger entry naming
+// index.html says "the registry shows this state", and an entry that needs
+// narrative explanation should still name a post.
+{
+  const home = await readFile(join(root, "index.html"), "utf8");
+  for (const m of home.matchAll(/\bdata-claim="https:\/\/bounded\.tools\/claims#(c\d+)"/g)) {
+    if (!citedBy.has(m[1])) citedBy.set(m[1], new Set());
+    citedBy.get(m[1]).add("index.html");
+  }
+}
 
 // ── ledger ───────────────────────────────────────────────────────────────────
 const lines = (await readFile(ledgerFile, "utf8")).split("\n").map((l) => l.trim()).filter(Boolean);

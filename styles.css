@@ -276,6 +276,18 @@ em { font-style: normal; color: var(--bs-color-forest); }   /* stress emphasis, 
 .legend__head--aspirational { color: var(--site-on-dark-mute); }
 .legend__card p { font-size: 15px; line-height: 1.55; color: var(--site-on-dark-soft); margin: 0; }
 
+/* the per-claim registry rows (generated — see gen-claims-rows.mjs) */
+.legend__list {
+  list-style: none; display: grid; gap: var(--space-4);
+  margin: var(--space-4) 0 0; padding: var(--space-4) 0 0;
+  border-top: 1px solid var(--site-dark-line);
+}
+.legend__claim-id { font-family: var(--bs-font-mono); font-size: 12px; font-weight: 600; color: var(--site-on-dark-text); }
+.legend__card .legend__gap { margin-top: var(--space-2); color: var(--site-on-dark-dim); }
+.legend__gap-label { font-weight: 600; color: var(--site-on-dark-mute); }
+.legend__evidence { font-family: var(--bs-font-mono); font-size: 12.5px; }
+.legend__claim a { color: inherit; }
+
 .claims { border-top: 1px solid var(--site-dark-line); }
 .claim {
   display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;

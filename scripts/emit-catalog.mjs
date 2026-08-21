@@ -50,6 +50,7 @@ const stripHtml = (s) => normalize(s
   .replace(/<pre[\s\S]*?<\/pre>/gi, " ") // code blocks aren't prose
   .replace(/<!--\s*seams:start[\s\S]*?seams:end\s*-->/gi, " ") // generated grid
   .replace(/<!--\s*registry:start[\s\S]*?registry:end\s*-->/gi, " ") // generated grid
+  .replace(/<!--\s*claims-registry:start[\s\S]*?claims-registry:end\s*-->/gi, " ") // generated rows — their source (claims.jsonld/verdict.mjs) is audited by the claims gates, not as page prose
   .replace(/<[^>]+>/g, " ")
   .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&middot;/g, " · ")
   .replace(/&rarr;|&#\d+;/g, " "));
