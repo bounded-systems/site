@@ -36,7 +36,7 @@
     "card-inset": "node scripts/check-card-inset.mjs dist"
   },
   "dependencies": {
-    "@bounded-systems/brand": "^1.4.0"
+    "@bounded-systems/brand": "^2.0.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",

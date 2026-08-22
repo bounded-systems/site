@@ -149,7 +149,7 @@ const page = `<!doctype html>
   </nav>
   <main class="wrap conf">
     <header class="conf__intro">
-      <p class="bs-text-label eyebrow"><a href="index.html#status">&larr;&nbsp;Kept honest</a></p>
+      <p class="bnd-text-label eyebrow"><a href="index.html#status">&larr;&nbsp;Kept honest</a></p>
       <h1>Conformance, computed against the running build</h1>
       <p class="conf__lead">Two reports over one project, from opposite directions. The conformance criteria below are <em>computed</em>: they fold the gate verdicts this build genuinely verifies through <a href="https://github.com/bounded-systems/lone"><code>lone</code></a>'s web-build conformance model, and report everything they cannot verify as <strong>not assessed</strong> — never as met. The strong WCAG&nbsp;2.2&nbsp;AA / OWASP&nbsp;ASVS claim is emitted only when every gating criterion passes, so this report can never overclaim on its own. <a href="#claims">The claims registry</a> underneath is the other half: what a person asserts about this system and grades by hand, each claim carrying its gap and a link to the code behind it.</p>
       <p class="conf__machine"><a href="api/v1/conformance.json">machine-readable report&nbsp;&#8599;&#xFE0E;</a> &middot; <a href="/claims.jsonld">claims.jsonld</a> &middot; <a href="index.html#deeper">the signed build provenance</a></p>

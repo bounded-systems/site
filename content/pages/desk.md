@@ -10,7 +10,7 @@ What is worth picking up next, ranked by the board itself. This is the same proj
 
 This queue schedules autonomous agent sessions. It is not a product roadmap, and the backlog count is not a count of active human work — most entries are small, and any agent or person can pick one up.
 
-Board projected at 2026-08-20T23:46:48Z, and rendered into this page at build time. The projection refreshes hourly; this page refreshes when the site rebuilds, so it can trail the board.
+**This snapshot is old.** The board was projected at 2026-08-20T23:46:48Z, more than 24 hours before this build. The projection lane publishes hourly, so this means it stopped. Treat the ranking below as history, not as the board.
 
 **25** — shown
 

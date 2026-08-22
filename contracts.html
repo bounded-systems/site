@@ -29,29 +29,29 @@
 
   <style>
     .lattice { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .lattice__intro { color: var(--bs-color-ink); max-width: 44rem; }
+    .lattice__intro { color: var(--bnd-color-ink); max-width: 44rem; }
     .lattice__tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: .75rem; margin: 1.75rem 0; }
     .tile { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: .6rem; padding: .85rem 1rem; }
     .tile__n { font-size: 1.9rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
     .tile__l { font-size: .8rem; opacity: .7; margin-top: .3rem; }
-    .tile--pass .tile__n { color: var(--bs-color-forest); }
-    .tile--gap .tile__n  { color: var(--bs-color-clay); }
+    .tile--pass .tile__n { color: var(--bnd-color-forest); }
+    .tile--gap .tile__n  { color: var(--bnd-color-clay); }
     /* Keep the table's overflow inside the table (the site visual sweep): without this the
        whole page scrolls sideways on a phone. min-width holds the columns
        readable rather than letting them crush. */
     .grid-scroll { overflow-x: auto; margin-top: 1rem; }
     .grid-scroll table.grid { min-width: 34rem; margin-top: 0; }
-    .grid-scroll:focus-visible { outline: 2px solid var(--bs-color-forest); outline-offset: 2px; }
+    .grid-scroll:focus-visible { outline: 2px solid var(--bnd-color-forest); outline-offset: 2px; }
     table.grid { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: .95rem; }
     .grid th, .grid td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); vertical-align: top; }
     .grid th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; opacity: .65; }
     .badge { display: inline-block; font-size: .78rem; font-weight: 600; padding: .12rem .5rem; border-radius: 1rem; white-space: nowrap; }
-    .badge--pass { background: color-mix(in srgb, var(--bs-color-forest) 15%, transparent); color: var(--bs-color-forest); }
-    .badge--gap  { background: color-mix(in srgb, var(--bs-color-clay) 13%, transparent); color: var(--bs-color-clay); }
+    .badge--pass { background: color-mix(in srgb, var(--bnd-color-forest) 15%, transparent); color: var(--bnd-color-forest); }
+    .badge--gap  { background: color-mix(in srgb, var(--bnd-color-clay) 13%, transparent); color: var(--bnd-color-clay); }
     .badge--declared { background: color-mix(in srgb, currentColor 9%, transparent); opacity: .8; }
-    code.mono, pre.verify { font-family: var(--bs-font-mono, ui-monospace, monospace); }
+    code.mono, pre.verify { font-family: var(--bnd-font-mono, ui-monospace, monospace); }
     pre.verify { background: color-mix(in srgb, currentColor 6%, transparent); padding: 1rem; border-radius: .6rem; overflow-x: auto; font-size: .82rem; line-height: 1.5; }
-    .kind { font-family: var(--bs-font-mono, ui-monospace, monospace); font-size: .82rem; opacity: .75; }
+    .kind { font-family: var(--bnd-font-mono, ui-monospace, monospace); font-size: .82rem; opacity: .75; }
     .muted { opacity: .7; }
     .home { display: inline-block; margin-bottom: 1.5rem; font-size: .9rem; }
   </style>
