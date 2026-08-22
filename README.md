@@ -14,14 +14,14 @@ The page pulls everything visual from it — never hard-codes a brand value:
 
 ```html
 <link rel="stylesheet" href="brand/css/fonts.css">     <!-- Space Grotesk + IBM Plex Mono -->
-<link rel="stylesheet" href="brand/tokens/tokens.css"> <!-- --bs-* vars + .bs-text-* styles -->
+<link rel="stylesheet" href="brand/tokens/tokens.css"> <!-- --bnd-* vars + .bnd-text-* styles -->
 <link rel="stylesheet" href="brand/css/base.css">      <!-- resets on the tokens -->
 ```
 
 ```css
 /* styles.css — site layout references brand tokens, never raw hexes */
-.hero { background: var(--bs-color-forest); }
-.eyebrow { /* paired with the brand .bs-text-label slug style */ }
+.hero { background: var(--bnd-color-forest); }
+.eyebrow { /* paired with the brand .bnd-text-label slug style */ }
 ```
 
 The mark is consumed as an asset: `brand/mark/mark-white.svg`. The link-card image

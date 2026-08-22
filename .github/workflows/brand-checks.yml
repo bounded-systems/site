@@ -58,7 +58,7 @@ jobs:
   # ships) and as the @bounded-systems/brand npm dependency (npm run dev + the checks
   # above). They must resolve to the same release — when they drift, the deployed CSS
   # can silently lag the styles that reference it. That is exactly how the grade
-  # badges shipped with empty var(--bs-grade-*) values: the (then-)submodule was
+  # badges shipped with empty var(--bnd-grade-*) values: the (then-)submodule was
   # bumped but flake.lock was never relocked. npm's pin is a semver version, not a
   # git commit, so this resolves it to the exact commit via the release tag
   # (mint release always tags v<version> at the commit it cuts the release from)

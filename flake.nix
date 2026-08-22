@@ -12,7 +12,7 @@
     # @bounded-systems/brand@<version>`. brand-checks.yml's brand-pins-agree job
     # fails closed if they ever diverge.
     brand = {
-      url = "github:bounded-systems/brand?ref=v1.4.0";
+      url = "github:bounded-systems/brand?ref=v2.0.0";
       flake = false;
     };
   };
