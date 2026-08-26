@@ -20,13 +20,18 @@ permissions:
   contents: read
 
 jobs:
-  # Offline, deterministic: the committed section must equal render(data/registry.json).
+  # Offline, deterministic, two halves. The seed must be well-formed (every node
+  # declares its labels, every edge names real nodes), and the page that renders
+  # it must equal render(seed). Those used to be one check against a summary
+  # spliced into index.html; the homepage no longer carries one, and /map renders
+  # the registry in full, so the rendering half is gen-map's.
   check:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: node scripts/gen-registry.mjs --check
+      - run: node scripts/gen-map.mjs --check
 
   # Networked: refresh labels from each package's bounded.* (per-repo), regenerate,
   # open a PR on any change. No-op until/unless a package's bounded.* changes.
@@ -37,9 +42,11 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - name: Refresh labels from each package's bounded.* and regenerate
-        run: node scripts/gen-registry.mjs --from-bounded
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Refresh labels from each package's bounded.* and re-render /map
+        run: |
+          node scripts/gen-registry.mjs --from-bounded
+          node scripts/gen-map.mjs
       - name: Open PR if the section changed
         env:
           GH_TOKEN: ${{ github.token }}

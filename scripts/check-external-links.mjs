@@ -24,7 +24,10 @@ async function walk(dir) {
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const abs = join(dir, e.name);
     if (e.isDirectory()) out.push(...await walk(abs));
-    else if (e.name.endsWith(".html")) out.push(abs);
+    // .jsonld too: the claims graph's `evidence` permalinks are the backing-code
+    // links the honesty section rests on, and they are served as data, not markup —
+    // so scanning only .html left exactly those links probed by nothing (P2, rot).
+    else if (e.name.endsWith(".html") || e.name.endsWith(".jsonld")) out.push(abs);
   }
   return out;
 }
@@ -34,7 +37,9 @@ const where = new Map();
 for (const abs of await walk(dist)) {
   const html = await readFile(abs, "utf8");
   const rel = relative(dist, abs);
-  for (const m of html.matchAll(/href="(https?:\/\/[^"]+)"/g)) {
+  // href="…" in markup; "…": "https://…" in the served JSON-LD graphs.
+  const pattern = abs.endsWith(".jsonld") ? /"(https?:\/\/[^"]+)"/g : /href="(https?:\/\/[^"]+)"/g;
+  for (const m of html.matchAll(pattern)) {
     const u = m[1].replace(/&amp;/g, "&");
     if (!where.has(u)) where.set(u, new Set());
     where.get(u).add(rel);

@@ -58,6 +58,15 @@ function renderRows(checks, declared) {
   const sorted = [...checks].sort((a, b) => a.type.localeCompare(b.type));
   const sortedDeclared = [...declared].sort((a, b) => a.type.localeCompare(b.type));
   return [
+    // The table is wider than a phone: 590px of columns in a 390px viewport, which
+    // made the PAGE scroll sideways instead of the table (visual sweep). Wrapping it in
+    // its own scroll container keeps the overflow where it belongs.
+    //
+    // tabindex="0" is load-bearing, not decoration: a scrollable region that cannot
+    // be focused cannot be scrolled by keyboard at all (WCAG 2.1.1), and the role +
+    // label are what stop a focusable div from being an unnamed stop in the tab
+    // order.
+    '      <div class="grid-scroll" role="region" aria-label="Contract lattice" tabindex="0">',
     '      <table class="grid">',
     "        <thead>",
     "          <tr><th>Contract</th><th>Kind</th><th>Grade</th><th>Governs</th></tr>",
@@ -67,6 +76,7 @@ function renderRows(checks, declared) {
     ...sortedDeclared.map(declaredRow),
     "        </tbody>",
     "      </table>",
+    "      </div>",
   ].join("\n");
 }
 

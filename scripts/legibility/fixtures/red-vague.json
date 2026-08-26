@@ -1,0 +1,23 @@
+{
+  "id": "msg_fixture_vague",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-opus-5",
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "",
+      "signature": ""
+    },
+    {
+      "type": "text",
+      "text": "{\n  \"restate_the_bet\": {\n    \"one_sentence\": \"It is an open-source infrastructure project about trust and verification, published with signed provenance.\"\n  },\n  \"why\": {\n    \"problem\": \"It solves the problem of not being able to verify a software supply chain.\"\n  },\n  \"what\": {\n    \"named\": [\n      \"the website\",\n      \"a JSON file\"\n    ],\n    \"what_one_does\": \"It works.\"\n  },\n  \"how_far_along\": {\n    \"working\": [\n      \"everything described\"\n    ],\n    \"open_bets\": [],\n    \"contracts_between_components\": \"solved\"\n  },\n  \"who_and_next\": {\n    \"who\": \"A company.\",\n    \"what_they_want\": \"They want to sell you a subscription.\"\n  }\n}"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 1204,
+    "output_tokens": 588
+  }
+}

@@ -7,7 +7,7 @@
 // home page and blog index. Output lives in dist/ (a pure build artifact, like
 // gen-blog.mjs) — nothing committed to drift-check. Wired into the hermetic build
 // (flake buildPhase) so the deployed site actually carries them.
-import { readdir, writeFile, mkdir } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -19,14 +19,35 @@ let posts = [];
 try { posts = (await readdir(join(root, "blog"))).filter((f) => f.endsWith(".md")).sort(); }
 catch { /* no blog/ */ }
 
-// Served files (guaranteed 200): home, the conformance projection, blog index,
-// each post at /blog/<slug>.html.
-const urls = [
+// Served URLs (guaranteed 200): home, every nav page, blog index, each post at
+// its canonical extensionless /blog/<slug> — the host 307-redirects the .html
+// form to it, and a sitemap should advertise final URLs, not redirects.
+//
+// DERIVED, NOT RESTATED (#203). This list used to be hand-maintained, and
+// /contracts went missing from it for its whole life (#201) because shipping a
+// page and listing it here were two separate acts of memory — the drift shape
+// data/nav.jsonld already exists to prevent for the nav itself ("so the two never
+// drift", build.mjs). Pages now come from that same canonical source: a page a
+// reader can reach from the nav is exactly a page a crawler should find. One
+// list, two consumers.
+//
+// `kind: "external"` entries are excluded by construction, and that is correct —
+// a sitemap advertises THIS origin, not GitHub. `/` is not a nav item (the mark
+// links home) so it stays explicit, and posts already derive from blog/*.md.
+const nav = JSON.parse(await readFile(join(root, "data", "nav.jsonld"), "utf8"));
+const navPages = (nav.site || []).filter((i) => i.kind === "page").map((i) => `${SITE}${i.url}`);
+
+// Deduped, order-preserving: the sources legitimately overlap — nav carries
+// "Writing" (/blog/) as a page, and the blog index is listed here in its own
+// right so it survives being dropped from the nav. A URL repeated in a sitemap
+// is not fatal, but it is the kind of sloppiness this repo gates elsewhere
+// (check-node-uniqueness), and a Set makes any future overlap a non-event.
+const urls = [...new Set([
   `${SITE}/`,
-  `${SITE}/conformance`,
+  ...navPages,
   `${SITE}/blog/`,
-  ...posts.map((f) => `${SITE}/blog/${basename(f, ".md")}.html`),
-];
+  ...posts.map((f) => `${SITE}/blog/${basename(f, ".md")}`),
+])];
 
 const sitemap =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +

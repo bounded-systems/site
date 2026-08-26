@@ -2,10 +2,10 @@
 // Generate the capability-seam grid on the homepage from data/seams.json.
 //
 // The grid between the `<!-- seams:start … -->` and `<!-- seams:end -->`
-// markers in index.html is GENERATED — do not hand-edit it. Edit the seed
+// markers in map.html is GENERATED — do not hand-edit it. Edit the seed
 // (data/seams.json) and run this script.
 //
-//   node scripts/gen-seams.mjs              rewrite the marked region in index.html
+//   node scripts/gen-seams.mjs              rewrite the marked region in map.html
 //   node scripts/gen-seams.mjs --check      exit 1 if the region is stale (no writes, offline)
 //   node scripts/gen-seams.mjs --from-prx   refresh the seed taglines from prx, then render (network)
 //   node scripts/gen-seams.mjs --emit-seed  write seed/prx-seam-taglines.json (upstream payload)
@@ -21,7 +21,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const HTML = join(root, "index.html");
+const HTML = join(root, "map.html");
 const DATA = join(root, "data", "seams.json");
 const START = "<!-- seams:start";
 const END = "<!-- seams:end -->";
@@ -51,7 +51,7 @@ function splice(html, grid) {
   const s = html.indexOf(START);
   const e = html.indexOf(END);
   if (s === -1 || e === -1) {
-    throw new Error("seam markers not found in index.html — add <!-- seams:start … --> / <!-- seams:end -->");
+    throw new Error("seam markers not found in map.html — add <!-- seams:start … --> / <!-- seams:end -->");
   }
   const afterStart = html.indexOf("-->", s) + 3;
   return `${html.slice(0, afterStart)}\n${grid}\n      ${html.slice(e)}`;
@@ -187,7 +187,7 @@ const next = splice(html, renderGrid(data.seams));
 // Read-only drift gate (offline, deterministic) — used by CI.
 if (args.has("--check")) {
   if (next !== html) {
-    console.error("✗ seam grid in index.html is stale — run: node scripts/gen-seams.mjs");
+    console.error("✗ seam grid in map.html is stale — run: node scripts/gen-seams.mjs");
     process.exit(1);
   }
   console.log("✓ seam grid is in sync with data/seams.json");
@@ -198,7 +198,7 @@ if (args.has("--check")) {
 if (!args.has("--reconcile") || args.has("--from-prx")) {
   if (next !== html) {
     await writeFile(HTML, next);
-    console.log("✓ regenerated seam grid in index.html");
+    console.log("✓ regenerated seam grid in map.html");
   } else {
     console.log("✓ seam grid already up to date");
   }

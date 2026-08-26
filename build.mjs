@@ -28,7 +28,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
 // Page files
-for (const f of ["index.html", "styles.css", "404.html", "llms.txt", "nav.js", "contracts.html"]) {
+for (const f of ["index.html", "styles.css", "404.html", "llms.txt", "nav.js", "contracts.html", "ledger.html", "map.html"]) {
   await cp(join(root, f), join(dist, f));
 }
 
@@ -46,7 +46,7 @@ const nav = JSON.parse(await readFile(join(root, "data", "nav.jsonld"), "utf8"))
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const renderSite = (items) => items.map((i) =>
   i.kind === "external"
-    ? `<a class="nav__gh" href="${i.url}" rel="noopener">${esc(i.name)}&nbsp;&#8599;<span class="u-sr-only"> (external site)</span></a>`
+    ? `<a class="nav__gh" href="${i.url}" rel="noopener">${esc(i.name)}&nbsp;&#8599;&#xFE0E;<span class="u-sr-only"> (external site)</span></a>`
     : `<a href="${i.url}">${esc(i.name)}</a>`
 ).join("\n          ");
 const renderToc = (items) =>

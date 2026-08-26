@@ -7,9 +7,17 @@
 // asserts the SHAPE of the outline itself, so that regression fails CI and cannot merge:
 //   1. exactly one <h1> (the page title);
 //   2. no skipped heading levels (h2 → h4 is a hole);
-//   3. every card that carries a title is a heading — each .proof-card and each .seams__head
-//      MUST contain an <h{2..6}> (not a <div>/<span> dressed as one);
+//   3. every card that carries a title is a heading — each .proof-card MUST contain
+//      an <h{2..6}> (not a <div>/<span> dressed as one), and the component must
+//      still exist SOMEWHERE across the surfaces, not necessarily on each one;
 //   4. every <section> has a heading somewhere inside it.
+//
+// The presence half used to be asserted per-surface, which made it an assertion
+// about the homepage's SHAPE rather than about the component: moving a card to
+// the page it belongs on failed the gate even though nothing regressed. It is
+// now global across SURFACES. (.seams__head was a second card in this rule; the
+// component was retired with the homepage cut in site issue 219, so there is
+// nothing left for that entry to guard.)
 //
 //   node scripts/check-outline.mjs        # over the source surface(s)
 import { readFileSync } from "node:fs";
@@ -17,7 +25,11 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const SURFACES = ["index.html"];
+const SURFACES = ["index.html", "map.html"];
+const CARD_RULES = [
+  { sel: "proof-card", re: /<a\b[^>]*\bclass="[^"]*\bproof-card\b[^"]*"[^>]*>([\s\S]*?)<\/a>/gi },
+];
+const seen = {};
 let errors = 0;
 const fail = (f, m) => { console.error(`✗ ${f}: ${m}`); errors++; };
 
@@ -32,14 +44,10 @@ for (const file of SURFACES) {
   for (const l of levels) { if (prev && l > prev + 1) fail(file, `skipped heading level: h${prev} → h${l}`); prev = l; }
 
   // 3 — title-bearing cards must use a real heading element.
-  const cardRules = [
-    { sel: "proof-card", re: /<a\b[^>]*\bclass="[^"]*\bproof-card\b[^"]*"[^>]*>([\s\S]*?)<\/a>/gi },
-    { sel: "seams__head", re: /<div\b[^>]*\bclass="[^"]*\bseams__head\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi },
-  ];
-  for (const { sel, re } of cardRules) {
+  for (const { sel, re } of CARD_RULES) {
     let n = 0;
     for (const m of html.matchAll(re)) { n++; if (!/<h[2-6]\b/i.test(m[1])) fail(file, `.${sel} #${n} has no heading element — a card title must be an <h{2..6}>, not a <div>/<span>`); }
-    if (n === 0) fail(file, `expected at least one .${sel} — structure missing?`);
+    seen[sel] = (seen[sel] || 0) + n;
   }
 
   // 4 — every <section> contains a heading.
@@ -49,6 +57,10 @@ for (const file of SURFACES) {
     const own = m[2].replace(/<section\b[\s\S]*?<\/section>/gi, " ");
     if (!/<h[1-6]\b/i.test(own)) fail(file, `<section id="${id}"> has no heading`);
   }
+}
+
+for (const { sel } of CARD_RULES) {
+  if (!seen[sel]) fail(SURFACES.join(" + "), `expected at least one .${sel} across the surfaces — component removed without updating this contract?`);
 }
 
 if (errors) { console.error(`✗ check-outline: ${errors} structural violation(s) — the outline contract is broken`); process.exit(1); }
