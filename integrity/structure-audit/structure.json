@@ -11,7 +11,6 @@
       "/blog/",
       "/conformance",
       "/contracts",
-      "/desk",
       "/ledger",
       "/map"
     ]
@@ -117,15 +116,6 @@
       "/"
     ]
   },
-  "desk.html": {
-    "h1": "Desk",
-    "outline": "12",
-    "mains": 1,
-    "readerOk": null,
-    "internalLinks": [
-      "/"
-    ]
-  },
   "index.html": {
     "h1": "Your coding agent runs with your access. Bounded Systems puts a checkpoint in fr",
     "outline": "12333223332",
@@ -137,7 +127,6 @@
       "/conformance",
       "/conformance#claims",
       "/contracts",
-      "/desk",
       "/ledger",
       "/map",
       "/map",

@@ -7,8 +7,8 @@
     {
       "@type": "SiteNavigationElement",
       "name": "Desk",
-      "url": "/desk",
-      "kind": "page"
+      "url": "https://desk.bounded.tools",
+      "kind": "external"
     },
     {
       "@type": "SiteNavigationElement",
