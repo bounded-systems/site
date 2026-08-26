@@ -17,6 +17,7 @@ permissions:
   contents: read
   id-token: write # OIDC: lets cosign mint a keyless Fulcio cert for build provenance
   packages: write # push the built site to GHCR as a signed OCI artifact
+  issues: write # the promote ceremony's notification issue (the callee's declared block intersects, so the grant must originate here)
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -102,9 +103,9 @@ jobs:
   # This ADDS an approval gate bounded.tools didn't have before (was straight build→deploy).
   # Pinned by SHA per the repo's "every action pinned by SHA" posture. A SHA pin does not
   # track .github main, so it only moves when bumped here deliberately — this one carries
-  # bounded-systems/.github#171 (per-role broker routes + the site-preview environment pin),
-  # which is the exact ref the broker's WORKERS_DEPLOY entries pin: any other SHA fails the
-  # mint 401.
+  # bounded-systems/.github#251 (the optional Face ID promote gate, atop #171's per-role
+  # broker routes and #172's id-token fix), which is the exact ref the broker's
+  # WORKERS_DEPLOY entries pin: any other SHA fails the mint 401.
   #
   # No stored Cloudflare credential: the callee mints a per-run token from the OIDC broker
   # (infra#336 option (a)). The URL is a literal, not vars.CF_BROKER_URL, so this public
@@ -116,10 +117,16 @@ jobs:
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@42db0e942a7ef35430e6e86b0973b9ca1fee1e6e # .github main (#172 — id-token fix over #171)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@8db89f811e4b0bb5e682103ba1c595c4b1fe8c2d # .github main (#251 — Face ID promote gate, over #172's id-token fix)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
       identity_regexp: "^https://github.com/bounded-systems/site/"
       cf_broker_url: "https://broker.bounded.tools"
       cf_broker_path: /deploy/bounded-tools-site
+      # The promote gate is a Face ID ceremony (infra#480): the callee opens a ceremony
+      # pinning the run and commit, the notification issue carries the verified preview
+      # URL, and the promote credential is minted only after a fail-closed redeem. With
+      # this set, the site-promote Environment's required reviewers become redundant —
+      # removing them is a repo-settings toggle recorded in the PR that added this line.
+      keeper_url: "https://keeper.bounded.tools"
