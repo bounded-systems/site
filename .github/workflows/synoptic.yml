@@ -9,6 +9,6 @@ permissions:
   contents: read
 jobs:
   site:
-    uses: bounded-systems/synoptic/.github/workflows/site-ci.yml@v0.5.1
+    uses: bounded-systems/synoptic/.github/workflows/site-ci.yml@v0.17.0
     permissions:
       contents: read
