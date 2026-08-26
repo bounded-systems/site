@@ -1,0 +1,138 @@
+name: card-inset
+
+# Rendered-layout gate: no card's text may touch the card's own border.
+#
+# WHY A LANE. `.provenance` shipped with no CSS rule at all — the two provenance
+# cards on the homepage rendered their copy flush against a 1px border, with the
+# corner radius cutting into the first line, and stacked siblings doubling their
+# borders into a seam. It survived every gate this repo runs, and each for a
+# defensible reason: axe scores the accessibility tree, not whitespace; the
+# visual sweep in issue 209 looked for horizontal OVERFLOW, the opposite failure; the
+# density gate reads words. A reader on an iPad found it instead (site issue 215).
+#
+# So this is not a stricter version of an existing check. It is the check that
+# was missing, and per docs/agentic-code-hygiene.md a fix without a forcing
+# function decays back — the padding could be dropped again tomorrow and nothing
+# would say so.
+#
+# It renders the built pages in Chromium at two widths and measures where the
+# glyphs land relative to each card's border box. Same machinery the axe gate
+# already depends on, for the same reason: layout is not derivable from markup.
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths:
+      - "*.html"
+      - "styles.css"
+      - "build.mjs"
+      - "scripts/**"
+      - "content/card-inset-allowlist.json"
+      - "data/**"
+      - "posts/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/card-inset.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  card-inset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: Install deps
+        run: npm ci
+      - name: Install Chromium (Playwright)
+        run: npx playwright install --with-deps chromium
+      - name: Build dist/
+        run: npm run build
+
+      # The gate must be able to FAIL, or it is decoration. Before trusting the
+      # green run below, strip a card variant's inset and prove the check goes
+      # red — rule 3 of agentic-code-hygiene: a gate's own claim about itself is
+      # not evidence. It mutates .proof-card because .provenance — the class the
+      # gate was written for — no longer exists: the homepage rewrite cut those
+      # cards. A mutation aimed at a class that is gone proves nothing and passes
+      # quietly, which is the failure mode this whole step exists to prevent.
+      #
+      # Restore from a COPY, not `git checkout -- styles.css`. The git form is
+      # correct in CI and quietly destructive anywhere else: run this script on
+      # a working tree with uncommitted style edits and it discards them. It ate
+      # this very change once while being written. A copy restores what was
+      # there, wherever it runs.
+      - name: mutation — the gate can fail
+        run: |
+          set -e
+          cp styles.css styles.css.orig
+          restore() { mv styles.css.orig styles.css; }
+          trap restore EXIT
+          printf '\n.proof-card { padding: 0; }\n' >> styles.css
+          npm run build >/dev/null
+          if npm run card-inset; then
+            echo "✗ card-inset passed with .proof-card padding removed — the gate is not measuring anything."
+            exit 1
+          fi
+          echo "✓ gate went red on the injected regression, as it must."
+          restore
+          trap - EXIT
+          npm run build >/dev/null
+
+      # The gate stands up a static server to render dist/ in a real browser.
+      # Its first version built a filesystem path out of the request, which
+      # CodeQL flagged and which was genuinely wrong:
+      # `join("dist", "/../../../../etc/passwd")` is /etc/passwd. It now serves
+      # from an allowlist built by walking dist, so no path is derived from the
+      # request at all — but that is a claim about the code, and this step is
+      # the evidence for it.
+      #
+      # fetch() and every browser normalize `..` out of a path BEFORE sending, so
+      # a request made with either one silently tests nothing. The first probe
+      # written here did exactly that and came back looking fine. Only a
+      # hand-written request line reaches the server with the traversal intact.
+      - name: the server serves nothing outside its own file list
+        run: |
+          set -e
+          node - <<'PROBE'
+          import { readFile, writeFile } from "node:fs/promises";
+          import net from "node:net";
+          const src = await readFile("scripts/check-card-inset.mjs", "utf8");
+          const head = src.slice(0, src.indexOf("// Runs in the page.")).replace("#!/usr/bin/env node", "");
+          await writeFile("/tmp/serve-probe.mjs", head + "\nexport { serve, walk };\n");
+          const { serve, walk } = await import("/tmp/serve-probe.mjs");
+          const { srv, base } = await serve("dist", await walk("dist"));
+          const port = new URL(base).port;
+          const raw = (path) => new Promise((res) => {
+            const s = net.connect(port, "127.0.0.1", () =>
+              s.write(`GET ${path} HTTP/1.1\r\nHost: x\r\nConnection: close\r\n\r\n`));
+            let b = ""; s.on("data", (d) => { b += d; }); s.on("end", () => res(b));
+          });
+          let bad = 0;
+          for (const p of [
+            "/../../../../etc/passwd",
+            "/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd",
+            "/../../scripts/check-card-inset.mjs",
+            "/../package.json",
+          ]) {
+            const r = await raw(p);
+            const status = r.split("\r\n")[0];
+            const leaked = /root:x:0:0|#!\/usr\/bin\/env node|"devDependencies"/.test(r);
+            console.log(`  ${status}   ${p}`);
+            if (status.includes(" 200") || leaked) { console.error(`  ✗ served something outside dist/: ${p}`); bad++; }
+          }
+          for (const p of ["/index.html", "/", "/map"]) {
+            const r = await raw(p);
+            if (!r.split("\r\n")[0].includes(" 200")) { console.error(`  ✗ a legitimate route stopped being served: ${p}`); bad++; }
+          }
+          srv.close();
+          if (bad) process.exit(1);
+          console.log("✓ nothing outside dist/ is reachable; real routes still are.");
+          PROBE
+
+      - name: card-inset gate — no card's text touches its own border
+        run: npm run card-inset

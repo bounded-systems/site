@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grade ledger — Bounded Systems</title>
+  <meta name="description" content="Every time a claim's grade moved or its gap narrowed, and what changed our mind — rendered at build time from the append-only ledger the build gate reads.">
+  <link rel="canonical" href="https://bounded.tools/ledger">
+  <link rel="icon" type="image/png" href="brand/favicon-32.png">
+  <meta name="theme-color" content="#0C5A42">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bounded Systems">
+  <meta property="og:url" content="https://bounded.tools/ledger">
+  <meta property="og:title" content="Grade ledger — Bounded Systems">
+  <meta property="og:description" content="Every time a claim's grade moved or its gap narrowed, and what changed our mind — rendered at build time from the append-only ledger the build gate reads.">
+  <meta property="og:image" content="https://bounded.tools/brand/lockup/lockup-forest-1200.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Bounded Systems — bounded authority for AI agents">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Grade ledger — Bounded Systems">
+  <meta name="twitter:description" content="Every time a claim's grade moved or its gap narrowed, and what changed our mind — rendered at build time from the append-only ledger the build gate reads.">
+  <meta name="twitter:image" content="https://bounded.tools/brand/lockup/lockup-forest-1200.png">
+
+  <link rel="stylesheet" href="brand/css/fonts.css">
+  <link rel="stylesheet" href="brand/tokens/tokens.css">
+  <link rel="stylesheet" href="brand/css/base.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .ledger { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .ledger__intro { color: var(--bnd-color-ink); max-width: 44rem; }
+    .ledger__tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: .75rem; margin: 1.75rem 0; }
+    .tile { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: .6rem; padding: .85rem 1rem; }
+    .tile__n { font-size: 1.9rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+    .tile__l { font-size: .8rem; opacity: .7; margin-top: .3rem; }
+    .quiet { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: .6rem; padding: 1rem 1.15rem; margin: 1.5rem 0; }
+    .entry { border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); padding: 1.1rem 0; }
+    .entry__head { display: flex; flex-wrap: wrap; gap: .6rem; align-items: baseline; }
+    .entry__date { font-size: .82rem; opacity: .65; font-variant-numeric: tabular-nums; }
+    .entry__claim { font-family: var(--bnd-font-mono, ui-monospace, monospace); font-size: .85rem; opacity: .8; }
+    .entry__note { margin: .5rem 0 .35rem; max-width: 46rem; }
+    .entry__pages { font-size: .85rem; opacity: .75; }
+    .move { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; font-weight: 600; }
+    .badge { display: inline-block; font-size: .78rem; font-weight: 600; padding: .12rem .5rem; border-radius: 1rem; white-space: nowrap; }
+    .badge--enforced { background: color-mix(in srgb, var(--bnd-color-forest) 15%, transparent); color: var(--bnd-color-forest); }
+    .badge--partial { background: color-mix(in srgb, var(--bnd-color-clay) 13%, transparent); color: var(--bnd-color-clay); }
+    .badge--aspirational { background: color-mix(in srgb, currentColor 9%, transparent); opacity: .8; }
+    .badge--genesis { background: color-mix(in srgb, currentColor 7%, transparent); opacity: .7; font-weight: 500; }
+    .mono { font-family: var(--bnd-font-mono, ui-monospace, monospace); }
+    .muted { opacity: .7; }
+    .home { display: inline-block; margin-bottom: 1.5rem; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main class="ledger" id="main">
+    <a class="home" href="/">&larr; bounded.tools</a>
+    <h1>Grade ledger</h1>
+    <p class="ledger__intro">
+      Claims on this site carry a grade. This page records every time one
+      <strong>moved</strong> — a grade changing, or a gap narrowing — and what
+      changed our mind. It is rendered at <strong>build time</strong> from
+      <a href="https://github.com/bounded-systems/site/blob/main/integrity/claims/ledger.jsonl"><code class="mono">ledger.jsonl</code></a>,
+      the same append-only record the build gate reads: if a grade moves and no
+      entry records it, the build fails. So this is not a changelog someone
+      remembers to write — it is the file that makes forgetting impossible.
+      The raw record is at <a href="/ledger.jsonl"><code class="mono">/ledger.jsonl</code></a>.
+    </p>
+
+<!-- ledger:start (generated by scripts/gen-ledger.mjs from integrity/claims/ledger.jsonl — do not hand-edit) -->
+      <div class="ledger__tiles">
+        <div class="tile"><div class="tile__n">0</div><div class="tile__l">movements</div></div>
+        <div class="tile"><div class="tile__n">6</div><div class="tile__l">claims tracked</div></div>
+        <div class="tile"><div class="tile__n">6</div><div class="tile__l">entries</div></div>
+      </div>
+      <div class="quiet">
+        <p><strong>No movement yet.</strong> Every claim below is at the grade it
+        held when this ledger opened — nothing has changed since. The page fills in
+        when a grade first moves, and the gate is what guarantees that entry exists.</p>
+      </div>
+      <h2 style="margin-top:2rem">Starting positions</h2>
+      <div class="entry">
+        <div class="entry__head">
+          <span class="entry__date">2026-08-20</span>
+          <span class="entry__claim">c6</span>
+          <span class="badge badge--genesis">genesis</span> <span class="badge badge--aspirational">aspirational</span>
+        </div>
+        <p class="entry__note">Genesis — state at ledger open. Inter-contract enforcement is the open problem the project is aimed at.</p>
+      </div>
+      <div class="entry">
+        <div class="entry__head">
+          <span class="entry__date">2026-08-20</span>
+          <span class="entry__claim">c5</span>
+          <span class="badge badge--genesis">genesis</span> <span class="badge badge--aspirational">aspirational</span>
+        </div>
+        <p class="entry__note">Genesis — state at ledger open. Convergence onto one door runtime is direction, not result. No page cites c5 yet.</p>
+      </div>
+      <div class="entry">
+        <div class="entry__head">
+          <span class="entry__date">2026-08-20</span>
+          <span class="entry__claim">c4</span>
+          <span class="badge badge--genesis">genesis</span> <span class="badge badge--partial">partial</span>
+        </div>
+        <p class="entry__note">Genesis — state at ledger open. Broker holds the credential; the macOS door is TCP loopback, weaker than unix-socket possession.</p>
+      </div>
+      <div class="entry">
+        <div class="entry__head">
+          <span class="entry__date">2026-08-20</span>
+          <span class="entry__claim">c3</span>
+          <span class="badge badge--genesis">genesis</span> <span class="badge badge--partial">partial</span>
+        </div>
+        <p class="entry__note">Genesis — state at ledger open. Provenance derivation exists; emission and enforcement stay opt-in until Sigstore lands.</p>
+      </div>
+      <div class="entry">
+        <div class="entry__head">
+          <span class="entry__date">2026-08-20</span>
+          <span class="entry__claim">c2</span>
+          <span class="badge badge--genesis">genesis</span> <span class="badge badge--enforced">enforced</span>
+        </div>
+        <p class="entry__note">Genesis — state at ledger open. guest-room's behaviour specs execute against the engine.</p>
+      </div>
+      <div class="entry">
+        <div class="entry__head">
+          <span class="entry__date">2026-08-20</span>
+          <span class="entry__claim">c1</span>
+          <span class="badge badge--genesis">genesis</span> <span class="badge badge--enforced">enforced</span>
+        </div>
+        <p class="entry__note">Genesis — state at ledger open. Docs generate from source and fail CI on drift.</p>
+      </div>
+<!-- ledger:end -->
+
+    <h2 style="margin-top:2.5rem">What a genesis entry is</h2>
+    <!-- Not .muted: opacity on a parent dims its whole subtree and a child cannot
+         opt out, so .muted (.7) over .badge--genesis (.7) compounds to ~.49 and the
+         badge falls under the AA contrast floor. Caught by the axe gate. -->
+    <p class="ledger__intro">
+      A <span class="badge badge--genesis">genesis</span> entry records the grade a
+      claim held when this ledger opened. It is a starting position, not a
+      movement, so it is marked apart from real transitions rather than padding
+      the count — the page would otherwise imply activity that never happened.
+    </p>
+  </main>
+</body>
+</html>

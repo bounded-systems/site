@@ -1,3 +1,5 @@
 {
-  "catalogPath": "content/strings.json"
+  "$comment": "Opt-in sentinel for bounded-systems/content-catalog's org-wide aggregate. THE TWO PATHS POINT AT DIFFERENT TREES ON PURPOSE — see #189 before 'tidying' them. catalogPath is the HAND-AUTHORED source, because the emitted data/audit/catalog.json carries 344 prose blocks and no claim-* symbols at all, so pointing at it would drop every honesty claim from the org catalog. groundingPath is the EMITTED array, because aggregate.mjs accepts an array of terms and content/grounding.json is an object keyed by phrase — declaring the authoring source there parses fine, fails the Array.isArray check, and is silently ignored, which is the same symptom as declaring nothing.",
+  "catalogPath": "content/strings.json",
+  "groundingPath": "data/audit/grounding.json"
 }

@@ -17,6 +17,7 @@ permissions:
   contents: read
   id-token: write # OIDC: lets cosign mint a keyless Fulcio cert for build provenance
   packages: write # push the built site to GHCR as a signed OCI artifact
+  issues: write # the promote ceremony's notification issue (the callee's declared block intersects, so the grant must originate here)
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -35,8 +36,8 @@ jobs:
     outputs:
       oci: ${{ steps.publish.outputs.oci }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: DeterminateSystems/nix-installer-action@90bb610b90bf290cad97484ba341453bd1cbefea # v19
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
 
       # Hermetic build: nodejs + brand are pinned by flake.lock. Same bytes on
       # every machine; runs the brand token-drift check, then assembles dist/.
@@ -66,22 +67,15 @@ jobs:
         run: |
           nix develop .#deploy --command bash -euo pipefail -c '
             short=$(printf "%s" "$GITHUB_SHA" | cut -c1-7)
-            # stamp the honesty section with THIS commit + date (freshness the
-            # visitor can see) BEFORE manifesting, so the stamp is covered by the
-            # signed whole-site manifest rather than an unsigned afterthought.
-            node scripts/gen-stamp.mjs
-            # Fail closed if the vendored conformance-kit drifted from its hash-pin.
-            node scripts/verify-vendor.mjs
-            # The deterministic SPDX SBOM is already in dist/ from the hermetic build;
-            # refuse to ship an incomplete bill, then emit the standards-compliant
-            # sidecars (RFC 9116 security.txt, web app manifest, RFC 9530 Repr-Digest
-            # _headers) onto the final, stamped bytes — all BEFORE the manifest, so the
-            # signed whole-site digest covers them (the SBOM becomes a signed subject).
-            node vendor/conformance-kit/gates/sbom/check-sbom.mjs
-            node scripts/emit-artifacts.mjs
-            # whole-site manifest (covers content + sbom + security.txt + manifest;
-            # _headers and the signature bundles are excluded), signed
-            node scripts/gen-sitemanifest.mjs
+            # The `stamped` half of scripts/pipeline.mjs — the steps that embed the
+            # build date or the deploying commit and so cannot live inside the pure
+            # nix derivation. It stamps the honesty section, re-asserts the vendor
+            # pin and the SBOM, emits the standards sidecars (RFC 9116 security.txt,
+            # web app manifest, RFC 9530 Repr-Digest _headers), emits the served
+            # claims + structured-data graphs, and ends with the whole-site manifest
+            # — so every one of those is a signed subject rather than an unsigned
+            # afterthought. The list lives in pipeline.mjs, never restated here.
+            node scripts/run-pipeline.mjs stamped
             cosign sign-blob --yes --bundle dist/site.sha256.sigstore.json dist/site.sha256
             # also keyless-sign the SBOM blob itself, so it carries its own verifiable
             # Sigstore bundle alongside being a subject of the signed site manifest
@@ -107,16 +101,32 @@ jobs:
   # preview-URL verify → gated promote) — the same source of truth as robertdelanghe.dev. The
   # required-reviewers `site-promote` Environment lives in THIS repo, so approval is enforced here.
   # This ADDS an approval gate bounded.tools didn't have before (was straight build→deploy).
-  # Pinned by SHA per the repo's "every action pinned by SHA" posture — now that
-  # bounded-systems/.github#42 (RFC 9110 probe opt-in) is merged, this moves off the
-  # temporary branch pin to its merge commit on .github main.
+  # Pinned by SHA per the repo's "every action pinned by SHA" posture. A SHA pin does not
+  # track .github main, so it only moves when bumped here deliberately — this one carries
+  # bounded-systems/.github#251 (the optional Face ID promote gate, atop #171's per-role
+  # broker routes and #172's id-token fix), which is the exact ref the broker's
+  # WORKERS_DEPLOY entries pin: any other SHA fails the mint 401.
+  #
+  # No stored Cloudflare credential: the callee mints a per-run token from the OIDC broker
+  # (infra#336 option (a)). The URL is a literal, not vars.CF_BROKER_URL, so this public
+  # caller cannot silently break on org-variable visibility; infra's target-host guard pins
+  # the same hostname. The callee appends the job role itself — preview POSTs
+  # /deploy/bounded-tools-site-preview, promote /deploy/bounded-tools-site-promote — so the
+  # path here stays role-less. `site-preview` auto-creates unprotected on first run: that is
+  # deliberate (a broker pin, not a gate); required reviewers stay on `site-promote` only.
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@c46a1dc7b8e6b2a9ad146bffb93a80f8689dd34e # .github main (#42)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@8db89f811e4b0bb5e682103ba1c595c4b1fe8c2d # .github main (#251 — Face ID promote gate, over #172's id-token fix)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
       identity_regexp: "^https://github.com/bounded-systems/site/"
-    secrets:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      cf_broker_url: "https://broker.bounded.tools"
+      cf_broker_path: /deploy/bounded-tools-site
+      # The promote gate is a Face ID ceremony (infra#480): the callee opens a ceremony
+      # pinning the run and commit, the notification issue carries the verified preview
+      # URL, and the promote credential is minted only after a fail-closed redeem. With
+      # this set, the site-promote Environment's required reviewers become redundant —
+      # removing them is a repo-settings toggle recorded in the PR that added this line.
+      keeper_url: "https://keeper.bounded.tools"

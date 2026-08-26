@@ -17,8 +17,8 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
       - name: Install
@@ -27,7 +27,7 @@ jobs:
         id: brand-version
         run: echo "version=$(node -p "require('./node_modules/@bounded-systems/brand/package.json').version")" >> "$GITHUB_OUTPUT"
       - name: Checkout brand's source (dev tooling only — not published to npm)
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: bounded-systems/brand
           ref: v${{ steps.brand-version.outputs.version }}
@@ -58,7 +58,7 @@ jobs:
   # ships) and as the @bounded-systems/brand npm dependency (npm run dev + the checks
   # above). They must resolve to the same release — when they drift, the deployed CSS
   # can silently lag the styles that reference it. That is exactly how the grade
-  # badges shipped with empty var(--bs-grade-*) values: the (then-)submodule was
+  # badges shipped with empty var(--bnd-grade-*) values: the (then-)submodule was
   # bumped but flake.lock was never relocked. npm's pin is a semver version, not a
   # git commit, so this resolves it to the exact commit via the release tag
   # (mint release always tags v<version> at the commit it cuts the release from)
@@ -66,8 +66,8 @@ jobs:
   brand-pins-agree:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
       - name: Install
@@ -107,8 +107,8 @@ jobs:
   structure-audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
       - name: Install
@@ -130,8 +130,8 @@ jobs:
   conformance:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
       - name: Install
@@ -158,7 +158,7 @@ jobs:
   # bump the pin to pick up upstream rule changes. build-cmd regenerates the
   # content-addressed catalog so the gate always sees the current prose.
   copy:
-    uses: bounded-systems/string-audit/.github/workflows/audit.yml@2d9153d219eed4ef3d9cf979f1bd04f510a04f00 # v0.6.1
+    uses: bounded-systems/string-audit/.github/workflows/audit.yml@ef860901c622651deac89072c946597ef07e8fbb # v0.7.0
     with:
       ref: 2d9153d219eed4ef3d9cf979f1bd04f510a04f00 # v0.6.1
       build-cmd: node scripts/emit-catalog.mjs

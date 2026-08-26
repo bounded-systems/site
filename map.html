@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map — Bounded Systems</title>
+  <meta name="description" content="Every package Bounded Systems has built, laid out by what it is — verbs that act, nouns that hold — generated from each package's own declared labels.">
+  <link rel="canonical" href="https://bounded.tools/map">
+  <link rel="icon" type="image/png" href="brand/favicon-32.png">
+  <meta name="theme-color" content="#0C5A42">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bounded Systems">
+  <meta property="og:url" content="https://bounded.tools/map">
+  <meta property="og:title" content="Map — Bounded Systems">
+  <meta property="og:description" content="Every package Bounded Systems has built, laid out by what it is — verbs that act, nouns that hold — generated from each package's own declared labels.">
+  <meta property="og:image" content="https://bounded.tools/brand/lockup/lockup-forest-1200.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Bounded Systems — bounded authority for AI agents">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Map — Bounded Systems">
+  <meta name="twitter:description" content="Every package Bounded Systems has built, laid out by what it is — verbs that act, nouns that hold — generated from each package's own declared labels.">
+  <meta name="twitter:image" content="https://bounded.tools/brand/lockup/lockup-forest-1200.png">
+
+  <link rel="stylesheet" href="brand/css/fonts.css">
+  <link rel="stylesheet" href="brand/tokens/tokens.css">
+  <link rel="stylesheet" href="brand/css/base.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .atlas { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .atlas__intro { color: var(--bnd-color-ink); max-width: 44rem; }
+    .atlas__tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: .75rem; margin: 1.75rem 0; }
+    .tile { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: .6rem; padding: .85rem 1rem; }
+    .tile__n { font-size: 1.9rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+    .tile__l { font-size: .8rem; opacity: .7; margin-top: .3rem; }
+    .legend { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: .6rem; padding: 1rem 1.15rem; margin: 1.5rem 0; }
+    .legend dt { font-weight: 600; display: inline; }
+    .legend dd { display: inline; margin: 0 0 0 .25rem; }
+    .legend div { margin: .25rem 0; }
+    .node { border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); padding: 1rem 0; }
+    .node__head { display: flex; flex-wrap: wrap; gap: .5rem; align-items: baseline; }
+    .node__name { font-family: var(--bnd-font-mono, ui-monospace, monospace); font-weight: 600; }
+    .node__desc { margin: .4rem 0 .25rem; max-width: 46rem; }
+    .node__uses { font-size: .85rem; opacity: .75; font-family: var(--bnd-font-mono, ui-monospace, monospace); }
+    .badge { display: inline-block; font-size: .74rem; font-weight: 600; padding: .1rem .5rem; border-radius: 1rem; white-space: nowrap; }
+    .badge--door { background: color-mix(in srgb, var(--bnd-color-forest) 15%, transparent); color: var(--bnd-color-forest); }
+    .badge--room { background: color-mix(in srgb, var(--bnd-color-clay) 13%, transparent); color: var(--bnd-color-clay); }
+    .badge--guest { background: color-mix(in srgb, currentColor 9%, transparent); }
+    .tag { display: inline-block; font-size: .74rem; font-family: var(--bnd-font-mono, ui-monospace, monospace); opacity: .65; }
+    .mono { font-family: var(--bnd-font-mono, ui-monospace, monospace); }
+    .muted { opacity: .7; }
+    .home { display: inline-block; margin-bottom: 1.5rem; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main class="atlas" id="main">
+    <a class="home" href="/">&larr; bounded.tools</a>
+    <h1>Map</h1>
+    <p class="atlas__intro">
+      Everything we've built, laid out by what it is. <strong>Verbs act</strong> —
+      they are the only places an agent can touch the world. <strong>Nouns
+      hold</strong> — the data those actions run on. Each entry below is generated
+      from the package's own declared labels, so this page can't drift from the
+      code; when it looks wrong, the code is wrong.
+    </p>
+    <p class="atlas__intro muted">
+      The system itself is the three repos on the front page — guest-room,
+      claude-box, prx. Everything else here is the workspace around them:
+      the packages those three are built from, and the tooling that keeps
+      the org honest.
+    </p>
+
+    <!-- The kind legend is the Hotel model in three sentences, attached to real
+         packages instead of asked to be learned up front. -->
+    <!-- Each div wraps exactly one dt+dd pair, nothing else — a stray element
+         inside the div (the badge used to sit there) fails axe's definition-list
+         rule, so the badge lives inside the dt. -->
+    <dl class="legend">
+      <div><dt><span class="badge badge--door">door</span> Door</dt><dd>— one bounded capability an agent acts through. Hold the socket, never the keys behind it.</dd></div>
+      <div><dt><span class="badge badge--room">room</span> Room</dt><dd>— infrastructure a stay runs on: storage, runtimes, policy engines.</dd></div>
+      <div><dt><span class="badge badge--guest">guest</span> Guest</dt><dd>— agent-side tooling: what the agent itself uses to do its job.</dd></div>
+    </dl>
+
+<!-- map:start (generated by scripts/gen-map.mjs from data/registry.json + data/lattice.json — do not hand-edit) -->
+      <div class="atlas__tiles">
+      <div class="tile"><div class="tile__n">26</div><div class="tile__l">packages mapped</div></div>
+      <div class="tile"><div class="tile__n">72</div><div class="tile__l">repos in the org</div></div>
+      <div class="tile"><div class="tile__n">19</div><div class="tile__l">verbs (act)</div></div>
+      <div class="tile"><div class="tile__n">7</div><div class="tile__l">nouns (hold)</div></div>
+      </div>
+      <p class="atlas__intro muted">Coverage is honest, not complete: these are the published packages that declare
+      their own labels. The rest of the org's repos appear here as their descriptors land.</p>
+      <h2>Verbs — the things that act</h2>
+      <p class="atlas__intro muted">Every one of these is a sanctioned access point: the single place a kind of effect is allowed to happen.</p>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">auth</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">capability</span>
+          <span class="tag">auth</span>
+        </div>
+        <p class="node__desc">Service-credential resolver (GitHub, Notion) through a single sanctioned access point</p>
+        <p class="node__uses">uses &rarr; env</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">bd</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">client</span>
+          <span class="tag">beads/tasks</span>
+        </div>
+        <p class="node__desc">Typed interface to the beads CLI with policy enforcement and short-ID guards</p>
+        <p class="node__uses">uses &rarr; env, policy, proc</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">door-kit</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">client</span>
+          <span class="tag">door/protocol</span>
+        </div>
+        <p class="node__desc">In-box door-client SDK for claude-box's capability doors, over the guest-room protocol</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">env</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">capability-seam</span>
+          <span class="tag">environment/config</span>
+        </div>
+        <p class="node__desc">The one sanctioned reader of process.env, routing ambient config through capability imports</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">fs</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">capability-seam</span>
+          <span class="tag">filesystem</span>
+        </div>
+        <p class="node__desc">Filesystem capability seam; the one allowed filesystem-access point with an injectable FileSystem</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">gh</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">client</span>
+          <span class="tag">github</span>
+        </div>
+        <p class="node__desc">GitHub CLI wrapper with policy enforcement, rate-limit gating, and budget audit logging</p>
+        <p class="node__uses">uses &rarr; env, github-budget, policy, proc</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">git</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">capability-seam</span>
+          <span class="tag">git</span>
+        </div>
+        <p class="node__desc">Git CLI wrapper with policy enforcement and stale-lock recovery</p>
+        <p class="node__uses">uses &rarr; env, fs, policy, proc</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">github-budget</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">governor</span>
+          <span class="tag">github/rate-limit</span>
+        </div>
+        <p class="node__desc">Rate-limit-aware gh wrapper with bucket classification, pre-call gating, and audit trail</p>
+        <p class="node__uses">uses &rarr; audit-context, env, proc</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">host</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">capability-seam</span>
+          <span class="tag">host-info</span>
+        </div>
+        <p class="node__desc">The one sanctioned reader of host/OS ambient state (home dir, temp dir, hostname), routing ambient authority through capability imports</p>
+        <p class="node__uses">uses &rarr; env</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">proc</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">capability-seam</span>
+          <span class="tag">process/spawn</span>
+        </div>
+        <p class="node__desc">The one allowed subprocess spawn point, routing external-tool invocations through a capability</p>
+        <p class="node__uses">uses &rarr; env, policy</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">repo-root</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">resolver</span>
+          <span class="tag">repo/fs</span>
+        </div>
+        <p class="node__desc">Repo-root resolution capability: lazy git-based runtime root plus the eager .git-marker walk for build/codegen, the one sanctioned root-resolution point</p>
+        <p class="node__uses">uses &rarr; proc</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">scout</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">reader</span>
+          <span class="tag">external-read</span>
+        </div>
+        <p class="node__desc">Content-addressed surface reads (file/grep/files) with anchored-chain provenance</p>
+        <p class="node__uses">uses &rarr; anchored-chain, anchored-chain-sqlite, cas</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">slack</span>
+          <span class="badge badge--door">door</span>
+          <span class="tag">reader</span>
+          <span class="tag">slack/external</span>
+        </div>
+        <p class="node__desc">Policy-gated, provenance-tracked Slack read surface: bounded read ops behind a swappable transport port, with keymaker-minted scoped credentials</p>
+        <p class="node__uses">uses &rarr; anchored-chain, anchored-chain-sqlite, cas, policy</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">guest-room</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">runtime</span>
+          <span class="tag">capability/model</span>
+        </div>
+        <p class="node__desc">Guest-agnostic room+door capability runtime — the core library claude-box is built on</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">policy</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">engine</span>
+          <span class="tag">tool-policy/authz</span>
+        </div>
+        <p class="node__desc">Tool-policy engine enforcing subcommand allowlists by tool, state, and role</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">surface-sync</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">transform</span>
+          <span class="tag">surfaces</span>
+        </div>
+        <p class="node__desc">Type ontology for work-unit change-detection across GH/branch/worktree/tmux/beads</p>
+        <p class="node__uses">uses &rarr; disposition</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">disposition</span>
+          <span class="badge badge--guest">guest</span>
+          <span class="tag">classifier</span>
+          <span class="tag">work-unit/state</span>
+        </div>
+        <p class="node__desc">Pure classifier mapping work-unit surface state to a disposition (ok/prune/repair/review)</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">schema-gen</span>
+          <span class="badge badge--guest">guest</span>
+          <span class="tag">generator</span>
+          <span class="tag">schema/types</span>
+        </div>
+        <p class="node__desc">Project zod schemas to explicit, fast-types-clean TypeScript (zod → JSON Schema → .d.ts)</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">verbspec</span>
+          <span class="badge badge--guest">guest</span>
+          <span class="tag">projection-engine</span>
+          <span class="tag">interface/cli</span>
+        </div>
+        <p class="node__desc">Spec-driven CLI core: author a verb once as a typed VerbSpec, project it to CLI, MCP, OpenAPI, and Anthropic tool surfaces</p>
+      </div>
+      <h2>Nouns — the things that hold</h2>
+      <p class="atlas__intro muted">The data the verbs run on: storage, schemas, chains, context.</p>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">anchored-chain</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">data-structure</span>
+          <span class="tag">provenance</span>
+        </div>
+        <p class="node__desc">Derivation chain with contract validation, signing, lineage tracking, and invalidation</p>
+        <p class="node__uses">uses &rarr; cas</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">anchored-chain-sqlite</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">store-impl</span>
+          <span class="tag">provenance/persistence</span>
+        </div>
+        <p class="node__desc">SQLite/Drizzle-backed implementation of the anchored-chain stores</p>
+        <p class="node__uses">uses &rarr; anchored-chain, cas</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">audit-context</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">context</span>
+          <span class="tag">audit/attribution</span>
+        </div>
+        <p class="node__desc">Ambient runtime context for gh-call audit attribution (verb, actor, truth reason)</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">cas</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">substrate</span>
+          <span class="tag">content-addressing</span>
+        </div>
+        <p class="node__desc">Content-addressable storage substrate: bytes addressed by their SHA-256 digest, with a storage-agnostic blob-store port</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">machine-schema</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">schema</span>
+          <span class="tag">state-machine/types</span>
+        </div>
+        <p class="node__desc">Brands, handoff envelope, and state/phase/invariant primitives for work-unit machines</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">ocap-provenance</span>
+          <span class="badge badge--room">room</span>
+          <span class="tag">contract</span>
+          <span class="tag">provenance</span>
+        </div>
+        <p class="node__desc">Capability-use provenance: a schema + SLSA mapping binding each privileged effect to a signed owner + auditable chain</p>
+      </div>
+      <div class="node">
+        <div class="node__head">
+          <span class="node__name">prx-config</span>
+          <span class="badge badge--guest">guest</span>
+          <span class="tag">config-schema</span>
+          <span class="tag">tui-config</span>
+        </div>
+        <p class="node__desc">TUI configuration schema parser/emitter for L1 Claude and L2 Warp tools</p>
+      </div>
+<!-- map:end -->
+
+    <!-- The capability seams. These lived on the homepage until the page was cut
+         down to what a first-time reader needs (site issue 219); the atlas is
+         where they belong anyway — the map is the page about what exists, and
+         these six are the narrowest, most concrete entry in it. Generated from
+         data/seams.json by scripts/gen-seams.mjs; do not hand-edit the region. -->
+    <h2>The capability seams</h2>
+    <p class="atlas__intro muted">One narrow seam per kind of ambient system power — the single sanctioned access
+    point in prx today, each one a door on the guest-room runtime tomorrow — so effects stay attributable and
+    policy stays enforceable.</p>
+    <!-- seams:start · generated from data/seams.json by scripts/gen-seams.mjs — do not edit by hand -->
+      <div class="seam-grid">
+        <div class="seam"><div class="seam__name">fs</div><div class="seam__desc">the one filesystem door</div></div>
+        <div class="seam"><div class="seam__name">proc</div><div class="seam__desc">the one subprocess spawn</div></div>
+        <div class="seam"><div class="seam__name">env</div><div class="seam__desc">the one reader of process.env</div></div>
+        <div class="seam"><div class="seam__name">gh</div><div class="seam__desc">GitHub CLI, policy-gated</div></div>
+        <div class="seam"><div class="seam__name">git</div><div class="seam__desc">git CLI, lock-recovering</div></div>
+        <div class="seam"><div class="seam__name">cas</div><div class="seam__desc">bytes addressed by digest</div></div>
+      </div>
+      <!-- seams:end -->
+
+    <p class="atlas__intro muted" style="margin-top:2.5rem">
+      Contract state between repos lives on <a href="/contracts">/contracts</a>;
+      how honestly the claims hold up, on <a href="/ledger">/ledger</a>. The full
+      source is at <a href="https://github.com/bounded-systems">github.com/bounded-systems</a>.
+    </p>
+  </main>
+</body>
+</html>

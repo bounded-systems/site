@@ -1,3 +1,4 @@
+<!-- claims: c6 -->
 # In agent-built software, the open problem is the seams between the pieces
 
 An agent can write the filesystem layer now. The process spawner and tool

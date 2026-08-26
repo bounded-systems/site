@@ -1,3 +1,4 @@
+<!-- claims: c2, c4 -->
 # Why I built this: my coding agent kept doing things I didn't ask for
 
 I run an AI coding agent on my own work every day. It writes code, runs

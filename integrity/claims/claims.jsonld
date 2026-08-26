@@ -25,14 +25,14 @@
           "@type": "bt:Claim",
           "claim": "Docs generate from source and fail CI on drift.",
           "grade": "enforced",
-          "evidence": "https://github.com/bounded-systems/site"
+          "evidence": "https://github.com/bounded-systems/site/blob/32d10d589af6e6e416c49147163bb7b8c2f36448/scripts/gen-blog.mjs"
         },
         {
           "@id": "https://bounded.tools/claims#c2",
           "@type": "bt:Claim",
           "claim": "guest-room's behaviour specs execute against the engine.",
           "grade": "enforced",
-          "evidence": "https://github.com/bounded-systems/guest-room"
+          "evidence": "https://github.com/bounded-systems/guest-room/blob/8473bdfd95ee3357603da8bad26ab0b876d8d61c/guest-room.test.ts"
         },
         {
           "@id": "https://bounded.tools/claims#c3",
@@ -40,7 +40,7 @@
           "claim": "A git-write carries a verifiable in-toto / SLSA provenance derivation — signed per-actor, content-addressed in a derivation ledger, checked fail-closed at the merge gate.",
           "grade": "partial",
           "gap": "Emission and enforcement are opt-in (a signer plus require-signed) until Sigstore lands; without them the push is bare. Verified mechanisms: ocap-provenance/slsa.ts, prx verify.ts/merge-guard.ts, anchored-chain.",
-          "evidence": "https://github.com/bounded-systems/ocap-provenance"
+          "evidence": "https://github.com/bounded-systems/ocap-provenance/blob/9b5139de0b0d89a0908b67e6ca22a6eb697ce3df/slsa.ts"
         },
         {
           "@id": "https://bounded.tools/claims#c4",
@@ -48,7 +48,7 @@
           "claim": "The agent never holds the credential — a broker daemon does.",
           "grade": "partial",
           "gap": "On macOS the door is TCP loopback — weaker than unix-socket possession; isolation is the container plus daemon discipline, not a hardened sandbox. Verified: keeperd/daemon.ts holds the key; claude-box is credential-free.",
-          "evidence": "https://github.com/bounded-systems/prx"
+          "evidence": "https://github.com/bounded-systems/prx/blob/d1b6030eebd2caffaf22377d21c24c4c6f2c77c1/packages/prx/src/keeperd/daemon.ts"
         },
         {
           "@id": "https://bounded.tools/claims#c5",

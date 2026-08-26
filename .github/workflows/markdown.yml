@@ -1,0 +1,90 @@
+name: markdown
+
+# The markdown projection of every page, and the repetition it makes visible.
+#
+# Two checks, one build:
+#
+#   gen-markdown --check   the committed projection under content/pages/ matches
+#                          what the built HTML actually says. It is a projection,
+#                          so it can go stale the same way /map or /desk can, and
+#                          a stale one is worse than none — it would show a
+#                          reviewer prose the site no longer serves.
+#
+#   check-repetition       the site does not say the same thing more times than
+#                          it already did. Ratcheted against a committed ceiling
+#                          rather than a hard zero: the current count is real,
+#                          and a gate nobody can go green against gets disabled.
+#
+# check-repetition also runs in `npm run check` — it reads only committed
+# markdown, so it needs no build. It runs here as well because this lane is where
+# the projection it reads gets verified: a green repetition count over a stale
+# projection is a number about the wrong text.
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths:
+      - "*.html"
+      - "blog/**"
+      - "content/**"
+      - "data/**"
+      - "scripts/**"
+      - "build.mjs"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/markdown.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: Install deps
+        run: npm ci
+      - name: Build dist/
+        run: npm run build
+
+      - name: the committed projection matches the built pages
+        run: node scripts/gen-markdown.mjs --check
+
+      # Both gates must be able to fail. A drift check that cannot detect drift
+      # and a ratchet that cannot detect a regression are both decoration
+      # (agentic-code-hygiene rule 3: a gate's own claim about itself is not
+      # evidence). Restore from copies, never `git checkout` — that would discard
+      # a contributor's uncommitted work if this script is ever run locally.
+      - name: mutation — both gates can fail
+        run: |
+          set -e
+          cp content/pages/index.md /tmp/index.md.orig
+          printf '\nA sentence the built page does not contain.\n' >> content/pages/index.md
+          if node scripts/gen-markdown.mjs --check; then
+            echo "✗ gen-markdown --check passed against an edited projection."
+            exit 1
+          fi
+          cp /tmp/index.md.orig content/pages/index.md
+          echo "✓ drift check went red on an edited projection."
+
+          cp content/repetition-baseline.json /tmp/baseline.orig
+          node -e '
+            const fs = require("fs");
+            const p = "content/repetition-baseline.json";
+            const b = JSON.parse(fs.readFileSync(p, "utf8"));
+            b.pairs = 0;
+            fs.writeFileSync(p, JSON.stringify(b, null, 2) + "\n");
+          '
+          if node scripts/check-repetition.mjs > /dev/null; then
+            echo "✗ check-repetition passed against a baseline of 0."
+            exit 1
+          fi
+          cp /tmp/baseline.orig content/repetition-baseline.json
+          echo "✓ ratchet went red on a lowered ceiling."
+
+      - name: the site does not repeat itself more than it already did
+        run: node scripts/check-repetition.mjs
