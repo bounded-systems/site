@@ -8,23 +8,25 @@
 
 Every contract between our repos, graded by its own check. Rendered at **build time** from the **signed** [trellis](https://github.com/bounded-systems/trellis) status projection — the same one the [Trust Center](https://github.com/bounded-systems/trust/blob/main/CLAIMS.md) reads. Nothing here is hand-typed: a Gap is real drift, shown honestly, until the check goes green. The data is refreshed by a signed, verified sync — see below.
 
-**72** — repos
+**74** — repos
 
-**5** — checked
+**7** — checked
 
-**5** — passing
+**6** — passing
 
-**0** — gaps
+**1** — gaps
 
-**34** — declared
+**35** — declared
 
 | Contract | Kind | Grade | Governs |
 | --- | --- | --- | --- |
 | `concierge-wire` | wire | Enforced | concierged's capability-resolution RPC surface (register/resolve/keys/list/status). |
+| `descriptor-honesty` | provenance | Enforced | A repo upholding its OWN descriptor claim — every trellis.json proof claim's provenBy file exists and its git blob hash matches the pin in the generated README. A UNARY contract, verified by @bounded-systems/drift-gate's pure descriptor check (offline; the surface check needs npm and stays in per-repo CI). Wired for guest-room; other descriptor repos next. |
 | `door-kit-mirror` | vendored-pin | Enforced | The door-kit client + runtime vendored into each door daemon — must stay byte-identical to door-kit HEAD. |
 | `keeper-wire` | wire | Enforced | keeperd's git-signing RPC surface (commit/push/import-and-push/attest-launch/sign/verify/status/getPublicKey). |
 | `sanctioned-reader-seam` | import-boundary | Enforced | A 'one sanctioned reader' package upholding its own seam claim (allowed imports + no ambient authority) — a UNARY contract. Wired for fs; env/host/proc/repo-root next. |
 | `scout-wire` | wire | Enforced | scoutd's external-read RPC surface (repo/pr/issue/fetch/download/status). |
+| `trellis-kit-lattice` | vendored-pin | Gap | The kit's findCycles/findMultiContractPairs vendored into trellis's check/lattice.ts — it runs \`--no-remote\` in a sealed derivation and cannot import the kit, so it mirrors it. Must stay equal to trellis-kit HEAD; verified by check/lattice\_test.ts (drift fails CI). This is the declared cross-repo clone the overlap check (check/overlap.ts) sanctions in place of an allowlist. |
 | `ast-git-spec` | shared-schema | Declared | AST-based git clean/smudge diff+merge spec (design stage). |
 | `brand-check` | repo-config | Declared | gh-action-brand-checks — CI gate for brand-token compliance; run by fleet. |
 | `brand-tokens` | shared-schema | Declared | brand's W3C design tokens + self-hosted fonts — consumed by the sites, gated by gh-action-brand-checks. |
@@ -50,6 +52,7 @@ Every contract between our repos, graded by its own check. Rendered at **build t
 | `oci-dev-registry` | external-platform | Declared | Local-first OCI registry + devcontainer build system with build traceability. |
 | `oidc-app-token-broker` | external-platform | Declared | cf-oidc-token-broker mints GitHub App installation tokens over Actions OIDC (the App key lives only in the broker) — consumed by gh-project-room's front-desk-sync. |
 | `org-defaults` | repo-config | Declared | Org-level defaults + the public profile README every bounded-systems repo inherits. |
+| `org-quality-standard` | repo-config | Declared | The reusable repo-standard workflow .github provides (security + the prose-proxy quality gates + test) — every repo that calls it runs the same org quality bar. CI-enforced via GitHub Actions; declared here (no trellis flake check yet). |
 | `peercred-helper` | shared-schema | Declared | SO\_PEERCRED helper for launcherd (Rust) — peer-identity extraction on unix sockets. |
 | `roundtrip-validation` | shared-schema | Declared | Parse-to-AST + regenerate-source fidelity validation (Deno + SWC). |
 | `schema-transform` | shared-schema | Declared | Schema transformation/bridging between formats. |
