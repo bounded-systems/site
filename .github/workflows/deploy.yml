@@ -1,12 +1,18 @@
 name: deploy
 
-# Two-phase, promote-the-artifact pipeline:
-#   build   — hermetic nix build → keyless-sign the whole site (Sigstore) →
-#             publish a SIGNED, fully-deployable OCI artifact to GHCR.
-#   deploy  — pull THAT artifact, cosign-verify it, and wrangler-deploy exactly
-#             those bytes. So prod serves the signed artifact by construction,
-#             not a re-staged copy. Fail-closed: a signing/verify failure blocks
-#             the deploy, and the edge check asserts the provenance reached prod.
+# Two-phase, promote-the-artifact pipeline, in deferred_sign order (site#243):
+# stage → approve → sign → release.
+#   build   — hermetic nix build → keyless-sign the BLOB provenance (whole-site
+#             manifest, SBOM, in-toto — build provenance stays signed at build) →
+#             publish a fully-deployable but UNSIGNED, digest-pinned OCI artifact
+#             to GHCR (staged, not released).
+#   deploy  — stage the artifact as an un-served preview, verify it at the
+#             version's own URL, pass the human gate — and only then does the
+#             gate-holding lane mint the artifact's first and only signature,
+#             which the release leg re-verifies before prod routes to it. So
+#             "unsigned" and "unreleased" are the same fact: a rejected build
+#             never acquires a signature, and a signature can only exist for an
+#             approved artifact. Fail-closed at every leg.
 on:
   push:
     branches: [main]
@@ -16,7 +22,7 @@ on:
 permissions:
   contents: read
   id-token: write # OIDC: lets cosign mint a keyless Fulcio cert for build provenance
-  packages: write # push the built site to GHCR as a signed OCI artifact
+  packages: write # build pushes the artifact; the callee's post-approval cosign sign pushes the signature (its declared block intersects, so the grant must originate here)
   issues: write # the promote ceremony's notification issue (the callee's declared block intersects, so the grant must originate here)
 
 concurrency:
@@ -51,9 +57,12 @@ jobs:
       # main only: content-address the whole site, keyless-sign that manifest
       # (no stored key — the Actions OIDC identity mints a one-build Fulcio cert,
       # logged in Rekor), write /provenance.json, then publish the WHOLE dist/
-      # (site + provenance sidecars) to GHCR as one signed, deployable OCI
-      # artifact. The deploy job promotes exactly this artifact.
-      - name: Sign + publish the signed OCI artifact (keyless Sigstore → GHCR)
+      # (site + provenance sidecars) to GHCR as one deployable OCI artifact.
+      # The blob signatures here are BUILD provenance and stay; the artifact
+      # itself leaves this job UNSIGNED (deferred_sign, site#243) — its first
+      # and only signature is minted by the deploy lane after the human gate.
+      # The deploy job stages exactly this digest.
+      - name: Publish the OCI artifact (blob provenance signed; artifact unsigned → GHCR)
         id: publish
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
@@ -91,21 +100,22 @@ jobs:
               site.tar.gz:application/gzip | tee oras-push.log
             oras tag "$GHCR_REPO:$short" latest
             digest=$(awk "/Digest:/ {print \$2}" oras-push.log)
-            printf "%s" "$GITHUB_TOKEN" | cosign login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
-            cosign sign --yes "$GHCR_REPO@$digest"
+            # no artifact-level cosign sign here: deferred_sign moves it after
+            # the promote gate (site#243), so approval gates the signature
             echo "oci=$GHCR_REPO@$digest" >> "$GITHUB_OUTPUT"
           '
 
 
-  # DEPLOY: hand the signed artifact to the CANONICAL reusable pipeline (preview → deterministic
-  # preview-URL verify → gated promote) — the same source of truth as robertdelanghe.dev. The
+  # DEPLOY: hand the staged, digest-pinned artifact to the CANONICAL reusable pipeline (preview →
+  # deterministic preview-URL verify → gated promote, which signs the artifact only after the
+  # gate) — the same source of truth as robertdelanghe.dev. The
   # required-reviewers `site-promote` Environment lives in THIS repo, so approval is enforced here.
   # This ADDS an approval gate bounded.tools didn't have before (was straight build→deploy).
   # Pinned by SHA per the repo's "every action pinned by SHA" posture. A SHA pin does not
   # track .github main, so it only moves when bumped here deliberately — this one carries
-  # bounded-systems/.github#251 (the optional Face ID promote gate, atop #171's per-role
-  # broker routes and #172's id-token fix), which is the exact ref the broker's
-  # WORKERS_DEPLOY entries pin: any other SHA fails the mint 401.
+  # deferred_sign (site#243: sign AFTER the human gate, over #251's Face ID promote gate,
+  # atop #171's per-role broker routes and #172's id-token fix), which is the exact ref
+  # the broker's WORKERS_DEPLOY entries pin (infra#504): any other SHA fails the mint 401.
   #
   # No stored Cloudflare credential: the callee mints a per-run token from the OIDC broker
   # (infra#336 option (a)). The URL is a literal, not vars.CF_BROKER_URL, so this public
@@ -117,11 +127,18 @@ jobs:
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@8db89f811e4b0bb5e682103ba1c595c4b1fe8c2d # .github main (#251 — Face ID promote gate, over #172's id-token fix)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@d2e102169f941ceb04ad4c33e0686e0d3a2e633b # .github main (deferred_sign, site#243 — over #251's Face ID promote gate)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
-      identity_regexp: "^https://github.com/bounded-systems/site/"
+      # deferred_sign (site#243): build pushes the artifact UNSIGNED and digest-pinned;
+      # preview runs pre-signature and rests on the run's own digest, and promote mints
+      # the artifact's first and only signature after the human gate.
+      deferred_sign: true
+      # The post-approval signer is the gate-holding lane's job_workflow_ref — the shared
+      # site-deploy workflow itself, not this repo's build lane — and promote keeps full
+      # verification of that fresh signature before anything routes.
+      identity_regexp: "^https://github.com/bounded-systems/.github/.github/workflows/site-deploy.yml@"
       cf_broker_url: "https://broker.bounded.tools"
       cf_broker_path: /deploy/bounded-tools-site
       # The promote gate is a Face ID ceremony (infra#480): the callee opens a ceremony
