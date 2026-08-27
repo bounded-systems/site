@@ -509,6 +509,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#60d4243c6682": {
+    "$value": "In Lean 4, the whole theorem is a few lines:",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#632b5ce09738": {
     "$value": "C is capped by the display's gamut",
     "$type": "body",
@@ -559,13 +564,13 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
-  "blog/colors-are-coordinates.md#71565464edb5": {
-    "$value": "The worst pair is 7.10:1 — not because we measured it and got lucky, but because the geometry guarantees it",
+  "blog/colors-are-coordinates.md#72cd80f7f8b6": {
+    "$value": "You perceive ratios, not absolute steps",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
-  "blog/colors-are-coordinates.md#72cd80f7f8b6": {
-    "$value": "You perceive ratios, not absolute steps",
+  "blog/colors-are-coordinates.md#78ea2b86ed48": {
+    "$value": "Now a color's band is its role — dark means surface, light means text — and each surface-on-text pairing is accessible by construction",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -611,11 +616,6 @@
   },
   "blog/colors-are-coordinates.md#8e68b91b439e": {
     "$value": "For a warm-and-cool AAA palette that's 6 surfaces and 6 texts: 36 pairings, all valid, zero checked",
-    "$type": "body",
-    "$description": "extracted prose — blog/colors-are-coordinates.md"
-  },
-  "blog/colors-are-coordinates.md#8ec837055bb5": {
-    "$value": "In Lean 4, the whole guarantee is a few lines:",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -686,11 +686,6 @@
   },
   "blog/colors-are-coordinates.md#a48238fbca60": {
     "$value": "WCAG only constrains lightness — chroma and hue are free of it",
-    "$type": "body",
-    "$description": "extracted prose — blog/colors-are-coordinates.md"
-  },
-  "blog/colors-are-coordinates.md#a6d31869c3b3": {
-    "$value": "Now a color's band is its role — dark means surface, light means text — and every surface-on-text pairing is accessible by construction",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
@@ -786,6 +781,11 @@
   },
   "blog/colors-are-coordinates.md#d57d15e72568": {
     "$value": "- L: 5% steps → 21 levels\n- C: 25%-of-gamut-ceiling → 5 tiers\n- H: 15° → 24 hues\n- α: 25% → 5 levels",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
+  "blog/colors-are-coordinates.md#d5fd6b45e717": {
+    "$value": "The worst pair is 7.10:1 — not because we measured it and got lucky, but because the geometry forces it",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },

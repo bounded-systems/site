@@ -86,11 +86,11 @@ Multiply it out, drop the degenerate corners, and the **entire perceptually-dist
 
 Which brings us to the point of the whole exercise. The normal way to make an accessible palette is: pick colors, then *check* each pairing against a contrast tool, then tweak and re-check. Apply the use, hope it's valid.
 
-Flip it. **Let the set determine the use.** Place surfaces in the dark band and text in the light band, leave the moat empty, and make the moat wide enough that the *lightest* surface still clears the bar against the *darkest* text. Now a color's **band is its role** — dark means surface, light means text — and *every* surface-on-text pairing is accessible **by construction.** You never test a pair. You can't produce an invalid one.
+Flip it. **Let the set determine the use.** Place surfaces in the dark band and text in the light band, leave the moat empty, and make the moat wide enough that the *lightest* surface still clears the bar against the *darkest* text. Now a color's **band is its role** — dark means surface, light means text — and *each* surface-on-text pairing is accessible **by construction.** You never test a pair. You can't produce an invalid one.
 
-For a warm-and-cool AAA palette that's 6 surfaces and 6 texts: **36 pairings, all valid, zero checked.** The worst pair is 7.10:1 — not because we measured it and got lucky, but because the geometry guarantees it.
+For a warm-and-cool AAA palette that's 6 surfaces and 6 texts: **36 pairings, all valid, zero checked.** The worst pair is 7.10:1 — not because we measured it and got lucky, but because the geometry forces it.
 
-And because it's just a monotonicity argument, it's **provable**. In Lean 4, the whole guarantee is a few lines:
+And because it's just a monotonicity argument, it's **provable**. In Lean 4, the whole theorem is a few lines:
 
 > if every surface has luminance ≤ Smax and every text ≥ Tmin, and the moat satisfies `r·(Smax+off) ≤ Tmin+off`, then for *all* surfaces and *all* texts, the pair clears `r`.
 
