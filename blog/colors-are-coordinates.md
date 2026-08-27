@@ -1,3 +1,4 @@
+<!-- claims: c1 -->
 # Colors Are Coordinates
 
 *What happens when you stop treating a website's colors as names and start treating them as points in a perceptual space: they dedupe, they collapse to a handful of hues, accessibility stops being a checkbox, and a palette becomes something you can prove.*
@@ -99,7 +100,7 @@ One chain: `r·(s+off) ≤ r·(Smax+off) ≤ Tmin+off ≤ t+off`. The `∀` is t
 
 Step back and the whole thing has one shape. A palette isn't a list you pick — it's a **Sudoku**.
 
-A Sudoku isn't defined by its filled-in numbers; it's defined by its *rules*. The digits don't fill the board — the constraints do. Give it a few givens and the rest is *forced*. Color works exactly the same way.
+A Sudoku isn't defined by its filled-in numbers; it's defined by its *rules*. Give it a few givens and the rest is *forced*. Color works exactly the same way.
 
 The board is the color space — lightness, chroma, hue. The cells are every place a color lands: this text on that background, this border, that link. And a few forces decide what can go in each cell:
 
@@ -107,7 +108,7 @@ The board is the color space — lightness, chroma, hue. The cells are every pla
 - **The gamut bounds it** — a color has to be displayable, and the ceiling on saturation is lowest at the light and dark extremes.
 - **Contrast couples it** — a text color and its background can't be too close in lightness, or you can't read it. That's the row-and-column rule: a relation *between* cells, not a property of one.
 
-Contrast is the strong force. It splits lightness into two bands — dark surfaces, light text — with a forbidden moat between them. And the twist: because the gamut's most saturated colors live *in* that forbidden middle, accessibility doesn't just limit color, it **mutes** it. The restrained look of a careful accessible site isn't a taste — it's where the forces settle.
+Contrast is the strong force. It splits lightness into two bands — dark surfaces, light text — with a forbidden moat between them. And the twist: because the gamut's most saturated colors live *in* that forbidden middle, accessibility doesn't just limit color, it **mutes** it. That's where the forces settle.
 
 So what do you actually choose? Almost nothing. You pick the **hues** — one or two — because hue is the only axis the forces don't touch. Everything else is forced: contrast sets the lightnesses, the gamut caps the saturation, the JND snaps to the grid. The tints and shades aren't decisions — they're the values the constraints drop into the empty cells. Factor a real 42-color palette and it comes out to **16 choices and 26 forced completions.**
 

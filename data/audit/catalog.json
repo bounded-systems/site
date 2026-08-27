@@ -539,6 +539,11 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
+  "blog/colors-are-coordinates.md#67e11ba0f7b3": {
+    "$value": "That's where the forces settle",
+    "$type": "body",
+    "$description": "extracted prose — blog/colors-are-coordinates.md"
+  },
   "blog/colors-are-coordinates.md#6c23ec0b7511": {
     "$value": "Even the grid has to respect the eye.)",
     "$type": "body",
@@ -714,11 +719,6 @@
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
-  "blog/colors-are-coordinates.md#adb653b06f8c": {
-    "$value": "The digits don't fill the board — the constraints do",
-    "$type": "body",
-    "$description": "extracted prose — blog/colors-are-coordinates.md"
-  },
   "blog/colors-are-coordinates.md#aeac2ed34a7a": {
     "$value": "OKLab's cylindrical form, OKLCh, gives a color three coordinates, and they map onto how you actually see:",
     "$type": "body",
@@ -726,11 +726,6 @@
   },
   "blog/colors-are-coordinates.md#b18cc6ea9f91": {
     "$value": "One axis at a time, because coupling axes is what makes derivation confusing",
-    "$type": "body",
-    "$description": "extracted prose — blog/colors-are-coordinates.md"
-  },
-  "blog/colors-are-coordinates.md#b1faf2490350": {
-    "$value": "The restrained look of a careful accessible site isn't a taste — it's where the forces settle",
     "$type": "body",
     "$description": "extracted prose — blog/colors-are-coordinates.md"
   },
