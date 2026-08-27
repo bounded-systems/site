@@ -22,9 +22,16 @@
     "readerOk": true,
     "internalLinks": []
   },
+  "blog/colors-are-coordinates.html": {
+    "h1": "Colors Are Coordinates",
+    "outline": "1222222222",
+    "mains": 1,
+    "readerOk": true,
+    "internalLinks": []
+  },
   "blog/index.html": {
     "h1": "Writing",
-    "outline": "122222",
+    "outline": "1222222",
     "mains": 1,
     "readerOk": null,
     "internalLinks": []
