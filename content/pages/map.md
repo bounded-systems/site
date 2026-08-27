@@ -12,7 +12,7 @@ The system itself is the three repos on the front page — guest-room, claude-bo
 
 **26** — packages mapped
 
-**72** — repos in the org
+**74** — repos in the org
 
 **19** — verbs (act)
 

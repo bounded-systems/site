@@ -10,6 +10,10 @@ Working notes on keeping agent-built software honest — the bet, graded against
 
 An agent can write the filesystem layer now. The process spawner and tool adapters, the CLI — all of it. What it can't do yet, what nobody has really solved, is keep all of those h
 
+## [Colors Are Coordinates](colors-are-coordinates.html)
+
+We pulled every color off a website — 42 of them, straight out of the rendered page — and asked a question that sounds naive: how many colors are there, really?
+
 ## [Provenance is not legitimacy](provenance-is-not-legitimacy.html)
 
 A signed build tells you who produced an artifact and that the bytes are intact. It does not tell you the build was meant to happen. That gap is small, easy to oversell, and the en
