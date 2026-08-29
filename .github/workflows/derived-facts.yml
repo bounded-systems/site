@@ -24,6 +24,12 @@ jobs:
       - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v7
         with:
           branch: chore/refresh-derived-facts
+          # Commit ONLY the derived facts. The synoptic checkout above lands at
+          # .synoptic inside the workspace, and an untracked nested git repo is
+          # staged by `git add -A` as a gitlink (mode 160000) with no .gitmodules
+          # entry — which is the entire content of the PRs this lane has been
+          # opening. Scoping the commit keeps the lane to the file it derives.
+          add-paths: data/derived-facts.json
           title: "chore: refresh derived facts (recomputed, unsigned)"
           commit-message: "chore: refresh derived facts from the signed lattice"
           body: "Recomputed org facts. No signature — a derived fact's basis is the recompute."

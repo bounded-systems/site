@@ -12,3 +12,7 @@ prose-corpus.json
 doc-corpus.json
 prose-corpus.json
 doc-corpus.json
+
+# synoptic is checked out into the workspace by derived-facts.yml and
+# graph-pipeline.yml; it is a build input, never repo content.
+.synoptic/
