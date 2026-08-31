@@ -127,7 +127,7 @@ jobs:
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@f0abde23ce4a8dc5042f80ee6a0919585b97d5e9 # .github main (deferred_sign, site#243 — over #251's Face ID promote gate)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@d126d721fa50275e12af0bdeaf1a2ff3016eedfd # .github main (deferred_sign, site#243 — over #251's Face ID promote gate)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
