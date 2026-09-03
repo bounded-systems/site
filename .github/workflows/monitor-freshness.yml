@@ -1,0 +1,61 @@
+name: monitor-freshness
+
+# THE WATCHER FOR THE WATCHERS — the answer to #258.
+#
+# `rekor-monitor.yml` last completed on 2026-08-21 and was cancelled on every
+# run for the thirteen days after. Nobody was told. The reusable workflow's
+# notification job fires on `failure`, and a CANCELLED run is not a FAILED one,
+# so the Actions tab stayed green while the Sigstore identity monitoring — the
+# control that workflow's own header credits with catching the Shai-Hulud worm —
+# was doing nothing at all.
+#
+# The lesson generalises past that one workflow: **the status of the last run
+# tells you nothing about whether a monitor is working.** A monitor can be
+# cancelled, skipped, disabled, or have its schedule quietly dropped by GitHub,
+# and in every case the newest row still looks recent. The one signal that
+# survives all of those is the AGE OF THE LAST SUCCESS, which is what this
+# checks.
+#
+# It is deliberately not part of `npm run check`: that suite is hermetic, and
+# this needs the network. A monitor is a schedule, not a build gate — the same
+# reasoning the `link-check.yml` header records.
+#
+# Its own test suite runs in `npm run check`, stubbed, so the decision logic is
+# gated hermetically even though the check itself cannot be.
+
+on:
+  schedule:
+    # Every 6h, off the mark — matched to the tightest threshold the script
+    # declares (rekor-monitor at 6h), so an alert is never more than one period
+    # behind the condition it reports.
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print the freshness table and file nothing"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write # file one issue per stuck monitor
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      # No `npm ci`: the script is dependency-free on purpose, so the watcher
+      # cannot be taken down by the thing it would then fail to report.
+      - name: Every monitor has completed within its threshold
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          node scripts/check-monitor-freshness.mjs \
+            ${{ inputs.dry_run && '--dry-run' || '' }}
