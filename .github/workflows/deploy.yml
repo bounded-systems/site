@@ -43,7 +43,7 @@ jobs:
       oci: ${{ steps.publish.outputs.oci }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: DeterminateSystems/nix-installer-action@ef8a148080ab6020fd15196c2084a2eea5ff2d25 # v22
+      - uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
 
       # Hermetic build: nodejs + brand are pinned by flake.lock. Same bytes on
       # every machine; runs the brand token-drift check, then assembles dist/.
@@ -127,7 +127,7 @@ jobs:
   deploy:
     needs: build
     if: needs.build.outputs.oci != ''
-    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@d126d721fa50275e12af0bdeaf1a2ff3016eedfd # .github main (deferred_sign, site#243 — over #251's Face ID promote gate)
+    uses: bounded-systems/.github/.github/workflows/site-deploy.yml@1716efd3a3cc81ba97e0ff2be0f9a0a0ebd6574c # .github main (deferred_sign, site#243 — over #251's Face ID promote gate)
     with:
       oci: ${{ needs.build.outputs.oci }}
       domain: "https://bounded.tools"
